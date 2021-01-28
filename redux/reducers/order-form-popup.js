@@ -1,28 +1,17 @@
-import {
-  OPEN_ORDER_FORM_POPUP,
-  CLOSE_ORDER_FORM_POPUP,
-} from '../actions';
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  isOpen: false,
-};
+const orderFormPopupSlice = createSlice({
+  name: 'orderFormPopup',
+  initialState: { isOpen: false },
+  reducers: {
+    openOrderFormPopup(state) {
+      state.isOpen = true;
+    },
+    closeOrderFormPopup(state) {
+      state.isOpen = false;
+    },
+  },
+});
 
-export const orderFormPopup = (state = initialState, action) => {
-  switch (action.type) {
-    case OPEN_ORDER_FORM_POPUP: {
-      return {
-        ...state,
-        isOpen: true,
-      };
-    }
-    case CLOSE_ORDER_FORM_POPUP: {
-      return {
-        ...state,
-        isOpen: false,
-      };
-    }
-    default: {
-      return state;
-    }
-  }
-};
+export const { openOrderFormPopup, closeOrderFormPopup } = orderFormPopupSlice.actions;
+export default orderFormPopupSlice.reducer;

@@ -1,19 +1,7 @@
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { filters } from '__constants__';
-import {
-  FETCH_CATALOG_REQUEST,
-  FETCH_CATALOG_SUCCESS,
-  FETCH_CATALOG_FAILURE,
-  CHANGE_FILTER,
-  CHANGE_PAGE,
-  RESET_CATALOG,
-  RESET_FILTERS,
-  OPEN_CARD_POPUP,
-  CLOSE_CARD_POPUP,
-  GO_TO_NEXT_CARD,
-  GO_TO_PREV_CARD,
-  OPEN_FULL_SCREEN_POPUP,
-  CLOSE_FULL_SCREEN_POPUP,
-} from '../actions';
+import * as api from 'utils/api';
+import { retrieveItemsFromResponse } from 'utils';
 
 const initialState = {
   items: [],
@@ -30,133 +18,119 @@ const initialState = {
   isFullScreenPopupOpen: false,
 };
 
-export const catalog = (state = initialState, action) => {
-  switch (action.type) {
-    case FETCH_CATALOG_REQUEST: {
-      return {
-        ...state,
-        isLoading: true,
-      };
-    }
-    case FETCH_CATALOG_SUCCESS: {
-      const { items, total } = action.payload;
-      const newItems = [...state.items, ...items];
+export const fetchCatalog = createAsyncThunk(
+  'fetchCatalog',
+  async (_, { rejectWithValue, getState }) => {
+    const { filter, page } = getState().catalog;
 
-      return {
-        ...state,
-        items: newItems,
-        isLoading: false,
-        hasMore: total > newItems.length,
-      };
+    try {
+      const response = await api.fetchCatalogByFilter(filter, page);
+
+      return retrieveItemsFromResponse(response, filter);
+    } catch (error) {
+      return rejectWithValue(error);
     }
-    case FETCH_CATALOG_FAILURE: {
-      return {
-        ...state,
-        items: [],
-        isLoading: false,
-        hasMore: false,
-      };
-    }
-    case CHANGE_FILTER: {
-      const { name, value } = action.payload;
+  },
+);
+
+const catalogSlice = createSlice({
+  name: 'catalog',
+  initialState,
+  reducers: {
+    changeFilter(state, { payload }) {
+      const { name, value } = payload;
 
       if (name === 'section') {
         if (value === 'accessories' || value === 'lightingSystems') {
-          return {
-            ...state,
-            filter: {
-              ...state.filter,
-              section: value,
-              style: 'any',
-              doorType: 'any',
-            },
+          state.filter = {
+            section: value,
+            style: 'any',
+            doorType: 'any',
           };
+
+          return;
         }
         if (value === 'wardrobe') {
-          return {
-            ...state,
-            filter: {
-              ...state.filter,
-              section: value,
-              doorType: 'any',
-            },
+          state.filter = {
+            ...state.filter,
+            section: value,
+            doorType: 'any',
           };
+
+          return;
         }
       }
 
-      return {
-        ...state,
-        filter: {
-          ...state.filter,
-          [name]: value,
-        },
+      state.filter[name] = value;
+    },
+    changePage(state, { payload }) {
+      state.page = payload;
+    },
+    resetCatalog(state) {
+      state.items = [];
+      state.page = 0;
+      state.hasMore = 0;
+    },
+    resetFilters(state) {
+      state.filter = {
+        section: filters.sections[0].id,
+        style: filters.styles[0].id,
+        doorType: filters.styles[0].id,
       };
-    }
-    case CHANGE_PAGE: {
-      return {
-        ...state,
-        page: action.payload,
-      };
-    }
-    case RESET_CATALOG: {
-      return {
-        ...state,
-        items: [],
-        page: 0,
-        hasMore: true,
-      };
-    }
-    case RESET_FILTERS: {
-      return {
-        ...state,
-        filter: {
-          section: filters.sections[0].id,
-          style: filters.styles[0].id,
-          doorType: filters.styles[0].id,
-        },
-      };
-    }
-    case OPEN_CARD_POPUP: {
-      return {
-        ...state,
-        currentItemId: action.payload,
-        isCardPopupOpen: true,
-      };
-    }
-    case CLOSE_CARD_POPUP: {
-      return {
-        ...state,
-        currentItemId: 0,
-        isCardPopupOpen: false,
-      };
-    }
-    case GO_TO_NEXT_CARD: {
-      return {
-        ...state,
-        currentItemId: state.currentItemId + 1,
-      };
-    }
-    case GO_TO_PREV_CARD: {
-      return {
-        ...state,
-        currentItemId: state.currentItemId - 1,
-      };
-    }
-    case OPEN_FULL_SCREEN_POPUP: {
-      return {
-        ...state,
-        currentItemId: action.payload,
-        isFullScreenPopupOpen: true,
-      };
-    }
-    case CLOSE_FULL_SCREEN_POPUP: {
-      return {
-        ...state,
-        isFullScreenPopupOpen: false,
-      };
-    }
-    default: {
-      return state;
-    }
-  }
-};
+    },
+    openCardPopup(state, { payload }) {
+      state.currentItemId = payload;
+      state.isCardPopupOpen = true;
+    },
+    closeCardPopup(state) {
+      state.currentItemId = 0;
+      state.isCardPopupOpen = false;
+    },
+    goToNextCard(state) {
+      state.currentItemId++;
+    },
+    goToPrevCard(state) {
+      state.currentItemId--;
+    },
+    openFullScreenPopup(state, { payload }) {
+      state.currentItemId = payload; // TODO: Проверить что тут вообще нужен payload
+      state.isFullScreenPopupOpen = true;
+    },
+    closeFullScreenPopup(state) {
+      state.isFullScreenPopupOpen = false;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCatalog.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchCatalog.fulfilled, (state, { payload }) => {
+        const { items, total } = payload;
+        const newItems = [...state.items, ...items];
+
+        state.items = newItems;
+        state.isLoading = false;
+        state.hasMore = total > newItems.length;
+      })
+      .addCase(fetchCatalog.rejected, (state) => {
+        state.items = [];
+        state.isLoading = false;
+        state.hasMore = false;
+      });
+  },
+});
+
+export const {
+  changeFilter,
+  changePage,
+  resetCatalog,
+  resetFilters,
+  openCardPopup,
+  closeCardPopup,
+  goToNextCard,
+  goToPrevCard,
+  openFullScreenPopup,
+  closeFullScreenPopup,
+} = catalogSlice.actions;
+export default catalogSlice.reducer;

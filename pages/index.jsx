@@ -5,6 +5,19 @@ import {
   Carousel,
   Description,
   Catalog,
+  FeedbackForm,
+  Advantages,
+  WardrobeLeft,
+  WardrobeRight,
+  About,
+  CallDesigner,
+  CallDesignerForm,
+  OurProduction,
+  HowToOrder,
+  FAQ,
+  QuestionsForm,
+  ShopImg,
+  Map,
 } from 'components';
 
 const marginTop80 = {
@@ -97,7 +110,7 @@ const HomePage = () => {
         <section
           className={classes.feedbackForm}
         >
-          {/* <FeedbackForm /> */}
+          <FeedbackForm />
         </section>
 
         {/* Преимущества нашей продукции */}
@@ -105,7 +118,7 @@ const HomePage = () => {
           // ref={(el) => { refsMap.current['#advantages'] = el; }}
           className={classes.advantages}
         >
-          {/* <Advantages /> */}
+          <Advantages />
         </section>
 
         {/* Комфорт и удобство, продуманное до мелочей */}
@@ -113,7 +126,7 @@ const HomePage = () => {
           // ref={(el) => { refsMap.current['#comfort'] = el; }}
           className={classes.wardrobe_left}
         >
-          {/* <WardrobeLeft /> */}
+          <WardrobeLeft />
         </section>
 
         {/* Исключтельное качество нашей мебели */}
@@ -121,7 +134,7 @@ const HomePage = () => {
           // ref={(el) => { refsMap.current['#quality'] = el; }}
           className={classes.wardrobe_right}
         >
-          {/* <WardrobeRight /> */}
+          <WardrobeRight />
         </section>
 
         {/* О нас */}
@@ -129,7 +142,7 @@ const HomePage = () => {
           // ref={(el) => { refsMap.current['#about'] = el; }}
           className={classes.about}
         >
-          {/* <About /> */}
+          <About />
         </section>
 
         {/* Закажите выезд дизайнера-замерщика сегодня
@@ -138,14 +151,14 @@ const HomePage = () => {
           // ref={(el) => { refsMap.current['#call-designer'] = el; }}
           className={classes.callDesigner}
         >
-          {/* <CallDesigner /> */}
+          <CallDesigner />
         </section>
 
         {/* Форма вызова дизайнера-замерщика */}
         <section
           className={classes.callDesignerForm}
         >
-          {/* <CallDesignerForm /> */}
+          <CallDesignerForm />
         </section>
 
         {/* Наше производство */}
@@ -153,7 +166,7 @@ const HomePage = () => {
           // ref={(el) => { refsMap.current['#production'] = el; }}
           className={classes.ourProduction}
         >
-          {/* <OurProduction /> */}
+          <OurProduction />
         </section>
 
         {/* Как заказать нашу мебель */}
@@ -161,7 +174,7 @@ const HomePage = () => {
           // ref={(el) => { refsMap.current['#how-to-order'] = el; }}
           className={classes.howToOrder}
         >
-          {/* <HowToOrder /> */}
+          <HowToOrder />
         </section>
 
         {/* Часто задаваемые вопросы */}
@@ -169,7 +182,7 @@ const HomePage = () => {
           // ref={(el) => { refsMap.current['#faq'] = el; }}
           className={classes.faq}
         >
-          {/* <FAQ /> */}
+          <FAQ />
         </section>
 
         {/* Форма "Остались вопросы?" */}
@@ -177,7 +190,7 @@ const HomePage = () => {
           // ref={(el) => { refsMap.current['#questions'] = el; }}
           className={classes.questionsForm}
         >
-          {/* <QuestionsForm /> */}
+          <QuestionsForm />
         </section>
 
         {/* Изображение магазина */}
@@ -185,7 +198,7 @@ const HomePage = () => {
           // ref={(el) => { refsMap.current['#shop-img'] = el; }}
           className={classes.shopImg}
         >
-          {/* <ShopImg /> */}
+          <ShopImg />
         </section>
 
         {/* Магазин на карте */}
@@ -193,7 +206,7 @@ const HomePage = () => {
           // ref={(el) => { refsMap.current['#contacts'] = el; }}
           className={classes.contacts}
         >
-          {/* <Map /> */}
+          <Map />
         </section>
       </main>
     </>

@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import {
   openOrderFormPopup,
-} from 'redux/actions';
+} from 'redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -2,7 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { Header } from 'components';
+import {
+  Header,
+  Footer,
+  GoTopButton,
+  OrderFormPopup,
+  FormSubmitPopup,
+} from 'components';
 import Head from 'next/head';
 import theme from 'theme';
 import '../styles/globals.css';
@@ -25,6 +31,11 @@ function MyApp({ Component, pageProps }) {
 
           <Header />
           <Component {...pageProps} />
+          <Footer />
+
+          <GoTopButton />
+          <OrderFormPopup />
+          <FormSubmitPopup />
         </ThemeProvider>
       </Provider>
     </React.StrictMode>

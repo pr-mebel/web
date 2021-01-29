@@ -1,0 +1,15 @@
+export * from './block-title';
+export * from './design-offer';
+export * from './header';
+export * from './link';
+export { default as MainButton } from './main-button';
+export * from './loading-background';
+export * from './submit-button';
+export * from './pagination';
+export * from './shop-img';
+export * from './map';
+export * from './footer';
+export * from './go-top-button';
+export * from './order-form-popup';
+export * from './form-submit-popup';
+export * from './loader';

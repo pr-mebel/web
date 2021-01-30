@@ -73,6 +73,8 @@ const useStyles = makeStyles((theme) => ({
 const HomePage = () => {
   const classes = useStyles();
 
+  console.log(process.env.NODE_ENV);
+
   return (
     <>
       <main>

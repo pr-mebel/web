@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { BlockTitle } from 'components/common';
+import Image from 'next/image';
 import { Typography, Popover } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
@@ -17,8 +18,8 @@ const useStyles = makeStyles(() => ({
     },
   },
   circle: {
-    width: '11px',
-    height: '11px',
+    width: '15px',
+    height: '15px',
     background: '#b0a3a3',
     border: '2px solid white',
     borderRadius: '50%',
@@ -103,10 +104,12 @@ export const WardrobeSnippet = ({
         onClose={handleClose}
       >
         <div className={classes.paperContainer}>
-          <img
-            className={classes.img}
+          <Image
             src={img}
-            alt="Сниппет изображения шкафа"
+            alt={title}
+            width={310}
+            height={310}
+            quality={100}
           />
           <div className={classes.container}>
             <BlockTitle>

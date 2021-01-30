@@ -1,21 +1,22 @@
 import { NB_SP, MDASH } from '__constants__';
+import { addIdsToArrayOfObjects } from 'lib/utils';
 
-const img1 = 'images/home-page/wardrobe-left/wardrobe-1.jpg';
-const img2 = 'images/home-page/wardrobe-left/wardrobe-2.jpg';
-const img3 = 'images/home-page/wardrobe-left/wardrobe-3.jpg';
-const imgAdd1 = 'images/home-page/wardrobe-left/1.jpg';
-const imgAdd2 = 'images/home-page/wardrobe-left/2.jpg';
-const imgAdd3 = 'images/home-page/wardrobe-left/3.jpg';
-const imgAdd4 = 'images/home-page/wardrobe-left/4.jpg';
-const imgAdd5 = 'images/home-page/wardrobe-left/5.jpg';
-const imgAdd6 = 'images/home-page/wardrobe-left/6.jpg';
-const imgAdd7 = 'images/home-page/wardrobe-left/7.jpg';
-const imgAdd8 = 'images/home-page/wardrobe-left/8.jpg';
-const imgAdd9 = 'images/home-page/wardrobe-left/9.jpg';
-const imgAdd10 = 'images/home-page/wardrobe-left/10.jpg';
-const imgAdd11 = 'images/home-page/wardrobe-left/11.jpg';
+const img1 = '/images/home-page/wardrobe-left/wardrobe-1.jpg';
+const img2 = '/images/home-page/wardrobe-left/wardrobe-2.jpg';
+const img3 = '/images/home-page/wardrobe-left/wardrobe-3.jpg';
+const imgAdd1 = '/images/home-page/wardrobe-left/1.jpg';
+const imgAdd2 = '/images/home-page/wardrobe-left/2.jpg';
+const imgAdd3 = '/images/home-page/wardrobe-left/3.jpg';
+const imgAdd4 = '/images/home-page/wardrobe-left/4.jpg';
+const imgAdd5 = '/images/home-page/wardrobe-left/5.jpg';
+const imgAdd6 = '/images/home-page/wardrobe-left/6.jpg';
+const imgAdd7 = '/images/home-page/wardrobe-left/7.jpg';
+const imgAdd8 = '/images/home-page/wardrobe-left/8.jpg';
+const imgAdd9 = '/images/home-page/wardrobe-left/9.jpg';
+const imgAdd10 = '/images/home-page/wardrobe-left/10.jpg';
+const imgAdd11 = '/images/home-page/wardrobe-left/11.jpg';
 
-export const TABS = [
+export const TABS = addIdsToArrayOfObjects([
   {
     title: 'Однотонный',
     img: img1,
@@ -28,9 +29,9 @@ export const TABS = [
     title: 'Кобминированный с Alcantara',
     img: img3,
   },
-];
+]);
 
-export const ADDITIONAL = [
+export const ADDITIONAL = addIdsToArrayOfObjects([
   // 1
   {
     title: `Встроенная подсветка с${NB_SP}датчиками включения`,
@@ -143,4 +144,4 @@ export const ADDITIONAL = [
     top: '65%',
     direction: 'left',
   },
-];
+]);

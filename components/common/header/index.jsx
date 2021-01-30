@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'flex-start',
   },
   logoContainerSm: {
     width: '110px',
@@ -197,10 +198,11 @@ export const Header = () => {
             <Grid item xs={7} container justify="center" alignItems="center">
               <ul
                 className={classNames(classes.menu, classes.list)}
-                onMouseEnter={handleOpenDropdown}
-                onMouseLeave={handleCloseDropdown}
               >
-                <li>
+                <li
+                  onMouseEnter={handleOpenDropdown}
+                  onMouseLeave={handleCloseDropdown}
+                >
                   <Typography
                     className={classNames(classes.text, classes.menu__dropdown)}
                     align="center"

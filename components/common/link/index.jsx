@@ -53,7 +53,11 @@ export const Link = ({
   }
 
   return (
-    <NextLink href={to} className={cn(classes.root, className)}>{children}</NextLink>
+    <NextLink passHref href={to}>
+      <span className={cn(classes.root, className)}>
+        {children}
+      </span>
+    </NextLink>
   );
 };
 

@@ -7,11 +7,7 @@ import {
   Grid,
   Hidden,
 } from '@material-ui/core';
-import {
-  BlockTitle,
-  MainButton,
-  Pagination,
-} from 'components/common';
+import { BlockTitle, MainButton, Pagination } from 'components/common';
 import { WardrobeAdditionalBlock } from '../wardrobe-additional-block';
 import { WardrobeSnippet } from '../wardrobe-snippet';
 import { TABS, ADDITIONAL } from './constants';

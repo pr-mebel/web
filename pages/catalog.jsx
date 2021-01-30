@@ -1,8 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-} from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -16,6 +12,7 @@ import {
   Questions,
   FullScreenPopup,
 } from 'components';
+import { useRouter } from 'next/router';
 import {
   fetchCatalog,
   changeFilter,
@@ -66,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Catalog = () => {
   const classes = useStyles();
-  const refsMap = useRef({});
+  const router = useRouter();
   const dispatch = useDispatch();
   const {
     items,
@@ -79,23 +76,31 @@ const Catalog = () => {
     isFullScreenPopupOpen,
   } = useSelector(catalogSelector);
 
-  // Применить фильтр
+  /**
+   * Применить фильтр
+   */
   const handleApplyFilter = useCallback(() => {
     dispatch(resetCatalog());
     dispatch(fetchCatalog());
   }, [dispatch]);
 
-  // Открыть картинку на полный экран
+  /**
+   * Открыть картинку на полный экран
+   */
   const handleOpenFullScreenPopup = useCallback((itemId) => {
     dispatch(openFullScreenPopup(itemId));
   }, [dispatch]);
 
-  // Закрыть картинку, открытую на полный экран
+  /**
+   * Закрыть картинку, открытую на полный экран
+   */
   const handleCloseFullScreenPopup = useCallback(() => {
     dispatch(closeFullScreenPopup());
   }, [dispatch]);
 
-  // Поменять значение одного из параметра фильтра
+  /**
+   * Поменять значение одного из параметра фильтра
+   */
   const handleChangeFilter = useCallback(({ name, value }) => {
     dispatch(changeFilter({
       name,
@@ -105,66 +110,60 @@ const Catalog = () => {
     handleApplyFilter();
   }, [dispatch, handleApplyFilter]);
 
-  // Открыть модальное окно с итемом
+  /**
+   * Открыть модальное окно с итемом
+   */
   const handleCardClick = useCallback((itemId) => {
     dispatch(openCardPopup(itemId));
   }, [dispatch]);
 
-  // Закрыть модальное окно итемов
+  /**
+   * Закрыть модальное окно итемов
+   */
   const handleCloseCardPopup = useCallback(() => {
     dispatch(closeCardPopup());
   }, [dispatch]);
 
-  // Открыть следующий итем внутри модального окна итемов
+  /**
+   * Открыть следующий итем внутри модального окна итемов
+   */
   const handleGoToNextCard = useCallback(() => {
     dispatch(goToNextCard());
   }, [dispatch]);
 
-  // Открыть предыдущий итем внутри модального окна итемов
+  /**
+   * Открыть предыдущий итем внутри модального окна итемов
+   */
   const handleGoToPrevCard = useCallback(() => {
     dispatch(goToPrevCard());
   }, [dispatch]);
 
+  /**
+   * Подгрузить больше изображений в галерее
+   */
   const handleDownloadMoreCards = useCallback(() => {
     dispatch(changePage(page + 1));
     dispatch(fetchCatalog());
   }, [dispatch, page]);
 
-  // // Разбирает поиск из урла, подставляет параметры в селекты, и делает по ним запрос
-  // useEffect(() => {
-  //   const search = QueryString.parse(location.search);
-  //   if (Object.keys(search).length) {
-  //     Object.keys(search).forEach((key) => {
-  //       dispatch(changeFilter({
-  //         name: key,
-  //         value: search[key],
-  //       }));
-  //     });
-  //   } else {
-  //     dispatch(resetFilters());
-  //   }
-  //   handleApplyFilter();
-  // }, [location, dispatch, handleApplyFilter]);
-
+  /**
+   * Разбирает поиск из урла, подставляет параметры в селекты, и делает по ним запрос
+   */
   useEffect(() => {
-    handleApplyFilter();
-    refsMap.current = {};
-  }, [handleApplyFilter]);
+    const { query } = router;
 
-  // useLayoutEffect(() => {
-  //   if (location.hash) {
-  //     refsMap.current[location.hash].scrollIntoView({
-  //       behavior: 'smooth',
-  //       block: 'center',
-  //     });
-  //   } else {
-  //     window.scrollTo({
-  //       top: 0,
-  //       left: 0,
-  //       behavior: 'smooth',
-  //     });
-  //   }
-  // }, [location]);
+    if (Object.keys(query).length) {
+      Object.keys(query).forEach((key) => {
+        dispatch(changeFilter({
+          name: key,
+          value: query[key],
+        }));
+      });
+    } else {
+      dispatch(resetFilters());
+    }
+    handleApplyFilter();
+  }, [router.query, dispatch, handleApplyFilter]);
 
   return (
     <>
@@ -172,7 +171,6 @@ const Catalog = () => {
         <Lead sectionId={filter.section} />
         <section
           id="filters"
-          // ref={(el) => { refsMap.current['#filters'] = el; }}
           className={classes.filterSection}
         >
           <Filters

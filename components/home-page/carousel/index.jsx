@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import cx from 'classnames';
+import { v4 } from 'uuid';
 import { Container } from '@material-ui/core';
 import { PAGES } from './constants';
 import { Page, Pagination } from './components';
@@ -152,7 +153,7 @@ export const Carousel = () => {
       >
         {PAGES.map((page, i) => (
           <Page
-            key={page.titles[0]}
+            key={v4()}
             id={i}
             titles={page.titles}
             subtitles={page.subtitles}

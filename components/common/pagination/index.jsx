@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { v4 } from 'uuid';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -83,7 +84,7 @@ export const Pagination = ({
       <div className={classes.list__container}>
         {list.map((item, index) => (
           <div
-            key={JSON.stringify(item)}
+            key={v4()}
             className={cx(classes.circle, {
               [classes.active]: index === activeIndex,
             })}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import cx from 'classnames';
+import { v4 } from 'uuid';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -62,7 +63,7 @@ export const Pagination = ({
     <div className={classes.root}>
       {pages.map((page, index) => (
         <button
-          key={page.titles[0]}
+          key={v4()}
           type="button"
           className={cx(classes.item, {
             [classes.active]: currentPage === index,

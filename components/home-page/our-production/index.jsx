@@ -7,11 +7,8 @@ import {
   Grid,
   Hidden,
 } from '@material-ui/core';
-import {
-  BlockTitle,
-  MainButton,
-  Pagination,
-} from 'components/common';
+import { BlockTitle, MainButton, Pagination } from 'components/common';
+import { v4 } from 'uuid';
 import { LIST } from './constants';
 
 const useStyles = makeStyles((theme) => ({
@@ -70,7 +67,7 @@ export const OurProduction = () => {
       >
         <Hidden xsDown>
           {LIST.map((item) => (
-            <Grid key={item.title} item xs={6} md={3}>
+            <Grid key={v4()} item xs={6} md={3}>
               <BlockTitle>
                 <Typography variant="h6" className={classes.section__title}>
                   {item.title}

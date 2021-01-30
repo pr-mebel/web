@@ -213,9 +213,9 @@ export const Advantages = () => {
           <Grid item xs={12} className={classes.listContainer}>
             <Options activeTab={activeTab}>
               {TABS.map((tab) => (
-                <ul key={tab.title} className={classes.list}>
+                <ul key={v4()} className={classes.list}>
                   {tab.list.map((option) => (
-                    <li key={option} className={classes.listItem}>
+                    <li key={v4()} className={classes.listItem}>
                       <CheckIcon className={classes.check} />
                       <Typography className={classes.listText}>{option}</Typography>
                     </li>

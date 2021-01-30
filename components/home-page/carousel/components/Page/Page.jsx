@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { v4 } from 'uuid';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Link from 'next/link';
@@ -196,7 +197,7 @@ export const Page = ({
       <div className={classes.content}>
         {titles.map((title) => (
           <Typography
-            key={title}
+            key={v4()}
             className={cx(classes.text, classes.title)}
           >
             {title}
@@ -205,7 +206,7 @@ export const Page = ({
         <div className={classes.subtitlesContainer}>
           {subtitles.map((subtitle) => (
             <Typography
-              key={subtitle}
+              key={v4()}
               className={cx(classes.text, classes.subtitle)}
             >
               {subtitle}
@@ -215,7 +216,7 @@ export const Page = ({
         <div className={classes.bottomTextContainer}>
           {texts.map((text) => (
             <Typography
-              key={text}
+              key={v4()}
               className={cx(classes.text, classes.bottomText)}
             >
               {text}

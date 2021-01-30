@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Container, Typography, Grid } from '@material-ui/core';
+import { v4 } from 'uuid';
 import { BlockTitle } from 'components/common';
 import { CARDS } from './constants';
 import { Card } from './components';
@@ -37,7 +38,7 @@ export const About = () => {
         </Typography>
         <Grid container spacing={isXsDown ? 2 : 4} className={classes.grid}>
           {CARDS.map((card) => (
-            <Grid item xs={10} sm={6} md={4} key={card.id}>
+            <Grid item xs={10} sm={6} md={4} key={v4()}>
               <Card
                 Img={card.img}
                 title={card.title}

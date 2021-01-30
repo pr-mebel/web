@@ -7,6 +7,7 @@ import {
   Grid,
   Hidden,
 } from '@material-ui/core';
+import { v4 } from 'uuid';
 import { BlockTitle, MainButton, Pagination } from 'components/common';
 import { WardrobeAdditionalBlock } from '../wardrobe-additional-block';
 import { WardrobeSnippet } from '../wardrobe-snippet';
@@ -105,7 +106,7 @@ export const WardrobeLeft = () => {
               />
               {ADDITIONAL.map((point) => (
                 <div
-                  key={`${point.left} x ${point.top}`}
+                  key={v4()}
                   className={classes.point}
                   style={{
                     left: point.left,
@@ -132,7 +133,7 @@ export const WardrobeLeft = () => {
             <ul className={classes.list}>
               {TABS.map((tab, i) => (
                 <li
-                  key={tab.title}
+                  key={v4()}
                   className={cn(classes.option, {
                     [classes.active]: activeTabIndex === i,
                   })}
@@ -153,7 +154,7 @@ export const WardrobeLeft = () => {
             <ul className={cn(classes.list, classes.list_horizontal)}>
               {TABS.map((tab, i) => (
                 <li
-                  key={tab.title}
+                  key={v4()}
                   className={cn(classes.option, {
                     [classes.active]: activeTabIndex === i,
                   })}

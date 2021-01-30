@@ -170,7 +170,6 @@ const Catalog = () => {
       <main>
         <Lead sectionId={filter.section} />
         <section
-          id="filters"
           className={classes.filterSection}
         >
           <Filters

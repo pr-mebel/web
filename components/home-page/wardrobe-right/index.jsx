@@ -6,11 +6,8 @@ import {
   Grid,
   Hidden,
 } from '@material-ui/core';
-import {
-  BlockTitle,
-  MainButton,
-  Pagination,
-} from 'components/common';
+import { BlockTitle, MainButton, Pagination } from 'components/common';
+import { v4 } from 'uuid';
 import { ADDITIONAL } from './constants';
 import { WardrobeAdditionalBlock } from '../wardrobe-additional-block';
 import { WardrobeSnippet } from '../wardrobe-snippet';
@@ -94,7 +91,7 @@ export const WardrobeRight = () => {
               />
               {ADDITIONAL.map((point) => (
                 <div
-                  key={`${point.left} x ${point.top}`}
+                  key={v4()}
                   className={classes.point}
                   style={{
                     left: point.left,

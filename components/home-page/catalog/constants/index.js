@@ -12,7 +12,7 @@ export const CATALOG = [
     subtitle: 'В вашем интерьере',
     caption: 'Шкафы классические',
     img: img1,
-    href: '/catalog?section=cupboard&style=classic#filters',
+    href: '/catalog?section=cupboard&style=classic',
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ export const CATALOG = [
     subtitle: 'В современном исполнении',
     caption: 'Шкафы современные',
     img: img2,
-    href: '/catalog?section=cupboard&style=modern#filters',
+    href: '/catalog?section=cupboard&style=modern',
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ export const CATALOG = [
     subtitle: 'Для удобного хранения',
     caption: 'Аксессуары',
     img: img3,
-    href: '/catalog?section=accessories#filters',
+    href: '/catalog?section=accessories',
   },
   {
     id: 4,
@@ -36,7 +36,7 @@ export const CATALOG = [
     subtitle: 'Для функциональных пространств',
     caption: 'Гардеробные классические',
     img: img4,
-    href: '/catalog?section=wardrobe&style=classic#filters',
+    href: '/catalog?section=wardrobe&style=classic',
   },
   {
     id: 5,
@@ -44,7 +44,7 @@ export const CATALOG = [
     subtitle: 'Максимальная функциональность',
     caption: 'Гардеробные современные',
     img: img5,
-    href: '/catalog?section=wardrobe&style=modern#filters',
+    href: '/catalog?section=wardrobe&style=modern',
   },
   {
     id: 6,
@@ -52,6 +52,6 @@ export const CATALOG = [
     subtitle: 'В каждой детали',
     caption: 'Системы подсветки',
     img: img6,
-    href: '/catalog?section=lightingSystems#filters',
+    href: '/catalog?section=lightingSystems',
   },
 ];

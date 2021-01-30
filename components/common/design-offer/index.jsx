@@ -5,6 +5,7 @@ import {
   Typography,
   Grid,
 } from '@material-ui/core';
+import { v4 } from 'uuid';
 import { BlockTitle } from '../block-title';
 import { DesignCard } from './components';
 import { LIST } from './constants';
@@ -65,7 +66,7 @@ export const DesignOffer = () => {
       </BlockTitle>
       <Grid container className={classes.container} spacing={4}>
         {LIST.map((item) => (
-          <Grid key={item.title} item xs={12} sm={6} md={3}>
+          <Grid key={v4()} item xs={12} sm={6} md={3}>
             <DesignCard Img={item.img}>
               {item.title}
             </DesignCard>

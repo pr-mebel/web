@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography, Grid } from '@material-ui/core';
+import { v4 } from 'uuid';
 import { BlockTitle, MainButton } from '../../common';
 import { CATALOG } from './constants';
 import { CatalogCard } from './components';
@@ -31,7 +32,7 @@ export const Catalog = () => {
       </BlockTitle>
       <Grid container spacing={4}>
         {CATALOG.map((item) => (
-          <Grid item xs={12} sm={6} md={4} key={item.id}>
+          <Grid item xs={12} sm={6} md={4} key={v4()}>
             <CatalogCard
               title={item.title}
               subtitle={item.subtitle}

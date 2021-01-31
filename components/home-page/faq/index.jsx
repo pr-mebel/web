@@ -8,7 +8,6 @@ import {
   AccordionDetails,
   AccordionSummary,
 } from '@material-ui/core';
-import { v4 } from 'uuid';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { BlockTitle, MainButton } from 'components/common';
 import { LIST } from './constants';
@@ -72,7 +71,7 @@ export const FAQ = () => {
           if (i > 4 && !isShowMoreClicked) return null;
 
           return (
-            <Grid item xs={12} md={10} key={v4()}>
+            <Grid item xs={12} md={10} key={item.id}>
               <Accordion
                 className={classes.accordion}
                 onChange={handleChange(item.title)}
@@ -95,22 +94,6 @@ export const FAQ = () => {
           );
         })}
       </Grid>
-      {/* <Grid container className={classes.container} spacing={3}>
-        {LIST.map((item) => (
-          <React.Fragment key={item.title}>
-            <Hidden smDown><Grid item md={2} /></Hidden>
-            <Grid item xs={12} md={8}>
-              <Question
-                id={item.id}
-                title={item.title}
-              >
-                {item.text}
-              </Question>
-            </Grid>
-            <Hidden smDown><Grid item md={2} /></Hidden>
-          </React.Fragment>
-        ))}
-      </Grid> */}
       {!isShowMoreClicked && (
         <Grid container justify="center" className={classes.buttonContainer}>
           <Grid item xs={10} sm={6} md={4}>

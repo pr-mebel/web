@@ -1,10 +1,6 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Container,
-  Grid,
-} from '@material-ui/core';
-import { v4 } from 'uuid';
+import { Container, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import { changePage, fetchCatalog } from 'redux';
@@ -43,7 +39,7 @@ export const Gallery = ({
     <Container>
       <Grid container spacing={3}>
         {items.map((item, i) => (
-          <Grid item xs={12} sm={6} md={4} key={v4()}>
+          <Grid item xs={12} sm={6} md={4} key={item.id}>
             <Card
               imageUrlMin={item.imageMinified.url}
               collection={item.collection}

@@ -1,4 +1,5 @@
 import { NB_SP, MDASH } from '__constants__';
+import { addIdsToArrayOfObjects } from 'lib/utils';
 
 import Img1 from '../assets/1.svg';
 import Img2 from '../assets/2.svg';
@@ -7,9 +8,8 @@ import Img4 from '../assets/4.svg';
 import Img5 from '../assets/5.svg';
 import Img6 from '../assets/6.svg';
 
-export const CARDS = [
+export const CARDS = addIdsToArrayOfObjects([
   {
-    id: 1,
     title: 'Богатый ассортимент',
     text: `Мы${NB_SP}можем предложить Вам корпусную мебель для любой из${NB_SP}зон
       вашего дома${NB_SP}${MDASH} от${NB_SP}кухни до${NB_SP}детской комнаты.
@@ -18,7 +18,6 @@ export const CARDS = [
     img: Img1,
   },
   {
-    id: 2,
     title: 'Высокое качество мебели',
     text: `Мы${NB_SP}знаем. что качественная мебель видна сразу.
       Приходите и${NB_SP}Вы увидите это сами. Вся продукция проходит
@@ -26,7 +25,6 @@ export const CARDS = [
     img: Img2,
   },
   {
-    id: 3,
     title: `Мы обустраиваем интерьеры более 20${NB_SP}лет`,
     text: `За${NB_SP}это время мы${NB_SP}приобрели бесценный опыт,
       который позволяет нам безупречно выполнять даже самые сложные проекты.
@@ -34,7 +32,6 @@ export const CARDS = [
     img: Img3,
   },
   {
-    id: 4,
     title: 'Большая экспозиция',
     text: `Невозможно выбрать мебель, не${NB_SP}увидев и${NB_SP}не${NB_SP}потрогав
       ее${NB_SP}руками. На${NB_SP}площади 300${NB_SP}м вы${NB_SP}сможете увидеть как
@@ -43,7 +40,6 @@ export const CARDS = [
     img: Img4,
   },
   {
-    id: 5,
     title: 'Удобные расположение',
     text: `Наш салон расположен в${NB_SP}одном из${NB_SP}самых транспортнодоступных
       мест города Москвы в${NB_SP}районе${NB_SP}м. Сокол в${NB_SP}5${NB_SP}минутах
@@ -51,11 +47,10 @@ export const CARDS = [
     img: Img5,
   },
   {
-    id: 6,
     title: 'С нами надежно и безопасно',
     text: `Наш салон являемся фирменным представительством фабрики,
       никаких посредников от${NB_SP}этапа проектирования мебели до${NB_SP}монтажа.
       Это позволяет найти решение даже в${NB_SP}самых нестандартных ситуациях.`,
     img: Img6,
   },
-];
+]);

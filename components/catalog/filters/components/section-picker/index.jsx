@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { v4 } from 'uuid';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 
@@ -60,7 +59,7 @@ export const SectionPicker = ({ options, value, onChange }) => {
         {options.map((section, i) => {
           if (i !== options.length - 1) {
             return (
-              <React.Fragment key={v4()}>
+              <React.Fragment key={section.id}>
                 <Typography
                   variant="body1"
                   className={cx(classes.option, {
@@ -77,7 +76,7 @@ export const SectionPicker = ({ options, value, onChange }) => {
 
           return (
             <Typography
-              key={v4()}
+              key={section.id}
               variant="body1"
               className={cx(classes.option, {
                 [classes.selectedOption]: value === section.id,

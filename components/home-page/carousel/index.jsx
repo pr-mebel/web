@@ -7,8 +7,7 @@ import React, {
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import cx from 'classnames';
-import { v4 } from 'uuid';
+import cn from 'classnames';
 import { Container } from '@material-ui/core';
 import { PAGES } from './constants';
 import { Page, Pagination } from './components';
@@ -140,7 +139,7 @@ export const Carousel = () => {
   return (
     <div className={classes.root} ref={rootRef}>
       <ArrowBackIosIcon
-        className={cx(
+        className={cn(
           classes.prevDesktop,
           classes.navDesktop,
           classes.nav,
@@ -153,7 +152,7 @@ export const Carousel = () => {
       >
         {PAGES.map((page, i) => (
           <Page
-            key={v4()}
+            key={page.id}
             id={i}
             titles={page.titles}
             subtitles={page.subtitles}
@@ -164,7 +163,7 @@ export const Carousel = () => {
         ))}
       </div>
       <ArrowForwardIosIcon
-        className={cx(
+        className={cn(
           classes.nextDesktop,
           classes.navDesktop,
           classes.nav,
@@ -174,7 +173,7 @@ export const Carousel = () => {
       <div className={classes.paginationContainer}>
         <Container className={classes.paginationInnerContainer}>
           <ArrowBackIosIcon
-            className={cx(
+            className={cn(
               classes.prevMobile,
               classes.navMobile,
               classes.nav,
@@ -187,7 +186,7 @@ export const Carousel = () => {
             onChangeSlide={handleChangeSlide}
           />
           <ArrowForwardIosIcon
-            className={cx(
+            className={cn(
               classes.nextMobile,
               classes.navMobile,
               classes.nav,

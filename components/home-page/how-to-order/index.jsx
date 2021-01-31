@@ -7,7 +7,6 @@ import {
   Hidden,
 } from '@material-ui/core';
 import { BlockTitle, MainButton } from 'components/common';
-import { v4 } from 'uuid';
 import { LIST } from './constants';
 
 const useStyles = makeStyles((theme) => ({
@@ -129,7 +128,7 @@ export const HowToOrder = () => {
         </Hidden>
         <Hidden smUp>
           {LIST.map((item) => (
-            <Grid key={v4()} item xs={12} className={classes.item}>
+            <Grid key={item.id} item xs={12} className={classes.item}>
               <Typography className={classes.number}>{item.id}</Typography>
               <BlockTitle>
                 <Typography variant="h6">

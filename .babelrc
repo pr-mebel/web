@@ -6,10 +6,9 @@
     ["module-resolver", {
       "root": ["./"]
     }],
-    // https://material-ui.com/guides/minimizing-bundle-size/
     ["babel-plugin-import", {
         "libraryName": "@material-ui/core",
-        "libraryDirectory": "esm",
+        "libraryDirectory": "",
         "camel2DashComponentName": false
       },
       "core"
@@ -18,7 +17,7 @@
       "babel-plugin-import",
       {
         "libraryName": "@material-ui/icons",
-        "libraryDirectory": "esm",
+        "libraryDirectory": "",
         "camel2DashComponentName": false
       },
       "icons"

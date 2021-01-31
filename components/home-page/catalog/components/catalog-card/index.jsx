@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Hidden } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { LoadingBackground } from 'components/common';
+import Image from 'next/image';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -167,7 +168,13 @@ export const CatalogCard = ({
         <Hidden xsDown>
           <LoadingBackground>
             <div className={classes.imageContainer}>
-              <img src={img} alt={caption} className={classes.image} />
+              <Image
+                src={img}
+                alt={caption}
+                layout="fill"
+                className={classes.image}
+                quality={100}
+              />
               <div className={classes.hoverTextContainer}>
                 <div className={classes.hoverTextInnerContainer}>
                   <Typography variant="h5" className={classes.title}>{title}</Typography>
@@ -189,7 +196,13 @@ export const CatalogCard = ({
         <Hidden smUp>
           <LoadingBackground>
             <div className={classes.imageContainer}>
-              <img src={img} alt={caption} className={classes.image} />
+              <Image
+                src={img}
+                alt={caption}
+                layout="fill"
+                className={classes.image}
+                quality={100}
+              />
               <div className={classes.imgHeader}>
                 <Typography
                   component="span"

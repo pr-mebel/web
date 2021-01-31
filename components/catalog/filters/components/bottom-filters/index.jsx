@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { v4 } from 'uuid';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid } from '@material-ui/core';
 
@@ -69,7 +68,7 @@ export const BottomFilters = ({
             {options.styles.map((option, i) => {
               if (i !== options.styles.length - 1) {
                 return (
-                  <React.Fragment key={v4()}>
+                  <React.Fragment key={option.id}>
                     <Typography
                       variant="body2"
                       component="span"
@@ -93,7 +92,7 @@ export const BottomFilters = ({
 
               return (
                 <Typography
-                  key={v4()}
+                  key={option.id}
                   variant="body2"
                   component="span"
                   className={cx(classes.option, {
@@ -119,7 +118,7 @@ export const BottomFilters = ({
             {options.doorTypes.map((option, i) => {
               if (i !== options.doorTypes.length - 1) {
                 return (
-                  <React.Fragment key={v4()}>
+                  <React.Fragment key={option.id}>
                     <Typography
                       variant="body2"
                       component="span"
@@ -143,7 +142,7 @@ export const BottomFilters = ({
 
               return (
                 <Typography
-                  key={v4()}
+                  key={option.id}
                   variant="body2"
                   component="span"
                   className={cx(classes.option, {

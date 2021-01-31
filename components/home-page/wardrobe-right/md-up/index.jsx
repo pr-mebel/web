@@ -13,12 +13,10 @@ const useStyles = makeStyles((theme) => ({
   description: {
     marginTop: '80px',
   },
-  img__container: {
+  imgContainer: {
     position: 'relative',
     paddingTop: '71.9%',
-  },
-  imgWrapper: {
-    position: 'relative',
+    width: '100%',
   },
   point: {
     position: 'absolute',
@@ -64,7 +62,7 @@ export const WardrobeRightMdUp = () => {
           </Typography>
         </Grid>
         <Grid item xs={6}>
-          <div className={classes.imgWrapper}>
+          <div className={classes.imgContainer}>
             <Image
               src={defaultImage}
               alt="Шкаф исключительного качества"

@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { v4 } from 'uuid';
+import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 
@@ -60,8 +59,8 @@ export const Tabs = ({
       <ul className={classes.tabs}>
         {tabs.map((tab, i) => (
           <li
-            key={v4()}
-            className={cx(classes.tab, {
+            key={tab.id}
+            className={cn(classes.tab, {
               [classes.active]: activeTab === i,
             })}
             onClick={handeChangeTab(i)}

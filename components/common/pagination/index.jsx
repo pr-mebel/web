@@ -1,10 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { v4 } from 'uuid';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import { addIdsToArrayOfObjects } from 'lib/utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,6 +75,8 @@ export const Pagination = ({
     }
   }, [activeIndex, onChange]);
 
+  const listWithIds = useMemo(() => addIdsToArrayOfObjects(list), [list]);
+
   return (
     <div className={classes.root}>
       <ArrowBackIosIcon
@@ -82,9 +84,9 @@ export const Pagination = ({
         onClick={handleClickPrev}
       />
       <div className={classes.list__container}>
-        {list.map((item, index) => (
+        {listWithIds.map((item, index) => (
           <div
-            key={v4()}
+            key={item.id}
             className={cx(classes.circle, {
               [classes.active]: index === activeIndex,
             })}

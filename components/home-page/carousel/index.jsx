@@ -150,10 +150,9 @@ export const Carousel = () => {
         className={classes.slider}
         style={{ transform: `translateX(-${windowWidth * activeSlide}px)` }}
       >
-        {PAGES.map((page, i) => (
+        {PAGES.map((page) => (
           <Page
             key={page.id}
-            id={i}
             titles={page.titles}
             subtitles={page.subtitles}
             texts={page.texts}

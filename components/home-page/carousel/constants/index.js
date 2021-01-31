@@ -1,25 +1,25 @@
 import { addIdsToArrayOfObjects } from 'lib/utils';
 
-const topImg1 = 'images/home-page/carousel/top-img1.jpg';
-const topImg2 = 'images/home-page/carousel/top-img2.jpg';
-const topImg3 = 'images/home-page/carousel/top-img3.jpg';
-const topImg4 = 'images/home-page/carousel/top-img4.jpg';
-const topImg5 = 'images/home-page/carousel/top-img5.jpg';
-const topImg6 = 'images/home-page/carousel/top-img6.jpg';
+const topImg1 = '/images/home-page/carousel/top-img1.jpg';
+const topImg2 = '/images/home-page/carousel/top-img2.jpg';
+const topImg3 = '/images/home-page/carousel/top-img3.jpg';
+const topImg4 = '/images/home-page/carousel/top-img4.jpg';
+const topImg5 = '/images/home-page/carousel/top-img5.jpg';
+const topImg6 = '/images/home-page/carousel/top-img6.jpg';
 
-const topImgTab1 = 'images/home-page/carousel/top-img-tab1.jpg';
-const topImgTab2 = 'images/home-page/carousel/top-img-tab2.jpg';
-const topImgTab3 = 'images/home-page/carousel/top-img-tab3.jpg';
-const topImgTab4 = 'images/home-page/carousel/top-img-tab4.jpg';
-const topImgTab5 = 'images/home-page/carousel/top-img-tab5.jpg';
-const topImgTab6 = 'images/home-page/carousel/top-img-tab6.jpg';
+const topImgTab1 = '/images/home-page/carousel/top-img-tab1.jpg';
+const topImgTab2 = '/images/home-page/carousel/top-img-tab2.jpg';
+const topImgTab3 = '/images/home-page/carousel/top-img-tab3.jpg';
+const topImgTab4 = '/images/home-page/carousel/top-img-tab4.jpg';
+const topImgTab5 = '/images/home-page/carousel/top-img-tab5.jpg';
+const topImgTab6 = '/images/home-page/carousel/top-img-tab6.jpg';
 
-const topImgMob1 = 'images/home-page/carousel/top-img-mob1.jpg';
-const topImgMob2 = 'images/home-page/carousel/top-img-mob2.jpg';
-const topImgMob3 = 'images/home-page/carousel/top-img-mob3.jpg';
-const topImgMob4 = 'images/home-page/carousel/top-img-mob4.jpg';
-const topImgMob5 = 'images/home-page/carousel/top-img-mob5.jpg';
-const topImgMob6 = 'images/home-page/carousel/top-img-mob6.jpg';
+const topImgMob1 = '/images/home-page/carousel/top-img-mob1.jpg';
+const topImgMob2 = '/images/home-page/carousel/top-img-mob2.jpg';
+const topImgMob3 = '/images/home-page/carousel/top-img-mob3.jpg';
+const topImgMob4 = '/images/home-page/carousel/top-img-mob4.jpg';
+const topImgMob5 = '/images/home-page/carousel/top-img-mob5.jpg';
+const topImgMob6 = '/images/home-page/carousel/top-img-mob6.jpg';
 
 export const PAGES = addIdsToArrayOfObjects([
   {

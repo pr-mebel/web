@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { Typography, Hidden } from '@material-ui/core';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -165,7 +166,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const Page = ({
   titles,
-  id,
   subtitles,
   texts,
   imageSet,
@@ -177,21 +177,30 @@ export const Page = ({
     <div
       className={classes.root}
     >
-      {id === 0 ? (
-        <picture className={classes.imageContainer}>
-          <source className={classes.image} srcSet={imageSet.small} media="(max-width: 575px)" />
-          <source className={classes.image} srcSet={imageSet.medium} media="(max-width: 990px)" />
-          <source className={classes.image} srcSet={imageSet.large} />
-          <img className={classes.image} src={imageSet.small} alt="Фоновое изображение" />
-        </picture>
-      ) : (
-        <picture className={classes.imageContainer}>
-          <source className={classes.image} srcSet={imageSet.small} media="(max-width: 575px)" />
-          <source className={classes.image} srcSet={imageSet.medium} media="(max-width: 990px)" />
-          <source className={classes.image} srcSet={imageSet.large} />
-          <img className={classes.image} src={imageSet.small} alt="Фоновое изображение" />
-        </picture>
-      )}
+      <div className={classes.imageContainer}>
+        <Hidden smDown>
+          <Image
+            src={imageSet.large}
+            alt={titles[0].data}
+            layout="fill"
+          />
+        </Hidden>
+        <Hidden xsDown mdUp>
+          <Image
+            src={imageSet.medium}
+            alt={titles[0].data}
+            layout="fill"
+          />
+        </Hidden>
+        <Hidden smUp>
+          <Image
+            src={imageSet.small}
+            alt={titles[0].data}
+            layout="fill"
+            quality={90}
+          />
+        </Hidden>
+      </div>
 
       <div className={classes.content}>
         {titles.map((titleWrapper) => (
@@ -237,7 +246,6 @@ export const Page = ({
 };
 
 Page.propTypes = {
-  id: PropTypes.number.isRequired,
   titles: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     data: PropTypes.string,

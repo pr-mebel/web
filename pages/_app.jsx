@@ -25,7 +25,13 @@ function MyApp({ Component, pageProps }) {
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link href="/fonts/index.css" rel="stylesheet" />
             <meta name="yandex-verification" content="6eb5436d905f1d91" />
-            <meta name="description" content="Частный мебельер - салон мбели премиум-класса" />
+            <meta
+              name="description"
+              content="Мы создаем эксклюзивный проект будущего изделия, который
+              не просто идеально впишется в ваш интерьер, а будет комфортен,
+              удобен и функционален в использовании, и прослужит долгие годы."
+            />
+            <meta name="canonical" content="https://pr-mebel.com" />
             <title>Частный мебельер - салон мебели премиум-класса</title>
           </Head>
 

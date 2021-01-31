@@ -69,7 +69,7 @@ const catalogSlice = createSlice({
     resetCatalog(state) {
       state.items = [];
       state.page = 0;
-      state.hasMore = 0;
+      state.hasMore = false;
     },
     resetFilters(state) {
       state.filter = {

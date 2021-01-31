@@ -1,6 +1,7 @@
+import { addIdsToArrayOfObjects } from 'lib/utils';
 import { NB_SP } from '__constants__';
 
-export const LIST = [
+export const LIST = addIdsToArrayOfObjects([
   {
     title: 'Квалифицированный персонал',
     text: `Все сотрудники нашей фабрики имеют многолетний опыт работы
@@ -23,4 +24,4 @@ export const LIST = [
     по${NB_SP}1000${NB_SP}параметрам, что позволяет
     свести риск возникновения брака к${NB_SP}минимуму.`,
   },
-];
+]);

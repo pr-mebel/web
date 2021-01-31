@@ -1,9 +1,6 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Container,
-  Grid,
-} from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import { changePage, fetchCatalog } from 'redux';

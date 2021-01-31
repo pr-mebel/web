@@ -1,10 +1,11 @@
+import { addIdsToArrayOfObjects } from 'lib/utils';
 import { NB_SP } from '__constants__';
 import Img1 from '../assets/design-img.svg';
 import Img2 from '../assets/design-img2.svg';
 import Img3 from '../assets/design-img3.svg';
 import Img4 from '../assets/design-img4.svg';
 
-export const LIST = [
+export const LIST = addIdsToArrayOfObjects([
   {
     title: `Пришлите нам эскизы вашей мебели или просто оставьте свои
     контактные данные`,
@@ -23,4 +24,4 @@ export const LIST = [
     title: 'Сформируем лучшее предложение в рамках бюджета',
     img: Img4,
   },
-];
+]);

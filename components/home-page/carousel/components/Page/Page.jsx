@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
+import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Link from 'next/link';
@@ -194,31 +194,31 @@ export const Page = ({
       )}
 
       <div className={classes.content}>
-        {titles.map((title) => (
+        {titles.map((titleWrapper) => (
           <Typography
-            key={title}
-            className={cx(classes.text, classes.title)}
+            key={titleWrapper.id}
+            className={cn(classes.text, classes.title)}
           >
-            {title}
+            {titleWrapper.data}
           </Typography>
         ))}
         <div className={classes.subtitlesContainer}>
-          {subtitles.map((subtitle) => (
+          {subtitles.map((subtitleWrapper) => (
             <Typography
-              key={subtitle}
-              className={cx(classes.text, classes.subtitle)}
+              key={subtitleWrapper.id}
+              className={cn(classes.text, classes.subtitle)}
             >
-              {subtitle}
+              {subtitleWrapper.data}
             </Typography>
           ))}
         </div>
         <div className={classes.bottomTextContainer}>
-          {texts.map((text) => (
+          {texts.map((textWrapper) => (
             <Typography
-              key={text}
-              className={cx(classes.text, classes.bottomText)}
+              key={textWrapper.id}
+              className={cn(classes.text, classes.bottomText)}
             >
-              {text}
+              {textWrapper.data}
             </Typography>
           ))}
         </div>
@@ -238,9 +238,18 @@ export const Page = ({
 
 Page.propTypes = {
   id: PropTypes.number.isRequired,
-  titles: PropTypes.arrayOf(PropTypes.string).isRequired,
-  subtitles: PropTypes.arrayOf(PropTypes.string),
-  texts: PropTypes.arrayOf(PropTypes.string).isRequired,
+  titles: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    data: PropTypes.string,
+  })).isRequired,
+  subtitles: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    data: PropTypes.string,
+  })),
+  texts: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    data: PropTypes.string,
+  })).isRequired,
   imageSet: PropTypes.object.isRequired,
   to: PropTypes.string.isRequired,
 };

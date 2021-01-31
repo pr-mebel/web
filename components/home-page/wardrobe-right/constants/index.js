@@ -1,18 +1,21 @@
 import { NB_SP, MDASH } from '__constants__';
+import { addIdsToArrayOfObjects } from 'lib/utils';
 
-const imgAdd1 = 'images/home-page/wardrobe-right/1.jpg';
-const imgAdd2 = 'images/home-page/wardrobe-right/2.jpg';
-const imgAdd3 = 'images/home-page/wardrobe-right/3.jpg';
-const imgAdd4 = 'images/home-page/wardrobe-right/4.jpg';
-const imgAdd5 = 'images/home-page/wardrobe-right/5.jpg';
-const imgAdd6 = 'images/home-page/wardrobe-right/6.jpg';
-const imgAdd7 = 'images/home-page/wardrobe-right/7.jpg';
-const imgAdd8 = 'images/home-page/wardrobe-right/8.jpg';
-const imgAdd9 = 'images/home-page/wardrobe-right/9.jpg';
-const imgAdd10 = 'images/home-page/wardrobe-right/10.jpg';
-const imgAdd11 = 'images/home-page/wardrobe-right/11.jpg';
+const imgAdd1 = '/images/home-page/wardrobe-right/1.jpg';
+const imgAdd2 = '/images/home-page/wardrobe-right/2.jpg';
+const imgAdd3 = '/images/home-page/wardrobe-right/3.jpg';
+const imgAdd4 = '/images/home-page/wardrobe-right/4.jpg';
+const imgAdd5 = '/images/home-page/wardrobe-right/5.jpg';
+const imgAdd6 = '/images/home-page/wardrobe-right/6.jpg';
+const imgAdd7 = '/images/home-page/wardrobe-right/7.jpg';
+const imgAdd8 = '/images/home-page/wardrobe-right/8.jpg';
+const imgAdd9 = '/images/home-page/wardrobe-right/9.jpg';
+const imgAdd10 = '/images/home-page/wardrobe-right/10.jpg';
+const imgAdd11 = '/images/home-page/wardrobe-right/11.jpg';
 
-export const ADDITIONAL = [
+export const defaultImage = '/images/home-page/wardrobe-right/wardrobe-1.jpg';
+
+export const ADDITIONAL = addIdsToArrayOfObjects([
   // 1
   {
     title: 'Двери купе',
@@ -131,4 +134,4 @@ export const ADDITIONAL = [
     left: '85%',
     direction: 'left',
   },
-];
+]);

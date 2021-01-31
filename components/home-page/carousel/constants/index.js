@@ -1,3 +1,5 @@
+import { addIdsToArrayOfObjects } from 'lib/utils';
+
 const topImg1 = 'images/home-page/carousel/top-img1.jpg';
 const topImg2 = 'images/home-page/carousel/top-img2.jpg';
 const topImg3 = 'images/home-page/carousel/top-img3.jpg';
@@ -19,16 +21,16 @@ const topImgMob4 = 'images/home-page/carousel/top-img-mob4.jpg';
 const topImgMob5 = 'images/home-page/carousel/top-img-mob5.jpg';
 const topImgMob6 = 'images/home-page/carousel/top-img-mob6.jpg';
 
-export const PAGES = [
+export const PAGES = addIdsToArrayOfObjects([
   {
-    titles: [
+    titles: addIdsToArrayOfObjects([
       'Частный мебельер',
-    ],
+    ]),
     subtitles: [],
-    texts: [
+    texts: addIdsToArrayOfObjects([
       'Шоу-рум мебели премиум класса',
       'по индивидуальным дизайн-проектам',
-    ],
+    ]),
     imageSet: {
       small: topImgMob1,
       medium: topImgTab1,
@@ -37,91 +39,91 @@ export const PAGES = [
     to: '/catalog',
   },
   {
-    titles: [
+    titles: addIdsToArrayOfObjects([
       'Элегантная классика',
-    ],
-    subtitles: [
+    ]),
+    subtitles: addIdsToArrayOfObjects([
       'в лучших традициях',
       'качества',
-    ],
-    texts: [
+    ]),
+    texts: addIdsToArrayOfObjects([
       'Премиальные детали',
       'Изысканный дизайн',
-    ],
+    ]),
     imageSet: {
       small: topImgMob2,
       medium: topImgTab2,
       large: topImg2,
     },
-    to: '/catalog?section=cupboard&style=classic#filters',
+    to: '/catalog?section=cupboard&style=classic',
   },
   {
-    titles: [
+    titles: addIdsToArrayOfObjects([
       'Гардеробные',
       'системы',
-    ],
+    ]),
     subtitles: [],
-    texts: [
+    texts: addIdsToArrayOfObjects([
       'Индивидуальное проектирование',
       'любой сложности',
       'Мы можем то, что другим не под силу',
-    ],
+    ]),
     imageSet: {
       small: topImgMob3,
       medium: topImgTab3,
       large: topImg3,
     },
-    to: '/catalog?section=wardrobe#filters',
+    to: '/catalog?section=wardrobe',
   },
   {
-    titles: [
+    titles: addIdsToArrayOfObjects([
       'Дизайнерская мебель',
       'в стиле модерн',
-    ],
+    ]),
     subtitles: [],
-    texts: [
+    texts: addIdsToArrayOfObjects([
       'Совершенный стиль',
       'Безупречное качество',
-    ],
+    ]),
     imageSet: {
       small: topImgMob4,
       medium: topImgTab4,
       large: topImg4,
     },
-    to: '/catalog?section=cupboard&style=modern#filters',
+    to: '/catalog?section=cupboard&style=modern',
   },
   {
-    titles: [
+    titles: addIdsToArrayOfObjects([
       'Комфорт, продуманный',
       'до мелочей',
-    ],
+    ]),
     subtitles: [],
-    texts: [
+    texts: addIdsToArrayOfObjects([
       'Эксклюзивные решения',
       'для организации хранения',
-    ],
+    ]),
     imageSet: {
       small: topImgMob5,
       medium: topImgTab5,
       large: topImg5,
     },
-    to: '/catalog?section=accessories#filters',
+    to: '/catalog?section=accessories',
   },
   {
-    titles: [
+    titles: addIdsToArrayOfObjects([
       'Истинное качество',
       'в деталях',
-    ],
+    ]),
     subtitles: [],
-    texts: [
+    texts: addIdsToArrayOfObjects([
       'Современные мебельные технологии,',
       'материалы и комплектующие',
-    ],
+    ]),
     imageSet: {
       small: topImgMob6,
       medium: topImgTab6,
       large: topImg6,
     },
-    to: '/catalog?section=lightingSystems#filters',
+    to: '/catalog?section=lightingSystems',
   },
-];
+]);

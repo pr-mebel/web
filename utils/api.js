@@ -15,13 +15,13 @@ export const fetchCatalogByFilter = ({ section, style, doorType }, page) => clie
                 collection
                 description
                 imageFull: image {
-                  url(transform: {format: JPG_PROGRESSIVE})
+                  url(transform: {format: WEBP})
                 }
                 imageMedium: image {
-                  url(transform: {width: 750, height: 500, format: JPG_PROGRESSIVE})
+                  url(transform: {width: 750, height: 500, format: WEBP})
                 }
                 imageMinified: image {
-                  url(transform: {width: 435, height: 290, format: JPG_PROGRESSIVE})
+                  url(transform: {width: 435, height: 290, format: WEBP})
                 }
                 sys {
                   id
@@ -44,21 +44,21 @@ export const fetchCatalogByFilter = ({ section, style, doorType }, page) => clie
               description
               imageFull: image {
                 url(transform: {
-                  format: JPG_PROGRESSIVE
+                  format: WEBP
                 })
               }
               imageMedium: image {
                 url(transform: {
                   width: 750
                   height: 500
-                  format: JPG_PROGRESSIVE
+                  format: WEBP
                 })
               }
               imageMinified: image {
                 url(transform: {
                   width: 435
                   height: 290
-                  format: JPG_PROGRESSIVE
+                  format: WEBP
                 })
               }
               sys {

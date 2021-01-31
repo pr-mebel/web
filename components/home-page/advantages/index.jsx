@@ -1,20 +1,17 @@
 import React, { useCallback, useState } from 'react';
-import cx from 'classnames';
+import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
-import { v4 } from 'uuid';
 import {
   Container,
   Typography,
   Grid,
   Hidden,
 } from '@material-ui/core';
+import Image from 'next/image';
 import CheckIcon from '@material-ui/icons/Check';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import {
-  BlockTitle,
-  MainButton,
-} from 'components/common';
+import { BlockTitle, MainButton } from 'components/common';
 import { TABS } from './constants';
 import { Tabs, Options } from './components';
 
@@ -54,10 +51,20 @@ const useStyles = makeStyles((theme) => ({
   },
   imgContainer: {
     position: 'relative',
-    margin: 'auto',
-  },
-  img: {
     width: '100%',
+    margin: 'auto',
+    paddingTop: '66%',
+  },
+  image: {
+    width: '100%',
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    opacity: '0',
+    transition: 'opacity .3s ease-in-out',
+  },
+  selectedImage: {
+    opacity: '1',
   },
   icon: {
     position: 'absolute',
@@ -146,10 +153,10 @@ export const Advantages = () => {
             <Tabs tabs={TABS} activeTab={activeTab} onChange={handleChangeTab} />
             <Options activeTab={activeTab}>
               {TABS.map((tab) => (
-                <div key={v4()} label={tab.title}>
+                <div key={tab.id} label={tab.title}>
                   <ul className={classes.list}>
                     {tab.list.map((option) => (
-                      <li key={v4()} className={classes.listItem}>
+                      <li key={option} className={classes.listItem}>
                         <CheckIcon className={classes.check} />
                         <Typography className={classes.listText}>{option}</Typography>
                       </li>
@@ -160,11 +167,19 @@ export const Advantages = () => {
             </Options>
           </Grid>
           <Grid item xs={5}>
-            <img
-              src={TABS.filter((tab, i) => i === activeTab)[0].img}
-              alt="smth"
-              className={classes.img}
-            />
+            <div className={classes.imgContainer}>
+              {TABS.map(({ id, title, img }, i) => (
+                <Image
+                  key={id}
+                  src={img}
+                  alt={title}
+                  layout="fill"
+                  className={cn(classes.image, {
+                    [classes.selectedImage]: i === activeTab,
+                  })}
+                />
+              ))}
+            </div>
           </Grid>
         </Grid>
       </Hidden>
@@ -197,23 +212,29 @@ export const Advantages = () => {
             className={classes.imgContainer}
           >
             <ArrowBackIosIcon
-              className={cx(classes.icon, classes.iconBack)}
+              className={cn(classes.icon, classes.iconBack)}
               onClick={handlePrevTab}
             />
-            <img
-              src={TABS.filter((tab, i) => i === activeTab)[0].img}
-              alt="smth"
-              className={classes.img}
-            />
+            {TABS.map(({ id, title, img }, i) => (
+              <Image
+                key={id}
+                src={img}
+                alt={title}
+                layout="fill"
+                className={cn(classes.image, {
+                  [classes.selectedImage]: i === activeTab,
+                })}
+              />
+            ))}
             <ArrowForwardIosIcon
-              className={cx(classes.icon, classes.iconForward)}
+              className={cn(classes.icon, classes.iconForward)}
               onClick={handleNextTab}
             />
           </Grid>
           <Grid item xs={12} className={classes.listContainer}>
             <Options activeTab={activeTab}>
               {TABS.map((tab) => (
-                <ul key={tab.title} className={classes.list}>
+                <ul key={tab.id} className={classes.list}>
                   {tab.list.map((option) => (
                     <li key={option} className={classes.listItem}>
                       <CheckIcon className={classes.check} />

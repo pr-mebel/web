@@ -139,7 +139,7 @@ export const Footer = () => {
                 <li>
                   <Typography variant="body1" gutterBottom>
                     <Link
-                      to="/catalog?section=cupboard&style=classic#filters"
+                      to="/catalog?section=cupboard&style=classic"
                       className={classes.listItem}
                     >
                       Шкафы классические
@@ -149,7 +149,7 @@ export const Footer = () => {
                 <li>
                   <Typography gutterBottom>
                     <Link
-                      to="/catalog?section=cupboard&style=modern#filters"
+                      to="/catalog?section=cupboard&style=modern"
                       className={classes.listItem}
                     >
                       Шкафы современные
@@ -159,7 +159,7 @@ export const Footer = () => {
                 <li>
                   <Typography gutterBottom>
                     <Link
-                      to="/catalog?section=wardrobe&style=classic#filters"
+                      to="/catalog?section=wardrobe&style=classic"
                       className={classes.listItem}
                     >
                       Гардеробные классические
@@ -169,7 +169,7 @@ export const Footer = () => {
                 <li>
                   <Typography gutterBottom>
                     <Link
-                      to="/catalog?section=wardrobe&style=modern#filters"
+                      to="/catalog?section=wardrobe&style=modern"
                       className={classes.listItem}
                     >
                       Гардеробные современные

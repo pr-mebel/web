@@ -8,22 +8,15 @@ import {
 } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import {
-  submitForm,
-  saveForm,
-} from 'redux';
-import {
-  BlockTitle,
-  SubmitButton,
-} from 'components/common';
+import Image from 'next/image';
+import { submitForm, saveForm } from 'redux';
+import { BlockTitle, SubmitButton } from 'components/common';
 
 const useStyles = makeStyles({
   root: {
-    backgroundImage: 'url("images/home-page/questions-form/1.jpg")',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
     padding: '80px 0',
+    position: 'relative',
+    width: '100%',
   },
   title: {
     color: 'white',
@@ -85,6 +78,12 @@ export const QuestionsForm = () => {
 
   return (
     <div className={classes.root}>
+      <Image
+        src="/images/home-page/questions-form/1.jpg"
+        alt="Заполните форму ниже. Наш менеджер свяжется с вами и ответит на вопросы"
+        layout="fill"
+        quality={100}
+      />
       <Container className={classes.container}>
         <BlockTitle>
           <Typography variant="h4" className={classes.title}>

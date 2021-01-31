@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'flex-start',
   },
   logoContainerSm: {
     width: '110px',
@@ -197,10 +198,11 @@ export const Header = () => {
             <Grid item xs={7} container justify="center" alignItems="center">
               <ul
                 className={classNames(classes.menu, classes.list)}
-                onMouseEnter={handleOpenDropdown}
-                onMouseLeave={handleCloseDropdown}
               >
-                <li>
+                <li
+                  onMouseEnter={handleOpenDropdown}
+                  onMouseLeave={handleCloseDropdown}
+                >
                   <Typography
                     className={classNames(classes.text, classes.menu__dropdown)}
                     align="center"
@@ -214,22 +216,22 @@ export const Header = () => {
                     >
                       <li>
                         <Typography className={classes.text} gutterBottom>
-                          <Link to="/catalog?section=cupboard#filters">Шкафы</Link>
+                          <Link to="/catalog?section=cupboard">Шкафы</Link>
                         </Typography>
                       </li>
                       <li>
                         <Typography className={classes.text} gutterBottom>
-                          <Link to="/catalog?section=wardrobe#filters">Гардеробные</Link>
+                          <Link to="/catalog?section=wardrobe">Гардеробные</Link>
                         </Typography>
                       </li>
                       <li>
                         <Typography className={classes.text} gutterBottom>
-                          <Link to="/catalog?section=accessories#filters">Аксессуары</Link>
+                          <Link to="/catalog?section=accessories">Аксессуары</Link>
                         </Typography>
                       </li>
                       <li>
                         <Typography className={classes.text} gutterBottom>
-                          <Link to="/catalog?section=lightingSystems#filters">Системы подсветки</Link>
+                          <Link to="/catalog?section=lightingSystems">Системы подсветки</Link>
                         </Typography>
                       </li>
                     </ul>
@@ -347,22 +349,22 @@ export const Header = () => {
               <Grid item xs={12} container spacing={1} direction="column" style={{ paddingLeft: '10px' }}>
                 <Grid item xs>
                   <Typography>
-                    <Link to="/catalog?section=cupboard#filters">Шкафы</Link>
+                    <Link to="/catalog?section=cupboard">Шкафы</Link>
                   </Typography>
                 </Grid>
                 <Grid item xs>
                   <Typography>
-                    <Link to="/catalog?section=wardrobe#filters">Гардеробные</Link>
+                    <Link to="/catalog?section=wardrobe">Гардеробные</Link>
                   </Typography>
                 </Grid>
                 <Grid item xs>
                   <Typography>
-                    <Link to="/catalog?section=accessories#filters">Аксессуары</Link>
+                    <Link to="/catalog?section=accessories">Аксессуары</Link>
                   </Typography>
                 </Grid>
                 <Grid item xs>
                   <Typography>
-                    <Link to="/catalog?section=lightingSystems#filters">Системы подсветки</Link>
+                    <Link to="/catalog?section=lightingSystems">Системы подсветки</Link>
                   </Typography>
                 </Grid>
               </Grid>

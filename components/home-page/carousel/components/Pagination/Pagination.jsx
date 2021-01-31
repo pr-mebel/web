@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import cx from 'classnames';
+import cn from 'classnames';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -62,9 +62,9 @@ export const Pagination = ({
     <div className={classes.root}>
       {pages.map((page, index) => (
         <button
-          key={page.titles[0]}
+          key={page.id}
           type="button"
-          className={cx(classes.item, {
+          className={cn(classes.item, {
             [classes.active]: currentPage === index,
           })}
           onClick={handleClick(index)}

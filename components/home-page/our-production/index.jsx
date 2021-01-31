@@ -7,18 +7,17 @@ import {
   Grid,
   Hidden,
 } from '@material-ui/core';
-import {
-  BlockTitle,
-  MainButton,
-  Pagination,
-} from 'components/common';
+import { BlockTitle, MainButton, Pagination } from 'components/common';
+import Image from 'next/image';
 import { LIST } from './constants';
 
 const useStyles = makeStyles((theme) => ({
-  img: {
+  imgContainer: {
     marginTop: '30px',
     width: '100%',
     marginBottom: '24px',
+    position: 'relative',
+    paddingTop: '30%',
   },
   section__title: {
     fontSize: '16px',
@@ -63,14 +62,21 @@ export const OurProduction = () => {
           Наше производство
         </Typography>
       </BlockTitle>
-      <img src="images/home-page/our-production/1.jpg" alt="Производство" className={classes.img} />
+      <div className={classes.imgContainer}>
+        <Image
+          src="/images/home-page/our-production/1.jpg"
+          alt="Производство"
+          layout="fill"
+          className={classes.img}
+        />
+      </div>
       <Grid
         container
         spacing={isXsDown ? 2 : 4}
       >
         <Hidden xsDown>
           {LIST.map((item) => (
-            <Grid key={item.title} item xs={6} md={3}>
+            <Grid key={item.id} item xs={6} md={3}>
               <BlockTitle>
                 <Typography variant="h6" className={classes.section__title}>
                   {item.title}

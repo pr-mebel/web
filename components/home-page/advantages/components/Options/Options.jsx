@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import cx from 'classnames';
-import { v4 } from 'uuid';
+import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
+import { addIdsToArrayOfObjects } from 'lib/utils';
 
 const useStyles = makeStyles({
   tabContent: {
@@ -19,12 +19,14 @@ export const Options = ({
 }) => {
   const classes = useStyles();
 
+  const childrenWithIds = useMemo(() => addIdsToArrayOfObjects(children), [children]);
+
   return (
     <>
-      {children.map((child, i) => (
+      {childrenWithIds.map((child, i) => (
         <div
-          key={v4()}
-          className={cx(classes.tabContent, {
+          key={child.id}
+          className={cn(classes.tabContent, {
             [classes.tabContentVisible]: activeTab === i,
           })}
         >

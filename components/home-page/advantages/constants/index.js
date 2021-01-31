@@ -1,10 +1,12 @@
-const img1 = 'images/home-page/advantages/1.jpg';
-const img2 = 'images/home-page/advantages/2.jpg';
-const img4 = 'images/home-page/advantages/4.jpg';
-const img5 = 'images/home-page/advantages/5.jpg';
-const img6 = 'images/home-page/advantages/6.jpg';
+import { addIdsToArrayOfObjects } from 'lib/utils';
 
-export const TABS = [
+const img1 = '/images/home-page/advantages/1.jpg';
+const img2 = '/images/home-page/advantages/2.jpg';
+const img4 = '/images/home-page/advantages/4.jpg';
+const img5 = '/images/home-page/advantages/5.jpg';
+const img6 = '/images/home-page/advantages/6.jpg';
+
+export const TABS = addIdsToArrayOfObjects([
   {
     title: 'Эмаль',
     list: [
@@ -67,4 +69,4 @@ export const TABS = [
     ],
     img: img6,
   },
-];
+]);

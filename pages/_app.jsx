@@ -7,6 +7,7 @@ import Head from 'next/head';
 import theme from 'theme';
 import '../styles/globals.css';
 import store from 'redux/store';
+
 function MyApp({ Component, pageProps }) {
     return (
         <React.StrictMode>

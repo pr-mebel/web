@@ -22,108 +22,80 @@ const topImgMob5 = '/images/home-page/carousel/top-img-mob5.jpg';
 const topImgMob6 = '/images/home-page/carousel/top-img-mob6.jpg';
 
 export const PAGES = addIdsToArrayOfObjects([
-  {
-    titles: addIdsToArrayOfObjects([
-      'Частный мебельер',
-    ]),
-    subtitles: [],
-    texts: addIdsToArrayOfObjects([
-      'Шоу-рум мебели премиум класса',
-      'по индивидуальным дизайн-проектам',
-    ]),
-    imageSet: {
-      small: topImgMob1,
-      medium: topImgTab1,
-      large: topImg1,
+    {
+        titles: addIdsToArrayOfObjects(['Частный мебельер']),
+        subtitles: [],
+        texts: addIdsToArrayOfObjects([
+            'Шоу-рум мебели премиум класса',
+            'по индивидуальным дизайн-проектам',
+        ]),
+        imageSet: {
+            small: topImgMob1,
+            medium: topImgTab1,
+            large: topImg1,
+        },
+        to: '/catalog',
     },
-    to: '/catalog',
-  },
-  {
-    titles: addIdsToArrayOfObjects([
-      'Элегантная классика',
-    ]),
-    subtitles: addIdsToArrayOfObjects([
-      'в лучших традициях',
-      'качества',
-    ]),
-    texts: addIdsToArrayOfObjects([
-      'Премиальные детали',
-      'Изысканный дизайн',
-    ]),
-    imageSet: {
-      small: topImgMob2,
-      medium: topImgTab2,
-      large: topImg2,
+    {
+        titles: addIdsToArrayOfObjects(['Элегантная классика']),
+        subtitles: addIdsToArrayOfObjects(['в лучших традициях', 'качества']),
+        texts: addIdsToArrayOfObjects(['Премиальные детали', 'Изысканный дизайн']),
+        imageSet: {
+            small: topImgMob2,
+            medium: topImgTab2,
+            large: topImg2,
+        },
+        to: '/catalog?section=cupboard&style=classic',
     },
-    to: '/catalog?section=cupboard&style=classic',
-  },
-  {
-    titles: addIdsToArrayOfObjects([
-      'Гардеробные',
-      'системы',
-    ]),
-    subtitles: [],
-    texts: addIdsToArrayOfObjects([
-      'Индивидуальное проектирование',
-      'любой сложности',
-      'Мы можем то, что другим не под силу',
-    ]),
-    imageSet: {
-      small: topImgMob3,
-      medium: topImgTab3,
-      large: topImg3,
+    {
+        titles: addIdsToArrayOfObjects(['Гардеробные', 'системы']),
+        subtitles: [],
+        texts: addIdsToArrayOfObjects([
+            'Индивидуальное проектирование',
+            'любой сложности',
+            'Мы можем то, что другим не под силу',
+        ]),
+        imageSet: {
+            small: topImgMob3,
+            medium: topImgTab3,
+            large: topImg3,
+        },
+        to: '/catalog?section=wardrobe',
     },
-    to: '/catalog?section=wardrobe',
-  },
-  {
-    titles: addIdsToArrayOfObjects([
-      'Дизайнерская мебель',
-      'в стиле модерн',
-    ]),
-    subtitles: [],
-    texts: addIdsToArrayOfObjects([
-      'Совершенный стиль',
-      'Безупречное качество',
-    ]),
-    imageSet: {
-      small: topImgMob4,
-      medium: topImgTab4,
-      large: topImg4,
+    {
+        titles: addIdsToArrayOfObjects(['Дизайнерская мебель', 'в стиле модерн']),
+        subtitles: [],
+        texts: addIdsToArrayOfObjects(['Совершенный стиль', 'Безупречное качество']),
+        imageSet: {
+            small: topImgMob4,
+            medium: topImgTab4,
+            large: topImg4,
+        },
+        to: '/catalog?section=cupboard&style=modern',
     },
-    to: '/catalog?section=cupboard&style=modern',
-  },
-  {
-    titles: addIdsToArrayOfObjects([
-      'Комфорт, продуманный',
-      'до мелочей',
-    ]),
-    subtitles: [],
-    texts: addIdsToArrayOfObjects([
-      'Эксклюзивные решения',
-      'для организации хранения',
-    ]),
-    imageSet: {
-      small: topImgMob5,
-      medium: topImgTab5,
-      large: topImg5,
+    {
+        titles: addIdsToArrayOfObjects(['Комфорт, продуманный', 'до мелочей']),
+        subtitles: [],
+        texts: addIdsToArrayOfObjects(['Эксклюзивные решения', 'для организации хранения']),
+        imageSet: {
+            small: topImgMob5,
+            medium: topImgTab5,
+            large: topImg5,
+        },
+        to: '/catalog?section=accessories',
     },
-    to: '/catalog?section=accessories',
-  },
-  {
-    titles: addIdsToArrayOfObjects([
-      'Истинное качество',
-      'в деталях',
-    ]),
-    subtitles: [],
-    texts: addIdsToArrayOfObjects([
-      'Современные мебельные технологии,',
-      'материалы и комплектующие',
-    ]),
-    imageSet: {
-      small: topImgMob6,
-      medium: topImgTab6,
-      large: topImg6,
+    {
+        titles: addIdsToArrayOfObjects(['Истинное качество', 'в деталях']),
+        subtitles: [],
+        texts: addIdsToArrayOfObjects([
+            'Современные мебельные технологии,',
+            'материалы и комплектующие',
+        ]),
+        imageSet: {
+            small: topImgMob6,
+            medium: topImgTab6,
+            large: topImg6,
+        },
+        to: '/catalog?section=lightingSystems',
     },
-    to: '/catalog?section=lightingSystems',
-  },
 ]);

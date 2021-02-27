@@ -53,20 +53,20 @@ const text2small = `
 `;
 
 export const texts = {
-  [filters.sections[0].id]: {
-    large: text0large,
-    small: text0small,
-  },
-  [filters.sections[1].id]: {
-    large: text1large,
-    small: text1small,
-  },
-  [filters.sections[2].id]: {
-    large: text2large,
-    small: text2small,
-  },
-  [filters.sections[3].id]: {
-    large: text2large,
-    small: text2small,
-  },
+    [filters.sections[0].id]: {
+        large: text0large,
+        small: text0small,
+    },
+    [filters.sections[1].id]: {
+        large: text1large,
+        small: text1small,
+    },
+    [filters.sections[2].id]: {
+        large: text2large,
+        small: text2small,
+    },
+    [filters.sections[3].id]: {
+        large: text2large,
+        small: text2small,
+    },
 };

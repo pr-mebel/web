@@ -2,8 +2,11 @@ import { gql } from '@apollo/client';
 import { batchSize } from '__constants__';
 import { client } from './client';
 
-export const fetchCatalogByFilter = ({ section, style, doorType }, page) => client.query({
-  query: style === 'any' && doorType === 'any' ? gql`
+export const fetchCatalogByFilter = ({ section, style, doorType }, page) =>
+    client.query({
+        query:
+            style === 'any' && doorType === 'any'
+                ? gql`
     {
       ${section}SectionCollection(limit: 1) {
         items {
@@ -31,7 +34,8 @@ export const fetchCatalogByFilter = ({ section, style, doorType }, page) => clie
           }
         }
       }
-    }` : gql`
+    }`
+                : gql`
         {
           ${section}Collection(where: {
             ${style !== 'any' ? `${style}: true` : ''}
@@ -67,4 +71,4 @@ export const fetchCatalogByFilter = ({ section, style, doorType }, page) => clie
             }
           }
         }`,
-});
+    });

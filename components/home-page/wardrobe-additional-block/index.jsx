@@ -5,32 +5,27 @@ import { BlockTitle } from 'components/common';
 import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
-  text: {
-    marginTop: '20px',
-  },
+    text: {
+        marginTop: '20px',
+    },
 });
 
-export const WardrobeAdditionalBlock = ({
-  title,
-  text,
-}) => {
-  const classes = useStyles();
+export const WardrobeAdditionalBlock = ({ title, text }) => {
+    const classes = useStyles();
 
-  return (
-    <>
-      <BlockTitle>
-        <Typography variant="h5">
-          {title}
-        </Typography>
-      </BlockTitle>
-      <Typography variant="body2" className={classes.text}>
-        {text}
-      </Typography>
-    </>
-  );
+    return (
+        <>
+            <BlockTitle>
+                <Typography variant="h5">{title}</Typography>
+            </BlockTitle>
+            <Typography variant="body2" className={classes.text}>
+                {text}
+            </Typography>
+        </>
+    );
 };
 
 WardrobeAdditionalBlock.propTypes = {
-  title: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
 };

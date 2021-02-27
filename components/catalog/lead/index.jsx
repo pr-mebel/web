@@ -5,10 +5,12 @@ import cn from 'classnames';
 import Image from 'next/image';
 import { images } from './constants';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
+    marginTop: '70px',
     width: '100%',
-    height: '500px',
+    paddingTop: '35%',
+    maxHeight: '500px',
     position: 'relative',
     '&:after': {
       position: 'absolute',
@@ -19,6 +21,9 @@ const useStyles = makeStyles({
       left: '0',
       background: 'rgba(0, 0, 0, .3)',
     },
+    [theme.breakpoints.down('md')]: {
+      marginTop: '50px',
+    },
   },
   image: {
     opacity: '0',
@@ -27,7 +32,7 @@ const useStyles = makeStyles({
   selectedImage: {
     opacity: '1',
   },
-});
+}));
 
 export const Lead = ({ sectionId }) => {
   const classes = useStyles();
@@ -43,6 +48,7 @@ export const Lead = ({ sectionId }) => {
             [classes.selectedImage]: imageWrapper.sectionId === sectionId,
           })}
           layout="fill"
+          objectFit="cover"
         />
       ))}
     </div>

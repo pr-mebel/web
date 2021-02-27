@@ -1,0 +1,7 @@
+TODO:
+    ✔ redux toolkit @done(21-02-27 12:36)
+    ☐ typescript
+    ☐ setup node mailer
+    ☐ setup api
+    ☐ Разобраться как не хостить на vercel
+    ☐ Добавить throttle или debounce в карусель

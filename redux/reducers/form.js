@@ -33,7 +33,6 @@ export const submitForm = createAsyncThunk(
   (_, { dispatch, getState }) => {
     const firestore = firebase.firestore();
     const storageRef = firebase.storage().ref();
-    const refs = [];
 
     dispatch(openFormSubmitPopup());
 
@@ -46,9 +45,9 @@ export const submitForm = createAsyncThunk(
     } = getState().form;
 
     if (files) {
-      [...files].forEach((file) => {
+      const refs = [...files].map((file) => {
         const fileRef = storageRef.child(file.name);
-        refs.push(fileRef.getDownloadURL());
+        return fileRef.getDownloadURL();
       });
 
       Promise.all(refs).then((fileLinks) => {

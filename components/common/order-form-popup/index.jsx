@@ -28,11 +28,11 @@ import {
   uploadFiles,
 } from 'redux';
 import {
-  SubmitButton,
-} from 'components/common';
-import {
   orderFormPopupSelector,
 } from 'lib/selectors/order-form-popup';
+import {
+  SubmitButton,
+} from '../submit-button';
 
 const useStyles = makeStyles((theme) => ({
   paperRoot: {

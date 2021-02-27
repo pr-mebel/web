@@ -1,56 +1,49 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Provider } from 'react-redux';
-import { ThemeProvider } from '@material-ui/core/styles';
-import {
-  Header,
-  Footer,
-  GoTopButton,
-  OrderFormPopup,
-  FormSubmitPopup,
-} from 'components';
-import Head from 'next/head';
-import theme from 'theme';
-import '../styles/globals.css';
-import store from 'redux/store';
-
+import React from "react";
+import PropTypes from "prop-types";
+import { Provider } from "react-redux";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { Header, Footer, GoTopButton, OrderFormPopup, FormSubmitPopup } from "components";
+import Head from "next/head";
+import theme from "theme";
+import "../styles/globals.css";
+import store from "redux/store"
 function MyApp({ Component, pageProps }) {
-  return (
-    <React.StrictMode>
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <Head>
-            <meta charSet="utf-8" />
-            <link rel="icon" href="/favicon.ico" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link href="/fonts/index.css" rel="stylesheet" />
-            <meta name="yandex-verification" content="6eb5436d905f1d91" />
-            <meta
-              name="description"
-              content="Мы создаем эксклюзивный проект будущего изделия, который
+    return (
+        <React.StrictMode>
+            <Provider store={store}>
+                <ThemeProvider theme={theme}>
+                    <Head>
+                        <meta charSet="utf-8" />
+                        <link rel="icon" href="/favicon.ico" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1" />
+                        <link href="/fonts/index.css" rel="stylesheet" />
+                        <meta name="yandex-verification" content="6eb5436d905f1d91" />
+                        <meta
+                            name="description"
+                            content="Мы создаем эксклюзивный проект будущего изделия, который
               не просто идеально впишется в ваш интерьер, а будет комфортен,
               удобен и функционален в использовании, и прослужит долгие годы."
-            />
-            <meta name="canonical" content="https://pr-mebel.com" />
-            <title>Частный мебельер - салон мебели премиум-класса</title>
-          </Head>
+                        />
+                        <meta name="canonical" content="https://pr-mebel.com" />
+                        <title>Частный мебельер - салон мебели премиум-класса</title>
+                    </Head>
 
-          <Header />
-          <Component {...pageProps} />
-          <Footer />
+                    <Header />
+                    <Component {...pageProps} />
+                    <Footer />
 
-          <GoTopButton />
-          <OrderFormPopup />
-          <FormSubmitPopup />
-        </ThemeProvider>
-      </Provider>
-    </React.StrictMode>
-  );
+                    <GoTopButton />
+                    <OrderFormPopup />
+                    <FormSubmitPopup />
+                </ThemeProvider>
+            </Provider>
+        </React.StrictMode>
+    );
 }
 
 MyApp.propTypes = {
-  Component: PropTypes.func,
-  pageProps: PropTypes.any,
+    Component: PropTypes.func,
+    pageProps: PropTypes.any,
 };
 
 export default MyApp;

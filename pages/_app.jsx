@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Provider } from "react-redux";
-import { ThemeProvider } from "@material-ui/core/styles";
-import { Header, Footer, GoTopButton, OrderFormPopup, FormSubmitPopup } from "components";
-import Head from "next/head";
-import theme from "theme";
-import "../styles/globals.css";
-import store from "redux/store"
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { Header, Footer, GoTopButton, OrderFormPopup, FormSubmitPopup } from 'components';
+import Head from 'next/head';
+import theme from 'theme';
+import '../styles/globals.css';
+import store from 'redux/store';
 function MyApp({ Component, pageProps }) {
     return (
         <React.StrictMode>

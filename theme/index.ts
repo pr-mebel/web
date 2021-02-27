@@ -31,7 +31,7 @@ export default createMuiTheme({
                 textTransform: 'uppercase',
                 fontSize: '30px',
                 lineHeight: '35px',
-                fontWeight: '300',
+                fontWeight: 300,
                 fontFamily: 'Gilroy, sans-serif',
                 '@media (max-width: 960px)': {
                     fontSize: '26px',
@@ -45,7 +45,7 @@ export default createMuiTheme({
                 textTransform: 'uppercase',
                 fontSize: '24px',
                 lineHeight: '28px',
-                fontWeight: '300',
+                fontWeight: 300,
                 fontFamily: 'Gilroy, sans-serif',
                 '@media (max-width: 600px)': {
                     fontSize: '16px',
@@ -56,7 +56,7 @@ export default createMuiTheme({
                 textTransform: 'uppercase',
                 fontSize: '18px',
                 lineHeight: '1.3',
-                fontWeight: '300',
+                fontWeight: 300,
                 fontFamily: 'Gilroy, sans-serif',
                 '@media (max-width: 960px)': {
                     fontSize: '16px',

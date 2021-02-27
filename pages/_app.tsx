@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
+import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { Header, Footer, GoTopButton, OrderFormPopup, FormSubmitPopup } from 'components';
+import { Header, Footer, GoTopButton, OrderFormPopup, FormSubmitPopup } from '../components';
 import Head from 'next/head';
-import theme from 'theme';
+import theme from '../theme';
 import '../styles/globals.css';
-import store from 'redux/store';
+import store from '../redux/store';
 
-function MyApp({ Component, pageProps }) {
+const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
     return (
         <React.StrictMode>
             <Provider store={store}>
@@ -40,11 +40,6 @@ function MyApp({ Component, pageProps }) {
             </Provider>
         </React.StrictMode>
     );
-}
-
-MyApp.propTypes = {
-    Component: PropTypes.func,
-    pageProps: PropTypes.any,
 };
 
 export default MyApp;

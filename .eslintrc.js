@@ -5,15 +5,17 @@ module.exports = {
     node: true,
   },
   extends: [
-    'eslint:recommended',
     'plugin:react/recommended',
-    'airbnb',
+    'plugin:@typescript-eslint/recommended',
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended",
   ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 12,
+    ecmaVersion: 2020,
     sourceType: 'module',
   },
   plugins: [
@@ -42,6 +44,9 @@ module.exports = {
         extensions: ['.js', '.jsx'],
         paths: ['.'],
       },
+    },
+    react: {
+      version: 'detect',
     },
   },
 };

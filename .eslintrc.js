@@ -8,7 +8,7 @@ module.exports = {
         'plugin:react/recommended',
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
-        'prettier'
+        'prettier',
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
@@ -16,7 +16,7 @@ module.exports = {
             jsx: true,
         },
         ecmaVersion: 2020,
-        sourceType: 'module'
+        sourceType: 'module',
     },
     plugins: ['react', 'prettier'],
     rules: {

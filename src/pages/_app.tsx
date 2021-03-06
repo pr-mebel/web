@@ -5,8 +5,8 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { Header, Footer, GoTopButton, OrderFormPopup, FormSubmitPopup } from '@/components';
 import Head from 'next/head';
 import theme from '@/theme';
-import '../styles/globals.css';
 import store from '@/redux/store';
+import '../styles/globals.css';
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
     return (

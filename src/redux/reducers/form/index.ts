@@ -1,9 +1,7 @@
 import { createReducer, createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import { State } from '@/redux';
 
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/storage';
+import { storage, firestore } from '@/lib';
 
 export const openFormSubmitPopup = createAction('open_form_submit_popup');
 export const closeFormSubmitPopup = createAction('close_form_submit_popup');
@@ -31,7 +29,7 @@ export const updateFileUploadProgress = createAction(
 
 export const setErrorInFileUpload = createAction(
     'set_error_in_file_upload',
-    (name: string, index: number, error: firebase.storage.FirebaseStorageError) => ({
+    (name: string, index: number, error) => ({
         payload: {
             name,
             index,
@@ -41,8 +39,7 @@ export const setErrorInFileUpload = createAction(
 );
 
 export const submitForm = createAsyncThunk('submit_form', (_, { dispatch, getState }) => {
-    const firestore = firebase.firestore();
-    const storageRef = firebase.storage().ref();
+    const storageRef = storage().ref();
 
     const state = getState() as State;
 
@@ -62,7 +59,7 @@ export const submitForm = createAsyncThunk('submit_form', (_, { dispatch, getSta
                 path: fileLink,
             }));
 
-            firestore
+            firestore()
                 .collection('mail')
                 .add({
                     to: 'zakaz@pr-mebel.com',
@@ -86,7 +83,7 @@ export const submitForm = createAsyncThunk('submit_form', (_, { dispatch, getSta
                 });
         });
     } else {
-        firestore
+        firestore()
             .collection('mail')
             .add({
                 to: 'zakaz@pr-mebel.com',
@@ -111,7 +108,7 @@ export const submitForm = createAsyncThunk('submit_form', (_, { dispatch, getSta
 });
 
 export const uploadFiles = createAsyncThunk('upload_files', (files: FileList, { dispatch }) => {
-    const storageRef = firebase.storage().ref();
+    const storageRef = storage().ref();
     const filesArray = [...files];
 
     filesArray.forEach((file) => {
@@ -142,7 +139,7 @@ const initialState = {
     files: [] as {
         name: string;
         progress?: number;
-        error?: firebase.storage.FirebaseStorageError;
+        error?: string;
     }[],
 };
 

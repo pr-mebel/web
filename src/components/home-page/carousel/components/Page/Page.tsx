@@ -27,11 +27,6 @@ const useStyles = makeStyles((theme) => ({
         top: '0',
         left: '0',
     },
-    image: {
-        height: '100%',
-        width: '100%',
-        objectFit: 'cover',
-    },
     pageContent: {
         position: 'relative',
         padding: '0',

@@ -4,7 +4,6 @@ import cx from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import { addIdsToArrayOfObjects } from '@/utils';
 import { PaginationProps } from './types';
 
 const useStyles = makeStyles((theme) => ({

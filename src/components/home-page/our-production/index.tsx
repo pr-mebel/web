@@ -23,13 +23,6 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '24px',
         fontSize: '15px',
     },
-    text__container_bottom: {
-        marginTop: '24px',
-    },
-    text_bottom: {
-        fontSize: '24px',
-        lineHeight: '28px',
-    },
     content_sm: {
         minHeight: '114px',
     },

@@ -26,9 +26,6 @@ const useStyles = makeStyles((theme) => ({
             borderColor: 'white',
         },
     },
-    input_outline: {
-        borderColor: 'white',
-    },
     input__label: {
         color: 'white',
     },
@@ -70,19 +67,6 @@ const useStyles = makeStyles((theme) => ({
     'button-container': {
         marginTop: '36px',
         marginBottom: '24px',
-    },
-    filenames: {
-        color: 'white',
-        fontWeight: 300,
-    },
-    'delete-icon': {
-        width: '30px',
-        height: '30px',
-        right: '30px',
-        top: '13px',
-        position: 'absolute',
-        color: 'white',
-        cursor: 'pointer',
     },
     'file-upload__container': {
         position: 'relative',

@@ -11,10 +11,6 @@ const useStyles = makeStyles((theme) => ({
     content: {
         marginTop: '26px',
     },
-    img__container: {
-        position: 'relative',
-        paddingTop: '71.9%',
-    },
     imgWrapper: {
         position: 'relative',
         paddingTop: '73%',
@@ -40,11 +36,6 @@ const useStyles = makeStyles((theme) => ({
         listStyle: 'none',
         marginTop: '40px',
     },
-    list_horizontal: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
     option: {
         color: 'black',
         transition: 'all .3s ease-in-out',
@@ -56,10 +47,6 @@ const useStyles = makeStyles((theme) => ({
     },
     active: {
         color: theme.palette.primary.main,
-    },
-    text_bottom: {
-        marginTop: '30px',
-        minHeight: '130px',
     },
     'button-container': {
         marginTop: '32px',

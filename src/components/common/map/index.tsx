@@ -54,20 +54,6 @@ const useStyles = makeStyles((theme) => ({
             textDecoration: 'none',
         },
     },
-    link: {
-        '&:hover,&:focus': {
-            textDecoration: 'none',
-        },
-    },
-    link_black: {
-        color: 'black',
-    },
-    link_grey: {
-        color: 'grey',
-    },
-    link_red: {
-        color: theme.palette.primary.main,
-    },
     message: {
         marginTop: '30px',
         display: 'flex',
@@ -81,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
             textDecoration: 'none',
         },
     },
+    // TODO: Rename
     hl: {
         marginTop: '20px',
         width: '265px',

@@ -50,9 +50,6 @@ const useStyles = makeStyles((theme) => ({
     imgNext2: {
         left: '200%',
     },
-    label: {
-        fontWeight: 'bold',
-    },
     descriptionContainer: {
         padding: '20px',
         display: 'flex',

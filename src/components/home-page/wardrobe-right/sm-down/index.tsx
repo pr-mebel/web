@@ -11,18 +11,9 @@ const useStyles = makeStyles(() => ({
     content_sm: {
         marginTop: '40px',
     },
-    description: {
-        marginTop: '80px',
-    },
     img__container: {
         position: 'relative',
         paddingTop: '71.9%',
-    },
-    imgWrapper: {
-        position: 'relative',
-    },
-    point: {
-        position: 'absolute',
     },
     image: {
         position: 'absolute',

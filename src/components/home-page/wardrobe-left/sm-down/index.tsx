@@ -8,15 +8,9 @@ import { WardrobeAdditionalBlock } from '../../wardrobe-additional-block';
 import { TABS, ADDITIONAL } from '../constants';
 
 const useStyles = makeStyles((theme) => ({
-    content: {
-        marginTop: '26px',
-    },
     img__container: {
         position: 'relative',
         paddingTop: '71.9%',
-    },
-    imgWrapper: {
-        position: 'relative',
     },
     image: {
         width: '100%',
@@ -29,9 +23,6 @@ const useStyles = makeStyles((theme) => ({
     },
     selectedImage: {
         opacity: '1',
-    },
-    point: {
-        position: 'absolute',
     },
     list: {
         margin: '0',

@@ -32,9 +32,6 @@ const useStyles = makeStyles({
             borderColor: 'white',
         },
     },
-    input_outline: {
-        borderColor: 'white',
-    },
     input__label: {
         color: 'white',
     },

@@ -6,7 +6,6 @@ import ClearIcon from '@material-ui/icons/Clear';
 import { FullScreenPopupProps } from './types';
 
 const useStyles = makeStyles(() => ({
-    root: {},
     img: {
         width: '100%',
         height: '100%',
@@ -54,7 +53,6 @@ export const FullScreenPopup: FC<FullScreenPopupProps> = ({ img, isOpen, onClose
             onClose={onClose}
             fullWidth
             maxWidth="lg"
-            className={classes.root}
             PaperProps={{
                 className: classes.paperRoot,
             }}

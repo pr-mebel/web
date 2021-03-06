@@ -22,9 +22,6 @@ const useStyles = makeStyles((theme) => ({
             borderColor: 'white',
         },
     },
-    input_outline: {
-        borderColor: 'white',
-    },
     input__label: {
         color: 'white',
     },

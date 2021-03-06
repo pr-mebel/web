@@ -34,9 +34,6 @@ const useStyles = makeStyles({
         fontSize: '32px',
         marginBottom: '20px',
     },
-    loader: {
-        width: '50px',
-    },
     icon: {
         display: 'inline-block',
         marginRight: '20px',

@@ -133,6 +133,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'space-between',
     },
+    // TODO: Rename
     hl: {
         width: '100%',
         height: '1px',

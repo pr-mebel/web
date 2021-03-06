@@ -5,7 +5,6 @@ import { Grid, Typography, Hidden } from '@material-ui/core';
 import { CardProps } from './types';
 
 const useStyles = makeStyles((theme) => ({
-    root: {},
     row_top: {
         display: 'flex',
         flexDirection: 'row',

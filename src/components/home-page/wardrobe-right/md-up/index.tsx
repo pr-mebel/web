@@ -28,10 +28,6 @@ const useStyles = makeStyles((theme) => ({
             left: '0',
         },
     },
-    text_bottom: {
-        marginTop: '30px',
-        minHeight: '120px',
-    },
     'button-container': {
         marginTop: '32px',
     },

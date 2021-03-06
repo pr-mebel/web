@@ -5,12 +5,12 @@ import { Grid, Typography, Hidden } from '@material-ui/core';
 import { CardProps } from './types';
 
 const useStyles = makeStyles((theme) => ({
-    row_top: {
+    rowTop: {
         display: 'flex',
         flexDirection: 'row',
         height: '57px',
     },
-    title__container: {
+    titleContainer: {
         marginLeft: '20px',
         display: 'flex',
         alignItems: 'center',
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
             fontWeight: '400',
         },
     },
-    row_bottom: {
+    rowBottom: {
         marginTop: '10px',
     },
     icon: {
@@ -49,15 +49,15 @@ export const Card: FC<CardProps> = ({ Img, title, text }) => {
     return (
         <>
             <Hidden xsDown>
-                <div className={classes.row_top}>
+                <div className={classes.rowTop}>
                     <Img className={classes.icon} />
-                    <div className={classes.title__container}>
+                    <div className={classes.titleContainer}>
                         <Typography variant={isXsDown ? 'h5' : 'h6'} className={classes.title}>
                             {title}
                         </Typography>
                     </div>
                 </div>
-                <div className={classes.row_bottom}>
+                <div className={classes.rowBottom}>
                     <Typography variant="body2" className={classes.text}>
                         {text}
                     </Typography>

@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '0',
         listStyle: 'none',
     },
-    list__item: {
+    listItem: {
         marginTop: '12px',
         position: 'relative',
         paddingLeft: '30px',
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
             textDecoration: 'none',
         },
     },
-    maps__text: {
+    mapsText: {
         textDecoration: 'underline',
         color: theme.palette.grey[500],
         '&:hover': {
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
     },
-    message__text: {
+    messageText: {
         marginLeft: '15px',
         textDecoration: 'underline',
         color: theme.palette.primary.main,
@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
         background: theme.palette.grey[300],
         content: '""',
     },
-    map__container: {
+    mapContainer: {
         marginTop: '30px',
         minHeight: '400px',
     },
@@ -101,11 +101,11 @@ export const Map: FC = () => {
                         Салон &ldquo;ЧАСТНЫЙ МЕБЕЛЬЕР&ldquo;
                     </Typography>
                     <ul className={classes.list}>
-                        <li className={classes.list__item}>
+                        <li className={classes.listItem}>
                             <RoomIcon className={classes.icon} />
                             <Typography variant="body2">м. Сокол, ул. Балтийская, д.9</Typography>
                         </li>
-                        <li className={classes.list__item}>
+                        <li className={classes.listItem}>
                             <PhoneIcon className={classes.icon} />
                             <Typography variant="body2">
                                 <Link to="tel:+7(495)2780285" external>
@@ -113,7 +113,7 @@ export const Map: FC = () => {
                                 </Link>
                             </Typography>
                         </li>
-                        <li className={classes.list__item}>
+                        <li className={classes.listItem}>
                             <MailIcon className={classes.icon} />
                             <Typography variant="body2">
                                 E-mail:
@@ -127,11 +127,11 @@ export const Map: FC = () => {
                                 </Link>
                             </Typography>
                         </li>
-                        <li className={classes.list__item}>
+                        <li className={classes.listItem}>
                             <LocalParkingIcon className={classes.icon} />
                             <Typography variant="body2">Бесплатная парковка</Typography>
                         </li>
-                        <li className={classes.list__item}>
+                        <li className={classes.listItem}>
                             <QueryBuilderIcon className={classes.icon} />
                             <Typography variant="body2">
                                 Время работы: с 10:00 до 20:00
@@ -142,25 +142,25 @@ export const Map: FC = () => {
                     </ul>
                     <div className={classes.hl} />
                     <ul className={classes.list}>
-                        <li className={classes.list__item}>
+                        <li className={classes.listItem}>
                             <img src={yandex} alt="Яндекс" className={classes.icon} />
-                            <Typography variant="body2" className={classes.maps__text}>
+                            <Typography variant="body2" className={classes.mapsText}>
                                 <Link to="https://yandex.ru/maps/-/CCQtFQdaLA" external>
                                     Открыть в яндекс навигаторе
                                 </Link>
                             </Typography>
                         </li>
-                        <li className={classes.list__item}>
+                        <li className={classes.listItem}>
                             <img src={google} alt="Google" className={classes.icon} />
-                            <Typography variant="body2" className={classes.maps__text}>
+                            <Typography variant="body2" className={classes.mapsText}>
                                 <Link to="https://goo.gl/maps/WZTKJ95GqKgV5YPr7" external>
                                     Открыть Google Maps
                                 </Link>
                             </Typography>
                         </li>
-                        <li className={classes.list__item}>
+                        <li className={classes.listItem}>
                             <img src={apple} alt="Apple" className={classes.icon} />
-                            <Typography variant="body2" className={classes.maps__text}>
+                            <Typography variant="body2" className={classes.mapsText}>
                                 <Link
                                     to="http://maps.apple.com/?daddr=55.809176,37.512955"
                                     external
@@ -172,7 +172,7 @@ export const Map: FC = () => {
                     </ul>
                     <div className={classes.message}>
                         <img src={mail} alt="Картинка письма" />
-                        <Typography variant="body2" className={classes.message__text}>
+                        <Typography variant="body2" className={classes.messageText}>
                             <Link to="mailto:zakaz@pr-mebel.ru" external>
                                 Написать письмо
                             </Link>
@@ -185,7 +185,7 @@ export const Map: FC = () => {
                     xs={12}
                     sm={6}
                     className={cn({
-                        [classes.map__container]: isXsDown,
+                        [classes.mapContainer]: isXsDown,
                     })}
                 >
                     <YMapsProvider>

@@ -24,21 +24,21 @@ const useStyles = makeStyles({
         margin: '40px 0',
         color: 'white',
     },
-    input__container: {
+    inputContainer: {
         marginBottom: '15px',
     },
-    input__inner: {
+    inputInner: {
         color: 'white',
         '&:placeholder': {
             color: 'white',
         },
     },
-    input__root: {
+    inputRoot: {
         '&:hover&:before,&:before': {
             borderColor: 'white',
         },
     },
-    input__label: {
+    inputLabel: {
         color: 'white',
     },
     textarea: {
@@ -54,10 +54,10 @@ const useStyles = makeStyles({
         fontWeight: 100,
         lineHeight: '100%',
     },
-    'copyright-link': {
+    copyrightLink: {
         color: 'white',
     },
-    'button-container': {
+    buttonContainer: {
         marginTop: '36px',
         marginBottom: '24px',
     },
@@ -154,7 +154,7 @@ export const Questions = () => {
                     <Grid container>
                         <Grid item xs={1} sm={3} />
                         <Grid item xs={10} sm={6} container>
-                            <Grid item xs={12} className={classes.input__container}>
+                            <Grid item xs={12} className={classes.inputContainer}>
                                 <TextField
                                     inputRef={register}
                                     name="name"
@@ -162,13 +162,13 @@ export const Questions = () => {
                                     autoComplete="name"
                                     InputProps={{
                                         classes: {
-                                            root: classes.input__root,
-                                            input: classes.input__inner,
+                                            root: classes.inputRoot,
+                                            input: classes.inputInner,
                                         },
                                     }}
                                     InputLabelProps={{
                                         classes: {
-                                            root: classes.input__label,
+                                            root: classes.inputLabel,
                                         },
                                     }}
                                     fullWidth
@@ -177,7 +177,7 @@ export const Questions = () => {
                                     required
                                 />
                             </Grid>
-                            <Grid item xs={12} className={classes.input__container}>
+                            <Grid item xs={12} className={classes.inputContainer}>
                                 <TextField
                                     inputRef={register}
                                     name="tel"
@@ -185,13 +185,13 @@ export const Questions = () => {
                                     autoComplete="tel"
                                     InputProps={{
                                         classes: {
-                                            root: classes.input__root,
-                                            input: classes.input__inner,
+                                            root: classes.inputRoot,
+                                            input: classes.inputInner,
                                         },
                                     }}
                                     InputLabelProps={{
                                         classes: {
-                                            root: classes.input__label,
+                                            root: classes.inputLabel,
                                         },
                                     }}
                                     fullWidth
@@ -200,7 +200,7 @@ export const Questions = () => {
                                     required
                                 />
                             </Grid>
-                            <Grid item xs={12} className={classes.input__container}>
+                            <Grid item xs={12} className={classes.inputContainer}>
                                 <TextField
                                     inputRef={register}
                                     name="email"
@@ -208,13 +208,13 @@ export const Questions = () => {
                                     autoComplete="email"
                                     InputProps={{
                                         classes: {
-                                            root: classes.input__root,
-                                            input: classes.input__inner,
+                                            root: classes.inputRoot,
+                                            input: classes.inputInner,
                                         },
                                     }}
                                     InputLabelProps={{
                                         classes: {
-                                            root: classes.input__label,
+                                            root: classes.inputLabel,
                                         },
                                     }}
                                     fullWidth
@@ -231,13 +231,13 @@ export const Questions = () => {
                                 className={classes.textarea}
                                 InputProps={{
                                     classes: {
-                                        root: classes.input__root,
-                                        input: classes.input__inner,
+                                        root: classes.inputRoot,
+                                        input: classes.inputInner,
                                     },
                                 }}
                                 InputLabelProps={{
                                     classes: {
-                                        root: classes.input__label,
+                                        root: classes.inputLabel,
                                     },
                                 }}
                                 variant="filled"
@@ -287,7 +287,7 @@ export const Questions = () => {
                             xs={12}
                             container
                             justify="center"
-                            className={classes['button-container']}
+                            className={classes.buttonContainer}
                         >
                             <Grid item xs={8} sm={6} md={4}>
                                 <SubmitButton>Отправить</SubmitButton>
@@ -301,7 +301,7 @@ export const Questions = () => {
                                 что ознакомлен с&nbsp;
                                 <a
                                     href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
-                                    className={classes['copyright-link']}
+                                    className={classes.copyrightLink}
                                 >
                                     пользовательским соглашением
                                 </a>

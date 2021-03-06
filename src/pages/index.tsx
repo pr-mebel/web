@@ -37,8 +37,8 @@ const useStyles = makeStyles((theme) => ({
     designOffer: marginTop80,
     feedbackForm: marginTop80,
     advantages: marginTop80,
-    wardrobe_left: marginTop80,
-    wardrobe_right: marginTop80,
+    wardrobeLeft: marginTop80,
+    wardrobeRight: marginTop80,
     about: marginTop80,
     callDesigner: marginTop80,
     callDesignerForm: marginTop80,
@@ -54,8 +54,8 @@ const useStyles = makeStyles((theme) => ({
         designOffer: marginTop40,
         feedbackForm: marginTop40,
         advantages: marginTop40,
-        wardrobe_left: marginTop40,
-        wardrobe_right: marginTop40,
+        wardrobeLeft: marginTop40,
+        wardrobeRight: marginTop40,
         about: marginTop40,
         callDesigner: marginTop40,
         callDesignerForm: marginTop40,
@@ -108,12 +108,12 @@ const HomePage: FC = () => {
                 </section>
 
                 {/* Комфорт и удобство, продуманное до мелочей */}
-                <section id="comfort" className={classes.wardrobe_left}>
+                <section id="comfort" className={classes.wardrobeLeft}>
                     <WardrobeLeft />
                 </section>
 
                 {/* Исключтельное качество нашей мебели */}
-                <section id="quality" className={classes.wardrobe_right}>
+                <section id="quality" className={classes.wardrobeRight}>
                     <WardrobeRight />
                 </section>
 

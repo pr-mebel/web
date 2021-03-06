@@ -15,18 +15,18 @@ const useStyles = makeStyles((theme) => ({
         background: theme.palette.grey[900],
         padding: '63px 0',
     },
-    input__inner: {
+    inputInner: {
         color: 'white',
         '&:placeholder': {
             color: 'white',
         },
     },
-    input__root: {
+    inputRoot: {
         '&:hover&:before,&:before': {
             borderColor: 'white',
         },
     },
-    input__label: {
+    inputLabel: {
         color: 'white',
     },
     text: {
@@ -45,30 +45,30 @@ const useStyles = makeStyles((theme) => ({
         width: '30px',
         height: '30px',
     },
-    text_publish: {
+    textPublish: {
         color: 'white',
         textTransform: 'uppercase',
         fontSize: '12px',
         lineHeight: '14px',
         marginLeft: '4px',
     },
-    copy__text: {
+    copyText: {
         color: 'white',
         fontSize: '12px',
         fontWeight: 100,
         lineHeight: '12px',
     },
-    'copyright-link': {
+    copyrightLink: {
         color: 'white',
     },
-    'input-file': {
+    inputFile: {
         display: 'none',
     },
-    'button-container': {
+    buttonContainer: {
         marginTop: '36px',
         marginBottom: '24px',
     },
-    'file-upload__container': {
+    fileUploadContainer: {
         position: 'relative',
         [theme.breakpoints.up('sm')]: {
             paddingTop: '16px',
@@ -157,13 +157,13 @@ export const FeedbackForm: FC = () => {
                                     autoComplete="name"
                                     InputProps={{
                                         classes: {
-                                            root: classes.input__root,
-                                            input: classes.input__inner,
+                                            root: classes.inputRoot,
+                                            input: classes.inputInner,
                                         },
                                     }}
                                     InputLabelProps={{
                                         classes: {
-                                            root: classes.input__label,
+                                            root: classes.inputLabel,
                                         },
                                     }}
                                     fullWidth
@@ -180,13 +180,13 @@ export const FeedbackForm: FC = () => {
                                     autoComplete="tel"
                                     InputProps={{
                                         classes: {
-                                            root: classes.input__root,
-                                            input: classes.input__inner,
+                                            root: classes.inputRoot,
+                                            input: classes.inputInner,
                                         },
                                     }}
                                     InputLabelProps={{
                                         classes: {
-                                            root: classes.input__label,
+                                            root: classes.inputLabel,
                                         },
                                     }}
                                     fullWidth
@@ -214,19 +214,19 @@ export const FeedbackForm: FC = () => {
                             container
                             justify="center"
                             alignItems={smDown ? 'center' : 'flex-start'}
-                            className={classes['file-upload__container']}
+                            className={classes.fileUploadContainer}
                         >
                             <Grid item xs={6} container justify="center">
                                 <input
                                     type="file"
                                     multiple
                                     ref={fileInputRef}
-                                    className={classes['input-file']}
+                                    className={classes.inputFile}
                                     onChange={handleFileUploadChange}
                                 />
                                 <div onClick={handleFileInputClick} className={classes.publish}>
                                     <PublishIcon className={classes.icon} />
-                                    <Typography className={classes.text_publish}>
+                                    <Typography className={classes.textPublish}>
                                         Прикрепить
                                         <br />
                                         эскизы
@@ -254,7 +254,7 @@ export const FeedbackForm: FC = () => {
                             xs={12}
                             container
                             justify="center"
-                            className={classes['button-container']}
+                            className={classes.buttonContainer}
                         >
                             <Grid item xs={10} sm={6} md={4}>
                                 <SubmitButton>Рассчитать стоимость</SubmitButton>
@@ -262,13 +262,13 @@ export const FeedbackForm: FC = () => {
                         </Grid>
                         <Grid item xs container justify="center">
                             <Grid item xs={12} sm={8} md={6}>
-                                <Typography className={classes.copy__text} align="center">
+                                <Typography className={classes.copyText} align="center">
                                     Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю
                                     согласие на&nbsp;обработку персональных данных
                                     и&nbsp;подтверждаю, что ознакомлен с&nbsp;
                                     <a
                                         href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
-                                        className={classes['copyright-link']}
+                                        className={classes.copyrightLink}
                                     >
                                         пользовательским соглашением
                                     </a>

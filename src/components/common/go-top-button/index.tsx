@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
         zIndex: 1000,
         transition: '.3s all ease-out',
     },
-    root_visible: {
+    rootVisible: {
         right: '10px',
     },
     img: {
@@ -43,7 +43,7 @@ export const GoTopButton: FC = () => {
         <div
             onClick={handleClick}
             className={cx(classes.root, {
-                [classes.root_visible]: trigger,
+                [classes.rootVisible]: trigger,
             })}
         >
             <Img className={classes.img} />

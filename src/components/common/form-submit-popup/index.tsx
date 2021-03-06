@@ -26,10 +26,10 @@ const useStyles = makeStyles({
     container: {
         flexGrow: 1,
     },
-    text__container: {
+    textContainer: {
         margin: '0',
     },
-    text_main: {
+    textMain: {
         fontWeight: 'bold',
         fontSize: '32px',
         marginBottom: '20px',
@@ -92,8 +92,8 @@ export const FormSubmitPopup: FC = () => {
                     {!allUploaded ? (
                         <CircularProgress size={80} variant="static" value={percentageOfUploaded} />
                     ) : (
-                        <Grid item xs={12} className={classes.text__container}>
-                            <Typography align="center" className={classes.text_main}>
+                        <Grid item xs={12} className={classes.textContainer}>
+                            <Typography align="center" className={classes.textMain}>
                                 Спасибо за обращение!
                             </Typography>
                             <Typography align="center">

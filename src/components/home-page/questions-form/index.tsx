@@ -21,18 +21,18 @@ const useStyles = makeStyles({
         marginTop: '40px',
         marginBottom: '60px',
     },
-    input__inner: {
+    inputInner: {
         color: 'white',
         '&:placeholder': {
             color: 'white',
         },
     },
-    input__root: {
+    inputRoot: {
         '&:hover&:before,&:before': {
             borderColor: 'white',
         },
     },
-    input__label: {
+    inputLabel: {
         color: 'white',
     },
     textarea: {
@@ -48,10 +48,10 @@ const useStyles = makeStyles({
         fontWeight: 100,
         lineHeight: '100%',
     },
-    'copyright-link': {
+    copyrightLink: {
         color: 'white',
     },
-    'button-container': {
+    buttonContainer: {
         marginTop: '36px',
         marginBottom: '24px',
     },
@@ -100,13 +100,13 @@ export const QuestionsForm: FC = () => {
                                     autoComplete="name"
                                     InputProps={{
                                         classes: {
-                                            root: classes.input__root,
-                                            input: classes.input__inner,
+                                            root: classes.inputRoot,
+                                            input: classes.inputInner,
                                         },
                                     }}
                                     InputLabelProps={{
                                         classes: {
-                                            root: classes.input__label,
+                                            root: classes.inputLabel,
                                         },
                                     }}
                                     fullWidth
@@ -124,13 +124,13 @@ export const QuestionsForm: FC = () => {
                                     autoComplete="tel"
                                     InputProps={{
                                         classes: {
-                                            root: classes.input__root,
-                                            input: classes.input__inner,
+                                            root: classes.inputRoot,
+                                            input: classes.inputInner,
                                         },
                                     }}
                                     InputLabelProps={{
                                         classes: {
-                                            root: classes.input__label,
+                                            root: classes.inputLabel,
                                         },
                                     }}
                                     fullWidth
@@ -147,13 +147,13 @@ export const QuestionsForm: FC = () => {
                                 className={classes.textarea}
                                 InputProps={{
                                     classes: {
-                                        root: classes.input__root,
-                                        input: classes.input__inner,
+                                        root: classes.inputRoot,
+                                        input: classes.inputInner,
                                     },
                                 }}
                                 InputLabelProps={{
                                     classes: {
-                                        root: classes.input__label,
+                                        root: classes.inputLabel,
                                     },
                                 }}
                                 variant="filled"
@@ -167,7 +167,7 @@ export const QuestionsForm: FC = () => {
                             xs={12}
                             container
                             justify="center"
-                            className={classes['button-container']}
+                            className={classes.buttonContainer}
                         >
                             <Grid item xs={10} sm={6} md={4}>
                                 <SubmitButton>Задать вопрос</SubmitButton>
@@ -181,7 +181,7 @@ export const QuestionsForm: FC = () => {
                                     ознакомлен с&nbsp;
                                     <a
                                         href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
-                                        className={classes['copyright-link']}
+                                        className={classes.copyrightLink}
                                     >
                                         пользовательским соглашением
                                     </a>

@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
             height: '50px',
         },
     },
-    root_dense: {
+    rootDense: {
         height: '50px',
     },
     innerWrapperSm: {
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
         height: '47px',
         transition: '.1s height',
     },
-    logo_dense: {
+    logoDense: {
         height: '40px',
     },
     logoContainer: {
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '0',
         margin: '0',
     },
-    menu__icon: {
+    menuIcon: {
         cursor: 'pointer',
         width: '35px',
         height: '35px',
@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
         transform: 'rotate(-90deg)',
         fontSize: 'inherit',
     },
-    menu__dropdown: {
+    menuDropdown: {
         position: 'relative',
         color: 'inherit',
         transition: 'color .1s',
@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
         },
         cursor: 'pointer',
     },
-    'menu__dropdown-popup': {
+    menuDropdownPopup: {
         width: '180px',
         background: 'white',
         padding: '8px',
@@ -119,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100px',
         justifyContent: 'space-between',
     },
-    social__icon: {
+    socialIcon: {
         '&:hover path': {
             fill: theme.palette.primary.main,
             transition: 'fill .1s',
@@ -173,7 +173,7 @@ export const Header: FC = () => {
     return (
         <header
             className={classNames(classes.root, {
-                [classes.root_dense]: smallHeader && !isMdDown,
+                [classes.rootDense]: smallHeader && !isMdDown,
             })}
         >
             <Container>
@@ -185,7 +185,7 @@ export const Header: FC = () => {
                                     src="/logo_header.svg"
                                     alt="logo"
                                     className={classNames(classes.logo, {
-                                        [classes.logo_dense]: smallHeader,
+                                        [classes.logoDense]: smallHeader,
                                     })}
                                 />
                             </Link>
@@ -197,14 +197,14 @@ export const Header: FC = () => {
                                     onMouseLeave={handleCloseDropdown}
                                 >
                                     <Typography
-                                        className={classNames(classes.text, classes.menu__dropdown)}
+                                        className={classNames(classes.text, classes.menuDropdown)}
                                         align="center"
                                     >
                                         Каталог&nbsp;
                                         <ArrowBackIosIcon className={classes.dropdown} />
                                     </Typography>
                                     {dropdownVisible && (
-                                        <ul className={classes['menu__dropdown-popup']}>
+                                        <ul className={classes.menuDropdownPopup}>
                                             <li>
                                                 <Typography className={classes.text} gutterBottom>
                                                     <Link to="/catalog?section=cupboard">
@@ -290,17 +290,17 @@ export const Header: FC = () => {
                             <ul className={classNames(classes.list, classes.social)}>
                                 <li>
                                     <a href="https://vk.com/public185518769">
-                                        <Vk className={classes.social__icon} />
+                                        <Vk className={classes.socialIcon} />
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://www.instagram.com/pr_mebel.ru/">
-                                        <Inst className={classes.social__icon} />
+                                        <Inst className={classes.socialIcon} />
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://www.facebook.com/%D0%A7%D0%B0%D1%81%D1%82%D0%BD%D1%8B%D0%B9-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D1%8C%D0%B5%D1%80-108136607213942">
-                                        <Fb className={classes.social__icon} />
+                                        <Fb className={classes.socialIcon} />
                                     </a>
                                 </li>
                             </ul>
@@ -335,7 +335,7 @@ export const Header: FC = () => {
                                 </Typography>
                             </Hidden>
                         </div>
-                        <MenuIcon className={classes.menu__icon} onClick={handleOpenDrawer} />
+                        <MenuIcon className={classes.menuIcon} onClick={handleOpenDrawer} />
                     </div>
                     <Drawer
                         anchor="right"
@@ -430,17 +430,17 @@ export const Header: FC = () => {
                                 <ul className={classNames(classes.list, classes.social)}>
                                     <li>
                                         <a href="https://vk.com/public185518769">
-                                            <Vk className={classes.social__icon} />
+                                            <Vk className={classes.socialIcon} />
                                         </a>
                                     </li>
                                     <li>
                                         <a href="https://www.instagram.com/pr_mebel.ru/">
-                                            <Inst className={classes.social__icon} />
+                                            <Inst className={classes.socialIcon} />
                                         </a>
                                     </li>
                                     <li>
                                         <a href="https://www.facebook.com/%D0%A7%D0%B0%D1%81%D1%82%D0%BD%D1%8B%D0%B9-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D1%8C%D0%B5%D1%80-108136607213942">
-                                            <Fb className={classes.social__icon} />
+                                            <Fb className={classes.socialIcon} />
                                         </a>
                                     </li>
                                 </ul>

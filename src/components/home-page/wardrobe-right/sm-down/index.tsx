@@ -8,10 +8,10 @@ import { ADDITIONAL, defaultImage } from '../constants';
 import { WardrobeAdditionalBlock } from '../../wardrobe-additional-block';
 
 const useStyles = makeStyles(() => ({
-    content_sm: {
+    contentSm: {
         marginTop: '40px',
     },
-    img__container: {
+    imgContainer: {
         position: 'relative',
         paddingTop: '71.9%',
     },
@@ -27,11 +27,11 @@ const useStyles = makeStyles(() => ({
     selectedImage: {
         opacity: '1',
     },
-    text_bottom: {
+    textBottom: {
         marginTop: '30px',
         minHeight: '120px',
     },
-    'button-container': {
+    buttonContainer: {
         marginTop: '32px',
     },
 }));
@@ -49,8 +49,8 @@ export const WardrobeRightSmDown = () => {
                     нашей мебели
                 </Typography>
             </BlockTitle>
-            <Grid container justify="center" className={classes.content_sm}>
-                <Grid item xs={12} className={classes.img__container}>
+            <Grid container justify="center" className={classes.contentSm}>
+                <Grid item xs={12} className={classes.imgContainer}>
                     <Image
                         src={defaultImage}
                         layout="fill"
@@ -82,14 +82,14 @@ export const WardrobeRightSmDown = () => {
                     />
                 </Grid>
                 {activePage !== 0 ? (
-                    <Grid item xs={10} className={classes.text_bottom}>
+                    <Grid item xs={10} className={classes.textBottom}>
                         <WardrobeAdditionalBlock
                             title={ADDITIONAL[activePage - 1].data.title}
                             text={ADDITIONAL[activePage - 1].data.text}
                         />
                     </Grid>
                 ) : (
-                    <Grid item xs={10} className={classes.text_bottom}>
+                    <Grid item xs={10} className={classes.textBottom}>
                         <Typography variant="body2">
                             Каждое наше изделие это сложный инженерный продукт, включающий
                             в&nbsp;себя передовые мировые стандарты производства мебели. Все это
@@ -98,7 +98,7 @@ export const WardrobeRightSmDown = () => {
                     </Grid>
                 )}
             </Grid>
-            <Grid container justify="center" className={classes['button-container']}>
+            <Grid container justify="center" className={classes.buttonContainer}>
                 <Grid item xs={10} sm={6} md={4}>
                     <MainButton>Рассчитать стоимость</MainButton>
                 </Grid>

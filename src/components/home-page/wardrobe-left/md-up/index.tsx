@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     active: {
         color: theme.palette.primary.main,
     },
-    'button-container': {
+    buttonContainer: {
         marginTop: '32px',
     },
 }));
@@ -131,7 +131,7 @@ export const WardrobeLeftMdUp = () => {
                     </ul>
                 </Grid>
             </Grid>
-            <Grid container justify="center" className={classes['button-container']}>
+            <Grid container justify="center" className={classes.buttonContainer}>
                 <Grid item xs={10} sm={6} md={4}>
                     <MainButton>Рассчитать стоимость</MainButton>
                 </Grid>

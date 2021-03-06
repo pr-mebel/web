@@ -11,18 +11,18 @@ const useStyles = makeStyles((theme) => ({
         background: theme.palette.grey[900],
         padding: '65px 0',
     },
-    input__inner: {
+    inputInner: {
         color: 'white',
         '&:placeholder': {
             color: 'white',
         },
     },
-    input__root: {
+    inputRoot: {
         '&:hover&:before,&:before': {
             borderColor: 'white',
         },
     },
-    input__label: {
+    inputLabel: {
         color: 'white',
     },
     text: {
@@ -31,11 +31,11 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 100,
         lineHeight: '100%',
     },
-    'button-container': {
+    buttonContainer: {
         marginTop: '36px',
         marginBottom: '24px',
     },
-    'copyright-link': {
+    copyrightLink: {
         color: 'white',
     },
 }));
@@ -69,13 +69,13 @@ export const CallDesignerForm: FC = () => {
                                     autoComplete="name"
                                     InputProps={{
                                         classes: {
-                                            root: classes.input__root,
-                                            input: classes.input__inner,
+                                            root: classes.inputRoot,
+                                            input: classes.inputInner,
                                         },
                                     }}
                                     InputLabelProps={{
                                         classes: {
-                                            root: classes.input__label,
+                                            root: classes.inputLabel,
                                         },
                                     }}
                                     fullWidth
@@ -93,13 +93,13 @@ export const CallDesignerForm: FC = () => {
                                     autoComplete="tel"
                                     InputProps={{
                                         classes: {
-                                            root: classes.input__root,
-                                            input: classes.input__inner,
+                                            root: classes.inputRoot,
+                                            input: classes.inputInner,
                                         },
                                     }}
                                     InputLabelProps={{
                                         classes: {
-                                            root: classes.input__label,
+                                            root: classes.inputLabel,
                                         },
                                     }}
                                     fullWidth
@@ -114,7 +114,7 @@ export const CallDesignerForm: FC = () => {
                             xs={12}
                             container
                             justify="center"
-                            className={classes['button-container']}
+                            className={classes.buttonContainer}
                         >
                             <Grid item xs={10} sm={6} md={4}>
                                 <SubmitButton>Вызвать дизайнера</SubmitButton>
@@ -128,7 +128,7 @@ export const CallDesignerForm: FC = () => {
                                     и&nbsp;подтверждаю, что ознакомлен с&nbsp;
                                     <a
                                         href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
-                                        className={classes['copyright-link']}
+                                        className={classes.copyrightLink}
                                     >
                                         пользовательским соглашением
                                     </a>

@@ -8,7 +8,7 @@ import { WardrobeAdditionalBlock } from '../../wardrobe-additional-block';
 import { TABS, ADDITIONAL } from '../constants';
 
 const useStyles = makeStyles((theme) => ({
-    img__container: {
+    imgContainer: {
         position: 'relative',
         paddingTop: '71.9%',
     },
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
         listStyle: 'none',
         marginTop: '40px',
     },
-    list_horizontal: {
+    listHorizontal: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -47,11 +47,11 @@ const useStyles = makeStyles((theme) => ({
     active: {
         color: theme.palette.primary.main,
     },
-    text_bottom: {
+    textBottom: {
         marginTop: '30px',
         minHeight: '130px',
     },
-    'button-container': {
+    buttonContainer: {
         marginTop: '32px',
     },
 }));
@@ -78,7 +78,7 @@ export const WardrobeLeftSmDown: FC = () => {
             </BlockTitle>
             <Grid container justify="center">
                 <Grid item xs>
-                    <ul className={cn(classes.list, classes.list_horizontal)}>
+                    <ul className={cn(classes.list, classes.listHorizontal)}>
                         {TABS.map((tab, i) => (
                             <li
                                 key={tab.id}
@@ -94,7 +94,7 @@ export const WardrobeLeftSmDown: FC = () => {
                         ))}
                     </ul>
                 </Grid>
-                <Grid item xs={12} className={classes.img__container}>
+                <Grid item xs={12} className={classes.imgContainer}>
                     {TABS.map(({ data: { img, title }, id }, i) => (
                         <Image
                             key={id}
@@ -129,14 +129,14 @@ export const WardrobeLeftSmDown: FC = () => {
                     />
                 </Grid>
                 {activePage !== 0 ? (
-                    <Grid item xs={10} className={classes.text_bottom}>
+                    <Grid item xs={10} className={classes.textBottom}>
                         <WardrobeAdditionalBlock
                             title={ADDITIONAL[activePage - 1].data.title}
                             text={ADDITIONAL[activePage - 1].data.text}
                         />
                     </Grid>
                 ) : (
-                    <Grid item xs={10} className={classes.text_bottom}>
+                    <Grid item xs={10} className={classes.textBottom}>
                         <Typography variant="body2">
                             Мы&nbsp;разработали специальные решения для оптимизации хранения ваших
                             вещей, которые позволяют сделать ежедневно пользование мебелью
@@ -145,7 +145,7 @@ export const WardrobeLeftSmDown: FC = () => {
                     </Grid>
                 )}
             </Grid>
-            <Grid container justify="center" className={classes['button-container']}>
+            <Grid container justify="center" className={classes.buttonContainer}>
                 <Grid item xs={10} sm={6} md={4}>
                     <MainButton>Рассчитать стоимость</MainButton>
                 </Grid>

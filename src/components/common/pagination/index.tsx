@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
     },
-    list__container: {
+    listContainer: {
         display: 'flex',
         justifyContent: 'center',
         width: '70%',
@@ -27,10 +27,10 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         top: '0',
     },
-    icon_back: {
+    iconBack: {
         left: '10px',
     },
-    icon_next: {
+    iconNext: {
         right: '10px',
     },
     circle: {
@@ -77,10 +77,10 @@ export const Pagination: FC<PaginationProps> = ({ numberOfPages, activeIndex, on
     return (
         <div className={classes.root}>
             <ArrowBackIosIcon
-                className={cx(classes.icon, classes.icon_back)}
+                className={cx(classes.icon, classes.iconBack)}
                 onClick={handleClickPrev}
             />
-            <div className={classes.list__container}>
+            <div className={classes.listContainer}>
                 {range(numberOfPages).map((index) => (
                     <div
                         key={index}
@@ -92,7 +92,7 @@ export const Pagination: FC<PaginationProps> = ({ numberOfPages, activeIndex, on
                 ))}
             </div>
             <ArrowForwardIosIcon
-                className={cx(classes.icon, classes.icon_next)}
+                className={cx(classes.icon, classes.iconNext)}
                 onClick={handleClickNext}
             />
         </div>

@@ -7,7 +7,7 @@ import { CARDS } from './constants';
 import { Card } from './components';
 
 const useStyles = makeStyles({
-    title_middle: {
+    titleMiddle: {
         marginTop: '30px',
         fontWeight: 400,
     },
@@ -26,7 +26,7 @@ export const About = () => {
             <BlockTitle>
                 <Typography variant="h4">О нас</Typography>
             </BlockTitle>
-            <Typography variant="h5" align="center" className={classes.title_middle}>
+            <Typography variant="h5" align="center" className={classes.titleMiddle}>
                 Почему нас выбрали уже более 10 000 клиентов?
             </Typography>
             <Grid container spacing={isXsDown ? 2 : 4} className={classes.grid}>
@@ -40,7 +40,7 @@ export const About = () => {
                     </Grid>
                 ))}
             </Grid>
-            <Typography variant="h5" align="center" className={classes.title_middle}>
+            <Typography variant="h5" align="center" className={classes.titleMiddle}>
                 Приходите, нам есть чем вас удивить!
             </Typography>
         </Container>

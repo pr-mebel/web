@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
         paddingTop: '30%',
     },
-    section__title: {
+    sectionTitle: {
         fontSize: '16px',
         lineHeight: '18px',
         fontWeight: 400,
@@ -23,16 +23,16 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '24px',
         fontSize: '15px',
     },
-    content_sm: {
+    contentSm: {
         minHeight: '114px',
     },
-    'button-container': {
+    buttonContainer: {
         marginTop: '30px',
         [theme.breakpoints.down('xs')]: {
             marginTop: '50px',
         },
     },
-    'bottom-title': {
+    bottomTitle: {
         marginTop: '30px',
     },
 }));
@@ -60,7 +60,7 @@ export const OurProduction = () => {
                     {LIST.map((item) => (
                         <Grid key={item.id} item xs={6} md={3}>
                             <BlockTitle>
-                                <Typography variant="h6" className={classes.section__title}>
+                                <Typography variant="h6" className={classes.sectionTitle}>
                                     {item.data.title}
                                 </Typography>
                             </BlockTitle>
@@ -71,7 +71,7 @@ export const OurProduction = () => {
                     ))}
                 </Hidden>
                 <Hidden smUp>
-                    <Grid item xs={12} className={classes.content_sm}>
+                    <Grid item xs={12} className={classes.contentSm}>
                         <BlockTitle>
                             <Typography variant="h5">{LIST[activeIndex].data.title}</Typography>
                         </BlockTitle>
@@ -89,12 +89,12 @@ export const OurProduction = () => {
                 </Hidden>
                 <Grid container justify="center">
                     <Grid item xs={12} md={10}>
-                        <Typography variant="h5" className={classes['bottom-title']} align="center">
+                        <Typography variant="h5" className={classes.bottomTitle} align="center">
                             Современные технологии производства для идеального качества вашей мебели
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid container justify="center" className={classes['button-container']}>
+                <Grid container justify="center" className={classes.buttonContainer}>
                     <Grid item xs={10} sm={6} md={4}>
                         <MainButton>Получить проект</MainButton>
                     </Grid>

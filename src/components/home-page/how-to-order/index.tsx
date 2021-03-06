@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     text: {
         marginTop: '20px',
     },
-    'button-container': {
+    buttonContainer: {
         marginTop: '36px',
         '@media (max-width: 960px)': {
             '&': {
@@ -129,7 +129,7 @@ export const HowToOrder: FC = () => {
                     xs={12}
                     container
                     justify="center"
-                    className={classes['button-container']}
+                    className={classes.buttonContainer}
                 >
                     <Grid item xs={10} sm={6} md={4}>
                         <MainButton>Оставить заявку</MainButton>

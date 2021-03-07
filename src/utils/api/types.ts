@@ -1,4 +1,10 @@
-import { SectionId, StyleId, DoorTypeId } from '@/entities';
+import {
+    SectionId,
+    StyleId,
+    DoorTypeId,
+    SectionCollection,
+    Collection
+} from '@/entities';
 
 export type FetchCatalogByFilterParams = {
     section: SectionId;
@@ -6,39 +12,7 @@ export type FetchCatalogByFilterParams = {
     doorType: DoorTypeId;
 };
 
-type Image = {
-    url: string;
-};
-
-type Collection = {
-    items: {
-        collection: string;
-        description: string;
-        id: string;
-        imageFull: Image;
-        imageMedium: Image;
-        imageMinified: Image;
-        sys: {
-            id: string;
-        };
-    }[];
-    total: number;
-}
-
-type SectionCollection = {
-    items: {
-        cardsCollection: Collection;
-    }[];
-};
-
-export enum FetchCatalogResponseSection {
-    cupboard = 'cupboardSectionCollection',
-    wardrobe = 'wardrobeSectionCollection',
-    accessories = 'accessoriesSectionCollection',
-    lightingSystems = 'lightingSystemsSectionCollection',
-}
-
-export interface FetchCatalogByFilterResponse {
+export interface CatalogResponse {
     data:
     | {
         cupboardSectionCollection: SectionCollection;
@@ -58,4 +32,18 @@ export interface FetchCatalogByFilterResponse {
     | {
         wardrobeCollection: Collection;
     };
+}
+
+export type SendEmailParams = {
+    email?: string;
+    name: string;
+    tel: string;
+    description?: string;
+    files?: {
+        name: string;
+    }[];
+}
+
+export type UploadFilesParams = {
+    files: FileList;
 }

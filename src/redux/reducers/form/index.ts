@@ -1,5 +1,6 @@
 import { createReducer, createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import { State } from '@/redux';
+import * as api from '@/utils/api';
 
 import { storage, firestore } from '@/lib';
 
@@ -38,72 +39,26 @@ export const setErrorInFileUpload = createAction(
     }),
 );
 
-export const submitForm = createAsyncThunk('submit_form', (_, { dispatch, getState }) => {
-    const storageRef = storage().ref();
-
+export const submitForm = createAsyncThunk('submit_form', async (_, { dispatch, getState, rejectWithValue }) => {
     const state = getState() as State;
 
     dispatch(openFormSubmitPopup());
 
     const { email, name, tel, description, files } = state.form;
 
-    if (files) {
-        const refs = [...files].map((file) => {
-            const fileRef = storageRef.child(file.name);
-            return fileRef.getDownloadURL();
+    try {
+        await api.sendEmail({
+            email,
+            name,
+            tel,
+            description,
+            files,
         });
 
-        Promise.all(refs).then((fileLinks) => {
-            const attachments = fileLinks.map((fileLink, i) => ({
-                filename: [...files][i].name,
-                path: fileLink,
-            }));
-
-            firestore()
-                .collection('mail')
-                .add({
-                    to: 'zakaz@pr-mebel.com',
-                    replyTo: email || 'zakaz@pr-mebel.com',
-                    message: {
-                        subject: `Расчет | ${name} | ${tel}`,
-                        html: `
-            <p><strong>Имя:</strong><br>${name}</p>
-            <p><strong>Телефон:</strong><br>${tel}</p>
-            ${email && `<p><strong>Почта:</strong><br>${email}</p>`}
-            ${description && `<p><strong>Описание:</strong><br>${description}</p>`}
-          `,
-                        attachments,
-                    },
-                })
-                .then(() => {
-                    dispatch(emailSent());
-                    setTimeout(() => {
-                        dispatch(closeFormSubmitPopup());
-                    }, 4000);
-                });
-        });
-    } else {
-        firestore()
-            .collection('mail')
-            .add({
-                to: 'zakaz@pr-mebel.com',
-                replyTo: email || 'zakaz@pr-mebel.com',
-                message: {
-                    subject: `Расчет | ${name} | ${tel}`,
-                    html: `
-          <p><strong>Имя:</strong><br>${name}</p>
-          <p><strong>Телефон:</strong><br>${tel}</p>
-          ${email && `<p><strong>Почта:</strong><br>${email}</p>`}
-          ${description && `<p><strong>Описание:</strong><br>${description}</p>`}
-          `,
-                },
-            })
-            .then(() => {
-                dispatch(emailSent());
-                setTimeout(() => {
-                    dispatch(closeFormSubmitPopup());
-                }, 4000);
-            });
+        dispatch(emailSent());
+        setTimeout(() => dispatch(closeFormSubmitPopup()), 4000);
+    } catch (error) {
+        rejectWithValue(error);
     }
 });
 

@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from 'react';
-import { Container, Grid } from '@material-ui/core';
+import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import { changePage, fetchCatalog } from '@/redux';
@@ -10,6 +10,9 @@ import { GalleryProps } from './types';
 const useStyles = makeStyles((theme) => ({
     buttonContainer: {
         marginTop: '60px',
+    },
+    notFound: {
+        minHeight: '300px',
     },
     [theme.breakpoints.down('xs')]: {
         buttonContainer: {

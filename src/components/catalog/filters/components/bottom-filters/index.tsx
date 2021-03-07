@@ -2,7 +2,7 @@ import React, { FC, useCallback } from 'react';
 import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid } from '@material-ui/core';
-import { SectionId } from '@/entities';
+import { SectionId, StyleId } from '@/entities';
 import { BottomFiltersProps } from './types';
 
 const useStyles = makeStyles((theme) => ({
@@ -86,6 +86,10 @@ export const BottomFilters: FC<BottomFiltersProps> = ({ filter, options, onChang
                         className={classes.optionsContainer}
                     >
                         {options.styles.map((option, i) => {
+                            if (option.id === StyleId.designer && filter.section === SectionId.wardrobe) {
+                                return null;
+                            }
+
                             if (i !== options.styles.length - 1) {
                                 return (
                                     <React.Fragment key={option.id}>
@@ -128,7 +132,7 @@ export const BottomFilters: FC<BottomFiltersProps> = ({ filter, options, onChang
                     </Grid>
                 </Grid>
             )}
-            {filter.section === options.sections[0].id && (
+            {filter.section === SectionId.cupboard && (
                 <Grid item container xs={12} sm={6}>
                     <Grid
                         item

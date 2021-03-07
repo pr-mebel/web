@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { SectionId, StyleId, DoorTypeId, FilterField, Item } from '@/entities';
 import * as api from '@/utils/api';
-import { retrieveItemsFromResponse } from '@/utils';
 import {
     ChangeFilterPayload,
     FetchCatalogFulfilledPayload,
@@ -35,7 +34,7 @@ export const fetchCatalog = createAsyncThunk(
         try {
             const response = await api.fetchCatalogByFilter(filter, page);
 
-            return retrieveItemsFromResponse(response, filter);
+            return response.data;
         } catch (error) {
             return rejectWithValue(error);
         }
@@ -59,15 +58,23 @@ const catalogSlice = createSlice({
 
                     return;
                 }
+
                 if (value === SectionId.wardrobe) {
                     state.filter = {
                         ...state.filter,
                         section: value,
+                        style: state.filter.style === StyleId.designer
+                            ? StyleId.any
+                            : state.filter.style,
                         doorType: DoorTypeId.any,
                     };
 
                     return;
                 }
+
+                state.filter.section = SectionId.cupboard;
+
+                return;
             }
             
             if (valueIsStyle(value)) {

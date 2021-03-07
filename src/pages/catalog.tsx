@@ -26,7 +26,7 @@ import {
     openFullScreenPopup,
     closeFullScreenPopup,
 } from '@/redux';
-import { filters, FilterField, SectionId, DoorTypeId, StyleId } from '@/entities';
+import { filters } from '@/entities';
 import { catalogSelector } from '@/selectors';
 import { checkIfNameAndValueAreKnown } from '@/utils';
 

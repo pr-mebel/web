@@ -4,6 +4,12 @@ import { client } from '../client';
 import { StyleId, DoorTypeId } from '@/entities';
 import { FetchCatalogByFilterParams, FetchCatalogByFilterResponse } from './types';
 
+/**
+ * Запрашивает из contentful CMS карточки по текущему фильтру
+ * @param param0 Параметры фильтров
+ * @param page Текущая страница в каталоге
+ * @returns Объект с новыми карточками
+ */
 export const fetchCatalogByFilter = (
     { section, style, doorType }: FetchCatalogByFilterParams,
     page: number,

@@ -1,3 +1,8 @@
+/**
+ * Получить слово файл с нужным окончанием в зависимости от количества
+ * @param num Количество
+ * @returns файл/файла/файлов
+ */
 export const getFileDeclination = (num: number) => {
     const variants = ['файл', 'файла', 'файлов'];
     const remainder = num % 100;

@@ -132,17 +132,12 @@ export const CardPopup: FC<CardPopupProps> = ({
 }) => {
     const classes = useStyles();
 
+    /**
+     * Открывает полноэкранный попап с картинкой из текущей карточки
+     */
     const handleImageClick = useCallback(() => {
         onFullScreenPopupOpen(currentItemId);
     }, [onFullScreenPopupOpen, currentItemId]);
-
-    const handleClickBack = useCallback(() => {
-        onClickBack();
-    }, [onClickBack]);
-
-    const handleClickForward = useCallback(() => {
-        onClickForward();
-    }, [onClickForward]);
 
     useEffect(() => {
         if (!isLoading && items.length - 5 === currentItemId) {
@@ -182,7 +177,7 @@ export const CardPopup: FC<CardPopupProps> = ({
                                 <>
                                     <div
                                         className={cx(classes.arrow, classes.arrowLeft)}
-                                        onClick={handleClickBack}
+                                        onClick={onClickBack}
                                     >
                                         <ArrowBack className={classes.icon} />
                                     </div>
@@ -193,7 +188,6 @@ export const CardPopup: FC<CardPopupProps> = ({
                                     />
                                 </>
                             )}
-                            {/* TODO Избавиться от LazyImage */}
                             <img
                                 className={cx(classes.img, classes.imgCenter)}
                                 src={items[currentItemId].imageMedium.url}
@@ -209,7 +203,7 @@ export const CardPopup: FC<CardPopupProps> = ({
                                     />
                                     <div
                                         className={cx(classes.arrow, classes.arrowRight)}
-                                        onClick={handleClickForward}
+                                        onClick={onClickForward}
                                     >
                                         <ArrowForward className={classes.icon} />
                                     </div>

@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
 export const SectionPicker: FC<SectionPickerProps> = ({ options, value, onChange }) => {
     const classes = useStyles();
 
+    /**
+     * Обработчик выбора секции
+     */
     const handleClick = useCallback(
         (id) => () => {
             onChange({

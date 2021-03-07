@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
 export const Tabs: FC<TabsProps> = ({ activeTab, tabs, onChange }) => {
     const classes = useStyles();
 
+    /**
+     * Обработчик клика на вкладку
+     */
     const handeChangeTab = useCallback(
         (tab) => () => {
             if (tab !== activeTab) {

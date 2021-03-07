@@ -17,8 +17,8 @@ export type CardPopupProps = {
     }[];
     currentItemId: number;
     onClose: MouseEventHandler<SVGSVGElement>;
-    onClickBack: Function;
-    onClickForward: Function;
+    onClickBack: MouseEventHandler<HTMLDivElement>;
+    onClickForward: MouseEventHandler<HTMLDivElement>;
     onDownloadMoreCards: Function;
     onFullScreenPopupOpen: Function;
 };

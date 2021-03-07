@@ -51,6 +51,9 @@ const useStyles = makeStyles(() => ({
 export const Pagination: FC<PaginationProps> = ({ currentPage, numberOfPages, onChangeSlide }) => {
     const classes = useStyles();
 
+    /**
+     * Обработчик клика на номер страницы
+     */
     const handleClick = useCallback(
         (index) => () => {
             onChangeSlide(index);

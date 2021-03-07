@@ -85,6 +85,9 @@ export const Carousel = () => {
     const [activeSlide, setActiveSlide] = useState(0);
     const [windowWidth, setWindowWidth] = useState(0);
 
+    /**
+     * Обработчик стрелочку назад
+     */
     const handleClickPrev = useCallback(() => {
         setActiveSlide((prev) => {
             if (prev > 0) {
@@ -95,6 +98,9 @@ export const Carousel = () => {
         });
     }, []);
 
+    /**
+     * Обработчик стрелочку вперед
+     */
     const handleClickNext = useCallback(() => {
         setActiveSlide((prev) => {
             if (prev < PAGES.length - 1) {
@@ -105,10 +111,16 @@ export const Carousel = () => {
         });
     }, []);
 
+    /**
+     * Переключает слайд
+     */
     const handleChangeSlide = useCallback((value) => {
         setActiveSlide(value);
     }, []);
 
+    /**
+     * Следит за изменением ширины окна
+     */
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(rootRef.current ? rootRef.current.offsetWidth : 0);

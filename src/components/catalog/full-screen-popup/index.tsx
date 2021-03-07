@@ -39,10 +39,16 @@ export const FullScreenPopup: FC<FullScreenPopupProps> = ({ img, isOpen, onClose
     const classes = useStyles();
     const [isLoading, setIsLoading] = useState(false);
 
+    /**
+     * Выставялет флаг isLoading в false, после того как картинка загрузится
+     */
     const handleSetLoaded = useCallback(() => {
         setIsLoading(false);
     }, []);
 
+    /**
+     * Выставляет флаг isLoading на true при изначальной отрисовке
+     */
     useEffect(() => {
         setIsLoading(true);
     }, [img]);

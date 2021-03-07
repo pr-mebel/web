@@ -27,10 +27,16 @@ const useStyles = makeStyles(() => ({
 
 export const GoTopButton: FC = () => {
     const classes = useStyles();
+    /**
+     * Флаг, отвечающий за отрисовку компоненты
+     */
     const trigger = useScrollTrigger({
         threshold: 1500,
     });
 
+    /**
+     * Обработчик клика на кнопку
+     */
     const handleClick = useCallback(() => {
         window.scrollTo({
             top: 0,

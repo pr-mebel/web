@@ -41,6 +41,9 @@ export const MainButton: FC<MainButtonProps> = ({ disabled, children, onClick })
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    /**
+     * Обработчик клика по кнопке
+     */
     const handleClick = useCallback(() => {
         if (onClick) {
             onClick();

@@ -45,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
 export const BottomFilters: FC<BottomFiltersProps> = ({ filter, options, onChange }) => {
     const classes = useStyles();
 
+    /**
+     * Обработчик клика на фильтр стиля или тип двери
+     */
     const handleClick = useCallback(
         (id, name) => () => {
             onChange({

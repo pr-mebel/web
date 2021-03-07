@@ -22,6 +22,9 @@ export const Gallery: FC<GalleryProps> = ({ items, isLoading, hasMore, page, onC
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    /**
+     * Загружает новый карточки после клика на кнопку
+     */
     const handleLoadMore = useCallback(() => {
         if (!isLoading && hasMore) {
             dispatch(changePage(page + 1));

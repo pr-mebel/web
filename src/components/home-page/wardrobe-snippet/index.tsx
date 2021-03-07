@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback } from 'react';
+import React, { FC, useState, useCallback, useMemo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { BlockTitle } from '@/components/common';
 import Image from 'next/image';
@@ -60,15 +60,21 @@ export const WardrobeSnippet: FC<WardrobeSnipperProps> = ({ title, text, img, di
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
 
+    /**
+     * Открывает сниппет
+     */
     const handleOpen = useCallback((event) => {
         setAnchorEl(event.currentTarget);
     }, []);
 
+    /**
+     * Закрывает сниппет
+     */
     const handleClose = useCallback(() => {
         setAnchorEl(null);
     }, []);
 
-    const open = Boolean(anchorEl);
+    const open = useMemo(() => !!anchorEl, [anchorEl]);
 
     return (
         <div onMouseEnter={handleOpen} onMouseLeave={handleClose}>

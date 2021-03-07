@@ -66,6 +66,9 @@ const useStyles = makeStyles(() => ({
 export const Card: FC<CardProps> = ({ imageUrlMin, collection, currentItemId, onClick }) => {
     const classes = useStyles();
 
+    /**
+     * Обработчик клика на конкретную карточку
+     */
     const handleClick = useCallback(() => {
         onClick(currentItemId);
     }, [onClick, currentItemId]);

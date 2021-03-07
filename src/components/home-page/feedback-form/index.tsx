@@ -96,22 +96,31 @@ const useStyles = makeStyles((theme) => ({
 export const FeedbackForm: FC = () => {
     const classes = useStyles();
     const theme = useTheme();
+    const dispatch = useDispatch();
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const dispatch = useDispatch();
     const { register, handleSubmit, reset } = useForm();
     const [fileNames, setFileNames] = useState<FileList>(([] as unknown) as FileList);
 
+    /**
+     * Имитирует клик на инпут файла
+     */
     const handleFileInputClick = useCallback(() => {
         fileInputRef.current?.click();
     }, [fileInputRef]);
 
+    /**
+     * Сохраняет выбранные файлы в массив
+     */
     const handleFileUploadChange = useCallback(() => {
         if (fileInputRef.current?.files) {
             setFileNames(fileInputRef.current.files);
         }
     }, [fileInputRef]);
 
+    /**
+     * Очищает массив сохраненных файлов
+     */
     const handleClearFiles = useCallback(() => {
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
@@ -119,6 +128,9 @@ export const FeedbackForm: FC = () => {
         }
     }, [fileInputRef]);
 
+    /**
+     * Отправляет форму
+     */
     const onSubmit = useCallback(
         (data) => {
             dispatch(saveForm(data));

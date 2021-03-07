@@ -97,16 +97,25 @@ export const Questions = () => {
     const [fileNames, setFileNames] = useState<FileList>(([] as unknown) as FileList);
     const { register, handleSubmit, reset } = useForm();
 
+    /**
+     * Обработчик клика на инпут загрузки файла
+     */
     const handleFileInputClick = useCallback(() => {
         fileInputRef.current?.click();
     }, [fileInputRef]);
 
+    /**
+     * Загружает выбранные файлы на сервер
+     */
     const handleFileUploadChange = useCallback(() => {
         if (fileInputRef.current?.files) {
             setFileNames(fileInputRef.current.files);
         }
     }, [fileInputRef]);
 
+    /**
+     * Удаляет выбранные файлы 
+     */
     const handleDeleteSelectedFiles = useCallback(() => {
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
@@ -114,6 +123,9 @@ export const Questions = () => {
         }
     }, []);
 
+    /**
+     * Отправляет форму после клика на кнопку
+     */
     const onSubmit = useCallback(
         (data) => {
             dispatch(saveForm(data));

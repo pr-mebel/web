@@ -49,6 +49,9 @@ const useStyles = makeStyles((theme) => ({
 export const Pagination: FC<PaginationProps> = ({ numberOfPages, activeIndex, onChange }) => {
     const classes = useStyles();
 
+    /**
+     * Обработчик клика стрелочки назад
+     */
     const handleClickPrev = useCallback(() => {
         if (activeIndex === 0) {
             onChange(numberOfPages - 1);
@@ -57,6 +60,9 @@ export const Pagination: FC<PaginationProps> = ({ numberOfPages, activeIndex, on
         }
     }, [activeIndex, numberOfPages, onChange]);
 
+    /**
+     * Обработчик клика стрелочки вперед
+     */
     const handleClickNext = useCallback(() => {
         if (activeIndex === numberOfPages - 1) {
             onChange(0);
@@ -65,6 +71,9 @@ export const Pagination: FC<PaginationProps> = ({ numberOfPages, activeIndex, on
         }
     }, [activeIndex, numberOfPages, onChange]);
 
+    /**
+     * Обработчик клика на номер страницы
+     */
     const handleClickByIndex = useCallback(
         (i) => () => {
             if (activeIndex !== i) {

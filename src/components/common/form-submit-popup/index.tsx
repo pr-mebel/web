@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Dialog, Grid, Typography, CircularProgress } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
@@ -47,9 +47,15 @@ export const FormSubmitPopup: FC = () => {
     const dispatch = useDispatch();
     const { files, isOpen } = useSelector(getFormState);
 
-    const allUploaded = files.every((file) => file.progress === 100) || !files.length;
+    /**
+     * Флаг, показывающий, что все выбранные файлы загружены
+     */
+    const allUploaded = useMemo(() => files.every((file) => file.progress === 100) || !files.length, [files]);
 
-    const percentageOfUploaded =
+    /**
+     * Процент полностью загруженных файлов
+     */
+    const percentageOfUploaded = useMemo(() =>
         (files.reduce((acc, curr) => {
             if (curr.progress === 100) {
                 return acc + 1;
@@ -58,22 +64,23 @@ export const FormSubmitPopup: FC = () => {
             return acc;
         }, 0) /
             files.length) *
-        100;
+        100,
+        [files]
+    );
 
+    /**
+     * Отправляет форму после того как все файлы загружены
+     */
     useEffect(() => {
         if (allUploaded && files.length) {
             dispatch(submitForm());
         }
     }, [allUploaded, files, dispatch]);
 
-    const handleClose = useCallback(() => {
-        dispatch(closeFormSubmitPopup());
-    }, [dispatch]);
-
     return (
-        <Dialog open={isOpen} onClose={handleClose} fullWidth maxWidth="sm">
+        <Dialog open={isOpen} onClose={closeFormSubmitPopup} fullWidth maxWidth="sm">
             <div className={classes.root}>
-                <ClearIcon className={classes.closeIcon} onClick={handleClose} />
+                <ClearIcon className={classes.closeIcon} onClick={closeFormSubmitPopup} />
                 <Typography variant="body1" align="center" gutterBottom>
                     {!allUploaded ? (
                         'Загрузка файлов'

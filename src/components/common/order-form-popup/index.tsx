@@ -111,12 +111,15 @@ const useStyles = makeStyles((theme) => ({
 
 export const OrderFormPopup: FC = () => {
     const classes = useStyles();
-    const { register, handleSubmit } = useForm();
-    const fileInputRef = useRef<HTMLInputElement>(null);
-    const [fileNames, setFileNames] = useState<FileList>(([] as unknown) as FileList);
     const dispatch = useDispatch();
+    const [fileNames, setFileNames] = useState<FileList>(([] as unknown) as FileList);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const { register, handleSubmit } = useForm();
     const { isOpen } = useSelector(orderFormPopupSelector);
 
+    /**
+     * Закрывает попап 
+     */
     const handleClosePopup = useCallback(() => {
         if (fileInputRef.current) {
             dispatch(closeOrderFormPopup());
@@ -124,16 +127,25 @@ export const OrderFormPopup: FC = () => {
         }
     }, [fileInputRef, dispatch]);
 
+    /**
+     * Имитирует клик по инпуту файлов
+     */
     const handleFileInputClick = useCallback(() => {
         fileInputRef.current?.click();
     }, [fileInputRef]);
 
+    /**
+     * Сохраняет новые загруженные файлы в массив
+     */
     const handleFileUploadChange = useCallback(() => {
         if (fileInputRef.current?.files) {
             setFileNames(fileInputRef.current.files);
         }
     }, [fileInputRef]);
 
+    /**
+     * Очищает загруженные файлы
+     */
     const handleDeleteSelectedFiles = useCallback(() => {
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
@@ -141,6 +153,9 @@ export const OrderFormPopup: FC = () => {
         }
     }, [fileInputRef]);
 
+    /**
+     * Отправляет форму
+     */
     const onSubmit = useCallback(
         (data) => {
             dispatch(closeOrderFormPopup());

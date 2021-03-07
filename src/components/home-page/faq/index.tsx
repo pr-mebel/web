@@ -46,10 +46,17 @@ export const FAQ = () => {
         ),
     );
 
+    /**
+     * Обработчик клика на кнопку показать еще
+     */
     const handleShowMore = useCallback(() => {
         setIsShowMoreClicked(true);
     }, []);
 
+    /**
+     * Обработчик клика на конкретный вопрос.
+     * Открывает тот, на который кликнули, и закрывает остальные
+     */
     const handleChange = useCallback(
         (title) => (_: React.ChangeEvent<{}>, expanded: boolean) => {
             if (expanded) {

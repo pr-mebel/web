@@ -62,6 +62,9 @@ export const QuestionsForm: FC = () => {
     const dispatch = useDispatch();
     const { register, handleSubmit, reset } = useForm();
 
+    /**
+     * Отправляет форму
+     */
     const onSubmit = useCallback(
         (data) => {
             dispatch(saveForm(data));

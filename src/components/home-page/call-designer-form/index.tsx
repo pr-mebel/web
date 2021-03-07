@@ -45,6 +45,9 @@ export const CallDesignerForm: FC = () => {
     const dispatch = useDispatch();
     const { register, handleSubmit, reset } = useForm();
 
+    /**
+     * Отправляет заполненную форму
+     */
     const onSubmit = useCallback(
         (data) => {
             dispatch(saveForm(data));

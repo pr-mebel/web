@@ -148,24 +148,40 @@ export const Header: FC = () => {
 
     const theme = useTheme();
     const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
-    const smallHeader = useScrollTrigger({
-        threshold: 500,
-    });
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+    /**
+     * Флаг, отвечающий за уменьшение высоты хедера. Срабатывает при прокрутке вниз на 500пк
+     */
+    const smallHeader = useScrollTrigger({
+        threshold: 500,
+    });
+
+    /**
+     * Открывает сайдбар
+     */
     const handleOpenDrawer = useCallback(() => {
         setIsDrawerOpen(true);
     }, []);
 
+    /**
+     * Закрывает сайдбар
+     */
     const handleCloseDrawer = useCallback(() => {
         setIsDrawerOpen(false);
     }, []);
 
+    /**
+     * Открывает дропдаун каталога
+     */
     const handleOpenDropdown = useCallback(() => {
         setDropdownVisible(true);
     }, []);
 
+    /**
+     * Закрывает дропдаун каталога
+     */
     const handleCloseDropdown = useCallback(() => {
         setDropdownVisible(false);
     }, []);

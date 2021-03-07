@@ -58,6 +58,9 @@ export const WardrobeLeftMdUp = () => {
     const [activePage, setActivePage] = useState(0);
     const [activeTabIndex, setActiveTabIndex] = useState(0);
 
+    /**
+     * Переключает вкладки по клику
+     */
     const handleClick = useCallback(
         (index) => () => {
             setActivePage(0);

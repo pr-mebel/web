@@ -2,7 +2,7 @@ import React, { FC, useCallback, useEffect } from 'react';
 import { Dialog, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { ArrowBack, ArrowForward, Clear as ClearIcon } from '@material-ui/icons';
-import cx from 'classnames';
+import cn from 'classnames';
 import { MainButton, LoadingBackground, Loader } from '@/components/common';
 import { CardPopupProps } from './types';
 import Fb from './assets/fb.svg';
@@ -168,7 +168,7 @@ export const CardPopup: FC<CardPopupProps> = ({
                         <div className={classes.imgContainer}>
                             {currentItemId > 1 && (
                                 <img
-                                    className={cx(classes.img, classes.imgPrev2)}
+                                    className={cn(classes.img, classes.imgPrev2)}
                                     src={items[currentItemId - 2].imageMedium.url}
                                     alt="Картинка в модальном окне"
                                 />
@@ -176,20 +176,20 @@ export const CardPopup: FC<CardPopupProps> = ({
                             {currentItemId > 0 && (
                                 <>
                                     <div
-                                        className={cx(classes.arrow, classes.arrowLeft)}
+                                        className={cn(classes.arrow, classes.arrowLeft)}
                                         onClick={onClickBack}
                                     >
                                         <ArrowBack className={classes.icon} />
                                     </div>
                                     <img
-                                        className={cx(classes.img, classes.imgPrev1)}
+                                        className={cn(classes.img, classes.imgPrev1)}
                                         src={items[currentItemId - 1].imageMedium.url}
                                         alt="Картинка в модальном окне"
                                     />
                                 </>
                             )}
                             <img
-                                className={cx(classes.img, classes.imgCenter)}
+                                className={cn(classes.img, classes.imgCenter)}
                                 src={items[currentItemId].imageMedium.url}
                                 alt="Картинка в модальном окне"
                                 onClick={handleImageClick}
@@ -197,12 +197,12 @@ export const CardPopup: FC<CardPopupProps> = ({
                             {currentItemId < items.length - 1 && (
                                 <>
                                     <img
-                                        className={cx(classes.img, classes.imgNext1)}
+                                        className={cn(classes.img, classes.imgNext1)}
                                         src={items[currentItemId + 1].imageMedium.url}
                                         alt="Картинка в модальном окне"
                                     />
                                     <div
-                                        className={cx(classes.arrow, classes.arrowRight)}
+                                        className={cn(classes.arrow, classes.arrowRight)}
                                         onClick={onClickForward}
                                     >
                                         <ArrowForward className={classes.icon} />
@@ -211,7 +211,7 @@ export const CardPopup: FC<CardPopupProps> = ({
                             )}
                             {currentItemId < items.length - 2 && (
                                 <img
-                                    className={cx(classes.img, classes.imgNext2)}
+                                    className={cn(classes.img, classes.imgNext2)}
                                     src={items[currentItemId + 2].imageMedium.url}
                                     alt="Картинка в модальном окне"
                                 />

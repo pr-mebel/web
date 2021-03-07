@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import cx from 'classnames';
+import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { LoadingBackgroundProps } from './types';
 
@@ -26,5 +26,5 @@ const useStyles = makeStyles((theme) => ({
 export const LoadingBackground: FC<LoadingBackgroundProps> = ({ children, className = '' }) => {
     const classes = useStyles();
 
-    return <div className={cx(classes.root, className)}>{children}</div>;
+    return <div className={cn(classes.root, className)}>{children}</div>;
 };

@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { Grid, Container, Typography, Hidden, Drawer, useScrollTrigger } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -188,7 +188,7 @@ export const Header: FC = () => {
 
     return (
         <header
-            className={classNames(classes.root, {
+            className={cn(classes.root, {
                 [classes.rootDense]: smallHeader && !isMdDown,
             })}
         >
@@ -200,20 +200,20 @@ export const Header: FC = () => {
                                 <img
                                     src="/logo_header.svg"
                                     alt="logo"
-                                    className={classNames(classes.logo, {
+                                    className={cn(classes.logo, {
                                         [classes.logoDense]: smallHeader,
                                     })}
                                 />
                             </Link>
                         </Grid>
                         <Grid item xs={7} container justify="center" alignItems="center">
-                            <ul className={classNames(classes.menu, classes.list)}>
+                            <ul className={cn(classes.menu, classes.list)}>
                                 <li
                                     onMouseEnter={handleOpenDropdown}
                                     onMouseLeave={handleCloseDropdown}
                                 >
                                     <Typography
-                                        className={classNames(classes.text, classes.menuDropdown)}
+                                        className={cn(classes.text, classes.menuDropdown)}
                                         align="center"
                                     >
                                         Каталог&nbsp;
@@ -275,7 +275,7 @@ export const Header: FC = () => {
                             </ul>
                         </Grid>
                         <Grid item xs={3} container justify="space-between" alignItems="center">
-                            <ul className={classNames(classes.list, classes.contacts)}>
+                            <ul className={cn(classes.list, classes.contacts)}>
                                 <li>
                                     <Typography variant="body2" className={classes.text}>
                                         <Link to="tel:+74952780285" external>
@@ -303,7 +303,7 @@ export const Header: FC = () => {
                                     </>
                                 )}
                             </ul>
-                            <ul className={classNames(classes.list, classes.social)}>
+                            <ul className={cn(classes.list, classes.social)}>
                                 <li>
                                     <a href="https://vk.com/public185518769">
                                         <Vk className={classes.socialIcon} />
@@ -328,7 +328,7 @@ export const Header: FC = () => {
                         <div>
                             <Link
                                 to="/"
-                                className={classNames(
+                                className={cn(
                                     classes.logoContainer,
                                     classes.logoContainerSm,
                                 )}
@@ -443,7 +443,7 @@ export const Header: FC = () => {
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <ul className={classNames(classes.list, classes.social)}>
+                                <ul className={cn(classes.list, classes.social)}>
                                     <li>
                                         <a href="https://vk.com/public185518769">
                                             <Vk className={classes.socialIcon} />

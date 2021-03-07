@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from 'react';
-import cx from 'classnames';
+import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import { SectionPickerProps } from './types';
@@ -68,7 +68,7 @@ export const SectionPicker: FC<SectionPickerProps> = ({ options, value, onChange
                             <React.Fragment key={section.id}>
                                 <Typography
                                     variant="body1"
-                                    className={cx(classes.option, {
+                                    className={cn(classes.option, {
                                         [classes.selectedOption]: value === section.id,
                                     })}
                                     onClick={handleClick(section.id)}
@@ -84,7 +84,7 @@ export const SectionPicker: FC<SectionPickerProps> = ({ options, value, onChange
                         <Typography
                             key={section.id}
                             variant="body1"
-                            className={cx(classes.option, {
+                            className={cn(classes.option, {
                                 [classes.selectedOption]: value === section.id,
                             })}
                             onClick={handleClick(section.id)}

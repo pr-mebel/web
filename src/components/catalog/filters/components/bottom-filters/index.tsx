@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from 'react';
-import cx from 'classnames';
+import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid } from '@material-ui/core';
 import { SectionId } from '@/entities';
@@ -92,7 +92,7 @@ export const BottomFilters: FC<BottomFiltersProps> = ({ filter, options, onChang
                                         <Typography
                                             variant="body2"
                                             component="span"
-                                            className={cx(classes.option, {
+                                            className={cn(classes.option, {
                                                 [classes.selectedOption]:
                                                     filter.style === option.id,
                                             })}
@@ -116,7 +116,7 @@ export const BottomFilters: FC<BottomFiltersProps> = ({ filter, options, onChang
                                     key={option.id}
                                     variant="body2"
                                     component="span"
-                                    className={cx(classes.option, {
+                                    className={cn(classes.option, {
                                         [classes.selectedOption]: filter.style === option.id,
                                     })}
                                     onClick={handleClick(option.id, 'style')}
@@ -155,7 +155,7 @@ export const BottomFilters: FC<BottomFiltersProps> = ({ filter, options, onChang
                                         <Typography
                                             variant="body2"
                                             component="span"
-                                            className={cx(classes.option, {
+                                            className={cn(classes.option, {
                                                 [classes.selectedOption]:
                                                     filter.doorType === option.id,
                                             })}
@@ -179,7 +179,7 @@ export const BottomFilters: FC<BottomFiltersProps> = ({ filter, options, onChang
                                     key={option.id}
                                     variant="body2"
                                     component="span"
-                                    className={cx(classes.option, {
+                                    className={cn(classes.option, {
                                         [classes.selectedOption]: filter.doorType === option.id,
                                     })}
                                     onClick={handleClick(option.id, 'doorType')}

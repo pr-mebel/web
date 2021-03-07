@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useMemo } from 'react';
 import { range } from 'lodash';
-import cx from 'classnames';
+import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -86,14 +86,14 @@ export const Pagination: FC<PaginationProps> = ({ numberOfPages, activeIndex, on
     return (
         <div className={classes.root}>
             <ArrowBackIosIcon
-                className={cx(classes.icon, classes.iconBack)}
+                className={cn(classes.icon, classes.iconBack)}
                 onClick={handleClickPrev}
             />
             <div className={classes.listContainer}>
                 {range(numberOfPages).map((index) => (
                     <div
                         key={index}
-                        className={cx(classes.circle, {
+                        className={cn(classes.circle, {
                             [classes.active]: index === activeIndex,
                         })}
                         onClick={handleClickByIndex(index)}
@@ -101,7 +101,7 @@ export const Pagination: FC<PaginationProps> = ({ numberOfPages, activeIndex, on
                 ))}
             </div>
             <ArrowForwardIosIcon
-                className={cx(classes.icon, classes.iconNext)}
+                className={cn(classes.icon, classes.iconNext)}
                 onClick={handleClickNext}
             />
         </div>

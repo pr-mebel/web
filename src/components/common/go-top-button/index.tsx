@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from 'react';
-import cx from 'classnames';
+import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Img from './assets/top-btn.svg';
@@ -48,7 +48,7 @@ export const GoTopButton: FC = () => {
     return (
         <div
             onClick={handleClick}
-            className={cx(classes.root, {
+            className={cn(classes.root, {
                 [classes.rootVisible]: trigger,
             })}
         >

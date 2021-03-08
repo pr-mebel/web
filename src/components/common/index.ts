@@ -13,4 +13,3 @@ export * from './go-top-button';
 export * from './order-form-popup';
 export * from './form-submit-popup';
 export * from './loader';
-export * from './image-progressive';

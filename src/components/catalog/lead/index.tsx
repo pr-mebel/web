@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import cn from 'classnames';
-import Image from 'next/image';
+import { ImageProgressive } from '@/components';
 import { images } from './constants';
 import { LeadProps } from './types';
 
@@ -41,21 +40,15 @@ export const Lead: FC<LeadProps> = ({ sectionId }) => {
     return (
         <div className={classes.root}>
             {images.map((imageWrapper) => (
-                <Image
+                <ImageProgressive
                     key={imageWrapper.id}
                     src={imageWrapper.data.image}
                     alt={imageWrapper.data.sectionId}
                     className={cn(classes.image, {
                         [classes.selectedImage]: imageWrapper.data.sectionId === sectionId,
                     })}
-                    layout="fill"
-                    objectFit="cover"
                 />
             ))}
         </div>
     );
-};
-
-Lead.propTypes = {
-    sectionId: PropTypes.string.isRequired,
 };

@@ -1,26 +1,30 @@
-
 {
-  "presets": ["next/babel"],
-  "plugins": [
-    "inline-react-svg",
-    ["module-resolver", {
-      "root": ["./"]
-    }],
-    ["babel-plugin-import", {
-        "libraryName": "@material-ui/core",
-        "libraryDirectory": "",
-        "camel2DashComponentName": false
-      },
-      "core"
-    ],
-    [
-      "babel-plugin-import",
-      {
-        "libraryName": "@material-ui/icons",
-        "libraryDirectory": "",
-        "camel2DashComponentName": false
-      },
-      "icons"
+    "presets": ["next/babel"],
+    "plugins": [
+        "inline-react-svg",
+        [
+            "module-resolver",
+            {
+                "root": ["./"]
+            }
+        ],
+        [
+            "babel-plugin-import",
+            {
+                "libraryName": "@material-ui/core",
+                "libraryDirectory": "",
+                "camel2DashComponentName": false
+            },
+            "core"
+        ],
+        [
+            "babel-plugin-import",
+            {
+                "libraryName": "@material-ui/icons",
+                "libraryDirectory": "",
+                "camel2DashComponentName": false
+            },
+            "icons"
+        ]
     ]
-  ]
 }

@@ -1,0 +1,54 @@
+import React, { FC } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import cn from 'classnames';
+import { ImageProgressive } from '@/components';
+import { images } from './constants';
+import { LeadProps } from './types';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        marginTop: '70px',
+        width: '100%',
+        paddingTop: '35%',
+        maxHeight: '500px',
+        position: 'relative',
+        '&:after': {
+            position: 'absolute',
+            content: '""',
+            width: '100%',
+            height: '100%',
+            top: '0',
+            left: '0',
+            background: 'rgba(0, 0, 0, .3)',
+        },
+        [theme.breakpoints.down('md')]: {
+            marginTop: '50px',
+        },
+    },
+    image: {
+        opacity: '0',
+        transition: 'opacity .3s ease-in-out',
+    },
+    selectedImage: {
+        opacity: '1',
+    },
+}));
+
+export const Lead: FC<LeadProps> = ({ sectionId }) => {
+    const classes = useStyles();
+
+    return (
+        <div className={classes.root}>
+            {images.map((imageWrapper) => (
+                <ImageProgressive
+                    key={imageWrapper.id}
+                    src={imageWrapper.data.image}
+                    alt={imageWrapper.data.sectionId}
+                    className={cn(classes.image, {
+                        [classes.selectedImage]: imageWrapper.data.sectionId === sectionId,
+                    })}
+                />
+            ))}
+        </div>
+    );
+};

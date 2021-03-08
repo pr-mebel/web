@@ -1,34 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Частный мебельер
 
-## Getting Started
+## Доступные команды
 
-First, run the development server:
-
-```bash
+### Запуск в dev режиме с hot-reload
+```
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Билд
+```
+npm run build
+```
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Запуск в prod режиме
+```
+npm run start
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### Typescript линтер 
+```
+npm run typecheck:watch
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Технологии
+- React
+- Typescript\
+    JS запрещен
+- Redux Toolkit\
+    Весь редакс написан с использованием RTK
+- firebase\
+    Используется serverless function trigger email и для хранения загруженных пользователем фотографий
+- Material-ui\
+    Все компоненты используются отсюда
+- SendGrid\
+    Используется для отправки почты
+- Vercel\
+    hosting provider
+- contentful CMS
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Как подключиться к использованным сервисам
+- firebase \
+    nayakunin@outlook.com
+- sendgrid \
+    nayakunin@outlook.com \
+    CCVfd6C5Z@zxHQcCCVfd6C5Z@zxHQc 
+- vercel \
+    nayakunin@outlook.com
+- mail.ru
+    - admin\
+        nayakunin@outlook.com
+    - zakaz\
+        zakaz@pr-mebel.com
+- contentful\
+    nayakunin@outlook.com
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

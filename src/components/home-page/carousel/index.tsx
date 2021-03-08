@@ -4,6 +4,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import cn from 'classnames';
 import { Container } from '@material-ui/core';
+import { useInterval } from '@/utils';
 import { PAGES } from './constants';
 import { Page, Pagination } from './components';
 
@@ -86,9 +87,33 @@ export const Carousel = () => {
     const [windowWidth, setWindowWidth] = useState(0);
 
     /**
+     * Крутит карусель
+     */
+    const { pause, unpause } = useInterval(
+        () => setActiveSlide((prev) => {
+            if (prev < PAGES.length - 1) {
+                return prev + 1;
+            }
+
+            return 0;
+        }),
+        7000,
+    );
+
+    /**
+     * Перезапускает интервал прокрутки карусели
+     */
+    const resetInterval = useCallback(() => {
+        pause();
+
+        setTimeout(unpause, 10000);
+    }, [pause, unpause]);
+
+    /**
      * Обработчик стрелочку назад
      */
     const handleClickPrev = useCallback(() => {
+        resetInterval();
         setActiveSlide((prev) => {
             if (prev > 0) {
                 return prev - 1;
@@ -96,12 +121,13 @@ export const Carousel = () => {
 
             return PAGES.length - 1;
         });
-    }, []);
+    }, [resetInterval]);
 
     /**
      * Обработчик стрелочку вперед
      */
     const handleClickNext = useCallback(() => {
+        resetInterval();
         setActiveSlide((prev) => {
             if (prev < PAGES.length - 1) {
                 return prev + 1;
@@ -109,14 +135,15 @@ export const Carousel = () => {
 
             return 0;
         });
-    }, []);
+    }, [resetInterval]);
 
     /**
      * Переключает слайд
      */
     const handleChangeSlide = useCallback((value) => {
+        resetInterval();
         setActiveSlide(value);
-    }, []);
+    }, [resetInterval]);
 
     /**
      * Следит за изменением ширины окна
@@ -126,22 +153,15 @@ export const Carousel = () => {
             setWindowWidth(rootRef.current ? rootRef.current.offsetWidth : 0);
         };
 
-        const handleRotate = () => {
-            handleClickNext();
-        };
-
         if (rootRef.current) {
             handleResize();
         }
 
-        const interval = setInterval(() => handleRotate(), 7000);
-
         window.addEventListener('resize', handleResize);
         return () => {
             window.removeEventListener('resize', handleResize);
-            clearInterval(interval);
         };
-    }, [handleClickNext, rootRef]);
+    }, [rootRef]);
 
     return (
         <div className={classes.root} ref={rootRef}>

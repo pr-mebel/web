@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
     },
     realImage: {
         opacity: 1,
-        transition: 'opacity 1s linear',
     }
 }));
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Image from 'next/image';
+import { ImageProgressive } from '@/components';
 
 const useStyles = makeStyles({
     root: {
@@ -15,12 +15,7 @@ export const ShopImg = () => {
 
     return (
         <div className={classes.root}>
-            <Image
-                src="/images/common/shop-img/1.png"
-                quality={100}
-                layout="fill"
-                alt="Изображение салона"
-            />
+            <ImageProgressive src="/images/common/shop-img/1.png" alt="Изображение салона" />
         </div>
     );
 };

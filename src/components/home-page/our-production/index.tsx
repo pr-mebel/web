@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Container, Typography, Grid, Hidden } from '@material-ui/core';
-import { BlockTitle, MainButton, Pagination } from '@/components/common';
+import { BlockTitle, MainButton, Pagination, ImageProgressive } from '@/components';
 import Image from 'next/image';
 import { LIST } from './constants';
 
@@ -49,10 +49,9 @@ export const OurProduction = () => {
                 <Typography variant="h4">Наше производство</Typography>
             </BlockTitle>
             <div className={classes.imgContainer}>
-                <Image
+                <ImageProgressive
                     src="/images/home-page/our-production/1.jpg"
                     alt="Производство"
-                    layout="fill"
                 />
             </div>
             <Grid container spacing={isXsDown ? 2 : 4}>

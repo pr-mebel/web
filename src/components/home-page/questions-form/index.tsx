@@ -3,9 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography, Grid, TextField } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import Image from 'next/image';
 import { submitForm, saveForm } from '@/redux';
-import { BlockTitle, SubmitButton } from '@/components/common';
+import { BlockTitle, SubmitButton, ImageProgressive } from '@/components';
 
 const useStyles = makeStyles({
     root: {
@@ -76,11 +75,9 @@ export const QuestionsForm: FC = () => {
 
     return (
         <div className={classes.root}>
-            <Image
+            <ImageProgressive
                 src="/images/home-page/questions-form/1.jpg"
                 alt="Заполните форму ниже. Наш менеджер свяжется с вами и ответит на вопросы"
-                layout="fill"
-                quality={100}
             />
             <Container className={classes.container}>
                 <BlockTitle>

@@ -3,7 +3,7 @@ import { Dialog, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { ArrowBack, ArrowForward, Clear as ClearIcon } from '@material-ui/icons';
 import cn from 'classnames';
-import { MainButton, LoadingBackground, Loader } from '@/components/common';
+import { MainButton, LoadingBackground, Loader, ImageProgressive } from '@/components';
 import { CardPopupProps } from './types';
 import Fb from './assets/fb.svg';
 import Inst from './assets/in.svg';
@@ -166,55 +166,27 @@ export const CardPopup: FC<CardPopupProps> = ({
                     )}
                     <LoadingBackground>
                         <div className={classes.imgContainer}>
-                            {currentItemId > 1 && (
-                                <img
-                                    className={cn(classes.img, classes.imgPrev2)}
-                                    src={items[currentItemId - 2].imageMedium.url}
-                                    alt="Картинка в модальном окне"
-                                />
-                            )}
                             {currentItemId > 0 && (
-                                <>
-                                    <div
-                                        className={cn(classes.arrow, classes.arrowLeft)}
-                                        onClick={onClickBack}
-                                    >
-                                        <ArrowBack className={classes.icon} />
-                                    </div>
-                                    <img
-                                        className={cn(classes.img, classes.imgPrev1)}
-                                        src={items[currentItemId - 1].imageMedium.url}
-                                        alt="Картинка в модальном окне"
-                                    />
-                                </>
+                                <div
+                                    className={cn(classes.arrow, classes.arrowLeft)}
+                                    onClick={onClickBack}
+                                >
+                                    <ArrowBack className={classes.icon} />
+                                </div>
                             )}
-                            <img
+                            <ImageProgressive
                                 className={cn(classes.img, classes.imgCenter)}
                                 src={items[currentItemId].imageMedium.url}
                                 alt="Картинка в модальном окне"
                                 onClick={handleImageClick}
                             />
                             {currentItemId < items.length - 1 && (
-                                <>
-                                    <img
-                                        className={cn(classes.img, classes.imgNext1)}
-                                        src={items[currentItemId + 1].imageMedium.url}
-                                        alt="Картинка в модальном окне"
-                                    />
-                                    <div
-                                        className={cn(classes.arrow, classes.arrowRight)}
-                                        onClick={onClickForward}
-                                    >
-                                        <ArrowForward className={classes.icon} />
-                                    </div>
-                                </>
-                            )}
-                            {currentItemId < items.length - 2 && (
-                                <img
-                                    className={cn(classes.img, classes.imgNext2)}
-                                    src={items[currentItemId + 2].imageMedium.url}
-                                    alt="Картинка в модальном окне"
-                                />
+                                <div
+                                    className={cn(classes.arrow, classes.arrowRight)}
+                                    onClick={onClickForward}
+                                >
+                                    <ArrowForward className={classes.icon} />
+                                </div>
                             )}
                         </div>
                     </LoadingBackground>

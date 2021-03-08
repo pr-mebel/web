@@ -2,7 +2,7 @@ import React, { FC, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import { LoadingBackground } from '@/components/common';
+import { LoadingBackground, ImageProgressive } from '@/components';
 import { CardProps } from './types';
 
 const useStyles = makeStyles(() => ({
@@ -35,12 +35,7 @@ const useStyles = makeStyles(() => ({
         },
     },
     img: {
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        top: '0',
-        left: '0',
-        transition: 'all .5s',
+        transition: 'transform .5s',
     },
     tooltip: {
         transform: 'translateY(100%)',
@@ -76,10 +71,10 @@ export const Card: FC<CardProps> = ({ imageUrlMin, collection, currentItemId, on
     return (
         <LoadingBackground>
             <div className={classes.root} onClick={handleClick}>
-                <img
-                    className={classes.img}
+                <ImageProgressive
                     src={imageUrlMin}
                     alt={`Товар из коллекции ${collection}`}
+                    className={classes.img}
                 />
                 <div className={classes.tooltip}>
                     <Typography className={classes.tooltipText}>{collection}</Typography>

@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Hidden } from '@material-ui/core';
 import Link from 'next/link';
-import { ImageProgressive } from '@/components';
+import Image from 'next/image';
 import { PageProps } from './types';
 
 const useStyles = makeStyles((theme) => ({
@@ -166,13 +166,13 @@ export const Page: FC<PageProps> = ({ titles, subtitles, texts, imageSet, to }) 
         <div className={classes.root}>
             <div className={classes.imageContainer}>
                 <Hidden smDown>
-                    <ImageProgressive src={imageSet.large} alt={titles[0].data} />
+                    <Image src={imageSet.large} alt={titles[0].data} layout="fill" />
                 </Hidden>
                 <Hidden xsDown mdUp>
-                    <ImageProgressive src={imageSet.medium} alt={titles[0].data} />
+                    <Image src={imageSet.medium} alt={titles[0].data} layout="fill" />
                 </Hidden>
                 <Hidden smUp>
-                    <ImageProgressive src={imageSet.small} alt={titles[0].data} />
+                    <Image src={imageSet.small} alt={titles[0].data} layout="fill" quality={90} />
                 </Hidden>
             </div>
 

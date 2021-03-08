@@ -1,5 +1,4 @@
 import React, { FC, useCallback, useState } from 'react';
-import { noop } from 'lodash';
 import Image from 'next/image';
 import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
@@ -42,8 +41,6 @@ export const ImageProgressive: FC<ImageProgressiveProps> = ({
     alt,
     quality = 100,
     className,
-    onMinImageLoad = noop,
-    onClick = noop,
 }) => {
     const classes = useStyles();
 
@@ -54,13 +51,10 @@ export const ImageProgressive: FC<ImageProgressiveProps> = ({
     }, []);
 
     return (
-        <div
-            className={cn(classes.root, {
-                [classes.unloaded]: !loaded,
-                [classes.loaded]: loaded
-            })}
-            onClick={onClick}
-        >
+        <div className={cn(classes.root, {
+            [classes.unloaded]: !loaded,
+            [classes.loaded]: loaded
+        })}>
             <Image
                 src={src}
                 alt={alt}
@@ -68,7 +62,6 @@ export const ImageProgressive: FC<ImageProgressiveProps> = ({
                 objectFit="cover"
                 layout="fill"
                 className={cn(className)}
-                onLoad={onMinImageLoad}
             />
             <Image
                 src={src}

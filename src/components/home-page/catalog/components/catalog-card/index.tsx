@@ -1,9 +1,11 @@
 import React, { FC } from 'react';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Hidden } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import { LoadingBackground, ImageProgressive } from '@/components';
+import Image from 'next/image';
+import { LoadingBackground } from '@/components/common';
 import { CatalogCardProps } from './types';
 
 const useStyles = makeStyles((theme) => ({
@@ -66,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         height: '100%',
         zIndex: 10,
-        transition: 'transform .5s',
+        transition: 'all .5s',
     },
     hoverTextContainer: {
         width: '100%',
@@ -161,10 +163,12 @@ export const CatalogCard: FC<CatalogCardProps> = ({ title, subtitle, caption, im
                 <Hidden xsDown>
                     <LoadingBackground>
                         <div className={classes.imageContainer}>
-                            <ImageProgressive
+                            <Image
                                 src={img}
                                 alt={caption}
+                                layout="fill"
                                 className={classes.image}
+                                quality={100}
                             />
                             <div className={classes.hoverTextContainer}>
                                 <div>
@@ -186,10 +190,12 @@ export const CatalogCard: FC<CatalogCardProps> = ({ title, subtitle, caption, im
                 <Hidden smUp>
                     <LoadingBackground>
                         <div className={classes.imageContainer}>
-                            <ImageProgressive
+                            <Image
                                 src={img}
                                 alt={caption}
+                                layout="fill"
                                 className={classes.image}
+                                quality={100}
                             />
                             <div className={classes.imgHeader}>
                                 <Typography
@@ -208,3 +214,14 @@ export const CatalogCard: FC<CatalogCardProps> = ({ title, subtitle, caption, im
     );
 };
 
+CatalogCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+    caption: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+    href: PropTypes.string,
+};
+
+CatalogCard.defaultProps = {
+    href: '/',
+};

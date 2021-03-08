@@ -163,6 +163,27 @@ export const Carousel = () => {
         };
     }, [rootRef]);
 
+
+    /**
+     * Следит за тем открыта ли эта страница.
+     * Если нет, то останавливает прокрутку карусели
+     */
+    useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'hidden') {
+                pause();
+            } else {
+                unpause();
+            }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
+        return () => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        }
+    }, []);
+
     return (
         <div className={classes.root} ref={rootRef}>
             <ArrowBackIosIcon

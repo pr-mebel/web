@@ -17,7 +17,8 @@
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": [
-            "eslint"
+            "eslint",
+            "exit 1"
         ]
     },
     "dependencies": {

@@ -6,19 +6,14 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "postinstall": "npx husky install",
+        "postinstall": "husky install",
         "typecheck": "tsc --noEmit -p ./tsconfig.json",
-        "typecheck:watch": "npm run typecheck -- --watch"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
+        "typecheck:watch": "npm run typecheck -- --watch",
+        "prepare": "lint-staged"
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": [
-            "eslint",
-            "exit 1"
+            "eslint"
         ]
     },
     "dependencies": {

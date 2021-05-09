@@ -16,6 +16,7 @@ module.exports = {
         },
         ecmaVersion: 2020,
         sourceType: 'module',
+        project: "./tsconfig.json"
     },
     plugins: ['react'],
     rules: {

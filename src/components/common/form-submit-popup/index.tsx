@@ -62,9 +62,7 @@ export const FormSubmitPopup: FC = () => {
             }
 
             return acc;
-        }, 0) /
-            files.length) *
-        100,
+        }, 0) / files.length) * 100,
         [files]
     );
 
@@ -88,7 +86,7 @@ export const FormSubmitPopup: FC = () => {
                         <>
                             <img
                                 src="images/common/form-submit-popup/1.svg"
-                                alt="Письмо отправлена"
+                                alt="Письмо отправлено"
                                 className={classes.icon}
                             />
                             <span>Письмо отправлено</span>

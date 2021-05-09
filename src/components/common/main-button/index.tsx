@@ -1,8 +1,7 @@
-import React, { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { FC, useCallback, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { openOrderFormPopup } from '@/redux';
 import { MainButtonProps } from './types';
+import { orderFormCtx } from '@/utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -39,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const MainButton: FC<MainButtonProps> = ({ disabled, children, onClick }) => {
     const classes = useStyles();
-    const dispatch = useDispatch();
+    const orderForm = useContext(orderFormCtx);
 
     /**
      * Обработчик клика по кнопке
@@ -48,9 +47,9 @@ export const MainButton: FC<MainButtonProps> = ({ disabled, children, onClick })
         if (onClick) {
             onClick();
         } else {
-            dispatch(openOrderFormPopup());
+            orderForm.onOpen();
         }
-    }, [dispatch, onClick]);
+    }, [orderForm, onClick]);
 
     return (
         <button type="button" disabled={disabled} className={classes.root} onClick={handleClick}>

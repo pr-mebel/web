@@ -1,4 +1,4 @@
-import { ContentModelSectionId, ContentModelId } from './content-model';
+import { CMSCardCollectionID, CMSSectionCollectionID } from './content-model';
 
 type Image = {
     url: string;
@@ -17,7 +17,7 @@ export type Collection = {
         };
     }[];
     total: number;
-    __typename: ContentModelId;
+    __typename: CMSCardCollectionID;
 }
 
 export type SectionCollection = {
@@ -25,5 +25,5 @@ export type SectionCollection = {
         cardsCollection: Collection;
     }[];
     total: number;
-    __typename: ContentModelSectionId;
+    __typename: CMSSectionCollectionID;
 };

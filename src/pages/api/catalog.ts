@@ -3,39 +3,28 @@ import { gql } from '@apollo/client';
 import { client } from '@/utils/client';
 import { parseContentfulCatalog } from '@/normalizers';
 import { batchSize } from '@/constants';
-import { StyleId, DoorTypeId, SectionCollection, Collection } from '@/entities';
+import { StyleID, DoorTypeID, SectionCollection, Collection, Filter } from '@/entities';
 
 type Output = {
-    data:
-    | {
-        cupboardSectionCollection: SectionCollection;
-    }
-    | {
-        wardrobeSectionCollection: SectionCollection;
-    }
-    | {
-        accessoriesSectionCollection: SectionCollection;
-    }
-    | {
-        lightingSystemsSectionCollection: SectionCollection;
-    }
-    | {
-        cupboardCollection: Collection;
-    }
-    | {
-        wardrobeCollection: Collection;
-    };
+    result: SectionCollection | Collection;
 }
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
-    const { page, filters: { style, doorType, section } } = req.body;
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export default async (
+    req: NextApiRequest,
+    res: NextApiResponse
+) => {
+    const { page, filters: { style, doorType, section } } = req.body as {
+        page: number;
+        filters: Filter;
+    };
 
-    return client.query<Output>({
-        query:
-            style === StyleId.any && doorType === DoorTypeId.any
+    try {
+        const data = await client.query<Output>({
+            query: style === 'any' as StyleID && doorType === 'any' as DoorTypeID
                 ? gql`
                 {
-                    ${section}SectionCollection(limit: 1) {
+                    result: ${section}SectionCollection(limit: 1) {
                         items {
                             cardsCollection(limit: ${batchSize}, skip: ${batchSize * page}) {
                                 total
@@ -64,7 +53,7 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
                 }`
                 : gql`
                 {
-                    ${section}Collection(where: {
+                    result: ${section}Collection(where: {
                         ${style !== 'any' ? `${style}: true` : ''}
                         ${doorType !== 'any' ? `${doorType}: true` : ''}
                     }, order: [id_ASC], limit: ${batchSize}, skip: ${batchSize * page}){
@@ -98,8 +87,11 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
                         }
                     }
                 }`,
-    })
-    .then((data) => parseContentfulCatalog(data))
-    .then((data) => res.status(200).json(data))
-    .catch((error) => res.status(500).json(error));
+        });
+        const resData = parseContentfulCatalog(data);
+        return res.status(200).json(resData);
+    } catch (error) {
+        // console.log(error);
+        return res.status(500).json(error);
+    }
 };

@@ -1,13 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { Container, Typography, Grid, Hidden } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import { openOrderFormPopup } from '@/redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from '@/components/common';
 import Logo from './assets/logo_footer.svg';
 import Vk from './assets/vk.svg';
 import Fb from './assets/fb.svg';
 import Inst from './assets/in.svg';
+import { orderFormCtx } from '@/utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -105,7 +104,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Footer: FC = () => {
     const classes = useStyles();
-    const dispatch = useDispatch();
+    const orderForm = useContext(orderFormCtx);
 
     return (
         <footer className={classes.root}>
@@ -272,7 +271,7 @@ export const Footer: FC = () => {
                     >
                         <div>
                             <Typography className={classes.columnTitle}>
-                                <Link asButton onClick={() => dispatch(openOrderFormPopup())}>
+                                <Link asButton onClick={orderForm.onOpen}>
                                     Связаться с нами
                                 </Link>
                             </Typography>
@@ -282,7 +281,7 @@ export const Footer: FC = () => {
                                         <Link
                                             asButton
                                             className={classes.listItem}
-                                            onClick={() => dispatch(openOrderFormPopup())}
+                                            onClick={orderForm.onOpen}
                                         >
                                             Заказать звонок
                                         </Link>
@@ -293,7 +292,7 @@ export const Footer: FC = () => {
                                         <Link
                                             asButton
                                             className={classes.listItem}
-                                            onClick={() => dispatch(openOrderFormPopup())}
+                                            onClick={orderForm.onOpen}
                                         >
                                             Получить проект
                                         </Link>
@@ -304,7 +303,7 @@ export const Footer: FC = () => {
                                         <Link
                                             asButton
                                             className={classes.listItem}
-                                            onClick={() => dispatch(openOrderFormPopup())}
+                                            onClick={orderForm.onOpen}
                                         >
                                             Вызвать дизайнера замерщика
                                         </Link>

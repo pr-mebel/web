@@ -1,7 +1,7 @@
-import { filters, SectionId } from '@/entities';
+import { filters, SectionID, Filter } from '@/entities';
 
 export type SectionPickerProps = {
     options: typeof filters.sections;
-    value: SectionId;
-    onChange: Function;
+    value: SectionID;
+    onChange: (arg0: { name: keyof Filter; value: Filter }) => void;
 };

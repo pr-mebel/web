@@ -1,5 +1,5 @@
 import { NB_SP, MDASH } from '@/constants';
-import { SectionId } from '@/entities';
+import { SectionID } from '@/entities';
 
 const text0large = `
   Мы${NB_SP}предлагаем ознакомиться с${NB_SP}самыми разными вариантами реализации закрытых
@@ -53,20 +53,23 @@ const text2small = `
   все задачи по${NB_SP}оптимальному и${NB_SP}удобному хранению вещей.
 `;
 
-export const texts = {
-    [SectionId.cupboard]: {
+export const texts: Record<SectionID, {
+    large: string;
+    small: string;
+}> = {
+    cupboard: {
         large: text0large,
         small: text0small,
     },
-    [SectionId.wardrobe]: {
+    wardrobe: {
         large: text1large,
         small: text1small,
     },
-    [SectionId.accessories]: {
+    accessories: {
         large: text2large,
         small: text2small,
     },
-    [SectionId.lightingSystems]: {
+    lightingSystems: {
         large: text2large,
         small: text2small,
     },

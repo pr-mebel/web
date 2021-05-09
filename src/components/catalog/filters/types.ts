@@ -1,11 +1,10 @@
-import { filters, SectionId, StyleId, DoorTypeId } from '@/entities';
+import { Filter, SectionID, StyleID, DoorTypeID } from '@/entities';
 
 export type FiltersProps = {
-    options: typeof filters;
     filter: {
-        section: SectionId;
-        style: StyleId;
-        doorType: DoorTypeId;
+        section: SectionID;
+        style: StyleID;
+        doorType: DoorTypeID;
     };
-    onChange: Function;
+    onChange: (arg0: { name: keyof Filter; value: Filter }) => void;
 };

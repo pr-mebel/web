@@ -1,11 +1,13 @@
-export enum ContentModelSectionId {
-    cupboardSection = 'CupboardSectionCollection',
-    wardrobeSection = 'WardrobeSectionCollection',
-    accessoriesSection = 'AccessoriesSectionCollection',
-    lightingSystemsSection = 'LightingSystemsSectionCollection',
-}
+export const CMSsectionCollectionIDs = [
+    'CupboardSectionCollection',
+    'WardrobeSectionCollection',
+    'AccessoriesSectionCollection',
+    'LightingSystemsSectionCollection',
+] as const;
+export type CMSSectionCollectionID = typeof CMSsectionCollectionIDs[number];
 
-export enum ContentModelId {
-    cupboard = 'CupboardCollection',
-    wardrobe = 'WardrobeCollection',
-}
+export const CMScardCollectionIDs = [
+    'CupboardCollection',
+    'WardrobeCollection',
+] as const;
+export type CMSCardCollectionID = typeof CMScardCollectionIDs[number];

@@ -1,19 +1,17 @@
-import React, { FC, useCallback, useRef, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { FC, useCallback, useContext, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { Dialog, Grid, Typography, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PublishIcon from '@material-ui/icons/Publish';
 import ClearIcon from '@material-ui/icons/Clear';
-import { getFileDeclination } from '@/utils';
+import { getFileDeclination, orderFormCtx } from '@/utils';
 import {
-    closeOrderFormPopup,
     openFormSubmitPopup,
     saveForm,
     submitForm,
     uploadFiles,
 } from '@/redux';
-import { orderFormPopupSelector } from '@/selectors';
 import { SubmitButton } from '../submit-button';
 
 const useStyles = makeStyles((theme) => ({
@@ -112,20 +110,20 @@ const useStyles = makeStyles((theme) => ({
 export const OrderFormPopup: FC = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const orderForm = useContext(orderFormCtx);
     const [fileNames, setFileNames] = useState<FileList>(([] as unknown) as FileList);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { register, handleSubmit } = useForm();
-    const { isOpen } = useSelector(orderFormPopupSelector);
 
     /**
      * Закрывает попап 
      */
     const handleClosePopup = useCallback(() => {
         if (fileInputRef.current) {
-            dispatch(closeOrderFormPopup());
+            orderForm.onClose();
             fileInputRef.current.value = '';
         }
-    }, [fileInputRef, dispatch]);
+    }, [fileInputRef, orderForm]);
 
     /**
      * Имитирует клик по инпуту файлов
@@ -158,7 +156,7 @@ export const OrderFormPopup: FC = () => {
      */
     const onSubmit = useCallback(
         (data) => {
-            dispatch(closeOrderFormPopup());
+            orderForm.onClose();
             dispatch(saveForm(data));
             if (fileNames.length && fileInputRef.current) {
                 dispatch(uploadFiles(fileNames));
@@ -174,7 +172,7 @@ export const OrderFormPopup: FC = () => {
 
     return (
         <Dialog
-            open={isOpen}
+            open={orderForm.isOpen}
             onClose={handleClosePopup}
             scroll="body"
             fullWidth

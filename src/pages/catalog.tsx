@@ -1,5 +1,5 @@
-import React, { FC, useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { FC, useCallback, useState } from 'react';
+import { useRequest } from 'ahooks';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     DesignOffer,
@@ -12,23 +12,9 @@ import {
     Questions,
     FullScreenPopup,
 } from '@/components';
-import { useRouter } from 'next/router';
-import {
-    fetchCatalog,
-    changeFilter,
-    resetCatalog,
-    resetFilters,
-    openCardPopup,
-    closeCardPopup,
-    goToNextCard,
-    goToPrevCard,
-    changePage,
-    openFullScreenPopup,
-    closeFullScreenPopup,
-} from '@/redux';
-import { filters } from '@/entities';
-import { catalogSelector } from '@/selectors';
-import { checkIfNameAndValueAreKnown } from '@/utils';
+import { useModal } from '@/hooks';
+import { Filter } from '@/entities';
+import { fetchCatalogByFilter } from '@/utils/api';
 
 const useStyles = makeStyles((theme) => ({
     filterSection: {
@@ -63,140 +49,112 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Catalog: FC = () => {
-    const classes = useStyles();
-    const router = useRouter();
-    const dispatch = useDispatch();
-    const {
-        items,
-        hasMore,
-        isLoading,
-        page,
-        filter,
-        currentItemId,
-        isCardPopupOpen,
-        isFullScreenPopupOpen,
-    } = useSelector(catalogSelector);
-
-    /**
-     * Применить фильтр
-     */
-    const handleApplyFilter = useCallback(() => {
-        dispatch(resetCatalog());
-        dispatch(fetchCatalog());
-    }, [dispatch]);
-
-    /**
-     * Открыть картинку на полный экран
-     */
-    const handleOpenFullScreenPopup = useCallback(
-        (itemId) => {
-            dispatch(openFullScreenPopup(itemId));
+    const [filters, setFilters] = useState<Filter>({
+        doorType: 'any',
+        section: 'cupboard',
+        style: 'any',
+    });
+    const [pagination, setPagination] = useState({
+        current: 1,
+        hasMore: false,
+    })
+    const getCatalogRequest = useRequest(() => fetchCatalogByFilter(filters, pagination.current), {
+        refreshDeps: [filters, pagination],
+    });
+    const [currentItemID, setCurrentItemID] = useState<number | undefined>();
+    const cardModal = useModal({
+        onOpen: (itemID: number) => {
+            setCurrentItemID(itemID);
         },
-        [dispatch],
-    );
-
-    /**
-     * Закрыть картинку, открытую на полный экран
-     */
-    const handleCloseFullScreenPopup = useCallback(() => {
-        dispatch(closeFullScreenPopup());
-    }, [dispatch]);
+        onClose: () => {
+            setCurrentItemID(undefined);
+        },
+    });
+    const cardModalFullScreen = useModal({
+        onOpen: (itemID: number) => {
+            setCurrentItemID(itemID);
+        },
+        onClose: () => {
+            setCurrentItemID(undefined);
+        },
+    });
+    const classes = useStyles();
 
     /**
      * Поменять значение одного из параметра фильтра
      */
     const handleChangeFilter = useCallback(
-        ({ name, value }) => {
-            dispatch(
-                changeFilter({
-                    name,
-                    value,
-                }),
-            );
-
-            handleApplyFilter();
+        ({ name, value }: { name: keyof Filter; value: Filter}) => {
+            setFilters((prev) => ({
+                ...prev,
+                [name]: value,
+            }));
         },
-        [dispatch, handleApplyFilter],
+        [],
     );
-
-    /**
-     * Открыть модальное окно с итемом
-     */
-    const handleCardClick = useCallback(
-        (itemId) => {
-            dispatch(openCardPopup(itemId));
-        },
-        [dispatch],
-    );
-
-    /**
-     * Закрыть модальное окно итемов
-     */
-    const handleCloseCardPopup = useCallback(() => {
-        dispatch(closeCardPopup());
-    }, [dispatch]);
 
     /**
      * Открыть следующий итем внутри модального окна итемов
      */
     const handleGoToNextCard = useCallback(() => {
-        dispatch(goToNextCard());
-    }, [dispatch]);
+        setCurrentItemID((prev) => prev !== undefined ? prev + 1 : prev);
+    }, []);
 
     /**
      * Открыть предыдущий итем внутри модального окна итемов
      */
     const handleGoToPrevCard = useCallback(() => {
-        dispatch(goToPrevCard());
-    }, [dispatch]);
+        setCurrentItemID((prev) => prev !== undefined ? prev - 1 : prev);
+    }, []);
 
     /**
      * Подгрузить больше изображений в галерее
      */
     const handleDownloadMoreCards = useCallback(() => {
-        dispatch(changePage(page + 1));
-        dispatch(fetchCatalog());
-    }, [dispatch, page]);
+        setPagination((prev) => ({
+            current: prev.current + 1,
+            hasMore: false,
+        }));
+    }, []);
 
     /**
      * Разбирает поиск из урла, подставляет параметры в селекты, и делает по ним запрос
      */
-    useEffect(() => {
-        const { query } = router;
+    // useEffect(() => {
+    //     const { query } = router;
 
-        if (Object.values(query).length) {
-            Object.entries(query).forEach(([key, value]) => {
-                if (typeof value === 'string') {
-                    const pair = { name: key, value };
-                    
-                    if (checkIfNameAndValueAreKnown(pair)) {
-                        dispatch(
-                            changeFilter(pair),
-                        );
-                    }
-                }
+    //     if (Object.values(query).length) {
+    //         Object.entries(query).forEach(([key, value]) => {
+    //             if (typeof value === 'string') {
+    //                 const pair = { name: key, value };
 
-            });
-        } else {
-            dispatch(resetFilters());
-        }
-        handleApplyFilter();
-    }, [router.query, dispatch, handleApplyFilter]);
+    //                 if (checkIfNameAndValueAreKnown(pair)) {
+    //                     dispatch(
+    //                         changeFilter(pair),
+    //                     );
+    //                 }
+    //             }
+
+    //         });
+    //     } else {
+    //         dispatch(resetFilters());
+    //     }
+    // }, [router.query, dispatch]);
 
     return (
         <>
             <main>
-                <Lead sectionId={filter.section} />
+                <Lead sectionId={filters.section} />
                 <section className={classes.filterSection}>
-                    <Filters filter={filter} options={filters} onChange={handleChangeFilter} />
+                    <Filters filter={filters} onChange={handleChangeFilter} />
                 </section>
                 <section className={classes.gallerySection}>
                     <Gallery
-                        items={items}
-                        isLoading={isLoading}
-                        hasMore={hasMore}
-                        page={page}
-                        onCardClick={handleCardClick}
+                        items={getCatalogRequest.data?.data.items || []}
+                        isLoading={getCatalogRequest.loading}
+                        hasMore={pagination.hasMore}
+                        onCardClick={cardModal.handleOpen}
+                        onLoadMore={handleDownloadMoreCards}
                     />
                 </section>
                 <section className={classes.designOfferSection}>
@@ -212,24 +170,24 @@ const Catalog: FC = () => {
                     <Map />
                 </section>
             </main>
-            {isCardPopupOpen && (
+            {cardModal.isOpen && currentItemID && (
                 <CardPopup
-                    items={items}
-                    currentItemId={currentItemId}
-                    isOpen={isCardPopupOpen}
-                    isLoading={isLoading}
-                    onClose={handleCloseCardPopup}
+                    items={getCatalogRequest.data?.data.items || []}
+                    currentItemId={currentItemID}
+                    isOpen={cardModal.isOpen}
+                    isLoading={getCatalogRequest.loading}
+                    onClose={cardModal.handleClose}
                     onClickBack={handleGoToPrevCard}
                     onClickForward={handleGoToNextCard}
                     onDownloadMoreCards={handleDownloadMoreCards}
-                    onFullScreenPopupOpen={handleOpenFullScreenPopup}
+                    onFullScreenPopupOpen={cardModalFullScreen.handleOpen}
                 />
             )}
-            {isFullScreenPopupOpen && (
+            {cardModalFullScreen.isOpen && currentItemID &&  (
                 <FullScreenPopup
-                    img={items[currentItemId].imageFull.url}
-                    isOpen={isFullScreenPopupOpen}
-                    onClose={handleCloseFullScreenPopup}
+                    img={getCatalogRequest.data?.data.items[currentItemID].imageFull.url || ''}
+                    isOpen={cardModalFullScreen.isOpen}
+                    onClose={cardModalFullScreen.handleClose}
                 />
             )}
         </>

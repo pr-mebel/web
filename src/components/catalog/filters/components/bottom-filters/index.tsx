@@ -2,7 +2,7 @@ import React, { FC, useCallback } from 'react';
 import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid } from '@material-ui/core';
-import { SectionId, StyleId } from '@/entities';
+import { filters as filterOptions } from '@/entities';
 import { BottomFiltersProps } from './types';
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const BottomFilters: FC<BottomFiltersProps> = ({ filter, options, onChange }) => {
+export const BottomFilters: FC<BottomFiltersProps> = ({ filter, onChange }) => {
     const classes = useStyles();
 
     /**
@@ -60,12 +60,12 @@ export const BottomFilters: FC<BottomFiltersProps> = ({ filter, options, onChang
 
     return (
         <Grid container spacing={2} alignItems="flex-start">
-            {![SectionId.accessories, SectionId.lightingSystems].includes(filter.section) && (
+            {!(filter.section === 'accessories' || filter.section === 'lightingSystems') && (
                 <Grid
                     item
                     container
                     xs={12}
-                    sm={filter.section === options.sections[0].id ? 6 : 12}
+                    sm={filter.section === 'cupboard' ? 6 : 12}
                 >
                     <Grid
                         item
@@ -85,12 +85,12 @@ export const BottomFilters: FC<BottomFiltersProps> = ({ filter, options, onChang
                         justify="center"
                         className={classes.optionsContainer}
                     >
-                        {options.styles.map((option, i) => {
-                            if (option.id === StyleId.designer && filter.section === SectionId.wardrobe) {
+                        {filterOptions.styles.map((option, i) => {
+                            if (option.id === 'designer' && filter.section === 'wardrobe') {
                                 return null;
                             }
 
-                            if (i !== options.styles.length - 1) {
+                            if (i !== filterOptions.styles.length - 1) {
                                 return (
                                     <React.Fragment key={option.id}>
                                         <Typography
@@ -132,7 +132,7 @@ export const BottomFilters: FC<BottomFiltersProps> = ({ filter, options, onChang
                     </Grid>
                 </Grid>
             )}
-            {filter.section === SectionId.cupboard && (
+            {filter.section === 'cupboard' && (
                 <Grid item container xs={12} sm={6}>
                     <Grid
                         item
@@ -152,8 +152,8 @@ export const BottomFilters: FC<BottomFiltersProps> = ({ filter, options, onChang
                         justify="center"
                         className={classes.optionsContainer}
                     >
-                        {options.doorTypes.map((option, i) => {
-                            if (i !== options.doorTypes.length - 1) {
+                        {filterOptions.doorTypes.map((option, i) => {
+                            if (i !== filterOptions.doorTypes.length - 1) {
                                 return (
                                     <React.Fragment key={option.id}>
                                         <Typography

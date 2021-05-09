@@ -7,9 +7,10 @@
         "build": "next build",
         "start": "next start",
         "postinstall": "husky install",
+        "lint": "eslint ./src/ --quiet --ext .ts,.tsx",
         "typecheck": "tsc --noEmit -p ./tsconfig.json",
         "typecheck:watch": "npm run typecheck -- --watch",
-        "prepare": "lint-staged"
+        "prepare": "echo clear"
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": [
@@ -22,6 +23,7 @@
         "@material-ui/icons": "^4.11.2",
         "@reduxjs/toolkit": "^1.5.0",
         "@svgr/webpack": "^5.5.0",
+        "ahooks": "^2.10.3",
         "axios": "^0.21.1",
         "babel-plugin-module-resolver": "^4.1.0",
         "firebase": "^8.2.4",

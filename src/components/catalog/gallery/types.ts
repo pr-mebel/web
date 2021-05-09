@@ -6,8 +6,8 @@ export type GalleryProps = {
         };
         collection: string;
     }[];
-    page: number;
     isLoading: boolean;
     hasMore: boolean;
-    onCardClick: Function;
+    onCardClick: (cardID: number) => void;
+    onLoadMore: () => void; 
 };

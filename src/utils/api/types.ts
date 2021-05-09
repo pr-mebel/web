@@ -1,37 +1,19 @@
 import {
-    SectionId,
-    StyleId,
-    DoorTypeId,
+    SectionID,
+    StyleID,
+    DoorTypeID,
     SectionCollection,
     Collection
 } from '@/entities';
 
 export type FetchCatalogByFilterParams = {
-    section: SectionId;
-    style: StyleId;
-    doorType: DoorTypeId;
+    section: SectionID;
+    style: StyleID;
+    doorType: DoorTypeID;
 };
 
 export interface CatalogResponse {
-    data:
-    | {
-        cupboardSectionCollection: SectionCollection;
-    }
-    | {
-        wardrobeSectionCollection: SectionCollection;
-    }
-    | {
-        accessoriesSectionCollection: SectionCollection;
-    }
-    | {
-        lightingSystemsSectionCollection: SectionCollection;
-    }
-    | {
-        cupboardCollection: Collection;
-    }
-    | {
-        wardrobeCollection: Collection;
-    };
+    result: SectionCollection | Collection;
 }
 
 export type SendEmailParams = {

@@ -70,7 +70,7 @@ export const uploadFiles = createAsyncThunk('upload_files', (files: FileList, { 
         dispatch(initFileUpload(file));
     });
 
-    filesArray.forEach(async (file, index) => {
+    filesArray.forEach((file, index) => {
         const imageRef = storageRef.child(file.name);
         const uploadTask = imageRef.put(file);
 

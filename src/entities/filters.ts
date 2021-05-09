@@ -1,105 +1,124 @@
-export enum SectionId {
-    cupboard = 'cupboard',
-    wardrobe = 'wardrobe',
-    accessories = 'accessories',
-    lightingSystems = 'lightingSystems',
-}
+export const sectionIDs = [
+    'cupboard',
+    'wardrobe',
+    'accessories',
+    'lightingSystems',
+] as const;
+export type SectionID = typeof sectionIDs[number];
 
-export enum StyleId {
-    any = 'any',
-    modern = 'modern',
-    classic = 'classic',
-    neoclassic = 'neoclassic',
-    designer = 'designer',
-}
+export const styleIDs = [
+    'any',
+    'modern',
+    'classic',
+    'neoclassic',
+    'designer',
+] as const;
+export type StyleID = typeof styleIDs[number];
 
-export enum DoorTypeId {
-    any = 'any',
-    coupe = 'coupe',
-    swing = 'swing',
-    folding = 'folding',
-}
+export const doorTypeIDs = [
+    'any',
+    'coupe',
+    'swing',
+    'folding',
+] as const;
+export type DoorTypeID = typeof doorTypeIDs[number];
 
-export enum FilterField {
-    section = 'section',
-    style = 'style',
-    doorType = 'doorType',
-}
+export const filterFields = [
+    'section',
+    'style',
+    'doorType',
+] as const;
+export type FilterField = typeof filterFields[number];
 
 export type Filter = {
-    section: SectionId;
-    style: StyleId;
-    doorType: DoorTypeId;
+    section: SectionID;
+    style: StyleID;
+    doorType: DoorTypeID;
 };
 
 export type FilterKeyValue = {
-    name: FilterField.section;
-    value: SectionId;
+    name: typeof filterFields[0];
+    value: SectionID;
 } | {
-    name: FilterField.style;
-    value: StyleId;
+    name: typeof filterFields[1];
+    value: StyleID;
 } | {
-    name: FilterField.doorType;
-    value: DoorTypeId;
+    name: typeof filterFields[2];
+    value: DoorTypeID;
 };
 
-export const filters = {
+type Filters = {
+    sections: {
+        title: string;
+        id: SectionID;
+    }[];
+    styles: {
+        title: string;
+        id: StyleID;
+    }[];
+    doorTypes: {
+        title: string;
+        id: DoorTypeID;
+    }[];
+}
+
+export const filters: Filters = {
     sections: [
         {
             title: 'Шкафы',
-            id: SectionId.cupboard,
+            id: 'cupboard',
         },
         {
             title: 'Гардеробные',
-            id: SectionId.wardrobe,
+            id: 'wardrobe',
         },
         {
             title: 'Аксессуары',
-            id: SectionId.accessories,
+            id: 'accessories',
         },
         {
             title: 'Cистемы подсветки',
-            id: SectionId.lightingSystems,
+            id: 'lightingSystems',
         },
     ],
     styles: [
         {
             title: 'Все',
-            id: StyleId.any,
+            id: 'any',
         },
         {
             title: 'Современные',
-            id: StyleId.modern,
+            id: 'modern',
         },
         {
             title: 'Классические',
-            id: StyleId.classic,
+            id: 'classic',
         },
         {
             title: 'Неоклассика',
-            id: StyleId.neoclassic,
+            id: 'neoclassic',
         },
         {
             title: 'Дизайнерские',
-            id: StyleId.designer,
+            id: 'designer',
         },
     ],
     doorTypes: [
         {
             title: 'Все',
-            id: DoorTypeId.any,
+            id: 'any',
         },
         {
             title: 'Купе',
-            id: DoorTypeId.coupe,
+            id: 'coupe',
         },
         {
             title: 'Распашные',
-            id: DoorTypeId.swing,
+            id: 'swing',
         },
         {
             title: 'Складные',
-            id: DoorTypeId.folding,
+            id: 'folding',
         },
     ],
-} as const;
+};

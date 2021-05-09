@@ -1,8 +1,6 @@
-import React, { FC, useCallback } from 'react';
-import { Container, Grid, Typography } from '@material-ui/core';
+import React, { FC } from 'react';
+import { Container, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useDispatch } from 'react-redux';
-import { changePage, fetchCatalog } from '@/redux';
 import { MainButton, Loader } from '@/components/common';
 import { Card } from './components';
 import { GalleryProps } from './types';
@@ -21,19 +19,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const Gallery: FC<GalleryProps> = ({ items, isLoading, hasMore, page, onCardClick }) => {
+export const Gallery: FC<GalleryProps> = ({ items, isLoading, hasMore, onCardClick, onLoadMore }) => {
     const classes = useStyles();
-    const dispatch = useDispatch();
 
-    /**
-     * Загружает новый карточки после клика на кнопку
-     */
-    const handleLoadMore = useCallback(() => {
-        if (!isLoading && hasMore) {
-            dispatch(changePage(page + 1));
-            dispatch(fetchCatalog());
-        }
-    }, [isLoading, hasMore, dispatch, page]);
+    console.log(items);
 
     return (
         <Container>
@@ -53,7 +42,7 @@ export const Gallery: FC<GalleryProps> = ({ items, isLoading, hasMore, page, onC
             {!!hasMore && (
                 <Grid container justify="center" className={classes.buttonContainer}>
                     <Grid item xs={10} sm={8} md={6}>
-                        <MainButton onClick={handleLoadMore}>Показать еще</MainButton>
+                        <MainButton onClick={onLoadMore}>Показать еще</MainButton>
                     </Grid>
                 </Grid>
             )}

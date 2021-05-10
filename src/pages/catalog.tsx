@@ -1,5 +1,6 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useState, useEffect } from 'react';
 import { useRequest } from 'ahooks';
+import { useRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     DesignOffer,
@@ -13,8 +14,9 @@ import {
     FullScreenPopup,
 } from '@/components';
 import { useModal } from '@/hooks';
-import { Filter } from '@/entities';
+import { Filter, FilterField, FilterValue } from '@/entities';
 import { fetchCatalogByFilter } from '@/utils/api';
+import { checkIfNameAndValueAreKnown } from '@/utils';
 
 const useStyles = makeStyles((theme) => ({
     filterSection: {
@@ -48,16 +50,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const initialFilters = {
+    doorType: 'any',
+    section: 'cupboard',
+    style: 'any',
+} as Filter;
+
 const Catalog: FC = () => {
-    const [filters, setFilters] = useState<Filter>({
-        doorType: 'any',
-        section: 'cupboard',
-        style: 'any',
-    });
+    const router = useRouter();
+    const [filters, setFilters] = useState(initialFilters);
     const [pagination, setPagination] = useState({
         current: 1,
         hasMore: false,
-    })
+    });
     const getCatalogRequest = useRequest(() => fetchCatalogByFilter(filters, pagination.current), {
         refreshDeps: [filters, pagination],
     });
@@ -84,7 +89,7 @@ const Catalog: FC = () => {
      * Поменять значение одного из параметра фильтра
      */
     const handleChangeFilter = useCallback(
-        ({ name, value }: { name: keyof Filter; value: Filter}) => {
+        ({ name, value }: { name: FilterField; value: FilterValue}) => {
             setFilters((prev) => ({
                 ...prev,
                 [name]: value,
@@ -120,26 +125,34 @@ const Catalog: FC = () => {
     /**
      * Разбирает поиск из урла, подставляет параметры в селекты, и делает по ним запрос
      */
-    // useEffect(() => {
-    //     const { query } = router;
+    useEffect(() => {
+        const { query } = router;
+        let res: Partial<Filter> = {};
 
-    //     if (Object.values(query).length) {
-    //         Object.entries(query).forEach(([key, value]) => {
-    //             if (typeof value === 'string') {
-    //                 const pair = { name: key, value };
+        if (Object.values(query).length) {
+            Object.entries(query).forEach(([key, value]) => {
+                if (typeof value === 'string') {
+                    const pair = { name: key, value };
 
-    //                 if (checkIfNameAndValueAreKnown(pair)) {
-    //                     dispatch(
-    //                         changeFilter(pair),
-    //                     );
-    //                 }
-    //             }
+                    if (checkIfNameAndValueAreKnown(pair)) {
+                        res = {
+                            ...res,
+                            [pair.name]: pair.value,
+                        };
+                    }
+                }
+            });
 
-    //         });
-    //     } else {
-    //         dispatch(resetFilters());
-    //     }
-    // }, [router.query, dispatch]);
+            if (Object.values(res).length) {
+                setFilters((prev) => ({
+                    ...prev,
+                    ...res,
+                }));
+            }
+        } else {
+            setFilters(initialFilters);
+        }
+    }, [router.query]);
 
     return (
         <>
@@ -183,7 +196,7 @@ const Catalog: FC = () => {
                     onFullScreenPopupOpen={cardModalFullScreen.handleOpen}
                 />
             )}
-            {cardModalFullScreen.isOpen && currentItemID &&  (
+            {cardModalFullScreen.isOpen && currentItemID && (
                 <FullScreenPopup
                     img={getCatalogRequest.data?.data.items[currentItemID].imageFull.url || ''}
                     isOpen={cardModalFullScreen.isOpen}

@@ -95,6 +95,7 @@ export const Questions = () => {
     const dispatch = useDispatch();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [fileNames, setFileNames] = useState<FileList>(([] as unknown) as FileList);
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { register, handleSubmit, reset } = useForm();
 
     /**
@@ -114,7 +115,7 @@ export const Questions = () => {
     }, [fileInputRef]);
 
     /**
-     * Удаляет выбранные файлы 
+     * Удаляет выбранные файлы
      */
     const handleDeleteSelectedFiles = useCallback(() => {
         if (fileInputRef.current) {

@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import { SectionPickerProps } from './types';
+import { FilterValue } from '@/entities';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,10 +51,10 @@ export const SectionPicker: FC<SectionPickerProps> = ({ options, value, onChange
      * Обработчик выбора секции
      */
     const handleClick = useCallback(
-        (id) => () => {
+        (value: FilterValue) => () => {
             onChange({
                 name: 'section',
-                value: id,
+                value,
             });
         },
         [onChange],

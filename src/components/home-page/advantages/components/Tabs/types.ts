@@ -6,5 +6,5 @@ export type TabsProps = {
             title: string;
         };
     }[];
-    onChange: Function;
+    onChange: (arg0: number) => void;
 };

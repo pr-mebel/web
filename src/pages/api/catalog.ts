@@ -9,10 +9,9 @@ type Output = {
     result: SectionCollection | Collection;
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default async (
     req: NextApiRequest,
-    res: NextApiResponse
+    res: NextApiResponse,
 ) => {
     const { page, filters: { style, doorType, section } } = req.body as {
         page: number;
@@ -21,8 +20,8 @@ export default async (
 
     try {
         const data = await client.query<Output>({
-            query: style === 'any' as StyleID && doorType === 'any' as DoorTypeID
-                ? gql`
+            query: style === 'any' as StyleID && doorType === 'any' as DoorTypeID ?
+                gql`
                 {
                     result: ${section}SectionCollection(limit: 1) {
                         items {
@@ -50,8 +49,8 @@ export default async (
                             }
                         }
                     }
-                }`
-                : gql`
+                }` :
+                gql`
                 {
                     result: ${section}Collection(where: {
                         ${style !== 'any' ? `${style}: true` : ''}

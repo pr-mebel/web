@@ -1,4 +1,4 @@
-import { Filter, SectionID, StyleID, DoorTypeID } from '@/entities';
+import { SectionID, StyleID, DoorTypeID, FilterField, FilterValue } from '@/entities';
 
 export type BottomFiltersProps = {
     filter: {
@@ -6,5 +6,5 @@ export type BottomFiltersProps = {
         style: StyleID;
         doorType: DoorTypeID;
     };
-    onChange: (arg0: { name: keyof Filter; value: Filter }) => void;
+    onChange: (arg0: { name: FilterField; value: FilterValue }) => void;
 };

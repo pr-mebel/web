@@ -3,7 +3,7 @@ import {
     StyleID,
     DoorTypeID,
     SectionCollection,
-    Collection
+    Collection,
 } from '@/entities';
 
 export type FetchCatalogByFilterParams = {

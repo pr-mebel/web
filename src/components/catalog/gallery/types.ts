@@ -9,5 +9,5 @@ export type GalleryProps = {
     isLoading: boolean;
     hasMore: boolean;
     onCardClick: (cardID: number) => void;
-    onLoadMore: () => void; 
+    onLoadMore: () => void;
 };

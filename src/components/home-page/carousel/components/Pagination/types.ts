@@ -1,5 +1,5 @@
 export type PaginationProps = {
     numberOfPages: number;
     currentPage: number;
-    onChangeSlide: Function;
+    onChangeSlide: (arg0: number) => void;
 };

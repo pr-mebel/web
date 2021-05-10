@@ -99,6 +99,7 @@ export const FeedbackForm: FC = () => {
     const dispatch = useDispatch();
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
     const fileInputRef = useRef<HTMLInputElement>(null);
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { register, handleSubmit, reset } = useForm();
     const [fileNames, setFileNames] = useState<FileList>(([] as unknown) as FileList);
 

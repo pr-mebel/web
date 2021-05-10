@@ -58,7 +58,7 @@ export const FAQ = () => {
      * Открывает тот, на который кликнули, и закрывает остальные
      */
     const handleChange = useCallback(
-        (title) => (_: React.ChangeEvent<{}>, expanded: boolean) => {
+        (title) => (_: unknown, expanded: boolean) => {
             if (expanded) {
                 setExpandedList(
                     LIST.reduce(

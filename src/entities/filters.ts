@@ -36,6 +36,8 @@ export type Filter = {
     doorType: DoorTypeID;
 };
 
+export type FilterValue = SectionID | StyleID | DoorTypeID;
+
 export type FilterKeyValue = {
     name: typeof filterFields[0];
     value: SectionID;

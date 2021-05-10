@@ -1,5 +1,5 @@
-import { SectionId } from '@/entities';
+import { SectionID } from '@/entities';
 
 export type LeadTextProps = {
-    selectedSection: SectionId;
+    selectedSection: SectionID;
 };

@@ -19,7 +19,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const Gallery: FC<GalleryProps> = ({ items, isLoading, hasMore, onCardClick, onLoadMore }) => {
+export const Gallery: FC<GalleryProps> = ({
+    items,
+    isLoading,
+    hasMore,
+    onCardClick,
+    onLoadMore,
+}) => {
     const classes = useStyles();
 
     console.log(items);

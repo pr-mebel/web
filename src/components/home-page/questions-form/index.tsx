@@ -60,6 +60,7 @@ const useStyles = makeStyles({
 export const QuestionsForm: FC = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { register, handleSubmit, reset } = useForm();
 
     /**

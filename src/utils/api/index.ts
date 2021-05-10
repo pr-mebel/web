@@ -10,7 +10,7 @@ import { FetchCatalogByFilterParams, SendEmailParams } from './types';
  */
 export const fetchCatalogByFilter = (
     filters: FetchCatalogByFilterParams,
-    page: number
+    page: number,
 ): Promise<{
     data: {
         items: Item[];
@@ -23,6 +23,6 @@ export const fetchCatalogByFilter = (
     });
 
 export const sendEmail = (
-    params: SendEmailParams
+    params: SendEmailParams,
 ): Promise<void> =>
     axios.post('/api/send-email', params);

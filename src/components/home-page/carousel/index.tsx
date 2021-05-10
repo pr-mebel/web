@@ -181,7 +181,7 @@ export const Carousel = () => {
 
         return () => {
             document.removeEventListener('visibilitychange', handleVisibilityChange);
-        }
+        };
     }, []);
 
     return (

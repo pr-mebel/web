@@ -2,7 +2,7 @@ import React, { FC, useCallback } from 'react';
 import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid } from '@material-ui/core';
-import { filters as filterOptions } from '@/entities';
+import { FilterField, filters as filterOptions, FilterValue } from '@/entities';
 import { BottomFiltersProps } from './types';
 
 const useStyles = makeStyles((theme) => ({
@@ -49,10 +49,10 @@ export const BottomFilters: FC<BottomFiltersProps> = ({ filter, onChange }) => {
      * Обработчик клика на фильтр стиля или тип двери
      */
     const handleClick = useCallback(
-        (id, name) => () => {
+        (name: FilterField, value: FilterValue) => () => {
             onChange({
                 name,
-                value: id,
+                value,
             });
         },
         [onChange],
@@ -100,7 +100,7 @@ export const BottomFilters: FC<BottomFiltersProps> = ({ filter, onChange }) => {
                                                 [classes.selectedOption]:
                                                     filter.style === option.id,
                                             })}
-                                            onClick={handleClick(option.id, 'style')}
+                                            onClick={handleClick('style', option.id)}
                                         >
                                             {option.title}
                                         </Typography>
@@ -123,7 +123,7 @@ export const BottomFilters: FC<BottomFiltersProps> = ({ filter, onChange }) => {
                                     className={cn(classes.option, {
                                         [classes.selectedOption]: filter.style === option.id,
                                     })}
-                                    onClick={handleClick(option.id, 'style')}
+                                    onClick={handleClick('style', option.id)}
                                 >
                                     {option.title}
                                 </Typography>
@@ -163,7 +163,7 @@ export const BottomFilters: FC<BottomFiltersProps> = ({ filter, onChange }) => {
                                                 [classes.selectedOption]:
                                                     filter.doorType === option.id,
                                             })}
-                                            onClick={handleClick(option.id, 'doorType')}
+                                            onClick={handleClick('doorType', option.id)}
                                         >
                                             {option.title}
                                         </Typography>
@@ -186,7 +186,7 @@ export const BottomFilters: FC<BottomFiltersProps> = ({ filter, onChange }) => {
                                     className={cn(classes.option, {
                                         [classes.selectedOption]: filter.doorType === option.id,
                                     })}
-                                    onClick={handleClick(option.id, 'doorType')}
+                                    onClick={handleClick('doorType', option.id)}
                                 >
                                     {option.title}
                                 </Typography>

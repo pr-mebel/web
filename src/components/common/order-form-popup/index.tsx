@@ -113,10 +113,11 @@ export const OrderFormPopup: FC = () => {
     const orderForm = useContext(orderFormCtx);
     const [fileNames, setFileNames] = useState<FileList>(([] as unknown) as FileList);
     const fileInputRef = useRef<HTMLInputElement>(null);
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { register, handleSubmit } = useForm();
 
     /**
-     * Закрывает попап 
+     * Закрывает попап
      */
     const handleClosePopup = useCallback(() => {
         if (fileInputRef.current) {

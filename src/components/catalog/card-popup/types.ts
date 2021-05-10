@@ -19,6 +19,6 @@ export type CardPopupProps = {
     onClose: MouseEventHandler<SVGSVGElement>;
     onClickBack: MouseEventHandler<HTMLDivElement>;
     onClickForward: MouseEventHandler<HTMLDivElement>;
-    onDownloadMoreCards: Function;
-    onFullScreenPopupOpen: Function;
+    onDownloadMoreCards: () => void;
+    onFullScreenPopupOpen: (arg0: number) => void;
 };

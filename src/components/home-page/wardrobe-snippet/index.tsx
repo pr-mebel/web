@@ -1,8 +1,9 @@
-import React, { FC, useState, useCallback, useMemo } from 'react';
+import React, { FC, useState, MouseEvent } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { BlockTitle } from '@/components/common';
 import Image from 'next/image';
 import { Typography, Popover } from '@material-ui/core';
+import { useModal } from '@/hooks';
 import { WardrobeSnipperProps } from './types';
 
 const useStyles = makeStyles(() => ({
@@ -58,34 +59,26 @@ const useStyles = makeStyles(() => ({
 
 export const WardrobeSnippet: FC<WardrobeSnipperProps> = ({ title, text, img, direction }) => {
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = useState(null);
-
-    /**
-     * Открывает сниппет
-     */
-    const handleOpen = useCallback((event) => {
-        setAnchorEl(event.currentTarget);
-    }, []);
-
-    /**
-     * Закрывает сниппет
-     */
-    const handleClose = useCallback(() => {
-        setAnchorEl(null);
-    }, []);
-
-    const open = useMemo(() => !!anchorEl, [anchorEl]);
+    const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
+    const popup = useModal({
+        onOpen: (event: MouseEvent<HTMLDivElement>) => {
+            setAnchorEl(event.currentTarget);
+        },
+        onClose: () => {
+            setAnchorEl(null);
+        },
+    });
 
     return (
-        <div onMouseEnter={handleOpen} onMouseLeave={handleClose}>
+        <div onMouseEnter={popup.handleOpen} onMouseLeave={popup.handleClose}>
             <div
-                aria-owns={open ? 'mouse-over-popover' : undefined}
+                aria-owns={popup.isOpen ? 'mouse-over-popover' : undefined}
                 aria-haspopup="true"
                 className={classes.circle}
             />
             <Popover
                 id="mouse-over-popover"
-                open={open}
+                open={popup.isOpen}
                 className={classes.popover}
                 anchorEl={anchorEl}
                 anchorOrigin={{
@@ -99,7 +92,7 @@ export const WardrobeSnippet: FC<WardrobeSnipperProps> = ({ title, text, img, di
                 PaperProps={{
                     className: classes.paper,
                 }}
-                onClose={handleClose}
+                onClose={popup.handleClose}
             >
                 <div className={classes.paperContainer}>
                     <Image src={img} alt={title} width={310} height={310} quality={100} />

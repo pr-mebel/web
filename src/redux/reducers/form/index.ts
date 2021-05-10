@@ -30,7 +30,7 @@ export const updateFileUploadProgress = createAction(
 
 export const setErrorInFileUpload = createAction(
     'set_error_in_file_upload',
-    (name: string, index: number, error) => ({
+    (name: string, index: number, error?: Error) => ({
         payload: {
             name,
             index,
@@ -94,7 +94,7 @@ const initialState = {
     files: [] as {
         name: string;
         progress?: number;
-        error?: string;
+        error?: string | Error;
     }[],
 };
 

@@ -50,7 +50,10 @@ export const FormSubmitPopup: FC = () => {
     /**
      * Флаг, показывающий, что все выбранные файлы загружены
      */
-    const allUploaded = useMemo(() => files.every((file) => file.progress === 100) || !files.length, [files]);
+    const allUploaded = useMemo(
+        () => files.every((file) => file.progress === 100) || !files.length,
+        [files],
+    );
 
     /**
      * Процент полностью загруженных файлов
@@ -63,7 +66,7 @@ export const FormSubmitPopup: FC = () => {
 
             return acc;
         }, 0) / files.length) * 100,
-        [files]
+    [files],
     );
 
     /**

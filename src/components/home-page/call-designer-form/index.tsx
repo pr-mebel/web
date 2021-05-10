@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 export const CallDesignerForm: FC = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     const { register, handleSubmit, reset } = useForm();
 
     /**

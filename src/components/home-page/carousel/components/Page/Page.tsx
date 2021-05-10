@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     imageContainer: {
         position: 'absolute',
         objectPosition: 'center',
+        backgroundColor: 'grey',
         width: '100%',
         height: '100%',
         top: '0',

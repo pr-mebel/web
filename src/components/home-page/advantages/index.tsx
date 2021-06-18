@@ -2,13 +2,20 @@ import React, { FC, useCallback, useState } from 'react';
 import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography, Grid, Hidden } from '@material-ui/core';
-import Image from 'next/image';
 import CheckIcon from '@material-ui/icons/Check';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import Image from 'next/image';
 import { BlockTitle, MainButton } from '@/components/common';
 import { TABS } from './constants';
 import { Tabs, Options } from './components';
+
+import img1 from 'public/images/home-page/advantages/1.jpg';
+import img2 from 'public/images/home-page/advantages/2.jpg';
+import img3 from 'public/images/home-page/advantages/3.jpg';
+import img4 from 'public/images/home-page/advantages/4.jpg';
+import img5 from 'public/images/home-page/advantages/5.jpg';
+import img6 from 'public/images/home-page/advantages/6.jpg';
 
 const useStyles = makeStyles((theme) => ({
     description: {
@@ -164,17 +171,60 @@ export const Advantages: FC = () => {
                     </Grid>
                     <Grid item xs={5}>
                         <div className={classes.imgContainer}>
-                            {TABS.map(({ id, data: { title, img } }, i) => (
-                                <Image
-                                    key={id}
-                                    src={img}
-                                    alt={title}
-                                    layout="fill"
-                                    className={cn(classes.image, {
-                                        [classes.selectedImage]: i === activeTab,
-                                    })}
-                                />
-                            ))}
+                            <Image
+                                src={img1}
+                                alt='Эмаль'
+                                layout="fill"
+                                className={cn(classes.image, {
+                                    [classes.selectedImage]: activeTab === 0,
+                                })}
+                                placeholder='blur'
+                            />
+                            <Image
+                                src={img2}
+                                alt='Ламинат'
+                                layout="fill"
+                                className={cn(classes.image, {
+                                    [classes.selectedImage]: activeTab === 1,
+                                })}
+                                placeholder='blur'
+                            />
+                            <Image
+                                src={img3}
+                                alt='3D Ламинат'
+                                layout="fill"
+                                className={cn(classes.image, {
+                                    [classes.selectedImage]: activeTab === 2,
+                                })}
+                                placeholder='blur'
+                            />
+                            <Image
+                                src={img4}
+                                alt='Шпон'
+                                layout="fill"
+                                className={cn(classes.image, {
+                                    [classes.selectedImage]: activeTab === 3,
+                                })}
+                                placeholder='blur'
+                            />
+                            <Image
+                                src={img5}
+                                alt='Кожа'
+                                layout="fill"
+                                className={cn(classes.image, {
+                                    [classes.selectedImage]: activeTab === 4,
+                                })}
+                                placeholder='blur'
+                            />
+                            <Image
+                                src={img6}
+                                alt='Стекло'
+                                layout="fill"
+                                className={cn(classes.image, {
+                                    [classes.selectedImage]: activeTab === 5,
+                                })}
+                                placeholder='blur'
+                            />
                         </div>
                     </Grid>
                 </Grid>
@@ -200,17 +250,60 @@ export const Advantages: FC = () => {
                             className={cn(classes.icon, classes.iconBack)}
                             onClick={handlePrevTab}
                         />
-                        {TABS.map(({ id, data: { title, img } }, i) => (
-                            <Image
-                                key={id}
-                                src={img}
-                                alt={title}
-                                layout="fill"
-                                className={cn(classes.image, {
-                                    [classes.selectedImage]: i === activeTab,
-                                })}
-                            />
-                        ))}
+                        <Image
+                            src={img1}
+                            alt='Эмаль'
+                            layout="fill"
+                            className={cn(classes.image, {
+                                [classes.selectedImage]: activeTab === 0,
+                            })}
+                            placeholder='blur'
+                        />
+                        <Image
+                            src={img2}
+                            alt='Ламинат'
+                            layout="fill"
+                            className={cn(classes.image, {
+                                [classes.selectedImage]: activeTab === 1,
+                            })}
+                            placeholder='blur'
+                        />
+                        <Image
+                            src={img3}
+                            alt='3D Ламинат'
+                            layout="fill"
+                            className={cn(classes.image, {
+                                [classes.selectedImage]: activeTab === 2,
+                            })}
+                            placeholder='blur'
+                        />
+                        <Image
+                            src={img4}
+                            alt='Шпон'
+                            layout="fill"
+                            className={cn(classes.image, {
+                                [classes.selectedImage]: activeTab === 3,
+                            })}
+                            placeholder='blur'
+                        />
+                        <Image
+                            src={img5}
+                            alt='Кожа'
+                            layout="fill"
+                            className={cn(classes.image, {
+                                [classes.selectedImage]: activeTab === 4,
+                            })}
+                            placeholder='blur'
+                        />
+                        <Image
+                            src={img6}
+                            alt='Стекло'
+                            layout="fill"
+                            className={cn(classes.image, {
+                                [classes.selectedImage]: activeTab === 5,
+                            })}
+                            placeholder='blur'
+                        />
                         <ArrowForwardIosIcon
                             className={cn(classes.icon, classes.iconForward)}
                             onClick={handleNextTab}

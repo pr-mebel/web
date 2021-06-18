@@ -6,6 +6,8 @@ import { BlockTitle, MainButton, Pagination } from '@/components/common';
 import Image from 'next/image';
 import { LIST } from './constants';
 
+import img from 'public/images/home-page/our-production/1.jpg';
+
 const useStyles = makeStyles((theme) => ({
     imgContainer: {
         marginTop: '30px',
@@ -37,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const OurProduction = () => {
+export const OurProduction: FC = () => {
     const classes = useStyles();
     const theme = useTheme();
     const isXsDown = useMediaQuery(theme.breakpoints.down('xs'));
@@ -50,9 +52,10 @@ export const OurProduction = () => {
             </BlockTitle>
             <div className={classes.imgContainer}>
                 <Image
-                    src="/images/home-page/our-production/1.jpg"
+                    src={img}
                     alt="Производство"
                     layout="fill"
+                    placeholder='blur'
                 />
             </div>
             <Grid container spacing={isXsDown ? 2 : 4}>

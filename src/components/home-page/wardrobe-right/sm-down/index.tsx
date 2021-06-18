@@ -4,8 +4,10 @@ import { Container, Typography, Grid } from '@material-ui/core';
 import { BlockTitle, MainButton, Pagination } from '@/components/common';
 import cn from 'classnames';
 import Image from 'next/image';
-import { ADDITIONAL, defaultImage } from '../constants';
+import { ADDITIONAL } from '../constants';
 import { WardrobeAdditionalBlock } from '../../wardrobe-additional-block';
+
+import defaultImage from 'public/images/home-page/wardrobe-right/wardrobe-1.jpg';
 
 const useStyles = makeStyles(() => ({
     contentSm: {
@@ -55,6 +57,7 @@ export const WardrobeRightSmDown = () => {
                         src={defaultImage}
                         layout="fill"
                         alt="Шкаф исключительного качества"
+                        placeholder='blur'
                         className={cn(classes.image, {
                             [classes.selectedImage]: activePage === 0,
                         })}

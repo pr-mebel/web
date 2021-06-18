@@ -194,13 +194,13 @@ export const Carousel = () => {
                 className={classes.slider}
                 style={{ transform: `translateX(-${windowWidth * activeSlide}px)` }}
             >
-                {PAGES.map((page) => (
+                {PAGES.map((page, id) => (
                     <Page
                         key={page.id}
                         titles={page.data.titles}
                         subtitles={page.data.subtitles}
                         texts={page.data.texts}
-                        imageSet={page.data.imageSet}
+                        pageID={id}
                         to={page.data.to}
                     />
                 ))}

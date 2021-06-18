@@ -2,7 +2,6 @@ import React, { FC, useCallback } from 'react';
 import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import { TabsProps } from './types';
 
 const useStyles = makeStyles((theme) => ({
     tabs: {
@@ -41,7 +40,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const Tabs: FC<TabsProps> = ({ activeTab, tabs, onChange }) => {
+type Props = {
+    activeTab: number;
+    tabs: {
+        id: string;
+        data: {
+            title: string;
+        };
+    }[];
+    onChange: (arg0: number) => void;
+};
+
+
+export const Tabs: FC<Props> = ({ activeTab, tabs, onChange }) => {
     const classes = useStyles();
 
     /**

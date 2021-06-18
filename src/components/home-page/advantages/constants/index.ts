@@ -1,11 +1,5 @@
 import { addIdsToArrayOfObjects } from '@/utils';
 
-const img1 = '/images/home-page/advantages/1.jpg';
-const img2 = '/images/home-page/advantages/2.jpg';
-const img4 = '/images/home-page/advantages/4.jpg';
-const img5 = '/images/home-page/advantages/5.jpg';
-const img6 = '/images/home-page/advantages/6.jpg';
-
 export const TABS = addIdsToArrayOfObjects([
     {
         title: 'Эмаль',
@@ -15,7 +9,6 @@ export const TABS = addIdsToArrayOfObjects([
             'Более 2000 оттенков',
             'Разработка фасадов по вашему образцу',
         ],
-        img: img1,
     },
     {
         title: 'Ламинат',
@@ -26,7 +19,6 @@ export const TABS = addIdsToArrayOfObjects([
             'Высокая износостойкость',
             'Декоративная ударопрочная кромка (не Китай).',
         ],
-        img: img2,
     },
     {
         title: '3D Ламинат',
@@ -36,7 +28,6 @@ export const TABS = addIdsToArrayOfObjects([
             'Более 50 вариантов декоров под древесину, камень, кожу',
             'Высокая износостойкость',
         ],
-        img: img2,
     },
     {
         title: 'Шпон',
@@ -46,7 +37,6 @@ export const TABS = addIdsToArrayOfObjects([
             'Тонирование в нужный цвет',
             'Сохраняется точный рисунок древесины',
         ],
-        img: img4,
     },
     {
         title: 'Кожа',
@@ -55,7 +45,6 @@ export const TABS = addIdsToArrayOfObjects([
             'Выглядит благородно и элегантно',
             'Создает атмосферу респектабельности и эксклюзивности',
         ],
-        img: img5,
     },
     {
         title: 'Стекло',
@@ -67,6 +56,5 @@ export const TABS = addIdsToArrayOfObjects([
             'Художественное матирование стекла',
             'Составные панно из зеркал',
         ],
-        img: img6,
     },
 ]);

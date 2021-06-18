@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Hidden } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { PageImage } from './components';
 import Link from 'next/link';
-import Image from 'next/image';
-import { PageProps } from './types';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -160,21 +159,26 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const Page: FC<PageProps> = ({ titles, subtitles, texts, imageSet, to }) => {
+type Texts = {
+    id: string;
+    data: string;
+};
+
+export type PageProps = {
+    pageID: number;
+    titles: Texts[];
+    subtitles?: Texts[];
+    texts: Texts[];
+    to: string;
+};
+
+export const Page: FC<PageProps> = ({ pageID, titles, subtitles, texts, to }) => {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
             <div className={classes.imageContainer}>
-                <Hidden smDown>
-                    <Image src={imageSet.large} alt={titles[0].data} layout="fill" />
-                </Hidden>
-                <Hidden xsDown mdUp>
-                    <Image src={imageSet.medium} alt={titles[0].data} layout="fill" />
-                </Hidden>
-                <Hidden smUp>
-                    <Image src={imageSet.small} alt={titles[0].data} layout="fill" quality={90} />
-                </Hidden>
+                <PageImage pageID={pageID} />
             </div>
 
             <div className={classes.pageContent}>

@@ -1,12 +1,9 @@
 import React, { FC } from 'react';
-import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Hidden } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import Image from 'next/image';
-import { LoadingBackground } from '@/components/common';
-import { CatalogCardProps } from './types';
+import { CardImage } from './card-image';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -154,33 +151,35 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const CatalogCard: FC<CatalogCardProps> = ({ title, subtitle, caption, img, href }) => {
+export type Props = {
+    cardID: number;
+    title: string;
+    subtitle: string;
+    caption: string;
+    href: string;
+}
+
+export const CatalogCard: FC<Props> = ({ cardID, title, subtitle, caption, href }) => {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
             <a href={href} className={classes.link}>
                 <Hidden xsDown>
-                    <LoadingBackground>
-                        <div className={classes.imageContainer}>
-                            <Image
-                                src={img}
-                                alt={caption}
-                                layout="fill"
-                                className={classes.image}
-                                quality={100}
-                            />
-                            <div className={classes.hoverTextContainer}>
-                                <div>
-                                    <Typography variant="h5" className={classes.title}>
-                                        {title}
-                                    </Typography>
-                                    <Typography className={classes.subtitle}>{subtitle}</Typography>
-                                </div>
-                            </div>
-                            <ArrowForwardIcon className={classes.arrow} />
+                    <div className={classes.imageContainer}>
+                        <div className={classes.image}>
+                            <CardImage id={cardID} />
                         </div>
-                    </LoadingBackground>
+                        <div className={classes.hoverTextContainer}>
+                            <div>
+                                <Typography variant="h5" className={classes.title}>
+                                    {title}
+                                </Typography>
+                                <Typography className={classes.subtitle}>{subtitle}</Typography>
+                            </div>
+                        </div>
+                        <ArrowForwardIcon className={classes.arrow} />
+                    </div>
                     <div className={classes.captionContainer}>
                         <Typography className={classes.caption} component="span">
                             {caption}
@@ -188,40 +187,22 @@ export const CatalogCard: FC<CatalogCardProps> = ({ title, subtitle, caption, im
                     </div>
                 </Hidden>
                 <Hidden smUp>
-                    <LoadingBackground>
-                        <div className={classes.imageContainer}>
-                            <Image
-                                src={img}
-                                alt={caption}
-                                layout="fill"
-                                className={classes.image}
-                                quality={100}
-                            />
-                            <div className={classes.imgHeader}>
-                                <Typography
-                                    component="span"
-                                    className={cn(classes.caption, classes.captionSm)}
-                                >
-                                    {caption}
-                                </Typography>
-                            </div>
-                            <ArrowForwardIcon className={classes.arrow} />
+                    <div className={classes.imageContainer}>
+                        <div className={classes.image}>
+                            <CardImage id={cardID} />
                         </div>
-                    </LoadingBackground>
+                        <div className={classes.imgHeader}>
+                            <Typography
+                                component="span"
+                                className={cn(classes.caption, classes.captionSm)}
+                            >
+                                {caption}
+                            </Typography>
+                        </div>
+                        <ArrowForwardIcon className={classes.arrow} />
+                    </div>
                 </Hidden>
             </a>
         </div>
     );
-};
-
-CatalogCard.propTypes = {
-    title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string.isRequired,
-    caption: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    href: PropTypes.string,
-};
-
-CatalogCard.defaultProps = {
-    href: '/',
 };

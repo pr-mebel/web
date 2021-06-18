@@ -7,6 +7,8 @@ import Image from 'next/image';
 import { submitForm, saveForm } from '@/redux';
 import { BlockTitle, SubmitButton } from '@/components/common';
 
+import bgImg from 'public/images/home-page/questions-form/1.jpg';
+
 const useStyles = makeStyles({
     root: {
         padding: '80px 0',
@@ -78,10 +80,10 @@ export const QuestionsForm: FC = () => {
     return (
         <div className={classes.root}>
             <Image
-                src="/images/home-page/questions-form/1.jpg"
+                src={bgImg}
                 alt="Заполните форму ниже. Наш менеджер свяжется с вами и ответит на вопросы"
                 layout="fill"
-                quality={100}
+                placeholder='blur'
             />
             <Container className={classes.container}>
                 <BlockTitle>

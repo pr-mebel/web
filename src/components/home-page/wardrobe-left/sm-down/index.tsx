@@ -7,6 +7,10 @@ import { BlockTitle, MainButton, Pagination } from '@/components/common';
 import { WardrobeAdditionalBlock } from '../../wardrobe-additional-block';
 import { TABS, ADDITIONAL } from '../constants';
 
+import img1 from 'public/images/home-page/wardrobe-left/wardrobe-1.jpg';
+import img2 from 'public/images/home-page/wardrobe-left/wardrobe-2.jpg';
+import img3 from 'public/images/home-page/wardrobe-left/wardrobe-3.jpg';
+
 const useStyles = makeStyles((theme) => ({
     imgContainer: {
         position: 'relative',
@@ -98,18 +102,33 @@ export const WardrobeLeftSmDown: FC = () => {
                     </ul>
                 </Grid>
                 <Grid item xs={12} className={classes.imgContainer}>
-                    {TABS.map(({ data: { img, title }, id }, i) => (
-                        <Image
-                            key={id}
-                            src={img}
-                            layout="fill"
-                            alt={title}
-                            className={cn(classes.image, {
-                                [classes.selectedImage]: activePage === 0 && activeTabIndex === i,
-                            })}
-                            quality={100}
-                        />
-                    ))}
+                    <Image
+                        src={img1}
+                        layout="fill"
+                        alt='Однотонный'
+                        className={cn(classes.image, {
+                            [classes.selectedImage]: activePage === 0 && activeTabIndex === 0,
+                        })}
+                        placeholder='blur'
+                    />
+                    <Image
+                        src={img2}
+                        layout="fill"
+                        alt='Комбинированный'
+                        className={cn(classes.image, {
+                            [classes.selectedImage]: activePage === 0 && activeTabIndex === 1,
+                        })}
+                        placeholder='blur'
+                    />
+                    <Image
+                        src={img3}
+                        layout="fill"
+                        alt='Кобминированный с Alcantara'
+                        className={cn(classes.image, {
+                            [classes.selectedImage]: activePage === 0 && activeTabIndex === 2,
+                        })}
+                        placeholder='blur'
+                    />
                     {ADDITIONAL.map(({ data: { img, title }, id }, i) => (
                         <Image
                             key={id}

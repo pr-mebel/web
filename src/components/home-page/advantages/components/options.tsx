@@ -2,7 +2,6 @@ import React, { FC, useMemo } from 'react';
 import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { addIdsToArrayOfObjects } from '@/utils';
-import { OptionsProps } from './types';
 
 const useStyles = makeStyles({
     tabContent: {
@@ -13,7 +12,13 @@ const useStyles = makeStyles({
     },
 });
 
-export const Options: FC<OptionsProps> = ({ activeTab, children }) => {
+type Props = {
+    activeTab: number;
+    children: React.ReactNode[];
+};
+
+
+export const Options: FC<Props> = ({ activeTab, children }) => {
     const classes = useStyles();
 
     const childrenWithIds = useMemo(() => addIdsToArrayOfObjects(children), [children]);

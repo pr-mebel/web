@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Image from 'next/image';
 
+import img from 'public/images/common/shop-img/1.png';
+
 const useStyles = makeStyles({
     root: {
         width: '100%',
@@ -16,10 +18,10 @@ export const ShopImg = () => {
     return (
         <div className={classes.root}>
             <Image
-                src="/images/common/shop-img/1.png"
-                quality={100}
+                src={img}
                 layout="fill"
                 alt="Изображение салона"
+                placeholder='blur'
             />
         </div>
     );

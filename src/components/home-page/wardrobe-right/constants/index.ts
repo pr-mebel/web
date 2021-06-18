@@ -13,8 +13,6 @@ const imgAdd9 = '/images/home-page/wardrobe-right/9.jpg';
 const imgAdd10 = '/images/home-page/wardrobe-right/10.jpg';
 const imgAdd11 = '/images/home-page/wardrobe-right/11.jpg';
 
-export const defaultImage = '/images/home-page/wardrobe-right/wardrobe-1.jpg';
-
 export const ADDITIONAL = addIdsToArrayOfObjects([
     // 1
     {

@@ -182,7 +182,7 @@ export const Carousel = () => {
         return () => {
             document.removeEventListener('visibilitychange', handleVisibilityChange);
         };
-    }, []);
+    }, [pause, unpause]);
 
     return (
         <div className={classes.root} ref={rootRef}>

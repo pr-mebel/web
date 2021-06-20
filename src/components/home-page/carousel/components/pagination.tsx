@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import cn from 'classnames';
 import { range } from 'lodash';
-import { PaginationProps } from './types';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -47,6 +46,12 @@ const useStyles = makeStyles(() => ({
         cursor: 'pointer',
     },
 }));
+
+type PaginationProps = {
+    numberOfPages: number;
+    currentPage: number;
+    onChangeSlide: (arg0: number) => void;
+};
 
 export const Pagination: FC<PaginationProps> = ({ currentPage, numberOfPages, onChangeSlide }) => {
     const classes = useStyles();

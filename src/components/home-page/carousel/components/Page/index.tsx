@@ -208,7 +208,7 @@ export const Page: FC<PageProps> = ({ pageID, titles, subtitles, texts, to }) =>
                     ))}
                 </div>
                 <div className={classes.buttonContainer}>
-                    <Link href={to}>
+                    <Link href={to} passHref>
                         <button type="button" className={classes.button}>
                             <Typography className={classes.buttonText}>Подробнее</Typography>
                         </button>

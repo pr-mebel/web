@@ -4,7 +4,7 @@ import { Container, Typography, Grid, Hidden } from '@material-ui/core';
 import { BlockTitle, MainButton } from '@/components/common';
 import { NB_SP } from '@/constants';
 
-export const LIST = [
+const LIST = [
     {
         id: '01',
         title: 'Оставьте заявку на сайте или закажите звонок',

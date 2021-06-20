@@ -23,17 +23,6 @@ const useStyles = makeStyles((theme) => ({
     rowBottom: {
         marginTop: '10px',
     },
-    icon: {
-        width: '50px',
-        height: '50px',
-        '& path': {
-            fill: theme.palette.primary.main,
-        },
-        [theme.breakpoints.down('xs')]: {
-            width: '35px',
-            height: '35px',
-        },
-    },
     text: {
         fontSize: '15px',
         lineHeight: '17px',
@@ -41,13 +30,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type CardProps = {
-    Img: React.FC<{ className: string }>;
+    img: React.ReactNode;
     title: string;
     text: string;
 };
 
 
-export const Card: FC<CardProps> = ({ Img, title, text }) => {
+export const Card: FC<CardProps> = ({ img, title, text }) => {
     const classes = useStyles();
     const theme = useTheme();
     const isXsDown = useMediaQuery(theme.breakpoints.down('xs'));
@@ -56,7 +45,7 @@ export const Card: FC<CardProps> = ({ Img, title, text }) => {
         <>
             <Hidden xsDown>
                 <div className={classes.rowTop}>
-                    <Img className={classes.icon} />
+                    {img}
                     <div className={classes.titleContainer}>
                         <Typography variant={isXsDown ? 'h5' : 'h6'} className={classes.title}>
                             {title}
@@ -72,7 +61,7 @@ export const Card: FC<CardProps> = ({ Img, title, text }) => {
             <Hidden smUp>
                 <Grid container alignItems="center">
                     <Grid item xs={2}>
-                        <Img className={classes.icon} />
+                        {img}
                     </Grid>
                     <Grid item xs={10}>
                         <Typography variant={isXsDown ? 'h5' : 'h6'} className={classes.title}>

@@ -9,7 +9,7 @@ import { BlockTitle, MainButton, Pagination } from '@/components/common';
 
 import img from 'public/images/home-page/our-production/1.jpg';
 
-export const LIST = addIdsToArrayOfObjects([
+const LIST = addIdsToArrayOfObjects([
     {
         title: 'Квалифицированный персонал',
         text: `Все сотрудники нашей фабрики имеют многолетний опыт работы

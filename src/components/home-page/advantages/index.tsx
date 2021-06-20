@@ -6,8 +6,8 @@ import CheckIcon from '@material-ui/icons/Check';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import Image from 'next/image';
+import { addIdsToArrayOfObjects } from '@/utils';
 import { BlockTitle, MainButton } from '@/components/common';
-import { TABS } from './constants';
 import { Tabs, Options } from './components';
 
 import img1 from 'public/images/home-page/advantages/1.jpg';
@@ -16,6 +16,66 @@ import img3 from 'public/images/home-page/advantages/3.jpg';
 import img4 from 'public/images/home-page/advantages/4.jpg';
 import img5 from 'public/images/home-page/advantages/5.jpg';
 import img6 from 'public/images/home-page/advantages/6.jpg';
+
+
+export const TABS = addIdsToArrayOfObjects([
+    {
+        title: 'Эмаль',
+        list: [
+            'Классичесике и современные модели фасадов',
+            'Патина, матовые и глянцевые отделки',
+            'Более 2000 оттенков',
+            'Разработка фасадов по вашему образцу',
+        ],
+    },
+    {
+        title: 'Ламинат',
+        list: [
+            'Итальянские, немецкие и австрийские материалы',
+            '100% экологичность, можно применять в детских комнатах',
+            'Более 300 вариантов декоров под любой дизайн помещения',
+            'Высокая износостойкость',
+            'Декоративная ударопрочная кромка (не Китай).',
+        ],
+    },
+    {
+        title: '3D Ламинат',
+        list: [
+            'Европейские материалы',
+            'Глубокая имитация текстуры натуральных материалов',
+            'Более 50 вариантов декоров под древесину, камень, кожу',
+            'Высокая износостойкость',
+        ],
+    },
+    {
+        title: 'Шпон',
+        list: [
+            'Подбор шпона по образцу',
+            'Покраска эмалью',
+            'Тонирование в нужный цвет',
+            'Сохраняется точный рисунок древесины',
+        ],
+    },
+    {
+        title: 'Кожа',
+        list: [
+            'Прочный и долговечный материал',
+            'Выглядит благородно и элегантно',
+            'Создает атмосферу респектабельности и эксклюзивности',
+        ],
+    },
+    {
+        title: 'Стекло',
+        list: [
+            'Декоративные и крашеные стекла',
+            'Декоративные и цветные зеркала',
+            'Более 100 декоров',
+            'Нанесение декоративной гравировки',
+            'Художественное матирование стекла',
+            'Составные панно из зеркал',
+        ],
+    },
+]);
 
 const useStyles = makeStyles((theme) => ({
     description: {

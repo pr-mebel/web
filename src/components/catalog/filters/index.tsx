@@ -3,9 +3,9 @@ import { find } from 'lodash';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from '@material-ui/core';
 import { filters as filterOptions } from '@/constants';
+import { SectionID, StyleID, DoorTypeID, FilterField, FilterValue } from '@/entities';
 import { BlockTitle, Link } from '@/components/common';
 import { LeadText, SectionPicker, BottomFilters } from './components';
-import { FiltersProps } from './types';
 
 const useStyles = makeStyles((theme) => ({
     breadcrumbs: {
@@ -41,6 +41,16 @@ const useStyles = makeStyles((theme) => ({
         },
     },
 }));
+
+type FiltersProps = {
+    filter: {
+        section: SectionID;
+        style: StyleID;
+        doorType: DoorTypeID;
+    };
+    onChange: (arg0: { name: FilterField; value: FilterValue }) => void;
+};
+
 
 export const Filters: FC<FiltersProps> = ({ filter, onChange }) => {
     const classes = useStyles();

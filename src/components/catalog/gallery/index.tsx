@@ -3,7 +3,6 @@ import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { MainButton, Loader } from '@/components/common';
 import { Card } from './components';
-import { GalleryProps } from './types';
 
 const useStyles = makeStyles((theme) => ({
     buttonContainer: {
@@ -21,6 +20,21 @@ const useStyles = makeStyles((theme) => ({
         },
     },
 }));
+
+type GalleryProps = {
+    items: {
+        id: string;
+        imageMinified: {
+            url: string;
+        };
+        collection: string;
+    }[];
+    isLoading: boolean;
+    hasMore: boolean;
+    onCardClick: (cardID: number) => void;
+    onLoadMore: () => void;
+};
+
 
 export const Gallery: FC<GalleryProps> = ({
     items,

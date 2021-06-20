@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Container, Grid } from '@material-ui/core';
+import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { MainButton, Loader } from '@/components/common';
 import { Card } from './components';
@@ -10,7 +10,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '60px',
     },
     notFound: {
-        minHeight: '300px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '200px',
     },
     [theme.breakpoints.down('xs')]: {
         buttonContainer: {
@@ -28,8 +31,6 @@ export const Gallery: FC<GalleryProps> = ({
 }) => {
     const classes = useStyles();
 
-    console.log(items);
-
     return (
         <Container>
             <Grid container spacing={3}>
@@ -45,6 +46,13 @@ export const Gallery: FC<GalleryProps> = ({
                 ))}
                 {isLoading && <Loader />}
             </Grid>
+            {items.length === 0 && !isLoading && (
+                <div className={classes.notFound}>
+                    <Typography align='center'>
+                        По заданному фильтру ничего не найдено. Пожалуйста, поменяйте запрос.
+                    </Typography>
+                </div>
+            )}
             {!!hasMore && (
                 <Grid container justify="center" className={classes.buttonContainer}>
                     <Grid item xs={10} sm={8} md={6}>

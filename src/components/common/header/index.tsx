@@ -5,9 +5,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import MenuIcon from '@material-ui/icons/Menu';
-import Fb from 'public/fb.svg';
-import Inst from 'public/in.svg';
-import Vk from 'public/vk.svg';
+import { Facebook, Vkontakte, Instagram, LogoHeader } from '@/components';
 import { Link } from '../link';
 import { MainButton } from '../main-button';
 
@@ -197,9 +195,7 @@ export const Header: FC = () => {
                     <Grid container>
                         <Grid item xs={2} className={classes.logoContainer}>
                             <Link to="/">
-                                <img
-                                    src="/logo_header.svg"
-                                    alt="logo"
+                                <LogoHeader
                                     className={cn(classes.logo, {
                                         [classes.logoDense]: smallHeader,
                                     })}
@@ -306,17 +302,17 @@ export const Header: FC = () => {
                             <ul className={cn(classes.list, classes.social)}>
                                 <li>
                                     <a href="https://vk.com/public185518769">
-                                        <Vk className={classes.socialIcon} />
+                                        <Vkontakte className={classes.socialIcon} />
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://www.instagram.com/pr_mebel.ru/">
-                                        <Inst className={classes.socialIcon} />
+                                        <Instagram className={classes.socialIcon} />
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://www.facebook.com/%D0%A7%D0%B0%D1%81%D1%82%D0%BD%D1%8B%D0%B9-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D1%8C%D0%B5%D1%80-108136607213942">
-                                        <Fb className={classes.socialIcon} />
+                                        <Facebook className={classes.socialIcon} />
                                     </a>
                                 </li>
                             </ul>
@@ -333,7 +329,9 @@ export const Header: FC = () => {
                                     classes.logoContainerSm,
                                 )}
                             >
-                                <img src="/logo_header.svg" alt="logo" className={classes.logoSm} />
+                                <LogoHeader
+                                    className={classes.logoSm}
+                                />
                             </Link>
                         </div>
                         <div>
@@ -446,17 +444,17 @@ export const Header: FC = () => {
                                 <ul className={cn(classes.list, classes.social)}>
                                     <li>
                                         <a href="https://vk.com/public185518769">
-                                            <Vk className={classes.socialIcon} />
+                                            <Vkontakte className={classes.socialIcon} />
                                         </a>
                                     </li>
                                     <li>
                                         <a href="https://www.instagram.com/pr_mebel.ru/">
-                                            <Inst className={classes.socialIcon} />
+                                            <Instagram className={classes.socialIcon} />
                                         </a>
                                     </li>
                                     <li>
                                         <a href="https://www.facebook.com/%D0%A7%D0%B0%D1%81%D1%82%D0%BD%D1%8B%D0%B9-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D1%8C%D0%B5%D1%80-108136607213942">
-                                            <Fb className={classes.socialIcon} />
+                                            <Facebook className={classes.socialIcon} />
                                         </a>
                                     </li>
                                 </ul>

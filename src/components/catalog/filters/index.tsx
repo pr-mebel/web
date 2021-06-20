@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { find } from 'lodash';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from '@material-ui/core';
-import { filters as filterOptions } from '@/entities';
+import { filters as filterOptions } from '@/constants';
 import { BlockTitle, Link } from '@/components/common';
 import { LeadText, SectionPicker, BottomFilters } from './components';
 import { FiltersProps } from './types';

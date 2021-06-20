@@ -5,9 +5,7 @@ import { ArrowBack, ArrowForward, Clear as ClearIcon } from '@material-ui/icons'
 import cn from 'classnames';
 import { MainButton, LoadingBackground, Loader } from '@/components/common';
 import { CardPopupProps } from './types';
-import Fb from './assets/fb.svg';
-import Inst from './assets/in.svg';
-import Vk from './assets/vk.svg';
+import { Facebook, Vkontakte, Instagram } from '@/components';
 
 const useStyles = makeStyles((theme) => ({
     paperRoot: {
@@ -251,17 +249,17 @@ export const CardPopup: FC<CardPopupProps> = ({
                             <Grid item xs={6} sm={4} container spacing={2}>
                                 <Grid item xs={4} container justify="center">
                                     <a href="https://www.instagram.com/pr_mebel.ru/">
-                                        <Inst className={classes.socialIcon} />
+                                        <Instagram className={classes.socialIcon} />
                                     </a>
                                 </Grid>
                                 <Grid item xs={4} container justify="center">
                                     <a href="https://vk.com/public185518769">
-                                        <Vk className={classes.socialIcon} />
+                                        <Vkontakte className={classes.socialIcon} />
                                     </a>
                                 </Grid>
                                 <Grid item xs={4} container justify="center">
                                     <a href="https://www.facebook.com/%D0%A7%D0%B0%D1%81%D1%82%D0%BD%D1%8B%D0%B9-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D1%8C%D0%B5%D1%80-108136607213942">
-                                        <Fb className={classes.socialIcon} />
+                                        <Facebook className={classes.socialIcon} />
                                     </a>
                                 </Grid>
                             </Grid>

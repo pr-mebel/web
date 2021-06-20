@@ -39,7 +39,7 @@ type Body = {
     files?: FileList;
 }
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
     const { email, name, tel, description, files } = req.body as Body;
     const storageRef = storage().ref();
 
@@ -77,3 +77,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             .then(() => res.json(200));
     }
 };
+
+export default sendEmail;

@@ -1,0 +1,22 @@
+{
+  "extends": "next",
+  // Ничего не делает
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ],
+        "paths": [
+          "."
+        ]
+      }
+    },
+    "react": {
+      "version": "detect"
+    }
+  }
+}

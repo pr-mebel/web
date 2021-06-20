@@ -2,10 +2,7 @@ import React, { FC, useContext } from 'react';
 import { Container, Typography, Grid, Hidden } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from '@/components/common';
-import Logo from './assets/logo_footer.svg';
-import Vk from './assets/vk.svg';
-import Fb from './assets/fb.svg';
-import Inst from './assets/in.svg';
+import { Instagram, Vkontakte, Facebook, LogoFooter } from '@/components';
 import { orderFormCtx } from '@/utils';
 
 const useStyles = makeStyles((theme) => ({
@@ -112,7 +109,7 @@ export const Footer: FC = () => {
                 <Grid container justify="center" className={classes.logoContainer}>
                     <Grid item xs={12}>
                         <Link to="/">
-                            <Logo className={classes.logo} />
+                            <LogoFooter className={classes.logo} />
                         </Link>
                         <Typography align="center" className={classes.subtitle}>
                             Салон мебели премиум класса
@@ -338,17 +335,17 @@ export const Footer: FC = () => {
                     <Grid item xs={6} sm={4} container className={classes.socialIconsContainer}>
                         <Grid item xs={4} container justify="center">
                             <a href="https://vk.com/public185518769">
-                                <Vk className={classes.socialIcon} />
+                                <Vkontakte className={classes.socialIcon} />
                             </a>
                         </Grid>
                         <Grid item xs={4} container justify="center">
                             <a href="https://www.instagram.com/pr_mebel.ru/">
-                                <Inst className={classes.socialIcon} />
+                                <Instagram className={classes.socialIcon} />
                             </a>
                         </Grid>
                         <Grid item xs={4} container justify="center">
                             <a href="https://www.facebook.com/%D0%A7%D0%B0%D1%81%D1%82%D0%BD%D1%8B%D0%B9-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D1%8C%D0%B5%D1%80-108136607213942">
-                                <Fb className={classes.socialIcon} />
+                                <Facebook className={classes.socialIcon} />
                             </a>
                         </Grid>
                     </Grid>

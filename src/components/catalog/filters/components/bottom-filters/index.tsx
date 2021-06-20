@@ -2,7 +2,8 @@ import React, { FC, useCallback } from 'react';
 import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid } from '@material-ui/core';
-import { FilterField, filters as filterOptions, FilterValue } from '@/entities';
+import { FilterField, FilterValue } from '@/entities';
+import { filters as filterOptions } from '@/constants';
 import { BottomFiltersProps } from './types';
 
 const useStyles = makeStyles((theme) => ({

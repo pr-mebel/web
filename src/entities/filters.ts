@@ -1,27 +1,11 @@
-export const sectionIDs = [
-    'cupboard',
-    'wardrobe',
-    'accessories',
-    'lightingSystems',
-] as const;
-export type SectionID = typeof sectionIDs[number];
+import { filters } from '@/constants';
 
-export const styleIDs = [
-    'any',
-    'modern',
-    'classic',
-    'neoclassic',
-    'designer',
-] as const;
-export type StyleID = typeof styleIDs[number];
-
-export const doorTypeIDs = [
-    'any',
-    'coupe',
-    'swing',
-    'folding',
-] as const;
-export type DoorTypeID = typeof doorTypeIDs[number];
+export const sectionIDs = filters.sections.map((section) => section.id);
+export type SectionID = typeof filters.sections[number]['id'];
+export const styleIDs = filters.styles.map((style) => style.id);
+export type StyleID = typeof filters.styles[number]['id'];
+export const doorTypeIDs = filters.doorTypes.map((doorTypes) => doorTypes.id);
+export type DoorTypeID = typeof filters.doorTypes[number]['id'];
 
 export const filterFields = [
     'section',
@@ -39,88 +23,12 @@ export type Filter = {
 export type FilterValue = SectionID | StyleID | DoorTypeID;
 
 export type FilterKeyValue = {
-    name: typeof filterFields[0];
+    name: 'section';
     value: SectionID;
 } | {
-    name: typeof filterFields[1];
+    name: 'style';
     value: StyleID;
 } | {
-    name: typeof filterFields[2];
+    name: 'doorType';
     value: DoorTypeID;
-};
-
-type Filters = {
-    sections: {
-        title: string;
-        id: SectionID;
-    }[];
-    styles: {
-        title: string;
-        id: StyleID;
-    }[];
-    doorTypes: {
-        title: string;
-        id: DoorTypeID;
-    }[];
-}
-
-export const filters: Filters = {
-    sections: [
-        {
-            title: 'Шкафы',
-            id: 'cupboard',
-        },
-        {
-            title: 'Гардеробные',
-            id: 'wardrobe',
-        },
-        {
-            title: 'Аксессуары',
-            id: 'accessories',
-        },
-        {
-            title: 'Cистемы подсветки',
-            id: 'lightingSystems',
-        },
-    ],
-    styles: [
-        {
-            title: 'Все',
-            id: 'any',
-        },
-        {
-            title: 'Современные',
-            id: 'modern',
-        },
-        {
-            title: 'Классические',
-            id: 'classic',
-        },
-        {
-            title: 'Неоклассика',
-            id: 'neoclassic',
-        },
-        {
-            title: 'Дизайнерские',
-            id: 'designer',
-        },
-    ],
-    doorTypes: [
-        {
-            title: 'Все',
-            id: 'any',
-        },
-        {
-            title: 'Купе',
-            id: 'coupe',
-        },
-        {
-            title: 'Распашные',
-            id: 'swing',
-        },
-        {
-            title: 'Складные',
-            id: 'folding',
-        },
-    ],
 };

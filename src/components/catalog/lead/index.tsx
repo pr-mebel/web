@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import { filters } from '@/constants';
 import cn from 'classnames';
 import Image from 'next/image';
-import { images } from './constants';
-import { LeadProps } from './types';
+
+import cupboard from 'public/images/catalog/lead/cupboard.jpg';
+import wardrobe from 'public/images/catalog/lead/wardrobe.jpg';
+import accessories from 'public/images/catalog/lead/accessories.jpg';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,27 +37,55 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const Lead: FC<LeadProps> = ({ sectionId }) => {
+export type Props = {
+    sectionID: typeof filters.sections[number]['id'];
+};
+
+export const Lead: FC<Props> = ({ sectionID }) => {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            {images.map((imageWrapper) => (
-                <Image
-                    key={imageWrapper.id}
-                    src={imageWrapper.data.image}
-                    alt={imageWrapper.data.sectionId}
-                    className={cn(classes.image, {
-                        [classes.selectedImage]: imageWrapper.data.sectionId === sectionId,
-                    })}
-                    layout="fill"
-                    objectFit="cover"
-                />
-            ))}
+            <Image
+                src={cupboard}
+                alt='Шкафы'
+                className={cn(classes.image, {
+                    [classes.selectedImage]: sectionID === 'cupboard',
+                })}
+                layout="fill"
+                placeholder='blur'
+                objectFit="cover"
+            />
+            <Image
+                src={wardrobe}
+                alt='Гардеробные'
+                className={cn(classes.image, {
+                    [classes.selectedImage]: sectionID === 'wardrobe',
+                })}
+                layout="fill"
+                placeholder='blur'
+                objectFit="cover"
+            />
+            <Image
+                src={accessories}
+                alt='Аксессуары'
+                className={cn(classes.image, {
+                    [classes.selectedImage]: sectionID === 'accessories',
+                })}
+                layout="fill"
+                placeholder='blur'
+                objectFit="cover"
+            />
+            <Image
+                src={accessories}
+                alt='Cистемы подсветки'
+                className={cn(classes.image, {
+                    [classes.selectedImage]: sectionID === 'lightingSystems',
+                })}
+                layout="fill"
+                placeholder='blur'
+                objectFit="cover"
+            />
         </div>
     );
-};
-
-Lead.propTypes = {
-    sectionId: PropTypes.string.isRequired,
 };

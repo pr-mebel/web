@@ -1,8 +1,8 @@
 import React, { FC, useState, useCallback, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Loader } from '@/components/common';
 import { Dialog } from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
+import { Loader } from '@/components/common';
 import { FullScreenPopupProps } from './types';
 
 const useStyles = makeStyles(() => ({
@@ -63,13 +63,22 @@ export const FullScreenPopup: FC<FullScreenPopupProps> = ({ img, isOpen, onClose
                 className: classes.paperRoot,
             }}
         >
-            <ClearIcon className={classes.closeIcon} onClick={onClose} />
-            {isLoading && (
+            {isLoading ? (
                 <div>
                     <Loader />
                 </div>
+            ) : (
+                <>
+                    <ClearIcon className={classes.closeIcon} onClick={onClose} />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                        className={classes.img}
+                        src={img}
+                        alt="Товар"
+                        onLoad={handleSetLoaded}
+                    />
+                </>
             )}
-            <img className={classes.img} src={img} alt="Товар" onLoad={handleSetLoaded} />
         </Dialog>
     );
 };

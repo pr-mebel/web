@@ -14,9 +14,10 @@ import {
     FullScreenPopup,
 } from '@/components';
 import { useModal } from '@/hooks';
-import { Filter, FilterField, FilterValue } from '@/entities';
+import { Filter, FilterField, FilterValue, Item } from '@/entities';
 import { fetchCatalogByFilter } from '@/utils/api';
 import { checkIfNameAndValueAreKnown } from '@/utils';
+import { batchSize } from '@/constants';
 
 const useStyles = makeStyles((theme) => ({
     filterSection: {
@@ -59,12 +60,15 @@ const initialFilters = {
 const Catalog: FC = () => {
     const router = useRouter();
     const [filters, setFilters] = useState(initialFilters);
-    const [pagination, setPagination] = useState({
-        current: 1,
-        hasMore: false,
-    });
-    const getCatalogRequest = useRequest(() => fetchCatalogByFilter(filters, pagination.current), {
-        refreshDeps: [filters, pagination],
+    const [items, setItems] = useState<Item[]>([]);
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(false);
+    const getCatalogRequest = useRequest(() => fetchCatalogByFilter(filters, page), {
+        refreshDeps: [filters, page],
+        onSuccess: (res) => {
+            setItems((prev) => [...prev, ...res.data.items]);
+            setHasMore(res.data.total > page * batchSize);
+        },
     });
     const [currentItemID, setCurrentItemID] = useState<number | undefined>();
     const cardModal = useModal({
@@ -75,14 +79,7 @@ const Catalog: FC = () => {
             setCurrentItemID(undefined);
         },
     });
-    const cardModalFullScreen = useModal({
-        onOpen: (itemID: number) => {
-            setCurrentItemID(itemID);
-        },
-        onClose: () => {
-            setCurrentItemID(undefined);
-        },
-    });
+    const cardModalFullScreen = useModal();
     const classes = useStyles();
 
     /**
@@ -94,6 +91,9 @@ const Catalog: FC = () => {
                 ...prev,
                 [name]: value,
             }));
+            setPage(1);
+            setHasMore(false);
+            setItems([]);
         },
         [],
     );
@@ -116,10 +116,8 @@ const Catalog: FC = () => {
      * Подгрузить больше изображений в галерее
      */
     const handleDownloadMoreCards = useCallback(() => {
-        setPagination((prev) => ({
-            current: prev.current + 1,
-            hasMore: false,
-        }));
+        setPage((prev) => prev + 1);
+        setHasMore(false);
     }, []);
 
     /**
@@ -152,20 +150,20 @@ const Catalog: FC = () => {
         } else {
             setFilters(initialFilters);
         }
-    }, [router.query]);
+    }, [router]);
 
     return (
         <>
             <main>
-                <Lead sectionId={filters.section} />
+                <Lead sectionID={filters.section} />
                 <section className={classes.filterSection}>
                     <Filters filter={filters} onChange={handleChangeFilter} />
                 </section>
                 <section className={classes.gallerySection}>
                     <Gallery
-                        items={getCatalogRequest.data?.data.items || []}
+                        items={items}
                         isLoading={getCatalogRequest.loading}
-                        hasMore={pagination.hasMore}
+                        hasMore={hasMore}
                         onCardClick={cardModal.handleOpen}
                         onLoadMore={handleDownloadMoreCards}
                     />
@@ -183,7 +181,7 @@ const Catalog: FC = () => {
                     <Map />
                 </section>
             </main>
-            {cardModal.isOpen && currentItemID && (
+            {cardModal.isOpen && currentItemID !== undefined && (
                 <CardPopup
                     items={getCatalogRequest.data?.data.items || []}
                     currentItemId={currentItemID}
@@ -196,7 +194,7 @@ const Catalog: FC = () => {
                     onFullScreenPopupOpen={cardModalFullScreen.handleOpen}
                 />
             )}
-            {cardModalFullScreen.isOpen && currentItemID && (
+            {cardModalFullScreen.isOpen && currentItemID !== undefined && (
                 <FullScreenPopup
                     img={getCatalogRequest.data?.data.items[currentItemID].imageFull.url || ''}
                     isOpen={cardModalFullScreen.isOpen}

@@ -9,12 +9,12 @@ const useStyles = makeStyles({
     },
 });
 
-type WardrobeAdditionalBlockProps = {
+type Props = {
     title: string;
     text: string;
 };
 
-export const WardrobeAdditionalBlock: FC<WardrobeAdditionalBlockProps> = ({ title, text }) => {
+export const WardrobeAdditionalBlock: FC<Props> = ({ title, text }) => {
     const classes = useStyles();
 
     return (

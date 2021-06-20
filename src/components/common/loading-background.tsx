@@ -22,11 +22,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-type LoadingBackgroundProps = {
+type Props = {
     className?: string;
 };
 
-export const LoadingBackground: FC<LoadingBackgroundProps> = ({ children, className = '' }) => {
+export const LoadingBackground: FC<Props> = ({ children, className }) => {
     const classes = useStyles();
 
     return <div className={cn(classes.root, className)}>{children}</div>;

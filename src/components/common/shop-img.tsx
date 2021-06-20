@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Image from 'next/image';
 
@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     },
 });
 
-export const ShopImg = () => {
+export const ShopImg: FC = () => {
     const classes = useStyles();
 
     return (

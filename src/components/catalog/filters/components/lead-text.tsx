@@ -88,11 +88,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-type LeadTextProps = {
+type Props = {
     selectedSection: SectionID;
 };
 
-export const LeadText: FC<LeadTextProps> = ({ selectedSection }) => {
+export const LeadText: FC<Props> = ({ selectedSection }) => {
     const classes = useStyles();
     const theme = useTheme();
     const mdUp = useMediaQuery(theme.breakpoints.up('md'));

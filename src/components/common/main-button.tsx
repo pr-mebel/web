@@ -35,12 +35,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-type MainButtonProps = {
+type Props = {
     disabled?: boolean;
     onClick?: () => void;
 };
 
-export const MainButton: FC<MainButtonProps> = ({ disabled, children, onClick }) => {
+export const MainButton: FC<Props> = ({ disabled, children, onClick }) => {
     const classes = useStyles();
     const orderForm = useContext(orderFormCtx);
 

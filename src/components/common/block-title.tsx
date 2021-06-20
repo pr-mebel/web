@@ -25,11 +25,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-type BlockTitleProps = {
+type Props = {
     className?: string;
 };
 
-export const BlockTitle: FC<BlockTitleProps> = ({ className = '', children }) => {
+export const BlockTitle: FC<Props> = ({ className, children }) => {
     const classes = useStyles();
 
     return <div className={cn(classes.root, className)}>{children}</div>;

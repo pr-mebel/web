@@ -56,14 +56,14 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-type WardrobeSnipperProps = {
+type Props = {
     title: string;
     text: string;
     img: string;
     direction: string;
 };
 
-export const WardrobeSnippet: FC<WardrobeSnipperProps> = ({ title, text, img, direction }) => {
+export const WardrobeSnippet: FC<Props> = ({ title, text, img, direction }) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
     const popup = useModal({

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Container, Typography, Grid } from '@material-ui/core';
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     },
 });
 
-export const About = () => {
+export const About: FC = () => {
     const classes = useStyles();
     const theme = useTheme();
     const isXsDown = useMediaQuery(theme.breakpoints.down('xs'));

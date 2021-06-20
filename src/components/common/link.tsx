@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-type LinkProps = {
+type Props = {
     to?: string;
     external?: boolean;
     asButton?: boolean;
@@ -25,7 +25,7 @@ type LinkProps = {
     onClick?: React.MouseEventHandler<HTMLSpanElement>;
 };
 
-export const Link: FC<LinkProps> = ({
+export const Link: FC<Props> = ({
     to = '/',
     external,
     asButton,

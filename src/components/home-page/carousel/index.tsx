@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect, useRef, FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const Carousel = () => {
+export const Carousel: FC = () => {
     const classes = useStyles();
     const rootRef = useRef<HTMLDivElement>(null);
 

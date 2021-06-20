@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-type BottomFiltersProps = {
+type Props = {
     filter: {
         section: SectionID;
         style: StyleID;
@@ -52,7 +52,7 @@ type BottomFiltersProps = {
 };
 
 
-export const BottomFilters: FC<BottomFiltersProps> = ({ filter, onChange }) => {
+export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
     const classes = useStyles();
 
     /**

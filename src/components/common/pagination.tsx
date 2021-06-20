@@ -45,13 +45,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-type PaginationProps = {
+type Props = {
     numberOfPages: number;
     activeIndex: number;
     onChange: (arg0: number) => void;
 };
 
-export const Pagination: FC<PaginationProps> = ({ numberOfPages, activeIndex, onChange }) => {
+export const Pagination: FC<Props> = ({ numberOfPages, activeIndex, onChange }) => {
     const classes = useStyles();
 
     /**

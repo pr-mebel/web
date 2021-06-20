@@ -164,7 +164,7 @@ type Texts = {
     data: string;
 };
 
-export type PageProps = {
+type Props = {
     pageID: number;
     titles: Texts[];
     subtitles?: Texts[];
@@ -172,7 +172,7 @@ export type PageProps = {
     to: string;
 };
 
-export const Page: FC<PageProps> = ({ pageID, titles, subtitles, texts, to }) => {
+export const Page: FC<Props> = ({ pageID, titles, subtitles, texts, to }) => {
     const classes = useStyles();
 
     return (

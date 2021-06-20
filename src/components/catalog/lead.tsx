@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export type Props = {
+type Props = {
     sectionID: typeof filters.sections[number]['id'];
 };
 

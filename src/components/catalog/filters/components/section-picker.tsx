@@ -44,14 +44,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-type SectionPickerProps = {
+type Props = {
     options: typeof filters.sections;
     value: SectionID;
     onChange: (arg0: { name: FilterField; value: FilterValue }) => void;
 };
 
 
-export const SectionPicker: FC<SectionPickerProps> = ({ options, value, onChange }) => {
+export const SectionPicker: FC<Props> = ({ options, value, onChange }) => {
     const classes = useStyles();
 
     /**

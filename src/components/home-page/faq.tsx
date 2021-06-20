@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Container,
@@ -134,7 +134,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const FAQ = () => {
+export const FAQ: FC = () => {
     const classes = useStyles();
     const [isShowMoreClicked, setIsShowMoreClicked] = useState(false);
     const [expandedList, setExpandedList] = useState(

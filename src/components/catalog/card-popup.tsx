@@ -120,7 +120,7 @@ type Image = {
     url: string;
 };
 
-export type CardPopupProps = {
+type Props = {
     isOpen: boolean;
     isLoading: boolean;
     items: {
@@ -140,7 +140,7 @@ export type CardPopupProps = {
 };
 
 
-export const CardPopup: FC<CardPopupProps> = ({
+export const CardPopup: FC<Props> = ({
     items,
     currentItemId,
     isOpen,

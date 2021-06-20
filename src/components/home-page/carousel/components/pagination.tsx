@@ -47,13 +47,13 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-type PaginationProps = {
+type Props = {
     numberOfPages: number;
     currentPage: number;
     onChangeSlide: (arg0: number) => void;
 };
 
-export const Pagination: FC<PaginationProps> = ({ currentPage, numberOfPages, onChangeSlide }) => {
+export const Pagination: FC<Props> = ({ currentPage, numberOfPages, onChangeSlide }) => {
     const classes = useStyles();
 
     /**

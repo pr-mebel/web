@@ -151,7 +151,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export type Props = {
+type Props = {
     cardID: number;
     title: string;
     subtitle: string;

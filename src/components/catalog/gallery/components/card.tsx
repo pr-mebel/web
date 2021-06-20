@@ -62,7 +62,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-type CardProps = {
+type Props = {
     imageUrlMin: string;
     collection: string;
     currentItemId: number;
@@ -70,7 +70,7 @@ type CardProps = {
 };
 
 
-export const Card: FC<CardProps> = ({ imageUrlMin, collection, currentItemId, onClick }) => {
+export const Card: FC<Props> = ({ imageUrlMin, collection, currentItemId, onClick }) => {
     const classes = useStyles();
 
     /**

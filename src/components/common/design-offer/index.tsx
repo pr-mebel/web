@@ -16,25 +16,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '30px',
         lineHeight: '35px',
     },
-    img: {
-        width: '70px',
-        height: '70px',
-        '& path': {
-            fill: theme.palette.primary.main,
-        },
-    },
-    [theme.breakpoints.down('xs')]: {
-        img: {
-            width: '45px',
-            height: '45px',
-        },
-    },
-    '@media (max-width: 400px)': {
-        img: {
-            width: '35px',
-            height: '35px',
-        },
-    },
 
     '@media (max-width: 1200px)': {
         biggerTitle: {
@@ -80,7 +61,7 @@ export const DesignOffer: FC = () => {
             <Grid container className={classes.container} spacing={4}>
                 <Grid item xs={12} sm={6} md={3}>
                     <DesignCard
-                        img={<Icon id={0} className={classes.img} />}
+                        img={<Icon id={0} />}
                     >
                         Пришлите нам эскизы вашей мебели или просто оставьте свои
                         контактные данные
@@ -88,7 +69,7 @@ export const DesignOffer: FC = () => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <DesignCard
-                        img={<Icon id={1} className={classes.img} />}
+                        img={<Icon id={1} />}
                     >
                         При необходимости, мы&nbsp;уточним детали и&nbsp;бесплатно
                         разработаем проект в&nbsp;ЗД
@@ -96,14 +77,14 @@ export const DesignOffer: FC = () => {
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <DesignCard
-                        img={<Icon id={2} className={classes.img} />}
+                        img={<Icon id={2} />}
                     >
                         Предложим разные варианты наполнение шкафа или гардеробной
                     </DesignCard>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <DesignCard
-                        img={<Icon id={3} className={classes.img} />}
+                        img={<Icon id={3} />}
                     >
                         Сформируем лучшее предложение в рамках бюджета
                     </DesignCard>

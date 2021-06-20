@@ -11,6 +11,7 @@ import LocalParkingIcon from '@material-ui/icons/LocalParking';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import { BlockTitle, Link } from '@/components/common';
 
+// TODO: Заменить на SVG
 const apple = 'images/common/map/apple.png';
 const google = 'images/common/map/google.png';
 const yandex = 'images/common/map/yandex.png';

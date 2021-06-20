@@ -34,14 +34,14 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-type FullScreenPopupProps = {
+type Props = {
     img: string;
     isOpen: boolean;
     onClose: React.MouseEventHandler<SVGSVGElement>;
 };
 
 
-export const FullScreenPopup: FC<FullScreenPopupProps> = ({ img, isOpen, onClose }) => {
+export const FullScreenPopup: FC<Props> = ({ img, isOpen, onClose }) => {
     const classes = useStyles();
     const [isLoading, setIsLoading] = useState(false);
 

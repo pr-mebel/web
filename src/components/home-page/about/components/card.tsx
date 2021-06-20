@@ -29,14 +29,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-type CardProps = {
+type Props = {
     img: React.ReactNode;
     title: string;
     text: string;
 };
 
 
-export const Card: FC<CardProps> = ({ img, title, text }) => {
+export const Card: FC<Props> = ({ img, title, text }) => {
     const classes = useStyles();
     const theme = useTheme();
     const isXsDown = useMediaQuery(theme.breakpoints.down('xs'));

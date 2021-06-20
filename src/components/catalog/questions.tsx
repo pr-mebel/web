@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { FC, useCallback, useRef, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography, Grid, TextField, Hidden } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
@@ -90,7 +90,7 @@ const useStyles = makeStyles({
     },
 });
 
-export const Questions = () => {
+export const Questions: FC = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const fileInputRef = useRef<HTMLInputElement>(null);

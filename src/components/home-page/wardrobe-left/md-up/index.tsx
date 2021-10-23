@@ -7,6 +7,10 @@ import { BlockTitle, MainButton } from '@/components/common';
 import { WardrobeSnippet } from '../../wardrobe-snippet';
 import { TABS, ADDITIONAL } from '../constants';
 
+import img1 from 'public/images/home-page/wardrobe-left/wardrobe-1.jpg';
+import img2 from 'public/images/home-page/wardrobe-left/wardrobe-2.jpg';
+import img3 from 'public/images/home-page/wardrobe-left/wardrobe-3.jpg';
+
 const useStyles = makeStyles((theme) => ({
     content: {
         marginTop: '26px',
@@ -53,9 +57,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const WardrobeLeftMdUp = () => {
+export const WardrobeLeftMdUp: FC = () => {
     const classes = useStyles();
-    const [activePage, setActivePage] = useState(0);
     const [activeTabIndex, setActiveTabIndex] = useState(0);
 
     /**
@@ -63,7 +66,6 @@ export const WardrobeLeftMdUp = () => {
      */
     const handleClick = useCallback(
         (index) => () => {
-            setActivePage(0);
             setActiveTabIndex(index);
         },
         [],
@@ -79,19 +81,33 @@ export const WardrobeLeftMdUp = () => {
             <Grid container spacing={6} className={classes.content}>
                 <Grid item xs={6}>
                     <div className={classes.imgWrapper}>
-                        {TABS.map(({ id, data: { img, title } }, i) => (
-                            <Image
-                                key={id}
-                                src={img}
-                                layout="fill"
-                                alt={title}
-                                className={cn(classes.image, {
-                                    [classes.selectedImage]:
-                                        activePage === 0 && activeTabIndex === i,
-                                })}
-                                quality={100}
-                            />
-                        ))}
+                        <Image
+                            src={img1}
+                            layout="fill"
+                            alt='Однотонный'
+                            className={cn(classes.image, {
+                                [classes.selectedImage]: activeTabIndex === 0,
+                            })}
+                            placeholder='blur'
+                        />
+                        <Image
+                            src={img2}
+                            layout="fill"
+                            alt='Комбинированный'
+                            className={cn(classes.image, {
+                                [classes.selectedImage]: activeTabIndex === 1,
+                            })}
+                            placeholder='blur'
+                        />
+                        <Image
+                            src={img3}
+                            layout="fill"
+                            alt='Кобминированный с Alcantara'
+                            className={cn(classes.image, {
+                                [classes.selectedImage]: activeTabIndex === 2,
+                            })}
+                            placeholder='blur'
+                        />
                         {ADDITIONAL.map((point) => (
                             <div
                                 key={point.id}

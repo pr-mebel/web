@@ -28,13 +28,13 @@ export const Catalog: FC = () => {
                 <Typography variant="h4">Каталог</Typography>
             </BlockTitle>
             <Grid container spacing={4}>
-                {CATALOG.map((item) => (
+                {CATALOG.map((item, id) => (
                     <Grid item xs={12} sm={6} md={4} key={item.id}>
                         <CatalogCard
+                            cardID={id}
                             title={item.data.title}
                             subtitle={item.data.subtitle}
                             caption={item.data.caption}
-                            img={item.data.img}
                             href={item.data.href}
                         />
                     </Grid>

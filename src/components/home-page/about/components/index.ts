@@ -1,1 +1,2 @@
-export * from './Card/Card';
+export * from './card';
+export * from './icon';

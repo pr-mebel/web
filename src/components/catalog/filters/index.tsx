@@ -2,9 +2,10 @@ import React, { FC } from 'react';
 import { find } from 'lodash';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from '@material-ui/core';
+import { filters as filterOptions } from '@/constants';
+import { SectionID, StyleID, DoorTypeID, FilterField, FilterValue } from '@/entities';
 import { BlockTitle, Link } from '@/components/common';
 import { LeadText, SectionPicker, BottomFilters } from './components';
-import { FiltersProps } from './types';
 
 const useStyles = makeStyles((theme) => ({
     breadcrumbs: {
@@ -41,7 +42,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const Filters: FC<FiltersProps> = ({ filter, options, onChange }) => {
+type Props = {
+    filter: {
+        section: SectionID;
+        style: StyleID;
+        doorType: DoorTypeID;
+    };
+    onChange: (arg0: { name: FilterField; value: FilterValue }) => void;
+};
+
+
+export const Filters: FC<Props> = ({ filter, onChange }) => {
     const classes = useStyles();
 
     return (
@@ -60,7 +71,7 @@ export const Filters: FC<FiltersProps> = ({ filter, options, onChange }) => {
             </section>
             <section className={classes.sectionPickerSection}>
                 <SectionPicker
-                    options={options.sections}
+                    options={filterOptions.sections}
                     value={filter.section}
                     onChange={onChange}
                 />
@@ -68,12 +79,12 @@ export const Filters: FC<FiltersProps> = ({ filter, options, onChange }) => {
             <section className={classes.secondTitle}>
                 <BlockTitle>
                     <Typography variant="h4">
-                        {find(options.sections, { id: filter.section })?.title}
+                        {find(filterOptions.sections, { id: filter.section })?.title}
                     </Typography>
                 </BlockTitle>
             </section>
             <section className={classes.bottomFiltersSection}>
-                <BottomFilters filter={filter} options={options} onChange={onChange} />
+                <BottomFilters filter={filter} onChange={onChange} />
             </section>
         </Container>
     );

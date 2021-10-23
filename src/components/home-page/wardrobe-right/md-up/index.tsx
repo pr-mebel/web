@@ -3,8 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography, Grid } from '@material-ui/core';
 import { BlockTitle, MainButton } from '@/components/common';
 import Image from 'next/image';
-import { ADDITIONAL, defaultImage } from '../constants';
+import { ADDITIONAL } from '../constants';
 import { WardrobeSnippet } from '../../wardrobe-snippet';
+
+import defaultImage from 'public/images/home-page/wardrobe-right/wardrobe-1.jpg';
 
 const useStyles = makeStyles((theme) => ({
     description: {
@@ -59,6 +61,7 @@ export const WardrobeRightMdUp = () => {
                             src={defaultImage}
                             alt="Шкаф исключительного качества"
                             layout="fill"
+                            placeholder='blur'
                             className={classes.img}
                         />
                         {ADDITIONAL.map((point) => (

@@ -1,105 +1,34 @@
-export enum SectionId {
-    cupboard = 'cupboard',
-    wardrobe = 'wardrobe',
-    accessories = 'accessories',
-    lightingSystems = 'lightingSystems',
-}
+import { filters } from '@/constants';
 
-export enum StyleId {
-    any = 'any',
-    modern = 'modern',
-    classic = 'classic',
-    neoclassic = 'neoclassic',
-    designer = 'designer',
-}
+export const sectionIDs = filters.sections.map((section) => section.id);
+export type SectionID = typeof filters.sections[number]['id'];
+export const styleIDs = filters.styles.map((style) => style.id);
+export type StyleID = typeof filters.styles[number]['id'];
+export const doorTypeIDs = filters.doorTypes.map((doorTypes) => doorTypes.id);
+export type DoorTypeID = typeof filters.doorTypes[number]['id'];
 
-export enum DoorTypeId {
-    any = 'any',
-    coupe = 'coupe',
-    swing = 'swing',
-    folding = 'folding',
-}
-
-export enum FilterField {
-    section = 'section',
-    style = 'style',
-    doorType = 'doorType',
-}
+export const filterFields = [
+    'section',
+    'style',
+    'doorType',
+] as const;
+export type FilterField = typeof filterFields[number];
 
 export type Filter = {
-    section: SectionId;
-    style: StyleId;
-    doorType: DoorTypeId;
+    section: SectionID;
+    style: StyleID;
+    doorType: DoorTypeID;
 };
+
+export type FilterValue = SectionID | StyleID | DoorTypeID;
 
 export type FilterKeyValue = {
-    name: FilterField.section;
-    value: SectionId;
+    name: 'section';
+    value: SectionID;
 } | {
-    name: FilterField.style;
-    value: StyleId;
+    name: 'style';
+    value: StyleID;
 } | {
-    name: FilterField.doorType;
-    value: DoorTypeId;
+    name: 'doorType';
+    value: DoorTypeID;
 };
-
-export const filters = {
-    sections: [
-        {
-            title: 'Шкафы',
-            id: SectionId.cupboard,
-        },
-        {
-            title: 'Гардеробные',
-            id: SectionId.wardrobe,
-        },
-        {
-            title: 'Аксессуары',
-            id: SectionId.accessories,
-        },
-        {
-            title: 'Cистемы подсветки',
-            id: SectionId.lightingSystems,
-        },
-    ],
-    styles: [
-        {
-            title: 'Все',
-            id: StyleId.any,
-        },
-        {
-            title: 'Современные',
-            id: StyleId.modern,
-        },
-        {
-            title: 'Классические',
-            id: StyleId.classic,
-        },
-        {
-            title: 'Неоклассика',
-            id: StyleId.neoclassic,
-        },
-        {
-            title: 'Дизайнерские',
-            id: StyleId.designer,
-        },
-    ],
-    doorTypes: [
-        {
-            title: 'Все',
-            id: DoorTypeId.any,
-        },
-        {
-            title: 'Купе',
-            id: DoorTypeId.coupe,
-        },
-        {
-            title: 'Распашные',
-            id: DoorTypeId.swing,
-        },
-        {
-            title: 'Складные',
-            id: DoorTypeId.folding,
-        },
-    ],
-} as const;

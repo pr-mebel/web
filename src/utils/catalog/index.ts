@@ -1,4 +1,4 @@
-import { FilterKeyValue, FilterField, SectionId, StyleId, DoorTypeId } from '@/entities';
+import { FilterKeyValue, FilterField, sectionIDs, SectionID, styleIDs, StyleID, doorTypeIDs, DoorTypeID } from '@/entities';
 
 /**
  * TypeGuard, который проверяет, что распаршенная пара ключ значение из URlSearchParams являются
@@ -7,7 +7,7 @@ import { FilterKeyValue, FilterField, SectionId, StyleId, DoorTypeId } from '@/e
  * @returns boolean
  */
 export const checkIfNameAndValueAreKnown = (
-    pair: { name: string; value: string }
+    pair: { name: string; value: string },
 ): pair is FilterKeyValue => {
     const { name, value } = pair;
     if (typeof value !== 'string') {
@@ -15,8 +15,8 @@ export const checkIfNameAndValueAreKnown = (
     }
 
     return (
-        name === FilterField.section && value in SectionId ||
-        name === FilterField.style && value in StyleId ||
-        name === FilterField.doorType && value in DoorTypeId
-    )
-}
+        name === 'section' as FilterField && sectionIDs.includes(value as SectionID) ||
+        name === 'style' as FilterField && styleIDs.includes(value as StyleID) ||
+        name === 'doorType' as FilterField && doorTypeIDs.includes(value as DoorTypeID)
+    );
+};

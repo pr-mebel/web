@@ -30,7 +30,7 @@ export const updateFileUploadProgress = createAction(
 
 export const setErrorInFileUpload = createAction(
     'set_error_in_file_upload',
-    (name: string, index: number, error) => ({
+    (name: string, index: number, error?: Error) => ({
         payload: {
             name,
             index,
@@ -70,7 +70,7 @@ export const uploadFiles = createAsyncThunk('upload_files', (files: FileList, { 
         dispatch(initFileUpload(file));
     });
 
-    filesArray.forEach(async (file, index) => {
+    filesArray.forEach((file, index) => {
         const imageRef = storageRef.child(file.name);
         const uploadTask = imageRef.put(file);
 
@@ -94,7 +94,7 @@ const initialState = {
     files: [] as {
         name: string;
         progress?: number;
-        error?: string;
+        error?: string | Error;
     }[],
 };
 

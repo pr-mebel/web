@@ -1,18 +1,18 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC } from 'react';
 import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useDispatch } from 'react-redux';
-import { changePage, fetchCatalog } from '@/redux';
 import { MainButton, Loader } from '@/components/common';
 import { Card } from './components';
-import { GalleryProps } from './types';
 
 const useStyles = makeStyles((theme) => ({
     buttonContainer: {
         marginTop: '60px',
     },
     notFound: {
-        minHeight: '300px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '200px',
     },
     [theme.breakpoints.down('xs')]: {
         buttonContainer: {
@@ -21,19 +21,29 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const Gallery: FC<GalleryProps> = ({ items, isLoading, hasMore, page, onCardClick }) => {
-    const classes = useStyles();
-    const dispatch = useDispatch();
+type GalleryProps = {
+    items: {
+        id: string;
+        imageMinified: {
+            url: string;
+        };
+        collection: string;
+    }[];
+    isLoading: boolean;
+    hasMore: boolean;
+    onCardClick: (cardID: number) => void;
+    onLoadMore: () => void;
+};
 
-    /**
-     * Загружает новый карточки после клика на кнопку
-     */
-    const handleLoadMore = useCallback(() => {
-        if (!isLoading && hasMore) {
-            dispatch(changePage(page + 1));
-            dispatch(fetchCatalog());
-        }
-    }, [isLoading, hasMore, dispatch, page]);
+
+export const Gallery: FC<GalleryProps> = ({
+    items,
+    isLoading,
+    hasMore,
+    onCardClick,
+    onLoadMore,
+}) => {
+    const classes = useStyles();
 
     return (
         <Container>
@@ -50,10 +60,17 @@ export const Gallery: FC<GalleryProps> = ({ items, isLoading, hasMore, page, onC
                 ))}
                 {isLoading && <Loader />}
             </Grid>
+            {items.length === 0 && !isLoading && (
+                <div className={classes.notFound}>
+                    <Typography align='center'>
+                        По заданному фильтру ничего не найдено. Пожалуйста, поменяйте запрос.
+                    </Typography>
+                </div>
+            )}
             {!!hasMore && (
                 <Grid container justify="center" className={classes.buttonContainer}>
                     <Grid item xs={10} sm={8} md={6}>
-                        <MainButton onClick={handleLoadMore}>Показать еще</MainButton>
+                        <MainButton onClick={onLoadMore}>Показать еще</MainButton>
                     </Grid>
                 </Grid>
             )}

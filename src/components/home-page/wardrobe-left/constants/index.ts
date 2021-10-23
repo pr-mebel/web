@@ -1,9 +1,6 @@
 import { NB_SP, MDASH } from '@/constants';
 import { addIdsToArrayOfObjects } from '@/utils';
 
-const img1 = '/images/home-page/wardrobe-left/wardrobe-1.jpg';
-const img2 = '/images/home-page/wardrobe-left/wardrobe-2.jpg';
-const img3 = '/images/home-page/wardrobe-left/wardrobe-3.jpg';
 const imgAdd1 = '/images/home-page/wardrobe-left/1.jpg';
 const imgAdd2 = '/images/home-page/wardrobe-left/2.jpg';
 const imgAdd3 = '/images/home-page/wardrobe-left/3.jpg';
@@ -19,15 +16,12 @@ const imgAdd11 = '/images/home-page/wardrobe-left/11.jpg';
 export const TABS = addIdsToArrayOfObjects([
     {
         title: 'Однотонный',
-        img: img1,
     },
     {
         title: 'Комбинированный',
-        img: img2,
     },
     {
         title: 'Кобминированный с Alcantara',
-        img: img3,
     },
 ]);
 

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect, useRef, FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const Carousel = () => {
+export const Carousel: FC = () => {
     const classes = useStyles();
     const rootRef = useRef<HTMLDivElement>(null);
 
@@ -181,8 +181,8 @@ export const Carousel = () => {
 
         return () => {
             document.removeEventListener('visibilitychange', handleVisibilityChange);
-        }
-    }, []);
+        };
+    }, [pause, unpause]);
 
     return (
         <div className={classes.root} ref={rootRef}>
@@ -194,13 +194,13 @@ export const Carousel = () => {
                 className={classes.slider}
                 style={{ transform: `translateX(-${windowWidth * activeSlide}px)` }}
             >
-                {PAGES.map((page) => (
+                {PAGES.map((page, id) => (
                     <Page
                         key={page.id}
                         titles={page.data.titles}
                         subtitles={page.data.subtitles}
                         texts={page.data.texts}
-                        imageSet={page.data.imageSet}
+                        pageID={id}
                         to={page.data.to}
                     />
                 ))}

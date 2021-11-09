@@ -89,43 +89,6 @@ const catalog =  async (
         });
         const resData = parseContentfulCatalog(data);
 
-        console.log(`
-        {
-            result: ${section}Collection(where: {
-                ${style !== 'any' ? `${style}: true` : ''}
-                ${doorType !== 'any' ? `${doorType}: true` : ''}
-            }, order: [id_ASC], limit: ${batchSize}, skip: ${batchSize * (page - 1)}){
-                total
-                items {
-                    id
-                    collection
-                    description
-                    imageFull: image {
-                        url(transform: {
-                            format: WEBP
-                        })
-                    }
-                    imageMedium: image {
-                        url(transform: {
-                            width: 750
-                            height: 500
-                            format: WEBP
-                        })
-                    }
-                    imageMinified: image {
-                        url(transform: {
-                            width: 435
-                            height: 290
-                            format: WEBP
-                        })
-                    }
-                    sys {
-                        id
-                    }
-                }
-            }
-        }`);
-
         return res.status(200).json(resData);
     } catch (error) {
         return res.status(500).json(error);

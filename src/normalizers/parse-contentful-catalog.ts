@@ -26,8 +26,6 @@ export const parseContentfulCatalog = (
 ): SectionCollection | Collection => {
     const res = response.data.result;
 
-    console.log(JSON.stringify(response, undefined, 4));
-
     if (checkIfTypenameisASection(res)) {
         return res.items[0].cardsCollection;
     }

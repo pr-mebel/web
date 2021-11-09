@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useCallback, useEffect, useMemo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Dialog, Grid, Typography, CircularProgress } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
@@ -69,6 +69,10 @@ export const FormSubmitPopup: FC = () => {
     [files],
     );
 
+    const handleClose = useCallback(() => {
+        dispatch(closeFormSubmitPopup());
+    }, [dispatch]);
+
     /**
      * Отправляет форму после того как все файлы загружены
      */
@@ -79,9 +83,9 @@ export const FormSubmitPopup: FC = () => {
     }, [allUploaded, files, dispatch]);
 
     return (
-        <Dialog open={isOpen} onClose={closeFormSubmitPopup} fullWidth maxWidth="sm">
+        <Dialog open={isOpen} onClose={handleClose} fullWidth maxWidth="sm">
             <div className={classes.root}>
-                <ClearIcon className={classes.closeIcon} onClick={closeFormSubmitPopup} />
+                <ClearIcon className={classes.closeIcon} onClick={handleClose} />
                 <Typography variant="body1" align="center" gutterBottom>
                     {!allUploaded ? (
                         'Загрузка файлов'

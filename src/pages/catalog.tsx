@@ -1,6 +1,4 @@
-import React, { FC, useCallback, useState, useEffect } from 'react';
-import { useRequest } from 'ahooks';
-import { useRouter } from 'next/router';
+import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     DesignOffer,
@@ -11,13 +9,8 @@ import {
     Gallery,
     Lead,
     Questions,
-    FullScreenPopup,
 } from '@/components';
-import { useModal } from '@/hooks';
-import { Filter, FilterField, FilterValue, Item } from '@/entities';
-import { fetchCatalogByFilter } from '@/utils/api';
-import { checkIfNameAndValueAreKnown } from '@/utils';
-import { batchSize } from '@/constants';
+import { useCards } from '@/hooks/catalog/use-cards';
 
 const useStyles = makeStyles((theme) => ({
     filterSection: {
@@ -51,121 +44,35 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const initialFilters = {
-    doorType: 'any',
-    section: 'cupboard',
-    style: 'any',
-} as Filter;
-
 const Catalog: FC = () => {
-    const router = useRouter();
-    const [filters, setFilters] = useState(initialFilters);
-    const [items, setItems] = useState<Item[]>([]);
-    const [page, setPage] = useState(1);
-    const [hasMore, setHasMore] = useState(false);
-    const getCatalogRequest = useRequest(() => fetchCatalogByFilter(filters, page), {
-        refreshDeps: [filters, page],
-        onSuccess: (res) => {
-            setItems((prev) => [...prev, ...res.data.items]);
-            setHasMore(res.data.total > page * batchSize);
-        },
-    });
-    const [currentItemID, setCurrentItemID] = useState<number | undefined>();
-    const cardModal = useModal({
-        onOpen: (itemID: number) => {
-            setCurrentItemID(itemID);
-        },
-        onClose: () => {
-            setCurrentItemID(undefined);
-        },
-    });
-    const cardModalFullScreen = useModal();
     const classes = useStyles();
-
-    /**
-     * Поменять значение одного из параметра фильтра
-     */
-    const handleChangeFilter = useCallback(
-        ({ name, value }: { name: FilterField; value: FilterValue}) => {
-            setFilters((prev) => ({
-                ...prev,
-                [name]: value,
-            }));
-            setPage(1);
-            setHasMore(false);
-            setItems([]);
-        },
-        [],
-    );
-
-    /**
-     * Открыть следующий итем внутри модального окна итемов
-     */
-    const handleGoToNextCard = useCallback(() => {
-        setCurrentItemID((prev) => prev !== undefined ? prev + 1 : prev);
-    }, []);
-
-    /**
-     * Открыть предыдущий итем внутри модального окна итемов
-     */
-    const handleGoToPrevCard = useCallback(() => {
-        setCurrentItemID((prev) => prev !== undefined ? prev - 1 : prev);
-    }, []);
-
-    /**
-     * Подгрузить больше изображений в галерее
-     */
-    const handleDownloadMoreCards = useCallback(() => {
-        setPage((prev) => prev + 1);
-        setHasMore(false);
-    }, []);
-
-    /**
-     * Разбирает поиск из урла, подставляет параметры в селекты, и делает по ним запрос
-     */
-    useEffect(() => {
-        const { query } = router;
-        let res: Partial<Filter> = {};
-
-        if (Object.values(query).length) {
-            Object.entries(query).forEach(([key, value]) => {
-                if (typeof value === 'string') {
-                    const pair = { name: key, value };
-
-                    if (checkIfNameAndValueAreKnown(pair)) {
-                        res = {
-                            ...res,
-                            [pair.name]: pair.value,
-                        };
-                    }
-                }
-            });
-
-            if (Object.values(res).length) {
-                setFilters((prev) => ({
-                    ...prev,
-                    ...res,
-                }));
-            }
-        } else {
-            setFilters(initialFilters);
-        }
-    }, [router]);
+    const {
+        filters,
+        list,
+        selectedItem,
+        bounds,
+        hasMore,
+        isLoading,
+        cardModal,
+        onChangeFilter,
+        onCardClick,
+        onDownloadMore,
+    } = useCards();
 
     return (
         <>
             <main>
                 <Lead sectionID={filters.section} />
                 <section className={classes.filterSection}>
-                    <Filters filter={filters} onChange={handleChangeFilter} />
+                    <Filters filter={filters} onChange={onChangeFilter} />
                 </section>
                 <section className={classes.gallerySection}>
                     <Gallery
-                        items={items}
-                        isLoading={getCatalogRequest.loading}
+                        items={list}
+                        isLoading={isLoading}
                         hasMore={hasMore}
-                        onCardClick={cardModal.handleOpen}
-                        onLoadMore={handleDownloadMoreCards}
+                        onCardClick={onCardClick}
+                        onLoadMore={onDownloadMore}
                     />
                 </section>
                 <section className={classes.designOfferSection}>
@@ -181,24 +88,16 @@ const Catalog: FC = () => {
                     <Map />
                 </section>
             </main>
-            {cardModal.isOpen && currentItemID !== undefined && (
+            {cardModal.isOpen && selectedItem && (
                 <CardPopup
-                    items={getCatalogRequest.data?.data.items || []}
-                    currentItemId={currentItemID}
+                    hasNext={bounds?.hasNext}
+                    hasPrev={bounds?.hasPrev}
+                    selectedItem={selectedItem}
+                    isLoading={isLoading}
                     isOpen={cardModal.isOpen}
-                    isLoading={getCatalogRequest.loading}
                     onClose={cardModal.handleClose}
-                    onClickBack={handleGoToPrevCard}
-                    onClickForward={handleGoToNextCard}
-                    onDownloadMoreCards={handleDownloadMoreCards}
-                    onFullScreenPopupOpen={cardModalFullScreen.handleOpen}
-                />
-            )}
-            {cardModalFullScreen.isOpen && currentItemID !== undefined && (
-                <FullScreenPopup
-                    img={getCatalogRequest.data?.data.items[currentItemID].imageFull.url || ''}
-                    isOpen={cardModalFullScreen.isOpen}
-                    onClose={cardModalFullScreen.handleClose}
+                    onClickBack={cardModal.onOpenPrev}
+                    onClickForward={cardModal.onOpenNext}
                 />
             )}
         </>

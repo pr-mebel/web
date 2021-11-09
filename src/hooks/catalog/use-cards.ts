@@ -1,0 +1,171 @@
+import { checkIfNameAndValueAreKnown, fetchCatalogByFilter } from '@/utils';
+import { useMount, useRequest, useUpdateEffect } from 'ahooks';
+import { Filter, FilterField, FilterValue, Item, SectionID } from '@/entities';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { batchSize } from '@/constants';
+import { useModal } from '..';
+import { useRouter } from 'next/router';
+
+const initialFilters = {
+    doorType: 'any',
+    section: 'cupboard',
+    style: 'any',
+} as Filter;
+
+export const useCards = () => {
+    const router = useRouter();
+
+    const [filters, setFilters] = useState(initialFilters);
+    const [list, setList] = useState<Item[]>([]);
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(false);
+    const [currentItemID, setCurrentItemID] = useState<number | null>(null);
+    const cardModal = useModal({
+        onClose: () => {
+            setCurrentItemID(null);
+        },
+    });
+    const cardModalFullScreen = useModal();
+
+    const request = useRequest(fetchCatalogByFilter, {
+        manual: true,
+        onSuccess: (res) => {
+            setList((prev) => [...prev, ...res.data.items]);
+            setHasMore(res.data.total > page * batchSize);
+        },
+    });
+
+    const bounds = useMemo(() => {
+        if (currentItemID === null) {
+            return null;
+        }
+
+        let hasPrev = false;
+        let hasNext = false;
+
+        if (currentItemID > 0) {
+            hasPrev = true;
+        };
+
+        if (currentItemID < list.length - 1) {
+            hasNext = true;
+        }
+
+        return {
+            hasPrev,
+            hasNext,
+        }
+    }, [list, currentItemID]);
+
+    const selectedItem = useMemo(() => {
+        if (currentItemID !== null && currentItemID < list.length) {
+            return list[currentItemID];
+        }
+
+        return null;
+    }, [list, currentItemID]);
+
+    const handleChangeFilter = useCallback(
+        ({ name, value }: { name: FilterField; value: FilterValue}) => {
+            if (name === 'section') {
+                setFilters({
+                    ...initialFilters,
+                    [name]: value as SectionID
+                });
+            } else {
+                setFilters((prev) => ({
+                    ...prev,
+                    [name]: value,
+                }));
+            }
+            setList([]);
+            setPage(1);
+            setHasMore(false);
+        },
+        [],
+    );
+
+    const handleClickCard = useCallback((itemID: number) => {
+        setCurrentItemID(itemID);
+        cardModal.handleOpen();
+    }, [cardModal]);
+
+    /**
+     * Открыть следующий итем внутри модального окна итемов
+     */
+     const handleGoToNextCard = useCallback(() => {
+        setCurrentItemID((prev) => prev !== null ? prev + 1 : prev);
+    }, []);
+
+    /**
+     * Открыть предыдущий итем внутри модального окна итемов
+     */
+    const handleGoToPrevCard = useCallback(() => {
+        setCurrentItemID((prev) => prev !== null ? prev - 1 : prev);
+    }, []);
+
+    /**
+     * Подгрузить больше изображений в галерее
+     */
+    const handleDownloadMoreCards = useCallback(() => {
+        setPage((prev) => prev + 1);
+        setHasMore(false);
+    }, []);
+
+    useMount(() => {
+        const { query } = router;
+        let res: Partial<Filter> = {};
+
+        if (Object.values(query).length) {
+            Object.entries(query).forEach(([key, value]) => {
+                if (typeof value === 'string') {
+                    const pair = { name: key, value };
+
+                    if (checkIfNameAndValueAreKnown(pair)) {
+                        res = {
+                            ...res,
+                            [pair.name]: pair.value,
+                        };
+                    }
+                }
+            });
+
+            if (Object.values(res).length) {
+                setFilters((prev) => ({
+                    ...prev,
+                    ...res,
+                }));
+            }
+        }
+
+        request.run(filters, page);
+    });
+
+    useEffect(() => {
+        if (hasMore && currentItemID && list.length - 5 <= currentItemID) {
+            handleDownloadMoreCards();
+        }
+    }, [list, currentItemID, hasMore, handleDownloadMoreCards]);
+
+    useUpdateEffect(() => {
+        request.run(filters, page);
+    }, [filters, page]);
+
+    return {
+        filters,
+        list,
+        selectedItem,
+        bounds,
+        hasMore,
+        isLoading: request.loading,
+        cardModal: {
+            ...cardModal,
+            onOpenNext: handleGoToNextCard,
+            onOpenPrev: handleGoToPrevCard,
+        },
+        cardModalFullScreen,
+        onChangeFilter: handleChangeFilter,
+        onCardClick: handleClickCard,
+        onDownloadMore: handleDownloadMoreCards,
+    }
+};

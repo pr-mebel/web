@@ -116,6 +116,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'row',
         width: '100px',
         justifyContent: 'space-between',
+        margin: 'auto',
     },
     socialIcon: {
         '&:hover path': {

@@ -100,43 +100,43 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                                 return null;
                             }
 
-                            if (i !== filterOptions.styles.length - 1) {
+                            if (i === 0) {
                                 return (
-                                    <React.Fragment key={option.id}>
-                                        <Typography
-                                            variant="body2"
-                                            component="span"
-                                            className={cn(classes.option, {
-                                                [classes.selectedOption]:
-                                                    filter.style === option.id,
-                                            })}
-                                            onClick={handleClick('style', option.id)}
-                                        >
-                                            {option.title}
-                                        </Typography>
-                                        <Typography
-                                            variant="body2"
-                                            component="span"
-                                            className={classes.dash}
-                                        >
-                                            -
-                                        </Typography>
-                                    </React.Fragment>
+                                    <Typography
+                                        key={option.id}
+                                        variant="body2"
+                                        component="span"
+                                        className={cn(classes.option, {
+                                            [classes.selectedOption]:
+                                                filter.style === option.id,
+                                        })}
+                                        onClick={handleClick('style', option.id)}
+                                    >
+                                        {option.title}
+                                    </Typography>
                                 );
                             }
 
                             return (
-                                <Typography
-                                    key={option.id}
-                                    variant="body2"
-                                    component="span"
-                                    className={cn(classes.option, {
-                                        [classes.selectedOption]: filter.style === option.id,
-                                    })}
-                                    onClick={handleClick('style', option.id)}
-                                >
-                                    {option.title}
-                                </Typography>
+                                <React.Fragment key={option.id}>
+                                    <Typography
+                                        variant="body2"
+                                        component="span"
+                                        className={classes.dash}
+                                    >
+                                        -
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
+                                        component="span"
+                                        className={cn(classes.option, {
+                                            [classes.selectedOption]: filter.style === option.id,
+                                        })}
+                                        onClick={handleClick('style', option.id)}
+                                    >
+                                        {option.title}
+                                    </Typography>
+                                </React.Fragment>
                             );
                         })}
                     </Grid>

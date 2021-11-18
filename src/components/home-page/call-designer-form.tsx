@@ -54,7 +54,7 @@ export const CallDesignerForm: FC = () => {
             dispatch(submitForm());
             reset();
         },
-        [reset, dispatch],
+        [reset, dispatch]
     );
 
     return (
@@ -125,9 +125,14 @@ export const CallDesignerForm: FC = () => {
                         </Grid>
                         <Grid item xs container justifyContent="center">
                             <Grid item xs={10} sm={6}>
-                                <Typography variant="body2" className={classes.text} align="center">
-                                    Нажимая кнопку &laquo;Вызвать дизайнера&raquo;, я&nbsp;даю
-                                    согласие на&nbsp;обработку персональных данных
+                                <Typography
+                                    variant="body2"
+                                    className={classes.text}
+                                    align="center"
+                                >
+                                    Нажимая кнопку &laquo;Вызвать
+                                    дизайнера&raquo;, я&nbsp;даю согласие
+                                    на&nbsp;обработку персональных данных
                                     и&nbsp;подтверждаю, что ознакомлен с&nbsp;
                                     <a
                                         href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"

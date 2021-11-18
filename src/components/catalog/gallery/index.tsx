@@ -35,7 +35,6 @@ type GalleryProps = {
     onLoadMore: () => void;
 };
 
-
 export const Gallery: FC<GalleryProps> = ({
     items,
     isLoading,
@@ -62,15 +61,22 @@ export const Gallery: FC<GalleryProps> = ({
             </Grid>
             {items.length === 0 && !isLoading && (
                 <div className={classes.notFound}>
-                    <Typography align='center'>
-                        По заданному фильтру ничего не найдено. Пожалуйста, поменяйте запрос.
+                    <Typography align="center">
+                        По заданному фильтру ничего не найдено. Пожалуйста,
+                        поменяйте запрос.
                     </Typography>
                 </div>
             )}
             {!!hasMore && (
-                <Grid container justifyContent="center" className={classes.buttonContainer}>
+                <Grid
+                    container
+                    justifyContent="center"
+                    className={classes.buttonContainer}
+                >
                     <Grid item xs={10} sm={8} md={6}>
-                        <MainButton onClick={onLoadMore}>Показать еще</MainButton>
+                        <MainButton onClick={onLoadMore}>
+                            Показать еще
+                        </MainButton>
                     </Grid>
                 </Grid>
             )}

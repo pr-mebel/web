@@ -37,7 +37,11 @@ export const Link: FC<Props> = ({
 
     if (asButton) {
         return (
-            <Typography component="a" className={cn(classes.root, className)} onClick={onClick}>
+            <Typography
+                component="a"
+                className={cn(classes.root, className)}
+                onClick={onClick}
+            >
                 {children}
             </Typography>
         );

@@ -106,7 +106,11 @@ export const Footer: FC = () => {
     return (
         <footer className={classes.root}>
             <Container>
-                <Grid container justifyContent="center" className={classes.logoContainer}>
+                <Grid
+                    container
+                    justifyContent="center"
+                    className={classes.logoContainer}
+                >
                     <Grid item xs={12}>
                         <Link to="/">
                             <LogoFooter className={classes.logo} />
@@ -190,21 +194,30 @@ export const Footer: FC = () => {
                             <ul className={classes.list}>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link to="/#advantages" className={classes.listItem}>
+                                        <Link
+                                            to="/#advantages"
+                                            className={classes.listItem}
+                                        >
                                             Наши материалы
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link to="/#comfort" className={classes.listItem}>
+                                        <Link
+                                            to="/#comfort"
+                                            className={classes.listItem}
+                                        >
                                             Комфорт и удобство
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link to="/#quality" className={classes.listItem}>
+                                        <Link
+                                            to="/#quality"
+                                            className={classes.listItem}
+                                        >
                                             Исключительное качество
                                         </Link>
                                     </Typography>
@@ -227,29 +240,44 @@ export const Footer: FC = () => {
                             </Typography>
                             <ul className={classes.list}>
                                 <li>
-                                    <Typography gutterBottom className={classes.listItem}>
-                                        <Link to="/#about" className={classes.listItem}>
+                                    <Typography
+                                        gutterBottom
+                                        className={classes.listItem}
+                                    >
+                                        <Link
+                                            to="/#about"
+                                            className={classes.listItem}
+                                        >
                                             Почему следует выбрать нас
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link to="/#production" className={classes.listItem}>
+                                        <Link
+                                            to="/#production"
+                                            className={classes.listItem}
+                                        >
                                             Наше производство
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link to="/#how-to-order" className={classes.listItem}>
+                                        <Link
+                                            to="/#how-to-order"
+                                            className={classes.listItem}
+                                        >
                                             Как заказать нашу мебель
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link to="/#faq" className={classes.listItem}>
+                                        <Link
+                                            to="/#faq"
+                                            className={classes.listItem}
+                                        >
                                             Часто задаваемые вопросы
                                         </Link>
                                     </Typography>
@@ -308,7 +336,10 @@ export const Footer: FC = () => {
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link to="/#questions" className={classes.listItem}>
+                                        <Link
+                                            to="/#questions"
+                                            className={classes.listItem}
+                                        >
                                             Задать вопрос
                                         </Link>
                                     </Typography>
@@ -324,15 +355,28 @@ export const Footer: FC = () => {
                                 +7 (495) 278-02-85
                             </Link>
                         </Typography>
-                        <Typography variant="body1" className={classes.address} align="center">
+                        <Typography
+                            variant="body1"
+                            className={classes.address}
+                            align="center"
+                        >
                             м. Сокол, ул. Балтийская, д.9. С 10:00 до 20:00
                         </Typography>
-                        <Typography className={classes.socialTitle} align="center">
+                        <Typography
+                            className={classes.socialTitle}
+                            align="center"
+                        >
                             Мы в соц.сетях
                         </Typography>
                     </Grid>
                     <Grid item xs={3} sm={4} />
-                    <Grid item xs={6} sm={4} container className={classes.socialIconsContainer}>
+                    <Grid
+                        item
+                        xs={6}
+                        sm={4}
+                        container
+                        className={classes.socialIconsContainer}
+                    >
                         <Grid item xs={4} container justifyContent="center">
                             <a href="https://vk.com/public185518769">
                                 <Vkontakte className={classes.socialIcon} />
@@ -378,8 +422,8 @@ export const Footer: FC = () => {
                         <Typography variant="body2" align="center">
                             &copy; Частный Мебельер
                             <span className={classes.verticalLine}>|</span>
-                            2020 Все права защищены законом. Копирование и цитирование только с
-                            письменного разрешения автора.
+                            2020 Все права защищены законом. Копирование и
+                            цитирование только с письменного разрешения автора.
                         </Typography>
                     </Grid>
                 </Grid>

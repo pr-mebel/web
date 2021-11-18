@@ -1,6 +1,13 @@
 import React, { FC, useCallback, useState } from 'react';
 import cn from 'classnames';
-import { Grid, Container, Typography, Hidden, Drawer, useScrollTrigger } from '@material-ui/core';
+import {
+    Grid,
+    Container,
+    Typography,
+    Hidden,
+    Drawer,
+    useScrollTrigger,
+} from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -203,44 +210,71 @@ export const Header: FC = () => {
                                 />
                             </Link>
                         </Grid>
-                        <Grid item xs={7} container justifyContent="center" alignItems="center">
+                        <Grid
+                            item
+                            xs={7}
+                            container
+                            justifyContent="center"
+                            alignItems="center"
+                        >
                             <ul className={cn(classes.menu, classes.list)}>
                                 <li
                                     onMouseEnter={handleOpenDropdown}
                                     onMouseLeave={handleCloseDropdown}
                                 >
                                     <Typography
-                                        className={cn(classes.text, classes.menuDropdown)}
+                                        className={cn(
+                                            classes.text,
+                                            classes.menuDropdown
+                                        )}
                                         align="center"
                                     >
                                         Каталог&nbsp;
-                                        <ArrowBackIosIcon className={classes.dropdown} />
+                                        <ArrowBackIosIcon
+                                            className={classes.dropdown}
+                                        />
                                     </Typography>
                                     {dropdownVisible && (
-                                        <ul className={classes.menuDropdownPopup}>
+                                        <ul
+                                            className={
+                                                classes.menuDropdownPopup
+                                            }
+                                        >
                                             <li>
-                                                <Typography className={classes.text} gutterBottom>
+                                                <Typography
+                                                    className={classes.text}
+                                                    gutterBottom
+                                                >
                                                     <Link to="/catalog?section=cupboard">
                                                         Шкафы
                                                     </Link>
                                                 </Typography>
                                             </li>
                                             <li>
-                                                <Typography className={classes.text} gutterBottom>
+                                                <Typography
+                                                    className={classes.text}
+                                                    gutterBottom
+                                                >
                                                     <Link to="/catalog?section=wardrobe">
                                                         Гардеробные
                                                     </Link>
                                                 </Typography>
                                             </li>
                                             <li>
-                                                <Typography className={classes.text} gutterBottom>
+                                                <Typography
+                                                    className={classes.text}
+                                                    gutterBottom
+                                                >
                                                     <Link to="/catalog?section=accessories">
                                                         Аксессуары
                                                     </Link>
                                                 </Typography>
                                             </li>
                                             <li>
-                                                <Typography className={classes.text} gutterBottom>
+                                                <Typography
+                                                    className={classes.text}
+                                                    gutterBottom
+                                                >
                                                     <Link to="/catalog?section=lightingSystems">
                                                         Системы подсветки
                                                     </Link>
@@ -251,12 +285,16 @@ export const Header: FC = () => {
                                 </li>
                                 <li>
                                     <Typography className={classes.text}>
-                                        <Link to="/#design-offer">Рассчитать стоимость</Link>
+                                        <Link to="/#design-offer">
+                                            Рассчитать стоимость
+                                        </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography className={classes.text}>
-                                        <Link to="/#advantages">Преимущества</Link>
+                                        <Link to="/#advantages">
+                                            Преимущества
+                                        </Link>
                                     </Typography>
                                 </li>
                                 <li>
@@ -271,10 +309,19 @@ export const Header: FC = () => {
                                 </li>
                             </ul>
                         </Grid>
-                        <Grid item xs={3} container justifyContent="space-between" alignItems="center">
+                        <Grid
+                            item
+                            xs={3}
+                            container
+                            justifyContent="space-between"
+                            alignItems="center"
+                        >
                             <ul className={cn(classes.list, classes.contacts)}>
                                 <li>
-                                    <Typography variant="body2" className={classes.text}>
+                                    <Typography
+                                        variant="body2"
+                                        className={classes.text}
+                                    >
                                         <Link to="tel:+74952780285" external>
                                             +7 (495) 278-02-85
                                         </Link>
@@ -283,7 +330,10 @@ export const Header: FC = () => {
                                 {!smallHeader && (
                                     <>
                                         <li>
-                                            <Typography variant="body2" className={classes.text}>
+                                            <Typography
+                                                variant="body2"
+                                                className={classes.text}
+                                            >
                                                 <Link
                                                     to="https://yandex.ru/maps/-/CCQtFQdaLA"
                                                     external
@@ -293,7 +343,10 @@ export const Header: FC = () => {
                                             </Typography>
                                         </li>
                                         <li>
-                                            <Typography variant="body2" className={classes.text}>
+                                            <Typography
+                                                variant="body2"
+                                                className={classes.text}
+                                            >
                                                 10:00 - 20:00
                                             </Typography>
                                         </li>
@@ -303,17 +356,23 @@ export const Header: FC = () => {
                             <ul className={cn(classes.list, classes.social)}>
                                 <li>
                                     <a href="https://vk.com/public185518769">
-                                        <Vkontakte className={classes.socialIcon} />
+                                        <Vkontakte
+                                            className={classes.socialIcon}
+                                        />
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://www.instagram.com/pr_mebel.ru/">
-                                        <Instagram className={classes.socialIcon} />
+                                        <Instagram
+                                            className={classes.socialIcon}
+                                        />
                                     </a>
                                 </li>
                                 <li>
                                     <a href="https://www.facebook.com/%D0%A7%D0%B0%D1%81%D1%82%D0%BD%D1%8B%D0%B9-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D1%8C%D0%B5%D1%80-108136607213942">
-                                        <Facebook className={classes.socialIcon} />
+                                        <Facebook
+                                            className={classes.socialIcon}
+                                        />
                                     </a>
                                 </li>
                             </ul>
@@ -327,12 +386,10 @@ export const Header: FC = () => {
                                 to="/"
                                 className={cn(
                                     classes.logoContainer,
-                                    classes.logoContainerSm,
+                                    classes.logoContainerSm
                                 )}
                             >
-                                <LogoHeader
-                                    className={classes.logoSm}
-                                />
+                                <LogoHeader className={classes.logoSm} />
                             </Link>
                         </div>
                         <div>
@@ -342,15 +399,24 @@ export const Header: FC = () => {
                                 </Link>
                             </Typography>
                             <Hidden xsDown>
-                                <Typography className={classes.text} align="center">
-                                    <Link to="https://yandex.ru/maps/-/CCQtFQdaLA" external>
+                                <Typography
+                                    className={classes.text}
+                                    align="center"
+                                >
+                                    <Link
+                                        to="https://yandex.ru/maps/-/CCQtFQdaLA"
+                                        external
+                                    >
                                         м. сокол
                                     </Link>{' '}
                                     10:00 - 20:00
                                 </Typography>
                             </Hidden>
                         </div>
-                        <MenuIcon className={classes.menuIcon} onClick={handleOpenDrawer} />
+                        <MenuIcon
+                            className={classes.menuIcon}
+                            onClick={handleOpenDrawer}
+                        />
                     </div>
                     <Drawer
                         anchor="right"
@@ -380,17 +446,23 @@ export const Header: FC = () => {
                             >
                                 <Grid item xs>
                                     <Typography>
-                                        <Link to="/catalog?section=cupboard">Шкафы</Link>
+                                        <Link to="/catalog?section=cupboard">
+                                            Шкафы
+                                        </Link>
                                     </Typography>
                                 </Grid>
                                 <Grid item xs>
                                     <Typography>
-                                        <Link to="/catalog?section=wardrobe">Гардеробные</Link>
+                                        <Link to="/catalog?section=wardrobe">
+                                            Гардеробные
+                                        </Link>
                                     </Typography>
                                 </Grid>
                                 <Grid item xs>
                                     <Typography>
-                                        <Link to="/catalog?section=accessories">Аксессуары</Link>
+                                        <Link to="/catalog?section=accessories">
+                                            Аксессуары
+                                        </Link>
                                     </Typography>
                                 </Grid>
                                 <Grid item xs>
@@ -402,15 +474,25 @@ export const Header: FC = () => {
                                 </Grid>
                             </Grid>
                             <div className={classes.hl} />
-                            <Grid item xs={12} container spacing={1} direction="column">
+                            <Grid
+                                item
+                                xs={12}
+                                container
+                                spacing={1}
+                                direction="column"
+                            >
                                 <Grid item xs>
                                     <Typography>
-                                        <Link to="/#design-offer">Рассчитать стоимость</Link>
+                                        <Link to="/#design-offer">
+                                            Рассчитать стоимость
+                                        </Link>
                                     </Typography>
                                 </Grid>
                                 <Grid item xs>
                                     <Typography>
-                                        <Link to="/#advantages">Преимущества</Link>
+                                        <Link to="/#advantages">
+                                            Преимущества
+                                        </Link>
                                     </Typography>
                                 </Grid>
                                 <Grid item xs>
@@ -427,35 +509,58 @@ export const Header: FC = () => {
                         </Grid>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
-                                <Typography variant="body2" className={classes.text} align="center">
+                                <Typography
+                                    variant="body2"
+                                    className={classes.text}
+                                    align="center"
+                                >
                                     <Link to="tel:+74952780285" external>
                                         +7 (495) 278-02-85
                                     </Link>
                                 </Typography>
-                                <Typography variant="body2" className={classes.text} align="center">
-                                    <Link to="https://yandex.ru/maps/-/CCQtFQdaLA" external>
+                                <Typography
+                                    variant="body2"
+                                    className={classes.text}
+                                    align="center"
+                                >
+                                    <Link
+                                        to="https://yandex.ru/maps/-/CCQtFQdaLA"
+                                        external
+                                    >
                                         м. сокол
                                     </Link>
                                 </Typography>
-                                <Typography variant="body2" className={classes.text} align="center">
+                                <Typography
+                                    variant="body2"
+                                    className={classes.text}
+                                    align="center"
+                                >
                                     10:00 - 20:00
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <ul className={cn(classes.list, classes.social)}>
+                                <ul
+                                    className={cn(classes.list, classes.social)}
+                                >
                                     <li>
                                         <a href="https://vk.com/public185518769">
-                                            <Vkontakte className={classes.socialIcon} />
+                                            <Vkontakte
+                                                className={classes.socialIcon}
+                                            />
                                         </a>
                                     </li>
                                     <li>
                                         <a href="https://www.instagram.com/pr_mebel.ru/">
-                                            <Instagram className={classes.socialIcon} />
+                                            <Instagram
+                                                className={classes.socialIcon}
+                                            />
                                         </a>
                                     </li>
                                     <li>
                                         <a href="https://www.facebook.com/%D0%A7%D0%B0%D1%81%D1%82%D0%BD%D1%8B%D0%B9-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D1%8C%D0%B5%D1%80-108136607213942">
-                                            <Facebook className={classes.socialIcon} />
+                                            <Facebook
+                                                className={classes.socialIcon}
+                                            />
                                         </a>
                                     </li>
                                 </ul>

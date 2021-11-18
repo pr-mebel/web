@@ -9,20 +9,29 @@ export const useModal = ({
 } = {}) => {
     const [isOpen, setIsOpen] = useState(initialOpen);
 
-    const handleOpen = useCallback((...args) => {
-        onOpen(...args);
-        setIsOpen(true);
-    }, [onOpen]);
+    const handleOpen = useCallback(
+        (...args) => {
+            onOpen(...args);
+            setIsOpen(true);
+        },
+        [onOpen]
+    );
 
-    const handleClose = useCallback((...args) => {
-        onClose(args);
-        setIsOpen(false);
-    }, [onClose]);
+    const handleClose = useCallback(
+        (...args) => {
+            onClose(args);
+            setIsOpen(false);
+        },
+        [onClose]
+    );
 
-    const handleToggle = useCallback((...args) => {
-        onToggle(...args);
-        setIsOpen(!isOpen);
-    }, [isOpen, onToggle]);
+    const handleToggle = useCallback(
+        (...args) => {
+            onToggle(...args);
+            setIsOpen(!isOpen);
+        },
+        [isOpen, onToggle]
+    );
 
     return {
         isOpen,

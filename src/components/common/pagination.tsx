@@ -51,7 +51,11 @@ type Props = {
     onChange: (arg0: number) => void;
 };
 
-export const Pagination: FC<Props> = ({ numberOfPages, activeIndex, onChange }) => {
+export const Pagination: FC<Props> = ({
+    numberOfPages,
+    activeIndex,
+    onChange,
+}) => {
     const classes = useStyles();
 
     /**
@@ -85,7 +89,7 @@ export const Pagination: FC<Props> = ({ numberOfPages, activeIndex, onChange }) 
                 onChange(i);
             }
         },
-        [activeIndex, onChange],
+        [activeIndex, onChange]
     );
 
     return (

@@ -24,8 +24,8 @@ export type SendEmailParams = {
     files?: {
         name: string;
     }[];
-}
+};
 
 export type UploadFilesParams = {
     files: FileList;
-}
+};

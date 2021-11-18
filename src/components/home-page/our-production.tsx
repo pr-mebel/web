@@ -81,7 +81,7 @@ export const OurProduction: FC = () => {
                     src={img}
                     alt="Производство"
                     layout="fill"
-                    placeholder='blur'
+                    placeholder="blur"
                 />
             </div>
             <Grid container spacing={isXsDown ? 2 : 4}>
@@ -89,11 +89,17 @@ export const OurProduction: FC = () => {
                     {LIST.map((item) => (
                         <Grid key={item.id} item xs={6} md={3}>
                             <BlockTitle>
-                                <Typography variant="h6" className={classes.sectionTitle}>
+                                <Typography
+                                    variant="h6"
+                                    className={classes.sectionTitle}
+                                >
                                     {item.data.title}
                                 </Typography>
                             </BlockTitle>
-                            <Typography className={classes.text} variant="body2">
+                            <Typography
+                                className={classes.text}
+                                variant="body2"
+                            >
                                 {item.data.text}
                             </Typography>
                         </Grid>
@@ -102,7 +108,9 @@ export const OurProduction: FC = () => {
                 <Hidden smUp>
                     <Grid item xs={12} className={classes.contentSm}>
                         <BlockTitle>
-                            <Typography variant="h5">{LIST[activeIndex].data.title}</Typography>
+                            <Typography variant="h5">
+                                {LIST[activeIndex].data.title}
+                            </Typography>
                         </BlockTitle>
                         <Typography variant="body2" className={classes.text}>
                             {LIST[activeIndex].data.text}
@@ -118,12 +126,21 @@ export const OurProduction: FC = () => {
                 </Hidden>
                 <Grid container justifyContent="center">
                     <Grid item xs={12} md={10}>
-                        <Typography variant="h5" className={classes.bottomTitle} align="center">
-                            Современные технологии производства для идеального качества вашей мебели
+                        <Typography
+                            variant="h5"
+                            className={classes.bottomTitle}
+                            align="center"
+                        >
+                            Современные технологии производства для идеального
+                            качества вашей мебели
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid container justifyContent="center" className={classes.buttonContainer}>
+                <Grid
+                    container
+                    justifyContent="center"
+                    className={classes.buttonContainer}
+                >
                     <Grid item xs={10} sm={6} md={4}>
                         <MainButton>Получить проект</MainButton>
                     </Grid>

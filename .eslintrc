@@ -1,31 +1,20 @@
 {
-  "plugins": [],
-  "extends": [
-    "next",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
-  ],
-  "rules": {
-    "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/explicit-module-boundary-types": 0
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx"
-        ],
-        "paths": [
-          "."
-        ]
-      }
+    "plugins": [],
+    "extends": ["next", "plugin:@typescript-eslint/recommended", "prettier"],
+    "rules": {
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/explicit-module-boundary-types": 0
     },
-    "react": {
-      "version": "detect"
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".ts", ".tsx"],
+                "paths": ["."]
+            }
+        },
+        "react": {
+            "version": "detect"
+        }
     }
-  }
 }

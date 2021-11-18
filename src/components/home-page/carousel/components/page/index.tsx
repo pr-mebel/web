@@ -183,7 +183,10 @@ export const Page: FC<Props> = ({ pageID, titles, subtitles, texts, to }) => {
 
             <div className={classes.pageContent}>
                 {titles.map((titleWrapper) => (
-                    <Typography key={titleWrapper.id} className={cn(classes.text, classes.title)}>
+                    <Typography
+                        key={titleWrapper.id}
+                        className={cn(classes.text, classes.title)}
+                    >
                         {titleWrapper.data}
                     </Typography>
                 ))}
@@ -210,7 +213,9 @@ export const Page: FC<Props> = ({ pageID, titles, subtitles, texts, to }) => {
                 <div className={classes.buttonContainer}>
                     <Link href={to} passHref>
                         <button type="button" className={classes.button}>
-                            <Typography className={classes.buttonText}>Подробнее</Typography>
+                            <Typography className={classes.buttonText}>
+                                Подробнее
+                            </Typography>
                         </button>
                     </Link>
                 </div>

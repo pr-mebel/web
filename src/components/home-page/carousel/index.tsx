@@ -90,14 +90,15 @@ export const Carousel: FC = () => {
      * Крутит карусель
      */
     const { pause, unpause } = useInterval(
-        () => setActiveSlide((prev) => {
-            if (prev < PAGES.length - 1) {
-                return prev + 1;
-            }
+        () =>
+            setActiveSlide((prev) => {
+                if (prev < PAGES.length - 1) {
+                    return prev + 1;
+                }
 
-            return 0;
-        }),
-        7000,
+                return 0;
+            }),
+        7000
     );
 
     /**
@@ -140,10 +141,13 @@ export const Carousel: FC = () => {
     /**
      * Переключает слайд
      */
-    const handleChangeSlide = useCallback((value) => {
-        resetInterval();
-        setActiveSlide(value);
-    }, [resetInterval]);
+    const handleChangeSlide = useCallback(
+        (value) => {
+            resetInterval();
+            setActiveSlide(value);
+        },
+        [resetInterval]
+    );
 
     /**
      * Следит за изменением ширины окна
@@ -163,7 +167,6 @@ export const Carousel: FC = () => {
         };
     }, [rootRef]);
 
-
     /**
      * Следит за тем открыта ли эта страница.
      * Если нет, то останавливает прокрутку карусели
@@ -180,19 +183,28 @@ export const Carousel: FC = () => {
         document.addEventListener('visibilitychange', handleVisibilityChange);
 
         return () => {
-            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            document.removeEventListener(
+                'visibilitychange',
+                handleVisibilityChange
+            );
         };
     }, [pause, unpause]);
 
     return (
         <div className={classes.root} ref={rootRef}>
             <ArrowBackIosIcon
-                className={cn(classes.prevDesktop, classes.navDesktop, classes.nav)}
+                className={cn(
+                    classes.prevDesktop,
+                    classes.navDesktop,
+                    classes.nav
+                )}
                 onClick={handleClickPrev}
             />
             <div
                 className={classes.slider}
-                style={{ transform: `translateX(-${windowWidth * activeSlide}px)` }}
+                style={{
+                    transform: `translateX(-${windowWidth * activeSlide}px)`,
+                }}
             >
                 {PAGES.map((page, id) => (
                     <Page
@@ -206,13 +218,21 @@ export const Carousel: FC = () => {
                 ))}
             </div>
             <ArrowForwardIosIcon
-                className={cn(classes.nextDesktop, classes.navDesktop, classes.nav)}
+                className={cn(
+                    classes.nextDesktop,
+                    classes.navDesktop,
+                    classes.nav
+                )}
                 onClick={handleClickNext}
             />
             <div className={classes.paginationContainer}>
                 <Container className={classes.paginationInnerContainer}>
                     <ArrowBackIosIcon
-                        className={cn(classes.prevMobile, classes.navMobile, classes.nav)}
+                        className={cn(
+                            classes.prevMobile,
+                            classes.navMobile,
+                            classes.nav
+                        )}
                         onClick={handleClickPrev}
                     />
                     <Pagination
@@ -221,7 +241,11 @@ export const Carousel: FC = () => {
                         onChangeSlide={handleChangeSlide}
                     />
                     <ArrowForwardIosIcon
-                        className={cn(classes.nextMobile, classes.navMobile, classes.nav)}
+                        className={cn(
+                            classes.nextMobile,
+                            classes.navMobile,
+                            classes.nav
+                        )}
                         onClick={handleClickNext}
                     />
                 </Container>

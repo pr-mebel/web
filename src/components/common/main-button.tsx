@@ -56,7 +56,12 @@ export const MainButton: FC<Props> = ({ disabled, children, onClick }) => {
     }, [orderForm, onClick]);
 
     return (
-        <button type="button" disabled={!!disabled} className={classes.root} onClick={handleClick}>
+        <button
+            type="button"
+            disabled={!!disabled}
+            className={classes.root}
+            onClick={handleClick}
+        >
             {children}
         </button>
     );

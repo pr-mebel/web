@@ -45,7 +45,7 @@ export const useCards = () => {
 
         if (currentItemID > 0) {
             hasPrev = true;
-        };
+        }
 
         if (currentItemID < list.length - 1) {
             hasNext = true;
@@ -54,7 +54,7 @@ export const useCards = () => {
         return {
             hasPrev,
             hasNext,
-        }
+        };
     }, [list, currentItemID]);
 
     const selectedItem = useMemo(() => {
@@ -66,11 +66,11 @@ export const useCards = () => {
     }, [list, currentItemID]);
 
     const handleChangeFilter = useCallback(
-        ({ name, value }: { name: FilterField; value: FilterValue}) => {
+        ({ name, value }: { name: FilterField; value: FilterValue }) => {
             if (name === 'section') {
                 setFilters({
                     ...initialFilters,
-                    [name]: value as SectionID
+                    [name]: value as SectionID,
                 });
             } else {
                 setFilters((prev) => ({
@@ -82,26 +82,29 @@ export const useCards = () => {
             setPage(1);
             setHasMore(false);
         },
-        [],
+        []
     );
 
-    const handleClickCard = useCallback((itemID: number) => {
-        setCurrentItemID(itemID);
-        cardModal.handleOpen();
-    }, [cardModal]);
+    const handleClickCard = useCallback(
+        (itemID: number) => {
+            setCurrentItemID(itemID);
+            cardModal.handleOpen();
+        },
+        [cardModal]
+    );
 
     /**
      * Открыть следующий итем внутри модального окна итемов
      */
-     const handleGoToNextCard = useCallback(() => {
-        setCurrentItemID((prev) => prev !== null ? prev + 1 : prev);
+    const handleGoToNextCard = useCallback(() => {
+        setCurrentItemID((prev) => (prev !== null ? prev + 1 : prev));
     }, []);
 
     /**
      * Открыть предыдущий итем внутри модального окна итемов
      */
     const handleGoToPrevCard = useCallback(() => {
-        setCurrentItemID((prev) => prev !== null ? prev - 1 : prev);
+        setCurrentItemID((prev) => (prev !== null ? prev - 1 : prev));
     }, []);
 
     /**
@@ -167,5 +170,5 @@ export const useCards = () => {
         onChangeFilter: handleChangeFilter,
         onCardClick: handleClickCard,
         onDownloadMore: handleDownloadMoreCards,
-    }
+    };
 };

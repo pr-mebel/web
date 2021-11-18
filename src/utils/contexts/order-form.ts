@@ -5,7 +5,7 @@ type CTX = {
     isOpen: boolean;
     onOpen: () => void;
     onClose: () => void;
-}
+};
 
 export const orderFormCtx = createContext<CTX>({
     isOpen: false,

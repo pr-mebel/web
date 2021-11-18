@@ -44,7 +44,14 @@ export const Loader: FC = () => {
     const classes = useStyles();
 
     return (
-        <Grid item xs={12} container justifyContent="center" alignItems="center" className={classes.root}>
+        <Grid
+            item
+            xs={12}
+            container
+            justifyContent="center"
+            alignItems="center"
+            className={classes.root}
+        >
             <div className={classes.loader} />
         </Grid>
     );

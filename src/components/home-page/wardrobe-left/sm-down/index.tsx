@@ -73,7 +73,7 @@ export const WardrobeLeftSmDown: FC = () => {
             setActivePage(0);
             setActiveTabIndex(index);
         },
-        [],
+        []
     );
 
     return (
@@ -105,29 +105,32 @@ export const WardrobeLeftSmDown: FC = () => {
                     <Image
                         src={img1}
                         layout="fill"
-                        alt='Однотонный'
+                        alt="Однотонный"
                         className={cn(classes.image, {
-                            [classes.selectedImage]: activePage === 0 && activeTabIndex === 0,
+                            [classes.selectedImage]:
+                                activePage === 0 && activeTabIndex === 0,
                         })}
-                        placeholder='blur'
+                        placeholder="blur"
                     />
                     <Image
                         src={img2}
                         layout="fill"
-                        alt='Комбинированный'
+                        alt="Комбинированный"
                         className={cn(classes.image, {
-                            [classes.selectedImage]: activePage === 0 && activeTabIndex === 1,
+                            [classes.selectedImage]:
+                                activePage === 0 && activeTabIndex === 1,
                         })}
-                        placeholder='blur'
+                        placeholder="blur"
                     />
                     <Image
                         src={img3}
                         layout="fill"
-                        alt='Кобминированный с Alcantara'
+                        alt="Кобминированный с Alcantara"
                         className={cn(classes.image, {
-                            [classes.selectedImage]: activePage === 0 && activeTabIndex === 2,
+                            [classes.selectedImage]:
+                                activePage === 0 && activeTabIndex === 2,
                         })}
-                        placeholder='blur'
+                        placeholder="blur"
                     />
                     {ADDITIONAL.map(({ data: { img, title }, id }, i) => (
                         <Image
@@ -160,14 +163,20 @@ export const WardrobeLeftSmDown: FC = () => {
                 ) : (
                     <Grid item xs={10} className={classes.textBottom}>
                         <Typography variant="body2">
-                            Мы&nbsp;разработали специальные решения для оптимизации хранения ваших
-                            вещей, которые позволяют сделать ежедневно пользование мебелью
-                            не&nbsp;только удобным и&nbsp;комфортным, но&nbsp;еще и&nbsp;приятным
+                            Мы&nbsp;разработали специальные решения для
+                            оптимизации хранения ваших вещей, которые позволяют
+                            сделать ежедневно пользование мебелью не&nbsp;только
+                            удобным и&nbsp;комфортным, но&nbsp;еще
+                            и&nbsp;приятным
                         </Typography>
                     </Grid>
                 )}
             </Grid>
-            <Grid container justifyContent="center" className={classes.buttonContainer}>
+            <Grid
+                container
+                justifyContent="center"
+                className={classes.buttonContainer}
+            >
                 <Grid item xs={10} sm={6} md={4}>
                     <MainButton>Рассчитать стоимость</MainButton>
                 </Grid>

@@ -57,10 +57,13 @@ const text2small = `
   все задачи по${NB_SP}оптимальному и${NB_SP}удобному хранению вещей.
 `;
 
-export const texts: Record<SectionID, {
-    large: string;
-    small: string;
-}> = {
+export const texts: Record<
+    SectionID,
+    {
+        large: string;
+        small: string;
+    }
+> = {
     cupboard: {
         large: text0large,
         small: text0small,

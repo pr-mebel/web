@@ -25,191 +25,191 @@ import topImgMob6 from 'public/images/home-page/carousel/top-img-mob6.jpg';
 
 type Props = {
     pageID: number;
-}
+};
 
 export const PageImage: FC<Props> = ({ pageID }) => {
     switch (pageID) {
-    case 0:
-        return (
-            <>
-                <Hidden smDown>
-                    <Image
-                        src={topImg1}
-                        alt='Частный мебельер'
-                        layout="fill"
-                        placeholder='blur'
-                    />
-                </Hidden>
-                <Hidden xsDown mdUp>
-                    <Image
-                        src={topImgTab1}
-                        alt='Частный мебельер'
-                        layout="fill"
-                        placeholder='blur'
-                    />
-                </Hidden>
-                <Hidden smUp>
-                    <Image
-                        src={topImgMob1}
-                        alt='Частный мебельер'
-                        layout="fill"
-                        placeholder='blur'
-                        quality={90}
-                    />
-                </Hidden>
-            </>
-        );
-    case 1:
-        return (
-            <>
-                <Hidden smDown>
-                    <Image
-                        src={topImg2}
-                        alt='Элегантная классика'
-                        layout="fill"
-                        placeholder='blur'
-                    />
-                </Hidden>
-                <Hidden xsDown mdUp>
-                    <Image
-                        src={topImgTab2}
-                        alt='Элегантная классика'
-                        layout="fill"
-                        placeholder='blur'
-                    />
-                </Hidden>
-                <Hidden smUp>
-                    <Image
-                        src={topImgMob2}
-                        alt='Элегантная классика'
-                        layout="fill"
-                        placeholder='blur'
-                        quality={90}
-                    />
-                </Hidden>
-            </>
-        );
-    case 2:
-        return (
-            <>
-                <Hidden smDown>
-                    <Image
-                        src={topImg3}
-                        alt='Гардеробные'
-                        layout="fill"
-                        placeholder='blur'
-                    />
-                </Hidden>
-                <Hidden xsDown mdUp>
-                    <Image
-                        src={topImgTab3}
-                        alt='Гардеробные'
-                        layout="fill"
-                        placeholder='blur'
-                    />
-                </Hidden>
-                <Hidden smUp>
-                    <Image
-                        src={topImgMob3}
-                        alt='Гардеробные'
-                        layout="fill"
-                        placeholder='blur'
-                        quality={90}
-                    />
-                </Hidden>
-            </>
-        );
-    case 3:
-        return (
-            <>
-                <Hidden smDown>
-                    <Image
-                        src={topImg4}
-                        alt='Дизайнерская мебель'
-                        layout="fill"
-                        placeholder='blur'
-                    />
-                </Hidden>
-                <Hidden xsDown mdUp>
-                    <Image
-                        src={topImgTab4}
-                        alt='Дизайнерская мебель'
-                        layout="fill"
-                        placeholder='blur'
-                    />
-                </Hidden>
-                <Hidden smUp>
-                    <Image
-                        src={topImgMob4}
-                        alt='Дизайнерская мебель'
-                        layout="fill"
-                        placeholder='blur'
-                        quality={90}
-                    />
-                </Hidden>
-            </>
-        );
-    case 4:
-        return (
-            <>
-                <Hidden smDown>
-                    <Image
-                        src={topImg5}
-                        alt='Комфорт, продуманный до мелочей'
-                        layout="fill"
-                        placeholder='blur'
-                    />
-                </Hidden>
-                <Hidden xsDown mdUp>
-                    <Image
-                        src={topImgTab5}
-                        alt='Комфорт, продуманный до мелочей'
-                        layout="fill"
-                        placeholder='blur'
-                    />
-                </Hidden>
-                <Hidden smUp>
-                    <Image
-                        src={topImgMob5}
-                        alt='Комфорт, продуманный до мелочей'
-                        layout="fill"
-                        placeholder='blur'
-                        quality={90}
-                    />
-                </Hidden>
-            </>
-        );
-    case 5:
-        return (
-            <>
-                <Hidden smDown>
-                    <Image
-                        src={topImg6}
-                        alt='Истинное качество'
-                        layout="fill"
-                        placeholder='blur'
-                    />
-                </Hidden>
-                <Hidden xsDown mdUp>
-                    <Image
-                        src={topImgTab6}
-                        alt='Истинное качество'
-                        layout="fill"
-                        placeholder='blur'
-                    />
-                </Hidden>
-                <Hidden smUp>
-                    <Image
-                        src={topImgMob6}
-                        alt='Истинное качество'
-                        layout="fill"
-                        placeholder='blur'
-                        quality={90}
-                    />
-                </Hidden>
-            </>
-        );
-    default:
-        return null;
+        case 0:
+            return (
+                <>
+                    <Hidden smDown>
+                        <Image
+                            src={topImg1}
+                            alt="Частный мебельер"
+                            layout="fill"
+                            placeholder="blur"
+                        />
+                    </Hidden>
+                    <Hidden xsDown mdUp>
+                        <Image
+                            src={topImgTab1}
+                            alt="Частный мебельер"
+                            layout="fill"
+                            placeholder="blur"
+                        />
+                    </Hidden>
+                    <Hidden smUp>
+                        <Image
+                            src={topImgMob1}
+                            alt="Частный мебельер"
+                            layout="fill"
+                            placeholder="blur"
+                            quality={90}
+                        />
+                    </Hidden>
+                </>
+            );
+        case 1:
+            return (
+                <>
+                    <Hidden smDown>
+                        <Image
+                            src={topImg2}
+                            alt="Элегантная классика"
+                            layout="fill"
+                            placeholder="blur"
+                        />
+                    </Hidden>
+                    <Hidden xsDown mdUp>
+                        <Image
+                            src={topImgTab2}
+                            alt="Элегантная классика"
+                            layout="fill"
+                            placeholder="blur"
+                        />
+                    </Hidden>
+                    <Hidden smUp>
+                        <Image
+                            src={topImgMob2}
+                            alt="Элегантная классика"
+                            layout="fill"
+                            placeholder="blur"
+                            quality={90}
+                        />
+                    </Hidden>
+                </>
+            );
+        case 2:
+            return (
+                <>
+                    <Hidden smDown>
+                        <Image
+                            src={topImg3}
+                            alt="Гардеробные"
+                            layout="fill"
+                            placeholder="blur"
+                        />
+                    </Hidden>
+                    <Hidden xsDown mdUp>
+                        <Image
+                            src={topImgTab3}
+                            alt="Гардеробные"
+                            layout="fill"
+                            placeholder="blur"
+                        />
+                    </Hidden>
+                    <Hidden smUp>
+                        <Image
+                            src={topImgMob3}
+                            alt="Гардеробные"
+                            layout="fill"
+                            placeholder="blur"
+                            quality={90}
+                        />
+                    </Hidden>
+                </>
+            );
+        case 3:
+            return (
+                <>
+                    <Hidden smDown>
+                        <Image
+                            src={topImg4}
+                            alt="Дизайнерская мебель"
+                            layout="fill"
+                            placeholder="blur"
+                        />
+                    </Hidden>
+                    <Hidden xsDown mdUp>
+                        <Image
+                            src={topImgTab4}
+                            alt="Дизайнерская мебель"
+                            layout="fill"
+                            placeholder="blur"
+                        />
+                    </Hidden>
+                    <Hidden smUp>
+                        <Image
+                            src={topImgMob4}
+                            alt="Дизайнерская мебель"
+                            layout="fill"
+                            placeholder="blur"
+                            quality={90}
+                        />
+                    </Hidden>
+                </>
+            );
+        case 4:
+            return (
+                <>
+                    <Hidden smDown>
+                        <Image
+                            src={topImg5}
+                            alt="Комфорт, продуманный до мелочей"
+                            layout="fill"
+                            placeholder="blur"
+                        />
+                    </Hidden>
+                    <Hidden xsDown mdUp>
+                        <Image
+                            src={topImgTab5}
+                            alt="Комфорт, продуманный до мелочей"
+                            layout="fill"
+                            placeholder="blur"
+                        />
+                    </Hidden>
+                    <Hidden smUp>
+                        <Image
+                            src={topImgMob5}
+                            alt="Комфорт, продуманный до мелочей"
+                            layout="fill"
+                            placeholder="blur"
+                            quality={90}
+                        />
+                    </Hidden>
+                </>
+            );
+        case 5:
+            return (
+                <>
+                    <Hidden smDown>
+                        <Image
+                            src={topImg6}
+                            alt="Истинное качество"
+                            layout="fill"
+                            placeholder="blur"
+                        />
+                    </Hidden>
+                    <Hidden xsDown mdUp>
+                        <Image
+                            src={topImgTab6}
+                            alt="Истинное качество"
+                            layout="fill"
+                            placeholder="blur"
+                        />
+                    </Hidden>
+                    <Hidden smUp>
+                        <Image
+                            src={topImgMob6}
+                            alt="Истинное качество"
+                            layout="fill"
+                            placeholder="blur"
+                            quality={90}
+                        />
+                    </Hidden>
+                </>
+            );
+        default:
+            return null;
     }
 };

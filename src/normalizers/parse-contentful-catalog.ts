@@ -3,7 +3,7 @@ import { ApolloQueryResult } from '@apollo/client';
 import { CatalogResponse } from '@/utils/api/types';
 
 const checkIfTypenameisASection = (
-    data: SectionCollection | Collection,
+    data: SectionCollection | Collection
 ): data is SectionCollection => {
     const { __typename } = data;
 
@@ -22,7 +22,7 @@ const checkIfTypenameisASection = (
  * @returns массив карточек
  */
 export const parseContentfulCatalog = (
-    response: ApolloQueryResult<CatalogResponse>,
+    response: ApolloQueryResult<CatalogResponse>
 ): SectionCollection | Collection => {
     const res = response.data.result;
 

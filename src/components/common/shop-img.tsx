@@ -21,7 +21,7 @@ export const ShopImg: FC = () => {
                 src={img}
                 layout="fill"
                 alt="Изображение салона"
-                placeholder='blur'
+                placeholder="blur"
             />
         </div>
     );

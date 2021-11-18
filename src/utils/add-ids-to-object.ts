@@ -5,7 +5,9 @@ import { v4 } from 'uuid';
  * @param array массив объектов
  * @returns массив, с объектами
  */
-export const addIdsToArrayOfObjects = <T extends unknown>(array: T[]): { id: string; data: T }[] =>
+export const addIdsToArrayOfObjects = <T extends unknown>(
+    array: T[]
+): { id: string; data: T }[] =>
     array.map((elem) => ({
         id: v4(),
         data: elem,

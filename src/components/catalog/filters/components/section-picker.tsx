@@ -50,7 +50,6 @@ type Props = {
     onChange: (arg0: { name: FilterField; value: FilterValue }) => void;
 };
 
-
 export const SectionPicker: FC<Props> = ({ options, value, onChange }) => {
     const classes = useStyles();
 
@@ -64,7 +63,7 @@ export const SectionPicker: FC<Props> = ({ options, value, onChange }) => {
                 value,
             });
         },
-        [onChange],
+        [onChange]
     );
 
     return (
@@ -77,7 +76,8 @@ export const SectionPicker: FC<Props> = ({ options, value, onChange }) => {
                                 <Typography
                                     variant="body1"
                                     className={cn(classes.option, {
-                                        [classes.selectedOption]: value === section.id,
+                                        [classes.selectedOption]:
+                                            value === section.id,
                                     })}
                                     onClick={handleClick(section.id)}
                                 >

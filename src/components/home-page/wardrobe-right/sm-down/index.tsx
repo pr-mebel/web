@@ -51,13 +51,17 @@ export const WardrobeRightSmDown = () => {
                     нашей мебели
                 </Typography>
             </BlockTitle>
-            <Grid container justifyContent="center" className={classes.contentSm}>
+            <Grid
+                container
+                justifyContent="center"
+                className={classes.contentSm}
+            >
                 <Grid item xs={12} className={classes.imgContainer}>
                     <Image
                         src={defaultImage}
                         layout="fill"
                         alt="Шкаф исключительного качества"
-                        placeholder='blur'
+                        placeholder="blur"
                         className={cn(classes.image, {
                             [classes.selectedImage]: activePage === 0,
                         })}
@@ -94,14 +98,19 @@ export const WardrobeRightSmDown = () => {
                 ) : (
                     <Grid item xs={10} className={classes.textBottom}>
                         <Typography variant="body2">
-                            Каждое наше изделие это сложный инженерный продукт, включающий
-                            в&nbsp;себя передовые мировые стандарты производства мебели. Все это
-                            сделано для того, чтобы наша мебель безупречно служила вам долгие годы
+                            Каждое наше изделие это сложный инженерный продукт,
+                            включающий в&nbsp;себя передовые мировые стандарты
+                            производства мебели. Все это сделано для того, чтобы
+                            наша мебель безупречно служила вам долгие годы
                         </Typography>
                     </Grid>
                 )}
             </Grid>
-            <Grid container justifyContent="center" className={classes.buttonContainer}>
+            <Grid
+                container
+                justifyContent="center"
+                className={classes.buttonContainer}
+            >
                 <Grid item xs={10} sm={6} md={4}>
                     <MainButton>Рассчитать стоимость</MainButton>
                 </Grid>

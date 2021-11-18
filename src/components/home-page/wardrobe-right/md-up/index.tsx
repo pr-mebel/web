@@ -50,9 +50,10 @@ export const WardrobeRightMdUp = () => {
             <Grid container spacing={6}>
                 <Grid item xs={6} className={classes.description}>
                     <Typography variant="body1">
-                        Каждое наше изделие это сложный инженерный продукт, включающий в&nbsp;себя
-                        передовые мировые стандарты производства мебели. Все это сделано для того,
-                        чтобы наша мебель безупречно служила вам долгие годы
+                        Каждое наше изделие это сложный инженерный продукт,
+                        включающий в&nbsp;себя передовые мировые стандарты
+                        производства мебели. Все это сделано для того, чтобы
+                        наша мебель безупречно служила вам долгие годы
                     </Typography>
                 </Grid>
                 <Grid item xs={6}>
@@ -61,7 +62,7 @@ export const WardrobeRightMdUp = () => {
                             src={defaultImage}
                             alt="Шкаф исключительного качества"
                             layout="fill"
-                            placeholder='blur'
+                            placeholder="blur"
                             className={classes.img}
                         />
                         {ADDITIONAL.map((point) => (
@@ -84,7 +85,11 @@ export const WardrobeRightMdUp = () => {
                     </div>
                 </Grid>
             </Grid>
-            <Grid container justifyContent="center" className={classes.buttonContainer}>
+            <Grid
+                container
+                justifyContent="center"
+                className={classes.buttonContainer}
+            >
                 <Grid item xs={10} sm={6} md={4}>
                     <MainButton>Рассчитать стоимость</MainButton>
                 </Grid>

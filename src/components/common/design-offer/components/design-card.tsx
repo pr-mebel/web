@@ -22,7 +22,12 @@ export const DesignCard: FC<Props> = ({ img, children }) => {
     const isXsDown = useMediaQuery(theme.breakpoints.down('xs'));
 
     return (
-        <Grid container alignItems="center" spacing={1} direction={isXsDown ? 'row' : 'column'}>
+        <Grid
+            container
+            alignItems="center"
+            spacing={1}
+            direction={isXsDown ? 'row' : 'column'}
+        >
             <Grid item xs={2} sm={12}>
                 {img}
             </Grid>

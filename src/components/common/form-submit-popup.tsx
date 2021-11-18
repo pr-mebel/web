@@ -52,21 +52,24 @@ export const FormSubmitPopup: FC = () => {
      */
     const allUploaded = useMemo(
         () => files.every((file) => file.progress === 100) || !files.length,
-        [files],
+        [files]
     );
 
     /**
      * Процент полностью загруженных файлов
      */
-    const percentageOfUploaded = useMemo(() =>
-        (files.reduce((acc, curr) => {
-            if (curr.progress === 100) {
-                return acc + 1;
-            }
+    const percentageOfUploaded = useMemo(
+        () =>
+            (files.reduce((acc, curr) => {
+                if (curr.progress === 100) {
+                    return acc + 1;
+                }
 
-            return acc;
-        }, 0) / files.length) * 100,
-    [files],
+                return acc;
+            }, 0) /
+                files.length) *
+            100,
+        [files]
     );
 
     const handleClose = useCallback(() => {
@@ -85,7 +88,10 @@ export const FormSubmitPopup: FC = () => {
     return (
         <Dialog open={isOpen} onClose={handleClose} fullWidth maxWidth="sm">
             <div className={classes.root}>
-                <ClearIcon className={classes.closeIcon} onClick={handleClose} />
+                <ClearIcon
+                    className={classes.closeIcon}
+                    onClick={handleClose}
+                />
                 <Typography variant="body1" align="center" gutterBottom>
                     {!allUploaded ? (
                         'Загрузка файлов'
@@ -100,12 +106,24 @@ export const FormSubmitPopup: FC = () => {
                         </>
                     )}
                 </Typography>
-                <Grid container justifyContent="center" alignItems="center" className={classes.container}>
+                <Grid
+                    container
+                    justifyContent="center"
+                    alignItems="center"
+                    className={classes.container}
+                >
                     {!allUploaded ? (
-                        <CircularProgress size={80} variant="static" value={percentageOfUploaded} />
+                        <CircularProgress
+                            size={80}
+                            variant="static"
+                            value={percentageOfUploaded}
+                        />
                     ) : (
                         <Grid item xs={12} className={classes.textContainer}>
-                            <Typography align="center" className={classes.textMain}>
+                            <Typography
+                                align="center"
+                                className={classes.textMain}
+                            >
                                 Спасибо за обращение!
                             </Typography>
                             <Typography align="center">

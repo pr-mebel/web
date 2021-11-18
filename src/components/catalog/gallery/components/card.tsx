@@ -69,8 +69,12 @@ type Props = {
     onClick: (arg0: number) => void;
 };
 
-
-export const Card: FC<Props> = ({ imageUrlMin, collection, currentItemId, onClick }) => {
+export const Card: FC<Props> = ({
+    imageUrlMin,
+    collection,
+    currentItemId,
+    onClick,
+}) => {
     const classes = useStyles();
 
     /**
@@ -89,7 +93,9 @@ export const Card: FC<Props> = ({ imageUrlMin, collection, currentItemId, onClic
                     alt={`Товар из коллекции ${collection}`}
                 />
                 <div className={classes.tooltip}>
-                    <Typography className={classes.tooltipText}>{collection}</Typography>
+                    <Typography className={classes.tooltipText}>
+                        {collection}
+                    </Typography>
                     <ArrowForwardIcon className={classes.arrow} />
                 </div>
             </div>

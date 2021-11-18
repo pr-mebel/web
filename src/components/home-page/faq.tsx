@@ -34,8 +34,7 @@ const LIST = [
     },
     {
         id: '03',
-        title:
-            'Могу ли я заказать шкаф под дизайн межкомнатных дверей или другой имеющейся мебели?',
+        title: 'Могу ли я заказать шкаф под дизайн межкомнатных дверей или другой имеющейся мебели?',
         text: `Да, наши специалисты могут разработать дизайн изделия
     как под ваши межкомнатные двери, так и${NB_SP}под любые
     другие предметы интерьера. Мы${NB_SP}максимально точно
@@ -143,8 +142,8 @@ export const FAQ: FC = () => {
                 ...acc,
                 [v.title]: false,
             }),
-            {},
-        ),
+            {}
+        )
     );
 
     /**
@@ -167,8 +166,8 @@ export const FAQ: FC = () => {
                             ...acc,
                             [v.title]: v.title === title,
                         }),
-                        {},
-                    ),
+                        {}
+                    )
                 );
             } else {
                 setExpandedList(
@@ -177,12 +176,12 @@ export const FAQ: FC = () => {
                             ...acc,
                             [v.title]: false,
                         }),
-                        {},
-                    ),
+                        {}
+                    )
                 );
             }
         },
-        [],
+        []
     );
 
     return (
@@ -204,17 +203,25 @@ export const FAQ: FC = () => {
                         <Grid item xs={12} md={10} key={item.id}>
                             <Accordion
                                 onChange={handleChange(item.title)}
-                                expanded={expandedList[item.title as keyof typeof expandedList]}
+                                expanded={
+                                    expandedList[
+                                        item.title as keyof typeof expandedList
+                                    ]
+                                }
                             >
                                 <AccordionSummary
                                     expandIcon={
-                                        <ArrowForwardIosIcon className={classes.dropdownIcon} />
+                                        <ArrowForwardIosIcon
+                                            className={classes.dropdownIcon}
+                                        />
                                     }
                                     classes={{
                                         content: classes.summaryContainer,
                                     }}
                                 >
-                                    <Typography className={classes.number}>{item.id}</Typography>
+                                    <Typography className={classes.number}>
+                                        {item.id}
+                                    </Typography>
                                     <Typography>{item.title}</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
@@ -226,9 +233,15 @@ export const FAQ: FC = () => {
                 })}
             </Grid>
             {!isShowMoreClicked && (
-                <Grid container justifyContent="center" className={classes.buttonContainer}>
+                <Grid
+                    container
+                    justifyContent="center"
+                    className={classes.buttonContainer}
+                >
                     <Grid item xs={10} sm={6} md={4}>
-                        <MainButton onClick={handleShowMore}>Показать еще</MainButton>
+                        <MainButton onClick={handleShowMore}>
+                            Показать еще
+                        </MainButton>
                     </Grid>
                 </Grid>
             )}

@@ -25,7 +25,11 @@ const messageBuilder = ({
             <p><strong>Имя:</strong><br>${name}</p>
             <p><strong>Телефон:</strong><br>${tel}</p>
             ${email ? `<p><strong>Почта:</strong><br>${email}</p>` : ''}
-            ${description ? `<p><strong>Описание:</strong><br>${description}</p>` : ''}
+            ${
+                description
+                    ? `<p><strong>Описание:</strong><br>${description}</p>`
+                    : ''
+            }
         `,
         attachments,
     },
@@ -37,43 +41,48 @@ type Body = {
     tel: string;
     description?: string;
     files?: FileList;
-}
+};
 
 const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
     const { email, name, tel, description, files } = req.body as Body;
     const storageRef = storage().ref();
 
     if (files) {
-        const refs = [...files]
-            .map((file) => storageRef.child(file.name).getDownloadURL() as Promise<string>);
+        const refs = [...files].map(
+            (file) =>
+                storageRef.child(file.name).getDownloadURL() as Promise<string>
+        );
 
-        await Promise.all(refs)
-            .then(async (fileLinks) => {
-                const attachments = fileLinks.map((fileLink, i) => ({
-                    filename: [...files][i].name,
-                    path: fileLink,
-                }));
+        await Promise.all(refs).then(async (fileLinks) => {
+            const attachments = fileLinks.map((fileLink, i) => ({
+                filename: [...files][i].name,
+                path: fileLink,
+            }));
 
-                await firestore()
-                    .collection('mail')
-                    .add(messageBuilder({
+            await firestore()
+                .collection('mail')
+                .add(
+                    messageBuilder({
                         email,
                         name,
                         tel,
                         description,
                         attachments,
-                    }))
-                    .then(() => res.status(200));
-            });
+                    })
+                )
+                .then(() => res.status(200));
+        });
     } else {
         await firestore()
             .collection('mail')
-            .add(messageBuilder({
-                email,
-                name,
-                tel,
-                description,
-            }))
+            .add(
+                messageBuilder({
+                    email,
+                    name,
+                    tel,
+                    description,
+                })
+            )
             .then(() => res.json(200));
     }
 };

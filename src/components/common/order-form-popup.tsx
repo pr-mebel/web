@@ -189,7 +189,7 @@ export const OrderFormPopup: FC = () => {
                     alt="Картинка в модальном окне"
                 />
             </div>
-            <Grid container justify="center" className={classes.content}>
+            <Grid container justifyContent="center" className={classes.content}>
                 <Typography variant="h5" gutterBottom className={classes.title}>
                     Расчет стоимости проекта
                 </Typography>
@@ -254,20 +254,20 @@ export const OrderFormPopup: FC = () => {
                             className={classes.inputFile}
                             onChange={handleFileUploadChange}
                         />
-                        <Grid container justify="center" className={classes.files}>
+                        <Grid container justifyContent="center" className={classes.files}>
                             <Grid
                                 item
                                 xs={12}
                                 sm={7}
                                 container
-                                justify="center"
+                                justifyContent="center"
                                 onClick={handleFileInputClick}
                             >
                                 <PublishIcon className={classes.icon} />
                                 <Typography>Прикрепить эскизы</Typography>
                             </Grid>
                             {!!fileNames.length && (
-                                <Grid item xs={12} sm={5} container justify="center">
+                                <Grid item xs={12} sm={5} container justifyContent="center">
                                     <Typography className={classes.fileInputText}>
                                         {`${fileNames.length}\xA0${getFileDeclination(
                                             fileNames.length,

@@ -81,7 +81,7 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                         item
                         container
                         xs={12}
-                        justify="center"
+                        justifyContent="center"
                         className={classes.firstOptionsGroup}
                     >
                         <Typography variant="body1" className={classes.subtitle}>
@@ -92,7 +92,7 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                         item
                         container
                         xs={12}
-                        justify="center"
+                        justifyContent="center"
                         className={classes.optionsContainer}
                     >
                         {filterOptions.styles.map((option, i) => {
@@ -148,7 +148,7 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                         item
                         container
                         xs={12}
-                        justify="center"
+                        justifyContent="center"
                         className={classes.secondOptionsGroup}
                     >
                         <Typography variant="body1" className={classes.subtitle}>
@@ -159,7 +159,7 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                         item
                         container
                         xs={12}
-                        justify="center"
+                        justifyContent="center"
                         className={classes.optionsContainer}
                     >
                         {filterOptions.doorTypes.map((option, i) => {

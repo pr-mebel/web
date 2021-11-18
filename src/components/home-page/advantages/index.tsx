@@ -387,7 +387,7 @@ export const Advantages: FC = () => {
                     </Grid>
                 </Grid>
             </Hidden>
-            <Grid item xs={12} container justify="center" className={classes.buttonContainer}>
+            <Grid item xs={12} container justifyContent="center" className={classes.buttonContainer}>
                 <Grid item xs={10} sm={6} md={4}>
                     <MainButton>Рассчитать стоимость</MainButton>
                 </Grid>

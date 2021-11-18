@@ -209,17 +209,17 @@ const CardPopupComponent: FC<Props> = ({
                         <Grid container className={classes.socials}>
                             <Grid item xs={3} sm={4} />
                             <Grid item xs={6} sm={4} container spacing={2}>
-                                <Grid item xs={4} container justify="center">
+                                <Grid item xs={4} container justifyContent="center">
                                     <a href="https://www.instagram.com/pr_mebel.ru/">
                                         <Instagram className={classes.socialIcon} />
                                     </a>
                                 </Grid>
-                                <Grid item xs={4} container justify="center">
+                                <Grid item xs={4} container justifyContent="center">
                                     <a href="https://vk.com/public185518769">
                                         <Vkontakte className={classes.socialIcon} />
                                     </a>
                                 </Grid>
-                                <Grid item xs={4} container justify="center">
+                                <Grid item xs={4} container justifyContent="center">
                                     <a href="https://www.facebook.com/%D0%A7%D0%B0%D1%81%D1%82%D0%BD%D1%8B%D0%B9-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D1%8C%D0%B5%D1%80-108136607213942">
                                         <Facebook className={classes.socialIcon} />
                                     </a>

@@ -68,7 +68,7 @@ export const Gallery: FC<GalleryProps> = ({
                 </div>
             )}
             {!!hasMore && (
-                <Grid container justify="center" className={classes.buttonContainer}>
+                <Grid container justifyContent="center" className={classes.buttonContainer}>
                     <Grid item xs={10} sm={8} md={6}>
                         <MainButton onClick={onLoadMore}>Показать еще</MainButton>
                     </Grid>

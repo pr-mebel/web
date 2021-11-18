@@ -116,14 +116,14 @@ export const CallDesignerForm: FC = () => {
                             item
                             xs={12}
                             container
-                            justify="center"
+                            justifyContent="center"
                             className={classes.buttonContainer}
                         >
                             <Grid item xs={10} sm={6} md={4}>
                                 <SubmitButton>Вызвать дизайнера</SubmitButton>
                             </Grid>
                         </Grid>
-                        <Grid item xs container justify="center">
+                        <Grid item xs container justifyContent="center">
                             <Grid item xs={10} sm={6}>
                                 <Typography variant="body2" className={classes.text} align="center">
                                     Нажимая кнопку &laquo;Вызвать дизайнера&raquo;, я&nbsp;даю

@@ -257,7 +257,7 @@ export const Questions: FC = () => {
                                 label="Описание"
                                 rows={5}
                             />
-                            <Grid container justify="center" className={classes.files}>
+                            <Grid container justifyContent="center" className={classes.files}>
                                 <input
                                     type="file"
                                     multiple
@@ -270,7 +270,7 @@ export const Questions: FC = () => {
                                     xs={12}
                                     sm={7}
                                     container
-                                    justify="center"
+                                    justifyContent="center"
                                     onClick={handleFileInputClick}
                                     className={classes.fileInputContainer}
                                 >
@@ -280,7 +280,7 @@ export const Questions: FC = () => {
                                     </Typography>
                                 </Grid>
                                 {!!fileNames.length && (
-                                    <Grid item xs={12} sm={5} container justify="center">
+                                    <Grid item xs={12} sm={5} container justifyContent="center">
                                         <Typography className={classes.fileInputText}>
                                             {`${fileNames.length}\xA0${getFileDeclination(
                                                 fileNames.length,
@@ -298,7 +298,7 @@ export const Questions: FC = () => {
                             item
                             xs={12}
                             container
-                            justify="center"
+                            justifyContent="center"
                             className={classes.buttonContainer}
                         >
                             <Grid item xs={8} sm={6} md={4}>

@@ -17,7 +17,6 @@ import img4 from 'public/images/home-page/advantages/4.jpg';
 import img5 from 'public/images/home-page/advantages/5.jpg';
 import img6 from 'public/images/home-page/advantages/6.jpg';
 
-
 export const TABS = addIdsToArrayOfObjects([
     {
         title: 'Эмаль',
@@ -182,21 +181,31 @@ export const Advantages: FC = () => {
         <Container>
             <Hidden xsDown>
                 <BlockTitle>
-                    <Typography variant="h4">Преимущества нашей продукции</Typography>
+                    <Typography variant="h4">
+                        Преимущества нашей продукции
+                    </Typography>
                 </BlockTitle>
                 <Grid container className={classes.description}>
                     <Grid item xs={12} md={10}>
                         <Typography variant="body2">
-                            Мы&nbsp;постоянно улучшаем качество, эргономические и&nbsp;эстетические
-                            параметры нашей мебели. Начиная с&nbsp;подбора материалов
-                            и&nbsp;комплектующих мы&nbsp;создаем эксклюзивный проект будущего
-                            изделия, который не&nbsp;просто идеально впишется в&nbsp;ваш интерьер,
-                            а&nbsp;будет комфортен, удобен и&nbsp;функционален в&nbsp;использовании,
+                            Мы&nbsp;постоянно улучшаем качество, эргономические
+                            и&nbsp;эстетические параметры нашей мебели. Начиная
+                            с&nbsp;подбора материалов и&nbsp;комплектующих
+                            мы&nbsp;создаем эксклюзивный проект будущего
+                            изделия, который не&nbsp;просто идеально впишется
+                            в&nbsp;ваш интерьер, а&nbsp;будет комфортен, удобен
+                            и&nbsp;функционален в&nbsp;использовании,
                             и&nbsp;прослужит Вам долгие годы.
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid item xs={12} container className={classes.materials} spacing={2}>
+                <Grid
+                    item
+                    xs={12}
+                    container
+                    className={classes.materials}
+                    spacing={2}
+                >
                     <Grid item xs={12} sm={7} container direction="column">
                         <Grid item>
                             <BlockTitle>
@@ -211,15 +220,26 @@ export const Advantages: FC = () => {
                         </Grid>
                     </Grid>
                     <Grid item xs={7} className={classes.tabs}>
-                        <Tabs tabs={TABS} activeTab={activeTab} onChange={handleChangeTab} />
+                        <Tabs
+                            tabs={TABS}
+                            activeTab={activeTab}
+                            onChange={handleChangeTab}
+                        />
                         <Options activeTab={activeTab}>
                             {TABS.map((tab) => (
                                 <div key={tab.id}>
                                     <ul className={classes.list}>
                                         {tab.data.list.map((option) => (
-                                            <li key={option} className={classes.listItem}>
-                                                <CheckIcon className={classes.check} />
-                                                <Typography className={classes.listText}>
+                                            <li
+                                                key={option}
+                                                className={classes.listItem}
+                                            >
+                                                <CheckIcon
+                                                    className={classes.check}
+                                                />
+                                                <Typography
+                                                    className={classes.listText}
+                                                >
                                                     {option}
                                                 </Typography>
                                             </li>
@@ -233,64 +253,70 @@ export const Advantages: FC = () => {
                         <div className={classes.imgContainer}>
                             <Image
                                 src={img1}
-                                alt='Эмаль'
+                                alt="Эмаль"
                                 layout="fill"
                                 className={cn(classes.image, {
                                     [classes.selectedImage]: activeTab === 0,
                                 })}
-                                placeholder='blur'
+                                placeholder="blur"
                             />
                             <Image
                                 src={img2}
-                                alt='Ламинат'
+                                alt="Ламинат"
                                 layout="fill"
                                 className={cn(classes.image, {
                                     [classes.selectedImage]: activeTab === 1,
                                 })}
-                                placeholder='blur'
+                                placeholder="blur"
                             />
                             <Image
                                 src={img3}
-                                alt='3D Ламинат'
+                                alt="3D Ламинат"
                                 layout="fill"
                                 className={cn(classes.image, {
                                     [classes.selectedImage]: activeTab === 2,
                                 })}
-                                placeholder='blur'
+                                placeholder="blur"
                             />
                             <Image
                                 src={img4}
-                                alt='Шпон'
+                                alt="Шпон"
                                 layout="fill"
                                 className={cn(classes.image, {
                                     [classes.selectedImage]: activeTab === 3,
                                 })}
-                                placeholder='blur'
+                                placeholder="blur"
                             />
                             <Image
                                 src={img5}
-                                alt='Кожа'
+                                alt="Кожа"
                                 layout="fill"
                                 className={cn(classes.image, {
                                     [classes.selectedImage]: activeTab === 4,
                                 })}
-                                placeholder='blur'
+                                placeholder="blur"
                             />
                             <Image
                                 src={img6}
-                                alt='Стекло'
+                                alt="Стекло"
                                 layout="fill"
                                 className={cn(classes.image, {
                                     [classes.selectedImage]: activeTab === 5,
                                 })}
-                                placeholder='blur'
+                                placeholder="blur"
                             />
                         </div>
                     </Grid>
                 </Grid>
             </Hidden>
             <Hidden smUp>
-                <Grid item xs={12} container className={classes.materials} direction="column">
+                <Grid
+                    item
+                    xs={12}
+                    container
+                    className={classes.materials}
+                    direction="column"
+                >
                     <Grid item xs={12}>
                         <BlockTitle>
                             <Typography variant="h5">
@@ -303,7 +329,11 @@ export const Advantages: FC = () => {
                         </BlockTitle>
                     </Grid>
                     <Grid item xs={12} className={classes.tabs}>
-                        <Tabs tabs={TABS} activeTab={activeTab} onChange={handleChangeTab} />
+                        <Tabs
+                            tabs={TABS}
+                            activeTab={activeTab}
+                            onChange={handleChangeTab}
+                        />
                     </Grid>
                     <Grid item xs={10} className={classes.imgContainer}>
                         <ArrowBackIosIcon
@@ -312,57 +342,57 @@ export const Advantages: FC = () => {
                         />
                         <Image
                             src={img1}
-                            alt='Эмаль'
+                            alt="Эмаль"
                             layout="fill"
                             className={cn(classes.image, {
                                 [classes.selectedImage]: activeTab === 0,
                             })}
-                            placeholder='blur'
+                            placeholder="blur"
                         />
                         <Image
                             src={img2}
-                            alt='Ламинат'
+                            alt="Ламинат"
                             layout="fill"
                             className={cn(classes.image, {
                                 [classes.selectedImage]: activeTab === 1,
                             })}
-                            placeholder='blur'
+                            placeholder="blur"
                         />
                         <Image
                             src={img3}
-                            alt='3D Ламинат'
+                            alt="3D Ламинат"
                             layout="fill"
                             className={cn(classes.image, {
                                 [classes.selectedImage]: activeTab === 2,
                             })}
-                            placeholder='blur'
+                            placeholder="blur"
                         />
                         <Image
                             src={img4}
-                            alt='Шпон'
+                            alt="Шпон"
                             layout="fill"
                             className={cn(classes.image, {
                                 [classes.selectedImage]: activeTab === 3,
                             })}
-                            placeholder='blur'
+                            placeholder="blur"
                         />
                         <Image
                             src={img5}
-                            alt='Кожа'
+                            alt="Кожа"
                             layout="fill"
                             className={cn(classes.image, {
                                 [classes.selectedImage]: activeTab === 4,
                             })}
-                            placeholder='blur'
+                            placeholder="blur"
                         />
                         <Image
                             src={img6}
-                            alt='Стекло'
+                            alt="Стекло"
                             layout="fill"
                             className={cn(classes.image, {
                                 [classes.selectedImage]: activeTab === 5,
                             })}
-                            placeholder='blur'
+                            placeholder="blur"
                         />
                         <ArrowForwardIosIcon
                             className={cn(classes.icon, classes.iconForward)}
@@ -374,9 +404,16 @@ export const Advantages: FC = () => {
                             {TABS.map((tab) => (
                                 <ul key={tab.id} className={classes.list}>
                                     {tab.data.list.map((option) => (
-                                        <li key={option} className={classes.listItem}>
-                                            <CheckIcon className={classes.check} />
-                                            <Typography className={classes.listText}>
+                                        <li
+                                            key={option}
+                                            className={classes.listItem}
+                                        >
+                                            <CheckIcon
+                                                className={classes.check}
+                                            />
+                                            <Typography
+                                                className={classes.listText}
+                                            >
                                                 {option}
                                             </Typography>
                                         </li>
@@ -387,7 +424,13 @@ export const Advantages: FC = () => {
                     </Grid>
                 </Grid>
             </Hidden>
-            <Grid item xs={12} container justifyContent="center" className={classes.buttonContainer}>
+            <Grid
+                item
+                xs={12}
+                container
+                justifyContent="center"
+                className={classes.buttonContainer}
+            >
                 <Grid item xs={10} sm={6} md={4}>
                     <MainButton>Рассчитать стоимость</MainButton>
                 </Grid>

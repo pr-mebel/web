@@ -2,7 +2,13 @@ import React, { FC, useCallback } from 'react';
 import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid } from '@material-ui/core';
-import { SectionID, StyleID, DoorTypeID, FilterField, FilterValue } from '@/entities';
+import {
+    SectionID,
+    StyleID,
+    DoorTypeID,
+    FilterField,
+    FilterValue,
+} from '@/entities';
 import { filters as filterOptions } from '@/constants';
 
 const useStyles = makeStyles((theme) => ({
@@ -51,7 +57,6 @@ type Props = {
     onChange: (arg0: { name: FilterField; value: FilterValue }) => void;
 };
 
-
 export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
     const classes = useStyles();
 
@@ -65,12 +70,15 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                 value,
             });
         },
-        [onChange],
+        [onChange]
     );
 
     return (
         <Grid container spacing={2} alignItems="flex-start">
-            {!(filter.section === 'accessories' || filter.section === 'lightingSystems') && (
+            {!(
+                filter.section === 'accessories' ||
+                filter.section === 'lightingSystems'
+            ) && (
                 <Grid
                     item
                     container
@@ -84,7 +92,10 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                         justifyContent="center"
                         className={classes.firstOptionsGroup}
                     >
-                        <Typography variant="body1" className={classes.subtitle}>
+                        <Typography
+                            variant="body1"
+                            className={classes.subtitle}
+                        >
                             Стиль
                         </Typography>
                     </Grid>
@@ -96,7 +107,10 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                         className={classes.optionsContainer}
                     >
                         {filterOptions.styles.map((option, i) => {
-                            if (option.id === 'designer' && filter.section === 'wardrobe') {
+                            if (
+                                option.id === 'designer' &&
+                                filter.section === 'wardrobe'
+                            ) {
                                 return null;
                             }
 
@@ -110,7 +124,10 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                                             [classes.selectedOption]:
                                                 filter.style === option.id,
                                         })}
-                                        onClick={handleClick('style', option.id)}
+                                        onClick={handleClick(
+                                            'style',
+                                            option.id
+                                        )}
                                     >
                                         {option.title}
                                     </Typography>
@@ -130,9 +147,13 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                                         variant="body2"
                                         component="span"
                                         className={cn(classes.option, {
-                                            [classes.selectedOption]: filter.style === option.id,
+                                            [classes.selectedOption]:
+                                                filter.style === option.id,
                                         })}
-                                        onClick={handleClick('style', option.id)}
+                                        onClick={handleClick(
+                                            'style',
+                                            option.id
+                                        )}
                                     >
                                         {option.title}
                                     </Typography>
@@ -151,7 +172,10 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                         justifyContent="center"
                         className={classes.secondOptionsGroup}
                     >
-                        <Typography variant="body1" className={classes.subtitle}>
+                        <Typography
+                            variant="body1"
+                            className={classes.subtitle}
+                        >
                             Тип открывания дверей
                         </Typography>
                     </Grid>
@@ -171,9 +195,13 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                                             component="span"
                                             className={cn(classes.option, {
                                                 [classes.selectedOption]:
-                                                    filter.doorType === option.id,
+                                                    filter.doorType ===
+                                                    option.id,
                                             })}
-                                            onClick={handleClick('doorType', option.id)}
+                                            onClick={handleClick(
+                                                'doorType',
+                                                option.id
+                                            )}
                                         >
                                             {option.title}
                                         </Typography>
@@ -194,7 +222,8 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                                     variant="body2"
                                     component="span"
                                     className={cn(classes.option, {
-                                        [classes.selectedOption]: filter.doorType === option.id,
+                                        [classes.selectedOption]:
+                                            filter.doorType === option.id,
                                     })}
                                     onClick={handleClick('doorType', option.id)}
                                 >

@@ -68,7 +68,7 @@ export const WardrobeLeftMdUp: FC = () => {
         (index) => () => {
             setActiveTabIndex(index);
         },
-        [],
+        []
     );
 
     return (
@@ -84,29 +84,29 @@ export const WardrobeLeftMdUp: FC = () => {
                         <Image
                             src={img1}
                             layout="fill"
-                            alt='Однотонный'
+                            alt="Однотонный"
                             className={cn(classes.image, {
                                 [classes.selectedImage]: activeTabIndex === 0,
                             })}
-                            placeholder='blur'
+                            placeholder="blur"
                         />
                         <Image
                             src={img2}
                             layout="fill"
-                            alt='Комбинированный'
+                            alt="Комбинированный"
                             className={cn(classes.image, {
                                 [classes.selectedImage]: activeTabIndex === 1,
                             })}
-                            placeholder='blur'
+                            placeholder="blur"
                         />
                         <Image
                             src={img3}
                             layout="fill"
-                            alt='Кобминированный с Alcantara'
+                            alt="Кобминированный с Alcantara"
                             className={cn(classes.image, {
                                 [classes.selectedImage]: activeTabIndex === 2,
                             })}
-                            placeholder='blur'
+                            placeholder="blur"
                         />
                         {ADDITIONAL.map((point) => (
                             <div
@@ -129,9 +129,10 @@ export const WardrobeLeftMdUp: FC = () => {
                 </Grid>
                 <Grid item xs={6}>
                     <Typography>
-                        Мы&nbsp;разработали специальные решения для оптимизации хранения ваших
-                        вещей, которые позволяют сделать ежедневно пользование мебелью
-                        не&nbsp;только удобным и&nbsp;комфортным, но&nbsp;еще и&nbsp;приятным
+                        Мы&nbsp;разработали специальные решения для оптимизации
+                        хранения ваших вещей, которые позволяют сделать
+                        ежедневно пользование мебелью не&nbsp;только удобным
+                        и&nbsp;комфортным, но&nbsp;еще и&nbsp;приятным
                     </Typography>
                     <ul className={classes.list}>
                         {TABS.map((tab, i) => (
@@ -150,7 +151,11 @@ export const WardrobeLeftMdUp: FC = () => {
                     </ul>
                 </Grid>
             </Grid>
-            <Grid container justifyContent="center" className={classes.buttonContainer}>
+            <Grid
+                container
+                justifyContent="center"
+                className={classes.buttonContainer}
+            >
                 <Grid item xs={10} sm={6} md={4}>
                     <MainButton>Рассчитать стоимость</MainButton>
                 </Grid>

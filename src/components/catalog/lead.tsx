@@ -25,7 +25,6 @@ export const images = addIdsToArrayOfObjects([
     },
 ]);
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: '70px',
@@ -66,42 +65,42 @@ export const Lead: FC<Props> = ({ sectionID }) => {
         <div className={classes.root}>
             <Image
                 src={cupboard}
-                alt='Шкафы'
+                alt="Шкафы"
                 className={cn(classes.image, {
                     [classes.selectedImage]: sectionID === 'cupboard',
                 })}
                 layout="fill"
-                placeholder='blur'
+                placeholder="blur"
                 objectFit="cover"
             />
             <Image
                 src={wardrobe}
-                alt='Гардеробные'
+                alt="Гардеробные"
                 className={cn(classes.image, {
                     [classes.selectedImage]: sectionID === 'wardrobe',
                 })}
                 layout="fill"
-                placeholder='blur'
+                placeholder="blur"
                 objectFit="cover"
             />
             <Image
                 src={accessories}
-                alt='Аксессуары'
+                alt="Аксессуары"
                 className={cn(classes.image, {
                     [classes.selectedImage]: sectionID === 'accessories',
                 })}
                 layout="fill"
-                placeholder='blur'
+                placeholder="blur"
                 objectFit="cover"
             />
             <Image
                 src={accessories}
-                alt='Cистемы подсветки'
+                alt="Cистемы подсветки"
                 className={cn(classes.image, {
                     [classes.selectedImage]: sectionID === 'lightingSystems',
                 })}
                 layout="fill"
-                placeholder='blur'
+                placeholder="blur"
                 objectFit="cover"
             />
         </div>

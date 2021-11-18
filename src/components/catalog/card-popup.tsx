@@ -1,7 +1,11 @@
 import React, { FC, memo, MouseEventHandler } from 'react';
 import { Dialog, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { ArrowBack, ArrowForward, Clear as ClearIcon } from '@material-ui/icons';
+import {
+    ArrowBack,
+    ArrowForward,
+    Clear as ClearIcon,
+} from '@material-ui/icons';
 import cn from 'classnames';
 import { MainButton, LoadingBackground, Loader } from '@/components/common';
 import { Facebook, Vkontakte, Instagram } from '@/components';
@@ -116,7 +120,6 @@ type Props = {
     onClickForward: MouseEventHandler<HTMLDivElement>;
 };
 
-
 const CardPopupComponent: FC<Props> = ({
     selectedItem,
     isOpen,
@@ -153,7 +156,10 @@ const CardPopupComponent: FC<Props> = ({
                             {hasPrev && (
                                 <>
                                     <div
-                                        className={cn(classes.arrow, classes.arrowLeft)}
+                                        className={cn(
+                                            classes.arrow,
+                                            classes.arrowLeft
+                                        )}
                                         onClick={onClickBack}
                                     >
                                         <ArrowBack className={classes.icon} />
@@ -164,42 +170,74 @@ const CardPopupComponent: FC<Props> = ({
                                 src={selectedItem.imageMedium.url}
                                 key={selectedItem.imageMedium.url}
                                 alt="Картинка в модальном окне"
-                                layout='fill'
+                                layout="fill"
                             />
                             {hasNext && (
                                 <>
                                     <div
-                                        className={cn(classes.arrow, classes.arrowRight)}
+                                        className={cn(
+                                            classes.arrow,
+                                            classes.arrowRight
+                                        )}
                                         onClick={onClickForward}
                                     >
-                                        <ArrowForward className={classes.icon} />
+                                        <ArrowForward
+                                            className={classes.icon}
+                                        />
                                     </div>
                                 </>
                             )}
                         </div>
                     </LoadingBackground>
                 </Grid>
-                <Grid item xs={12} md={5} className={classes.descriptionContainer}>
+                <Grid
+                    item
+                    xs={12}
+                    md={5}
+                    className={classes.descriptionContainer}
+                >
                     <div className={classes.descriptionContainerTop}>
-                        <Typography variant="body1" gutterBottom className={classes.title}>
+                        <Typography
+                            variant="body1"
+                            gutterBottom
+                            className={classes.title}
+                        >
                             Коллекция:&nbsp;
-                            <Typography variant="body1" component="span" className={classes.text}>
+                            <Typography
+                                variant="body1"
+                                component="span"
+                                className={classes.text}
+                            >
                                 {selectedItem.collection}
                             </Typography>
                         </Typography>
                         {selectedItem.description && (
                             <div className={classes.description}>
-                                <Typography variant="body1" className={classes.title}>
+                                <Typography
+                                    variant="body1"
+                                    className={classes.title}
+                                >
                                     Описание:
                                 </Typography>
-                                <Typography variant="body1" className={classes.text}>
+                                <Typography
+                                    variant="body1"
+                                    className={classes.text}
+                                >
                                     {selectedItem.description}
                                 </Typography>
                             </div>
                         )}
-                        <Typography variant="body1" gutterBottom className={classes.title}>
+                        <Typography
+                            variant="body1"
+                            gutterBottom
+                            className={classes.title}
+                        >
                             Артикул:&nbsp;
-                            <Typography variant="body1" component="span" className={classes.text}>
+                            <Typography
+                                variant="body1"
+                                component="span"
+                                className={classes.text}
+                            >
                                 {selectedItem.id}
                             </Typography>
                         </Typography>
@@ -209,19 +247,40 @@ const CardPopupComponent: FC<Props> = ({
                         <Grid container className={classes.socials}>
                             <Grid item xs={3} sm={4} />
                             <Grid item xs={6} sm={4} container spacing={2}>
-                                <Grid item xs={4} container justifyContent="center">
+                                <Grid
+                                    item
+                                    xs={4}
+                                    container
+                                    justifyContent="center"
+                                >
                                     <a href="https://www.instagram.com/pr_mebel.ru/">
-                                        <Instagram className={classes.socialIcon} />
+                                        <Instagram
+                                            className={classes.socialIcon}
+                                        />
                                     </a>
                                 </Grid>
-                                <Grid item xs={4} container justifyContent="center">
+                                <Grid
+                                    item
+                                    xs={4}
+                                    container
+                                    justifyContent="center"
+                                >
                                     <a href="https://vk.com/public185518769">
-                                        <Vkontakte className={classes.socialIcon} />
+                                        <Vkontakte
+                                            className={classes.socialIcon}
+                                        />
                                     </a>
                                 </Grid>
-                                <Grid item xs={4} container justifyContent="center">
+                                <Grid
+                                    item
+                                    xs={4}
+                                    container
+                                    justifyContent="center"
+                                >
                                     <a href="https://www.facebook.com/%D0%A7%D0%B0%D1%81%D1%82%D0%BD%D1%8B%D0%B9-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D1%8C%D0%B5%D1%80-108136607213942">
-                                        <Facebook className={classes.socialIcon} />
+                                        <Facebook
+                                            className={classes.socialIcon}
+                                        />
                                     </a>
                                 </Grid>
                             </Grid>

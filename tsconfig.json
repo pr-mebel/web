@@ -1,37 +1,24 @@
 {
-  "compilerOptions": {
-    "target": "es6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
+    "compilerOptions": {
+        "target": "es6",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": false,
+        "skipLibCheck": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"]
+        },
+        "incremental": true
     },
-    "incremental": true
-  },
-  "include": [
-    ".eslintrc.js",
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "include": [".eslintrc.js", "next-env.d.ts", "**/*.ts", "**/*.tsx"],
+    "exclude": ["node_modules"]
 }

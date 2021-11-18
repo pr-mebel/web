@@ -53,7 +53,11 @@ type Props = {
     onChangeSlide: (arg0: number) => void;
 };
 
-export const Pagination: FC<Props> = ({ currentPage, numberOfPages, onChangeSlide }) => {
+export const Pagination: FC<Props> = ({
+    currentPage,
+    numberOfPages,
+    onChangeSlide,
+}) => {
     const classes = useStyles();
 
     /**
@@ -63,7 +67,7 @@ export const Pagination: FC<Props> = ({ currentPage, numberOfPages, onChangeSlid
         (index) => () => {
             onChangeSlide(index);
         },
-        [onChangeSlide],
+        [onChangeSlide]
     );
 
     return (
@@ -77,7 +81,9 @@ export const Pagination: FC<Props> = ({ currentPage, numberOfPages, onChangeSlid
                     })}
                     onClick={handleClick(index)}
                 >
-                    <Typography className={classes.text}>{index + 1}</Typography>
+                    <Typography className={classes.text}>
+                        {index + 1}
+                    </Typography>
                 </button>
             ))}
         </div>

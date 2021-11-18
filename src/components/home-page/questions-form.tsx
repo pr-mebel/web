@@ -73,7 +73,7 @@ export const QuestionsForm: FC = () => {
             dispatch(submitForm());
             reset();
         },
-        [reset, dispatch],
+        [reset, dispatch]
     );
 
     return (
@@ -82,7 +82,7 @@ export const QuestionsForm: FC = () => {
                 src={bgImg}
                 alt="Заполните форму ниже. Наш менеджер свяжется с вами и ответит на вопросы"
                 layout="fill"
-                placeholder='blur'
+                placeholder="blur"
             />
             <Container className={classes.container}>
                 <BlockTitle>
@@ -91,7 +91,8 @@ export const QuestionsForm: FC = () => {
                     </Typography>
                 </BlockTitle>
                 <Typography variant="h6" className={classes.subtitle}>
-                    Заполните форму ниже. Наш менеджер свяжется с вами и ответит на вопросы
+                    Заполните форму ниже. Наш менеджер свяжется с вами и ответит
+                    на вопросы
                 </Typography>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Grid container>
@@ -180,9 +181,13 @@ export const QuestionsForm: FC = () => {
                         </Grid>
                         <Grid item xs container justifyContent="center">
                             <Grid item xs={10} md={6}>
-                                <Typography className={classes.text} align="center">
-                                    Нажимая кнопку &laquo;Задать вопрос&raquo;, я&nbsp;даю согласие
-                                    на&nbsp;обработку персональных данных и&nbsp;подтверждаю, что
+                                <Typography
+                                    className={classes.text}
+                                    align="center"
+                                >
+                                    Нажимая кнопку &laquo;Задать вопрос&raquo;,
+                                    я&nbsp;даю согласие на&nbsp;обработку
+                                    персональных данных и&nbsp;подтверждаю, что
                                     ознакомлен с&nbsp;
                                     <a
                                         href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"

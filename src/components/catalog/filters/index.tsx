@@ -3,7 +3,13 @@ import { find } from 'lodash';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from '@material-ui/core';
 import { filters as filterOptions } from '@/constants';
-import { SectionID, StyleID, DoorTypeID, FilterField, FilterValue } from '@/entities';
+import {
+    SectionID,
+    StyleID,
+    DoorTypeID,
+    FilterField,
+    FilterValue,
+} from '@/entities';
 import { BlockTitle, Link } from '@/components/common';
 import { LeadText, SectionPicker, BottomFilters } from './components';
 
@@ -51,7 +57,6 @@ type Props = {
     onChange: (arg0: { name: FilterField; value: FilterValue }) => void;
 };
 
-
 export const Filters: FC<Props> = ({ filter, onChange }) => {
     const classes = useStyles();
 
@@ -79,7 +84,10 @@ export const Filters: FC<Props> = ({ filter, onChange }) => {
             <section className={classes.secondTitle}>
                 <BlockTitle>
                     <Typography variant="h4">
-                        {find(filterOptions.sections, { id: filter.section })?.title}
+                        {
+                            find(filterOptions.sections, { id: filter.section })
+                                ?.title
+                        }
                     </Typography>
                 </BlockTitle>
             </section>

@@ -26,14 +26,18 @@ export const About: FC = () => {
             <BlockTitle>
                 <Typography variant="h4">О нас</Typography>
             </BlockTitle>
-            <Typography variant="h5" align="center" className={classes.titleMiddle}>
+            <Typography
+                variant="h5"
+                align="center"
+                className={classes.titleMiddle}
+            >
                 Почему нас выбрали уже более 10 000 клиентов?
             </Typography>
             <Grid container spacing={isXsDown ? 2 : 4} className={classes.grid}>
                 <Grid item xs={10} sm={6} md={4}>
                     <Card
                         img={<Icon id={0} />}
-                        title='Богатый ассортимент'
+                        title="Богатый ассортимент"
                         text={`Мы${NB_SP}можем предложить Вам корпусную мебель для любой из${NB_SP}зон
                         вашего дома${NB_SP}${MDASH} от${NB_SP}кухни до${NB_SP}детской комнаты.
                         Более 1000 вариантов материалов и${NB_SP}отделок будут доступны для вашего выбора.
@@ -43,7 +47,7 @@ export const About: FC = () => {
                 <Grid item xs={10} sm={6} md={4}>
                     <Card
                         img={<Icon id={1} />}
-                        title='Высокое качество мебели'
+                        title="Высокое качество мебели"
                         text={`Мы${NB_SP}знаем. что качественная мебель видна сразу.
                         Приходите и${NB_SP}Вы увидите это сами. Вся продукция проходит
                         строжайший контроль качества фабрики. Поэтому она выглядит хорошо.`}
@@ -61,7 +65,7 @@ export const About: FC = () => {
                 <Grid item xs={10} sm={6} md={4}>
                     <Card
                         img={<Icon id={3} />}
-                        title='Большая экспозиция'
+                        title="Большая экспозиция"
                         text={`Невозможно выбрать мебель, не${NB_SP}увидев и${NB_SP}не${NB_SP}потрогав
                         ее${NB_SP}руками. На${NB_SP}площади 300${NB_SP}м вы${NB_SP}сможете увидеть как
                         множество готовых образцов мебели, так и${NB_SP}подобрать все
@@ -71,7 +75,7 @@ export const About: FC = () => {
                 <Grid item xs={10} sm={6} md={4}>
                     <Card
                         img={<Icon id={4} />}
-                        title='Удобные расположение'
+                        title="Удобные расположение"
                         text={`Наш салон расположен в${NB_SP}одном из${NB_SP}самых транспортнодоступных
                         мест города Москвы в${NB_SP}районе${NB_SP}м. Сокол в${NB_SP}5${NB_SP}минутах
                         от${NB_SP}ТТК. Вам будет очень удобно добираться до${NB_SP}нас.`}
@@ -80,14 +84,18 @@ export const About: FC = () => {
                 <Grid item xs={10} sm={6} md={4}>
                     <Card
                         img={<Icon id={5} />}
-                        title='С нами надежно и безопасно'
+                        title="С нами надежно и безопасно"
                         text={`Наш салон являемся фирменным представительством фабрики,
                         никаких посредников от${NB_SP}этапа проектирования мебели до${NB_SP}монтажа.
                         Это позволяет найти решение даже в${NB_SP}самых нестандартных ситуациях.`}
                     />
                 </Grid>
             </Grid>
-            <Typography variant="h5" align="center" className={classes.titleMiddle}>
+            <Typography
+                variant="h5"
+                align="center"
+                className={classes.titleMiddle}
+            >
                 Приходите, нам есть чем вас удивить!
             </Typography>
         </Container>

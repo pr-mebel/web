@@ -3,4 +3,4 @@ export type SVGProps = {
     height?: number;
     fill?: string;
     className?: string;
-}
+};

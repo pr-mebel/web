@@ -157,9 +157,15 @@ type Props = {
     subtitle: string;
     caption: string;
     href: string;
-}
+};
 
-export const CatalogCard: FC<Props> = ({ cardID, title, subtitle, caption, href }) => {
+export const CatalogCard: FC<Props> = ({
+    cardID,
+    title,
+    subtitle,
+    caption,
+    href,
+}) => {
     const classes = useStyles();
 
     return (
@@ -172,16 +178,24 @@ export const CatalogCard: FC<Props> = ({ cardID, title, subtitle, caption, href 
                         </div>
                         <div className={classes.hoverTextContainer}>
                             <div>
-                                <Typography variant="h5" className={classes.title}>
+                                <Typography
+                                    variant="h5"
+                                    className={classes.title}
+                                >
                                     {title}
                                 </Typography>
-                                <Typography className={classes.subtitle}>{subtitle}</Typography>
+                                <Typography className={classes.subtitle}>
+                                    {subtitle}
+                                </Typography>
                             </div>
                         </div>
                         <ArrowForwardIcon className={classes.arrow} />
                     </div>
                     <div className={classes.captionContainer}>
-                        <Typography className={classes.caption} component="span">
+                        <Typography
+                            className={classes.caption}
+                            component="span"
+                        >
                             {caption}
                         </Typography>
                     </div>
@@ -194,7 +208,10 @@ export const CatalogCard: FC<Props> = ({ cardID, title, subtitle, caption, href 
                         <div className={classes.imgHeader}>
                             <Typography
                                 component="span"
-                                className={cn(classes.caption, classes.captionSm)}
+                                className={cn(
+                                    classes.caption,
+                                    classes.captionSm
+                                )}
                             >
                                 {caption}
                             </Typography>

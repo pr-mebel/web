@@ -3,7 +3,11 @@ import cn from 'classnames';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Container, Typography, Grid } from '@material-ui/core';
-import { YMaps as YMapsProvider, Map as YMap, Placemark } from 'react-yandex-maps';
+import {
+    YMaps as YMapsProvider,
+    Map as YMap,
+    Placemark,
+} from 'react-yandex-maps';
 import RoomIcon from '@material-ui/icons/Room';
 import PhoneIcon from '@material-ui/icons/Phone';
 import MailIcon from '@material-ui/icons/Mail';
@@ -95,8 +99,9 @@ export const Map: FC = () => {
             <Grid container className={classes.content}>
                 <Grid item xs={12} sm={5}>
                     <Typography variant="body2">
-                        Мы&nbsp;с&nbsp;удовольствием покажем весь ассортимент нашей мебели
-                        и&nbsp;поможем вам сделать правильный выбор.
+                        Мы&nbsp;с&nbsp;удовольствием покажем весь ассортимент
+                        нашей мебели и&nbsp;поможем вам сделать правильный
+                        выбор.
                     </Typography>
                     <Typography variant="h6" className={classes.subtitle}>
                         Салон &ldquo;ЧАСТНЫЙ МЕБЕЛЬЕР&ldquo;
@@ -104,7 +109,9 @@ export const Map: FC = () => {
                     <ul className={classes.list}>
                         <li className={classes.listItem}>
                             <RoomIcon className={classes.icon} />
-                            <Typography variant="body2">м. Сокол, ул. Балтийская, д.9</Typography>
+                            <Typography variant="body2">
+                                м. Сокол, ул. Балтийская, д.9
+                            </Typography>
                         </li>
                         <li className={classes.listItem}>
                             <PhoneIcon className={classes.icon} />
@@ -130,7 +137,9 @@ export const Map: FC = () => {
                         </li>
                         <li className={classes.listItem}>
                             <LocalParkingIcon className={classes.icon} />
-                            <Typography variant="body2">Бесплатная парковка</Typography>
+                            <Typography variant="body2">
+                                Бесплатная парковка
+                            </Typography>
                         </li>
                         <li className={classes.listItem}>
                             <QueryBuilderIcon className={classes.icon} />
@@ -144,24 +153,51 @@ export const Map: FC = () => {
                     <div className={classes.hl} />
                     <ul className={classes.list}>
                         <li className={classes.listItem}>
-                            <img src={yandex} alt="Яндекс" className={classes.icon} />
-                            <Typography variant="body2" className={classes.mapsText}>
-                                <Link to="https://yandex.ru/maps/-/CCQtFQdaLA" external>
+                            <img
+                                src={yandex}
+                                alt="Яндекс"
+                                className={classes.icon}
+                            />
+                            <Typography
+                                variant="body2"
+                                className={classes.mapsText}
+                            >
+                                <Link
+                                    to="https://yandex.ru/maps/-/CCQtFQdaLA"
+                                    external
+                                >
                                     Открыть в яндекс навигаторе
                                 </Link>
                             </Typography>
                         </li>
                         <li className={classes.listItem}>
-                            <img src={google} alt="Google" className={classes.icon} />
-                            <Typography variant="body2" className={classes.mapsText}>
-                                <Link to="https://goo.gl/maps/WZTKJ95GqKgV5YPr7" external>
+                            <img
+                                src={google}
+                                alt="Google"
+                                className={classes.icon}
+                            />
+                            <Typography
+                                variant="body2"
+                                className={classes.mapsText}
+                            >
+                                <Link
+                                    to="https://goo.gl/maps/WZTKJ95GqKgV5YPr7"
+                                    external
+                                >
                                     Открыть Google Maps
                                 </Link>
                             </Typography>
                         </li>
                         <li className={classes.listItem}>
-                            <img src={apple} alt="Apple" className={classes.icon} />
-                            <Typography variant="body2" className={classes.mapsText}>
+                            <img
+                                src={apple}
+                                alt="Apple"
+                                className={classes.icon}
+                            />
+                            <Typography
+                                variant="body2"
+                                className={classes.mapsText}
+                            >
                                 <Link
                                     to="http://maps.apple.com/?daddr=55.809176,37.512955"
                                     external
@@ -173,7 +209,10 @@ export const Map: FC = () => {
                     </ul>
                     <div className={classes.message}>
                         <img src={mail} alt="Картинка письма" />
-                        <Typography variant="body2" className={classes.messageText}>
+                        <Typography
+                            variant="body2"
+                            className={classes.messageText}
+                        >
                             <Link to="mailto:zakaz@pr-mebel.ru" external>
                                 Написать письмо
                             </Link>
@@ -212,7 +251,9 @@ export const Map: FC = () => {
                                 'control.TypeSelector',
                             ]}
                         >
-                            <Placemark defaultGeometry={[55.808543, 37.512389]} />
+                            <Placemark
+                                defaultGeometry={[55.808543, 37.512389]}
+                            />
                         </YMap>
                     </YMapsProvider>
                 </Grid>

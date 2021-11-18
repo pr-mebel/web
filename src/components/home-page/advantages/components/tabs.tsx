@@ -51,7 +51,6 @@ type Props = {
     onChange: (arg0: number) => void;
 };
 
-
 export const Tabs: FC<Props> = ({ activeTab, tabs, onChange }) => {
     const classes = useStyles();
 
@@ -64,7 +63,7 @@ export const Tabs: FC<Props> = ({ activeTab, tabs, onChange }) => {
                 onChange(tab);
             }
         },
-        [onChange, activeTab],
+        [onChange, activeTab]
     );
 
     return (
@@ -78,7 +77,11 @@ export const Tabs: FC<Props> = ({ activeTab, tabs, onChange }) => {
                         })}
                         onClick={handeChangeTab(i)}
                     >
-                        <Typography component="span" variant="h6" color="inherit">
+                        <Typography
+                            component="span"
+                            variant="h6"
+                            color="inherit"
+                        >
                             {tab.data.title}
                         </Typography>
                     </li>

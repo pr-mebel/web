@@ -17,11 +17,13 @@ type Props = {
     children: React.ReactNode[];
 };
 
-
 export const Options: FC<Props> = ({ activeTab, children }) => {
     const classes = useStyles();
 
-    const childrenWithIds = useMemo(() => addIdsToArrayOfObjects(children), [children]);
+    const childrenWithIds = useMemo(
+        () => addIdsToArrayOfObjects(children),
+        [children]
+    );
 
     return (
         <>

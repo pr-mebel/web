@@ -35,7 +35,6 @@ type Props = {
     text: string;
 };
 
-
 export const Card: FC<Props> = ({ img, title, text }) => {
     const classes = useStyles();
     const theme = useTheme();
@@ -47,7 +46,10 @@ export const Card: FC<Props> = ({ img, title, text }) => {
                 <div className={classes.rowTop}>
                     {img}
                     <div className={classes.titleContainer}>
-                        <Typography variant={isXsDown ? 'h5' : 'h6'} className={classes.title}>
+                        <Typography
+                            variant={isXsDown ? 'h5' : 'h6'}
+                            className={classes.title}
+                        >
                             {title}
                         </Typography>
                     </div>
@@ -64,7 +66,10 @@ export const Card: FC<Props> = ({ img, title, text }) => {
                         {img}
                     </Grid>
                     <Grid item xs={10}>
-                        <Typography variant={isXsDown ? 'h5' : 'h6'} className={classes.title}>
+                        <Typography
+                            variant={isXsDown ? 'h5' : 'h6'}
+                            className={classes.title}
+                        >
                             {title}
                         </Typography>
                     </Grid>

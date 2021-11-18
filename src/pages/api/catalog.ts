@@ -3,32 +3,45 @@ import { gql } from '@apollo/client';
 import { client } from '@/utils/client';
 import { parseContentfulCatalog } from '@/normalizers';
 import { batchSize } from '@/constants';
-import { StyleID, DoorTypeID, SectionCollection, Collection, Filter } from '@/entities';
+import {
+    StyleID,
+    DoorTypeID,
+    SectionCollection,
+    Collection,
+    Filter,
+} from '@/entities';
 
 type Output = {
     result: SectionCollection | Collection;
-}
+};
 
-const catalog =  async (
-    req: NextApiRequest,
-    res: NextApiResponse,
-) => {
-    const { page, filters: { style, doorType, section } } = req.body as {
+const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
+    const {
+        page,
+        filters: { style, doorType, section },
+    } = req.body as {
         page: number;
         filters: Filter;
     };
 
     try {
         const data = await client.query<Output>({
-            query: style === 'any' as StyleID && doorType === 'any' as DoorTypeID ?
-                gql`
+            query:
+                style === ('any' as StyleID) &&
+                doorType === ('any' as DoorTypeID)
+                    ? gql`
                 {
                     result: ${section}SectionCollection(limit: 1) {
                         items {
-                            cardsCollection(limit: ${batchSize}, skip: ${batchSize * (page - 1)}) {
+                            cardsCollection(limit: ${batchSize}, skip: ${
+                          batchSize * (page - 1)
+                      }) {
                                 total
                                 items {
-                                    ... on ${section[0].toUpperCase() + section.slice(1)} {
+                                    ... on ${
+                                        section[0].toUpperCase() +
+                                        section.slice(1)
+                                    } {
                                         id
                                         collection
                                         description
@@ -49,13 +62,15 @@ const catalog =  async (
                             }
                         }
                     }
-                }` :
-                gql`
+                }`
+                    : gql`
                 {
                     result: ${section}Collection(where: {
                         ${style !== 'any' ? `${style}: true` : ''}
                         ${doorType !== 'any' ? `${doorType}: true` : ''}
-                    }, order: [id_ASC], limit: ${batchSize}, skip: ${batchSize * (page - 1)}){
+                    }, order: [id_ASC], limit: ${batchSize}, skip: ${
+                          batchSize * (page - 1)
+                      }){
                         total
                         items {
                             id

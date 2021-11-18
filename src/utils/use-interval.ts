@@ -4,7 +4,10 @@ import { useRef, useCallback, useEffect, useState } from 'react';
 /**
  * https://stackoverflow.com/questions/56952038/how-to-reset-setinterval-function-using-react-hooks
  */
-export const useInterval = (callback: (...args: unknown[]) => unknown, delay: number | null) => {
+export const useInterval = (
+    callback: (...args: unknown[]) => unknown,
+    delay: number | null
+) => {
     const savedCallback = useRef<typeof callback>(noop);
     const intervalId = useRef<NodeJS.Timeout | null>(null);
     const [currentDelay, setDelay] = useState<number | null>(delay);

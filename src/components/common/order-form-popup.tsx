@@ -111,7 +111,9 @@ export const OrderFormPopup: FC = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const orderForm = useContext(orderFormCtx);
-    const [fileNames, setFileNames] = useState<FileList>(([] as unknown) as FileList);
+    const [fileNames, setFileNames] = useState<FileList>(
+        [] as unknown as FileList
+    );
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { register, handleSubmit } = useForm();
 
@@ -147,7 +149,7 @@ export const OrderFormPopup: FC = () => {
     const handleDeleteSelectedFiles = useCallback(() => {
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
-            setFileNames(([] as unknown) as FileList);
+            setFileNames([] as unknown as FileList);
         }
     }, [fileInputRef]);
 
@@ -162,12 +164,12 @@ export const OrderFormPopup: FC = () => {
                 dispatch(uploadFiles(fileNames));
                 dispatch(openFormSubmitPopup());
                 fileInputRef.current.value = '';
-                setFileNames(([] as unknown) as FileList);
+                setFileNames([] as unknown as FileList);
             } else {
                 dispatch(submitForm());
             }
         },
-        [fileNames, fileInputRef, dispatch, orderForm],
+        [fileNames, fileInputRef, dispatch, orderForm]
     );
 
     return (
@@ -181,7 +183,10 @@ export const OrderFormPopup: FC = () => {
                 className: classes.paperRoot,
             }}
         >
-            <ClearIcon className={classes.closeIcon} onClick={handleClosePopup} />
+            <ClearIcon
+                className={classes.closeIcon}
+                onClick={handleClosePopup}
+            />
             <div className={classes.imgContainer}>
                 <img
                     className={classes.img}
@@ -194,14 +199,22 @@ export const OrderFormPopup: FC = () => {
                     Расчет стоимости проекта
                 </Typography>
                 <Grid item xs={12} className={classes.textContainer}>
-                    <Typography variant="body1" align="center" className={classes.text}>
-                        Отправьте эскизы, план помещения или просто напишите свои пожелания
-                        к&nbsp;будущему проекту и&nbsp;мы&nbsp;подготовим для Вас индивидуальное
+                    <Typography
+                        variant="body1"
+                        align="center"
+                        className={classes.text}
+                    >
+                        Отправьте эскизы, план помещения или просто напишите
+                        свои пожелания к&nbsp;будущему проекту
+                        и&nbsp;мы&nbsp;подготовим для Вас индивидуальное
                         предложение
                     </Typography>
                 </Grid>
                 <Grid item xs={11} sm={10}>
-                    <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+                    <form
+                        className={classes.form}
+                        onSubmit={handleSubmit(onSubmit)}
+                    >
                         <TextField
                             inputRef={register}
                             name="name"
@@ -254,7 +267,11 @@ export const OrderFormPopup: FC = () => {
                             className={classes.inputFile}
                             onChange={handleFileUploadChange}
                         />
-                        <Grid container justifyContent="center" className={classes.files}>
+                        <Grid
+                            container
+                            justifyContent="center"
+                            className={classes.files}
+                        >
                             <Grid
                                 item
                                 xs={12}
@@ -267,10 +284,20 @@ export const OrderFormPopup: FC = () => {
                                 <Typography>Прикрепить эскизы</Typography>
                             </Grid>
                             {!!fileNames.length && (
-                                <Grid item xs={12} sm={5} container justifyContent="center">
-                                    <Typography className={classes.fileInputText}>
-                                        {`${fileNames.length}\xA0${getFileDeclination(
-                                            fileNames.length,
+                                <Grid
+                                    item
+                                    xs={12}
+                                    sm={5}
+                                    container
+                                    justifyContent="center"
+                                >
+                                    <Typography
+                                        className={classes.fileInputText}
+                                    >
+                                        {`${
+                                            fileNames.length
+                                        }\xA0${getFileDeclination(
+                                            fileNames.length
                                         )}`}
                                         <ClearIcon
                                             className={classes.deleteFilesIcon}
@@ -281,10 +308,14 @@ export const OrderFormPopup: FC = () => {
                             )}
                         </Grid>
                         <SubmitButton>Рассчитать стоимость</SubmitButton>
-                        <Typography variant="body2" align="center" className={classes.copy}>
-                            Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие
-                            на&nbsp;обработку персональных данных и&nbsp;подтверждаю, что ознакомлен
-                            с&nbsp;
+                        <Typography
+                            variant="body2"
+                            align="center"
+                            className={classes.copy}
+                        >
+                            Нажимая кнопку &laquo;Рассчитать стоимость&raquo;,
+                            я&nbsp;даю согласие на&nbsp;обработку персональных
+                            данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
                             <a
                                 href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
                                 className={classes.copyrightLink}

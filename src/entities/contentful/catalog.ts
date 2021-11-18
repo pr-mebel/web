@@ -18,7 +18,7 @@ export type Collection = {
     }[];
     total: number;
     __typename: CMSCardCollectionID;
-}
+};
 
 export type SectionCollection = {
     items: {

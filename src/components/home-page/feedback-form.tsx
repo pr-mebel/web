@@ -1,10 +1,21 @@
 import React, { FC, useRef, useCallback, useState } from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Container, Grid, Typography, TextField, Hidden } from '@material-ui/core';
+import {
+    Container,
+    Grid,
+    Typography,
+    TextField,
+    Hidden,
+} from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { saveForm, submitForm, openFormSubmitPopup, uploadFiles } from '@/redux';
+import {
+    saveForm,
+    submitForm,
+    openFormSubmitPopup,
+    uploadFiles,
+} from '@/redux';
 import PublishIcon from '@material-ui/icons/Publish';
 import ClearIcon from '@material-ui/icons/Clear';
 import { getFileDeclination } from '@/utils';
@@ -100,7 +111,9 @@ export const FeedbackForm: FC = () => {
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { register, handleSubmit, reset } = useForm();
-    const [fileNames, setFileNames] = useState<FileList>(([] as unknown) as FileList);
+    const [fileNames, setFileNames] = useState<FileList>(
+        [] as unknown as FileList
+    );
 
     /**
      * Имитирует клик на инпут файла
@@ -124,7 +137,7 @@ export const FeedbackForm: FC = () => {
     const handleClearFiles = useCallback(() => {
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
-            setFileNames(([] as unknown) as FileList);
+            setFileNames([] as unknown as FileList);
         }
     }, [fileInputRef]);
 
@@ -138,13 +151,13 @@ export const FeedbackForm: FC = () => {
                 dispatch(uploadFiles(fileNames));
                 dispatch(openFormSubmitPopup());
                 fileInputRef.current.value = '';
-                setFileNames(([] as unknown) as FileList);
+                setFileNames([] as unknown as FileList);
             } else {
                 dispatch(submitForm());
             }
             reset();
         },
-        [reset, fileNames, fileInputRef, dispatch],
+        [reset, fileNames, fileInputRef, dispatch]
     );
 
     return (
@@ -209,10 +222,15 @@ export const FeedbackForm: FC = () => {
                             </Grid>
                             <Hidden smDown>
                                 <Grid item xs={12}>
-                                    <Typography variant="body2" className={classes.text}>
-                                        Прикрепите, пожалуйста, эскизы вашей мебели или просто план
-                                        помещения с&nbsp;описанием ваших пожеланий и&nbsp;наш
-                                        дизайнер в&nbsp;кратчайшие сроки подготовит для вас свои
+                                    <Typography
+                                        variant="body2"
+                                        className={classes.text}
+                                    >
+                                        Прикрепите, пожалуйста, эскизы вашей
+                                        мебели или просто план помещения
+                                        с&nbsp;описанием ваших пожеланий
+                                        и&nbsp;наш дизайнер в&nbsp;кратчайшие
+                                        сроки подготовит для вас свои
                                         предложения.
                                     </Typography>
                                 </Grid>
@@ -236,7 +254,10 @@ export const FeedbackForm: FC = () => {
                                     className={classes.inputFile}
                                     onChange={handleFileUploadChange}
                                 />
-                                <div onClick={handleFileInputClick} className={classes.publish}>
+                                <div
+                                    onClick={handleFileInputClick}
+                                    className={classes.publish}
+                                >
                                     <PublishIcon className={classes.icon} />
                                     <Typography className={classes.textPublish}>
                                         Прикрепить
@@ -247,13 +268,24 @@ export const FeedbackForm: FC = () => {
                             </Grid>
                             <Grid item xs={6}>
                                 {!!fileNames.length && (
-                                    <Grid item xs={12} container justifyContent="center">
-                                        <Typography className={classes.fileInputText}>
-                                            {`${fileNames.length}\xA0${getFileDeclination(
-                                                fileNames.length,
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        container
+                                        justifyContent="center"
+                                    >
+                                        <Typography
+                                            className={classes.fileInputText}
+                                        >
+                                            {`${
+                                                fileNames.length
+                                            }\xA0${getFileDeclination(
+                                                fileNames.length
                                             )}`}
                                             <ClearIcon
-                                                className={classes.deleteFilesIcon}
+                                                className={
+                                                    classes.deleteFilesIcon
+                                                }
                                                 onClick={handleClearFiles}
                                             />
                                         </Typography>
@@ -269,14 +301,20 @@ export const FeedbackForm: FC = () => {
                             className={classes.buttonContainer}
                         >
                             <Grid item xs={10} sm={6} md={4}>
-                                <SubmitButton>Рассчитать стоимость</SubmitButton>
+                                <SubmitButton>
+                                    Рассчитать стоимость
+                                </SubmitButton>
                             </Grid>
                         </Grid>
                         <Grid item xs container justifyContent="center">
                             <Grid item xs={12} sm={8} md={6}>
-                                <Typography className={classes.copyText} align="center">
-                                    Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю
-                                    согласие на&nbsp;обработку персональных данных
+                                <Typography
+                                    className={classes.copyText}
+                                    align="center"
+                                >
+                                    Нажимая кнопку &laquo;Рассчитать
+                                    стоимость&raquo;, я&nbsp;даю согласие
+                                    на&nbsp;обработку персональных данных
                                     и&nbsp;подтверждаю, что ознакомлен с&nbsp;
                                     <a
                                         href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"

@@ -96,66 +96,102 @@ export const HowToOrder: FC = () => {
                             </Typography>
                         </BlockTitle>
                         <Typography variant="body2" className={classes.text}>
-                            Наш менеджер свяжется с&nbsp;вами, ответит на&nbsp;все вопросы,
-                            и&nbsp;предложит вам наиболее удобный способ работы над вашим проектом
+                            Наш менеджер свяжется с&nbsp;вами, ответит
+                            на&nbsp;все вопросы, и&nbsp;предложит вам наиболее
+                            удобный способ работы над вашим проектом
                         </Typography>
                     </Grid>
                     <Grid item xs={4} className={classes.item}>
                         <Typography className={classes.number}>02</Typography>
                         <BlockTitle>
-                            <Typography variant="h6">Разработка дизайн-проекта мебели</Typography>
+                            <Typography variant="h6">
+                                Разработка дизайн-проекта мебели
+                            </Typography>
                         </BlockTitle>
                         <Typography variant="body2" className={classes.text}>
-                            Вы&nbsp;можете прислать ваши эскизы или просто планировки нам
-                            и&nbsp;наши специалисты разработают дизайн-проект будущей мебели
-                            и&nbsp;рассчитают его стоимость
+                            Вы&nbsp;можете прислать ваши эскизы или просто
+                            планировки нам и&nbsp;наши специалисты разработают
+                            дизайн-проект будущей мебели и&nbsp;рассчитают его
+                            стоимость
                         </Typography>
                     </Grid>
                     <Grid item xs={4} className={classes.item}>
                         <Typography className={classes.number}>03</Typography>
                         <BlockTitle>
-                            <Typography variant="h6">Выезд дизайнера-замерщика на дом</Typography>
+                            <Typography variant="h6">
+                                Выезд дизайнера-замерщика на дом
+                            </Typography>
                         </BlockTitle>
                         <Typography variant="body2" className={classes.text}>
-                            Наш специалист приедет в&nbsp;удобное для вас время, сделает нужные
-                            замеры и&nbsp;согласует все детали будущего проекта
+                            Наш специалист приедет в&nbsp;удобное для вас время,
+                            сделает нужные замеры и&nbsp;согласует все детали
+                            будущего проекта
                         </Typography>
                     </Grid>
                     <Grid item xs={2} />
                     <Grid item xs={8} container spacing={6}>
                         <Grid item xs={6} className={classes.item}>
-                            <Typography className={classes.number}>04</Typography>
+                            <Typography className={classes.number}>
+                                04
+                            </Typography>
                             <BlockTitle>
-                                <Typography variant="h6">Изготовление мебели</Typography>
+                                <Typography variant="h6">
+                                    Изготовление мебели
+                                </Typography>
                             </BlockTitle>
-                            <Typography variant="body2" className={classes.text}>
-                                Наша мебель изготавливается на&nbsp;промышленных обрабатывающих
-                                центрах с&nbsp;числовым программным управлением. Вы&nbsp;получите
-                                действительно качественную мебель европейского уровня
+                            <Typography
+                                variant="body2"
+                                className={classes.text}
+                            >
+                                Наша мебель изготавливается на&nbsp;промышленных
+                                обрабатывающих центрах с&nbsp;числовым
+                                программным управлением. Вы&nbsp;получите
+                                действительно качественную мебель европейского
+                                уровня
                             </Typography>
                         </Grid>
                         <Grid item xs={6} className={classes.item}>
-                            <Typography className={classes.number}>05</Typography>
+                            <Typography className={classes.number}>
+                                05
+                            </Typography>
                             <BlockTitle>
-                                <Typography variant="h6">Доставка и монтаж</Typography>
+                                <Typography variant="h6">
+                                    Доставка и монтаж
+                                </Typography>
                             </BlockTitle>
-                            <Typography variant="body2" className={classes.text}>
-                                Собственная служба сервиса доставит и&nbsp;установит вашу мебель
-                                в&nbsp;оговоренное время. Мы&nbsp;сами отвечаем за&nbsp;качество
-                                проекта от&nbsp;самого начала до&nbsp;момента его установки
-                                у&nbsp;вас дома
+                            <Typography
+                                variant="body2"
+                                className={classes.text}
+                            >
+                                Собственная служба сервиса доставит
+                                и&nbsp;установит вашу мебель в&nbsp;оговоренное
+                                время. Мы&nbsp;сами отвечаем за&nbsp;качество
+                                проекта от&nbsp;самого начала до&nbsp;момента
+                                его установки у&nbsp;вас дома
                             </Typography>
                         </Grid>
                     </Grid>
                 </Hidden>
                 <Hidden smUp>
                     {LIST.map((item) => (
-                        <Grid key={item.id} item xs={12} className={classes.item}>
-                            <Typography className={classes.number}>{item.id}</Typography>
+                        <Grid
+                            key={item.id}
+                            item
+                            xs={12}
+                            className={classes.item}
+                        >
+                            <Typography className={classes.number}>
+                                {item.id}
+                            </Typography>
                             <BlockTitle>
-                                <Typography variant="h6">{item.title}</Typography>
+                                <Typography variant="h6">
+                                    {item.title}
+                                </Typography>
                             </BlockTitle>
-                            <Typography variant="body2" className={classes.text}>
+                            <Typography
+                                variant="body2"
+                                className={classes.text}
+                            >
                                 {item.text}
                             </Typography>
                         </Grid>

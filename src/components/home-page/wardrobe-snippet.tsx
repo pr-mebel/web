@@ -90,7 +90,11 @@ export const WardrobeSnippet: FC<Props> = ({ title, text, img, direction }) => {
                 anchorEl={anchorEl}
                 anchorOrigin={{
                     vertical: 'center',
-                    horizontal: direction as number | 'left' | 'right' | 'center',
+                    horizontal: direction as
+                        | number
+                        | 'left'
+                        | 'right'
+                        | 'center',
                 }}
                 transformOrigin={{
                     vertical: 'center',
@@ -102,7 +106,13 @@ export const WardrobeSnippet: FC<Props> = ({ title, text, img, direction }) => {
                 onClose={popup.handleClose}
             >
                 <div className={classes.paperContainer}>
-                    <Image src={img} alt={title} width={310} height={310} quality={100} />
+                    <Image
+                        src={img}
+                        alt={title}
+                        width={310}
+                        height={310}
+                        quality={100}
+                    />
                     <div className={classes.container}>
                         <BlockTitle>
                             <Typography variant="h5" className={classes.title}>

@@ -2,7 +2,7 @@ import { createReducer, createAsyncThunk, createAction } from '@reduxjs/toolkit'
 import { State } from '@/redux';
 import * as api from '@/utils/api';
 
-import { storage, firestore } from '@/lib';
+import { storage } from '@/lib';
 
 export const openFormSubmitPopup = createAction('open_form_submit_popup');
 export const closeFormSubmitPopup = createAction('close_form_submit_popup');

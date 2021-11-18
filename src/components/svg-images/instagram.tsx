@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import classanames from 'classnames';
 import { SVGProps } from './types';
 
-export const Instagram: FC<SVGProps> = ({ width = 19, height = 18, fill = 'none', className }) => (
+export const Instagram: FC<SVGProps> = ({ width = 19, height = 18, className }) => (
     <svg width={width} height={height} viewBox="0 0 19 18" fill="none" className={classanames(className)}>
         <path d="M9 0c5.1 0 9.2 4.3 9 9.3-.2 4.7-4.1 8.7-9.3 8.7C3.9 17.9 0 13.8 0 8.9 0 4 4 0 9 0zm0 13.6h2.2c1.4-.1 2.3-1 2.4-2.4.1-1.5.1-3 0-4.5-.1-1.3-.9-2.1-2.1-2.3-1.6-.2-3.3-.2-4.9 0-1.2.1-2 1-2.1 2.2-.1 1.6-.1 3.1 0 4.7.1 1.1.8 1.9 1.9 2.1.8.3 1.7.2 2.6.2z" fill="#000"/>
         <path d="M12.7 9v2c-.1 1-.6 1.5-1.5 1.6-1.5.1-2.9.1-4.4 0-1-.1-1.5-.7-1.5-1.7-.1-1.3-.1-2.7 0-4 .1-1.1.6-1.6 1.6-1.7 1.4-.1 2.8-.1 4.1 0 1.1.2 1.7.8 1.7 1.8v2zM9 6.6C7.7 6.6 6.6 7.7 6.6 9c0 1.3 1.1 2.4 2.4 2.4 1.3 0 2.4-1 2.4-2.4 0-1.3-1.1-2.4-2.4-2.4zm2.5.5c.3 0 .5-.2.5-.6 0-.3-.2-.5-.6-.5-.3 0-.5.2-.5.6 0 .3.2.5.6.5z" fill="#000"/>

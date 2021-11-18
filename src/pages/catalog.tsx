@@ -59,6 +59,8 @@ const Catalog: FC = () => {
         onDownloadMore,
     } = useCards();
 
+    console.log(list);
+
     return (
         <>
             <main>

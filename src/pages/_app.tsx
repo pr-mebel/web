@@ -10,6 +10,8 @@ import { orderFormCtx } from '@/utils';
 import { useModal } from '@/hooks';
 import '../styles/globals.css';
 
+const a: number = 1;
+
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
     const orderFormModal = useModal();
 

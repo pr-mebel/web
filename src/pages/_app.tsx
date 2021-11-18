@@ -12,6 +12,7 @@ import '../styles/globals.css';
 
 const a: number = 1;
 
+
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
     const orderFormModal = useModal();
 

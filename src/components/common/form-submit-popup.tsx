@@ -100,7 +100,7 @@ export const FormSubmitPopup: FC = () => {
                         </>
                     )}
                 </Typography>
-                <Grid container justify="center" alignItems="center" className={classes.container}>
+                <Grid container justifyContent="center" alignItems="center" className={classes.container}>
                     {!allUploaded ? (
                         <CircularProgress size={80} variant="static" value={percentageOfUploaded} />
                     ) : (

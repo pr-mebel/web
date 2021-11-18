@@ -151,7 +151,7 @@ export const FeedbackForm: FC = () => {
         <div className={classes.root}>
             <Container>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Grid container justify="center">
+                    <Grid container justifyContent="center">
                         <Grid item xs={1} />
                         <Grid
                             item
@@ -224,11 +224,11 @@ export const FeedbackForm: FC = () => {
                             xs={10}
                             md={4}
                             container
-                            justify="center"
+                            justifyContent="center"
                             alignItems={smDown ? 'center' : 'flex-start'}
                             className={classes.fileUploadContainer}
                         >
-                            <Grid item xs={6} container justify="center">
+                            <Grid item xs={6} container justifyContent="center">
                                 <input
                                     type="file"
                                     multiple
@@ -247,7 +247,7 @@ export const FeedbackForm: FC = () => {
                             </Grid>
                             <Grid item xs={6}>
                                 {!!fileNames.length && (
-                                    <Grid item xs={12} container justify="center">
+                                    <Grid item xs={12} container justifyContent="center">
                                         <Typography className={classes.fileInputText}>
                                             {`${fileNames.length}\xA0${getFileDeclination(
                                                 fileNames.length,
@@ -265,14 +265,14 @@ export const FeedbackForm: FC = () => {
                             item
                             xs={12}
                             container
-                            justify="center"
+                            justifyContent="center"
                             className={classes.buttonContainer}
                         >
                             <Grid item xs={10} sm={6} md={4}>
                                 <SubmitButton>Рассчитать стоимость</SubmitButton>
                             </Grid>
                         </Grid>
-                        <Grid item xs container justify="center">
+                        <Grid item xs container justifyContent="center">
                             <Grid item xs={12} sm={8} md={6}>
                                 <Typography className={classes.copyText} align="center">
                                     Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю

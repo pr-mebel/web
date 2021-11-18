@@ -171,14 +171,14 @@ export const QuestionsForm: FC = () => {
                             item
                             xs={12}
                             container
-                            justify="center"
+                            justifyContent="center"
                             className={classes.buttonContainer}
                         >
                             <Grid item xs={10} sm={6} md={4}>
                                 <SubmitButton>Задать вопрос</SubmitButton>
                             </Grid>
                         </Grid>
-                        <Grid item xs container justify="center">
+                        <Grid item xs container justifyContent="center">
                             <Grid item xs={10} md={6}>
                                 <Typography className={classes.text} align="center">
                                     Нажимая кнопку &laquo;Задать вопрос&raquo;, я&nbsp;даю согласие

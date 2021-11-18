@@ -203,7 +203,7 @@ export const Header: FC = () => {
                                 />
                             </Link>
                         </Grid>
-                        <Grid item xs={7} container justify="center" alignItems="center">
+                        <Grid item xs={7} container justifyContent="center" alignItems="center">
                             <ul className={cn(classes.menu, classes.list)}>
                                 <li
                                     onMouseEnter={handleOpenDropdown}
@@ -271,7 +271,7 @@ export const Header: FC = () => {
                                 </li>
                             </ul>
                         </Grid>
-                        <Grid item xs={3} container justify="space-between" alignItems="center">
+                        <Grid item xs={3} container justifyContent="space-between" alignItems="center">
                             <ul className={cn(classes.list, classes.contacts)}>
                                 <li>
                                     <Typography variant="body2" className={classes.text}>

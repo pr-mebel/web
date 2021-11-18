@@ -116,14 +116,14 @@ export const OurProduction: FC = () => {
                         />
                     </Grid>
                 </Hidden>
-                <Grid container justify="center">
+                <Grid container justifyContent="center">
                     <Grid item xs={12} md={10}>
                         <Typography variant="h5" className={classes.bottomTitle} align="center">
                             Современные технологии производства для идеального качества вашей мебели
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid container justify="center" className={classes.buttonContainer}>
+                <Grid container justifyContent="center" className={classes.buttonContainer}>
                     <Grid item xs={10} sm={6} md={4}>
                         <MainButton>Получить проект</MainButton>
                     </Grid>

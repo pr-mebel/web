@@ -226,7 +226,7 @@ export const FAQ: FC = () => {
                 })}
             </Grid>
             {!isShowMoreClicked && (
-                <Grid container justify="center" className={classes.buttonContainer}>
+                <Grid container justifyContent="center" className={classes.buttonContainer}>
                     <Grid item xs={10} sm={6} md={4}>
                         <MainButton onClick={handleShowMore}>Показать еще</MainButton>
                     </Grid>

@@ -153,7 +153,7 @@ export const CallDesigner: FC = () => {
                         xs={10}
                         container
                         direction="row"
-                        justify="flex-start"
+                        justifyContent="flex-start"
                         alignItems="center"
                     >
                         <Grid item xs={2}>

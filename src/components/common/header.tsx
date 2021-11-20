@@ -10,7 +10,6 @@ import {
 } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Facebook, Vkontakte, Instagram, LogoHeader } from '@/components';
 import { Link } from './link';
@@ -55,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'flex-start',
     },
     logoContainerSm: {
-        width: '110px',
+        width: '130px',
         [theme.breakpoints.up('sm')]: {
             width: '150px',
         },
@@ -88,12 +87,9 @@ const useStyles = makeStyles((theme) => ({
         height: '35px',
     },
     dropdown: {
-        position: 'relative',
-        width: '11px',
-        top: '-1px',
-        color: theme.palette.primary.main,
+        width: '6px',
         transform: 'rotate(-90deg)',
-        fontSize: 'inherit',
+        marginLeft: '6px',
     },
     menuDropdown: {
         position: 'relative',
@@ -229,10 +225,16 @@ export const Header: FC = () => {
                                         )}
                                         align="center"
                                     >
-                                        Каталог&nbsp;
-                                        <ArrowBackIosIcon
+                                        Каталог
+                                        <svg
                                             className={classes.dropdown}
-                                        />
+                                            viewBox="0 0 14 24"
+                                        >
+                                            <path
+                                                d="M11.857 23.448a.807.807 0 0 0 .585.242.827.827 0 0 0 .585-1.41L2.746 12l10.28-10.28a.827.827 0 0 0-1.17-1.168L.994 11.416a.827.827 0 0 0 0 1.168l10.863 10.864z"
+                                                fill="#EB2F46"
+                                            />
+                                        </svg>
                                     </Typography>
                                     {dropdownVisible && (
                                         <ul

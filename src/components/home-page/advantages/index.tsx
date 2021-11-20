@@ -1,10 +1,8 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC } from 'react';
 import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography, Grid, Hidden } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import Image from 'next/image';
 import { addIdsToArrayOfObjects } from '@/utils';
 import { BlockTitle, MainButton } from '@/components/common';
@@ -16,6 +14,7 @@ import img3 from 'public/images/home-page/advantages/3.jpg';
 import img4 from 'public/images/home-page/advantages/4.jpg';
 import img5 from 'public/images/home-page/advantages/5.jpg';
 import img6 from 'public/images/home-page/advantages/6.jpg';
+import { usePagination } from '@/hooks';
 
 export const TABS = addIdsToArrayOfObjects([
     {
@@ -128,15 +127,15 @@ const useStyles = makeStyles((theme) => ({
         opacity: '1',
     },
     icon: {
+        height: '20px',
         position: 'absolute',
         top: '50%',
-        color: theme.palette.primary.main,
         cursor: 'pointer',
     },
-    iconBack: {
+    iconPrev: {
         left: '-30px',
     },
-    iconForward: {
+    iconNext: {
         right: '-30px',
     },
     buttonContainer: {
@@ -151,31 +150,9 @@ const useStyles = makeStyles((theme) => ({
 
 export const Advantages: FC = () => {
     const classes = useStyles();
-    const [activeTab, setActiveTab] = useState(0);
-
-    const handleNextTab = useCallback(() => {
-        setActiveTab((prev) => {
-            if (prev === TABS.length - 1) {
-                return 0;
-            }
-
-            return prev + 1;
-        });
-    }, []);
-
-    const handlePrevTab = useCallback(() => {
-        setActiveTab((prev) => {
-            if (prev === 0) {
-                return TABS.length - 1;
-            }
-
-            return prev - 1;
-        });
-    }, []);
-
-    const handleChangeTab = useCallback((index) => {
-        setActiveTab(index);
-    }, []);
+    const { current, onSet, onPrev, onNext, swipableHandlers } = usePagination({
+        total: TABS.length - 1,
+    });
 
     return (
         <Container>
@@ -222,10 +199,10 @@ export const Advantages: FC = () => {
                     <Grid item xs={7} className={classes.tabs}>
                         <Tabs
                             tabs={TABS}
-                            activeTab={activeTab}
-                            onChange={handleChangeTab}
+                            activeTab={current}
+                            onChange={onSet}
                         />
-                        <Options activeTab={activeTab}>
+                        <Options activeTab={current}>
                             {TABS.map((tab) => (
                                 <div key={tab.id}>
                                     <ul className={classes.list}>
@@ -256,7 +233,7 @@ export const Advantages: FC = () => {
                                 alt="Эмаль"
                                 layout="fill"
                                 className={cn(classes.image, {
-                                    [classes.selectedImage]: activeTab === 0,
+                                    [classes.selectedImage]: current === 0,
                                 })}
                                 placeholder="blur"
                             />
@@ -265,7 +242,7 @@ export const Advantages: FC = () => {
                                 alt="Ламинат"
                                 layout="fill"
                                 className={cn(classes.image, {
-                                    [classes.selectedImage]: activeTab === 1,
+                                    [classes.selectedImage]: current === 1,
                                 })}
                                 placeholder="blur"
                             />
@@ -274,7 +251,7 @@ export const Advantages: FC = () => {
                                 alt="3D Ламинат"
                                 layout="fill"
                                 className={cn(classes.image, {
-                                    [classes.selectedImage]: activeTab === 2,
+                                    [classes.selectedImage]: current === 2,
                                 })}
                                 placeholder="blur"
                             />
@@ -283,7 +260,7 @@ export const Advantages: FC = () => {
                                 alt="Шпон"
                                 layout="fill"
                                 className={cn(classes.image, {
-                                    [classes.selectedImage]: activeTab === 3,
+                                    [classes.selectedImage]: current === 3,
                                 })}
                                 placeholder="blur"
                             />
@@ -292,7 +269,7 @@ export const Advantages: FC = () => {
                                 alt="Кожа"
                                 layout="fill"
                                 className={cn(classes.image, {
-                                    [classes.selectedImage]: activeTab === 4,
+                                    [classes.selectedImage]: current === 4,
                                 })}
                                 placeholder="blur"
                             />
@@ -301,7 +278,7 @@ export const Advantages: FC = () => {
                                 alt="Стекло"
                                 layout="fill"
                                 className={cn(classes.image, {
-                                    [classes.selectedImage]: activeTab === 5,
+                                    [classes.selectedImage]: current === 5,
                                 })}
                                 placeholder="blur"
                             />
@@ -316,6 +293,7 @@ export const Advantages: FC = () => {
                     container
                     className={classes.materials}
                     direction="column"
+                    {...swipableHandlers}
                 >
                     <Grid item xs={12}>
                         <BlockTitle>
@@ -331,21 +309,27 @@ export const Advantages: FC = () => {
                     <Grid item xs={12} className={classes.tabs}>
                         <Tabs
                             tabs={TABS}
-                            activeTab={activeTab}
-                            onChange={handleChangeTab}
+                            activeTab={current}
+                            onChange={onSet}
                         />
                     </Grid>
                     <Grid item xs={10} className={classes.imgContainer}>
-                        <ArrowBackIosIcon
-                            className={cn(classes.icon, classes.iconBack)}
-                            onClick={handlePrevTab}
-                        />
+                        <svg
+                            className={cn(classes.icon, classes.iconPrev)}
+                            viewBox="0 0 14 24"
+                            onClick={onPrev}
+                        >
+                            <path
+                                d="M11.857 23.448a.807.807 0 0 0 .585.242.827.827 0 0 0 .585-1.41L2.746 12l10.28-10.28a.827.827 0 0 0-1.17-1.168L.994 11.416a.827.827 0 0 0 0 1.168l10.863 10.864z"
+                                fill="#EB2F46"
+                            />
+                        </svg>
                         <Image
                             src={img1}
                             alt="Эмаль"
                             layout="fill"
                             className={cn(classes.image, {
-                                [classes.selectedImage]: activeTab === 0,
+                                [classes.selectedImage]: current === 0,
                             })}
                             placeholder="blur"
                         />
@@ -354,7 +338,7 @@ export const Advantages: FC = () => {
                             alt="Ламинат"
                             layout="fill"
                             className={cn(classes.image, {
-                                [classes.selectedImage]: activeTab === 1,
+                                [classes.selectedImage]: current === 1,
                             })}
                             placeholder="blur"
                         />
@@ -363,7 +347,7 @@ export const Advantages: FC = () => {
                             alt="3D Ламинат"
                             layout="fill"
                             className={cn(classes.image, {
-                                [classes.selectedImage]: activeTab === 2,
+                                [classes.selectedImage]: current === 2,
                             })}
                             placeholder="blur"
                         />
@@ -372,7 +356,7 @@ export const Advantages: FC = () => {
                             alt="Шпон"
                             layout="fill"
                             className={cn(classes.image, {
-                                [classes.selectedImage]: activeTab === 3,
+                                [classes.selectedImage]: current === 3,
                             })}
                             placeholder="blur"
                         />
@@ -381,7 +365,7 @@ export const Advantages: FC = () => {
                             alt="Кожа"
                             layout="fill"
                             className={cn(classes.image, {
-                                [classes.selectedImage]: activeTab === 4,
+                                [classes.selectedImage]: current === 4,
                             })}
                             placeholder="blur"
                         />
@@ -390,17 +374,23 @@ export const Advantages: FC = () => {
                             alt="Стекло"
                             layout="fill"
                             className={cn(classes.image, {
-                                [classes.selectedImage]: activeTab === 5,
+                                [classes.selectedImage]: current === 5,
                             })}
                             placeholder="blur"
                         />
-                        <ArrowForwardIosIcon
-                            className={cn(classes.icon, classes.iconForward)}
-                            onClick={handleNextTab}
-                        />
+                        <svg
+                            className={cn(classes.icon, classes.iconNext)}
+                            viewBox="0 0 14 24"
+                            onClick={onNext}
+                        >
+                            <path
+                                d="M2.143 23.448a.807.807 0 0 1-.585.242.827.827 0 0 1-.584-1.41L11.253 12 .973 1.72A.827.827 0 0 1 2.144.553l10.863 10.864a.827.827 0 0 1 0 1.168L2.143 23.449z"
+                                fill="#EB2F46"
+                            />
+                        </svg>
                     </Grid>
                     <Grid item xs={12} className={classes.listContainer}>
-                        <Options activeTab={activeTab}>
+                        <Options activeTab={current}>
                             {TABS.map((tab) => (
                                 <ul key={tab.id} className={classes.list}>
                                     {tab.data.list.map((option) => (

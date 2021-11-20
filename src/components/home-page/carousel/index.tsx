@@ -1,7 +1,5 @@
 import React, { useState, useCallback, useEffect, useRef, FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import cn from 'classnames';
 import { Container } from '@material-ui/core';
 import { useInterval } from '@/utils';
@@ -40,9 +38,9 @@ const useStyles = makeStyles((theme) => ({
     },
     nav: {
         color: 'white',
+        height: '20px',
     },
     navDesktop: {
-        width: '40px',
         height: '40px',
         color: 'white',
         position: 'absolute',
@@ -192,14 +190,20 @@ export const Carousel: FC = () => {
 
     return (
         <div className={classes.root} ref={rootRef}>
-            <ArrowBackIosIcon
+            <svg
                 className={cn(
                     classes.prevDesktop,
                     classes.navDesktop,
                     classes.nav
                 )}
+                viewBox="0 0 14 24"
                 onClick={handleClickPrev}
-            />
+            >
+                <path
+                    d="M11.857 23.448a.807.807 0 0 0 .585.242.827.827 0 0 0 .585-1.41L2.746 12l10.28-10.28a.827.827 0 0 0-1.17-1.168L.994 11.416a.827.827 0 0 0 0 1.168l10.863 10.864z"
+                    fill="#fff"
+                />
+            </svg>
             <div
                 className={classes.slider}
                 style={{
@@ -217,37 +221,55 @@ export const Carousel: FC = () => {
                     />
                 ))}
             </div>
-            <ArrowForwardIosIcon
+            <svg
                 className={cn(
                     classes.nextDesktop,
                     classes.navDesktop,
                     classes.nav
                 )}
+                viewBox="0 0 14 24"
                 onClick={handleClickNext}
-            />
+            >
+                <path
+                    d="M2.143 23.448a.807.807 0 0 1-.585.242.827.827 0 0 1-.584-1.41L11.253 12 .973 1.72A.827.827 0 0 1 2.144.553l10.863 10.864a.827.827 0 0 1 0 1.168L2.143 23.449z"
+                    fill="#fff"
+                />
+            </svg>
             <div className={classes.paginationContainer}>
                 <Container className={classes.paginationInnerContainer}>
-                    <ArrowBackIosIcon
+                    <svg
                         className={cn(
                             classes.prevMobile,
                             classes.navMobile,
                             classes.nav
                         )}
+                        viewBox="0 0 14 24"
                         onClick={handleClickPrev}
-                    />
+                    >
+                        <path
+                            d="M11.857 23.448a.807.807 0 0 0 .585.242.827.827 0 0 0 .585-1.41L2.746 12l10.28-10.28a.827.827 0 0 0-1.17-1.168L.994 11.416a.827.827 0 0 0 0 1.168l10.863 10.864z"
+                            fill="#fff"
+                        />
+                    </svg>
                     <Pagination
                         currentPage={activeSlide}
                         numberOfPages={PAGES.length}
                         onChangeSlide={handleChangeSlide}
                     />
-                    <ArrowForwardIosIcon
+                    <svg
                         className={cn(
                             classes.nextMobile,
                             classes.navMobile,
                             classes.nav
                         )}
+                        viewBox="0 0 14 24"
                         onClick={handleClickNext}
-                    />
+                    >
+                        <path
+                            d="M2.143 23.448a.807.807 0 0 1-.585.242.827.827 0 0 1-.584-1.41L11.253 12 .973 1.72A.827.827 0 0 1 2.144.553l10.863 10.864a.827.827 0 0 1 0 1.168L2.143 23.449z"
+                            fill="#fff"
+                        />
+                    </svg>
                 </Container>
             </div>
         </div>

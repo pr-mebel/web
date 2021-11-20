@@ -233,8 +233,8 @@ export const Map: FC = () => {
                             width="100%"
                             height="100%"
                             defaultState={{
-                                center: [55.808543, 37.512389],
-                                zoom: 17,
+                                center: [55.806696, 37.513225],
+                                zoom: 16,
                                 controls: [
                                     'zoomControl',
                                     'fullscreenControl',

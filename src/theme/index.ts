@@ -17,6 +17,16 @@ export default createTheme({
         },
     },
     overrides: {
+        MuiInputLabel: {
+            root: {
+                fontFamily: 'Gilroy, sans-serif',
+            },
+        },
+        MuiInputBase: {
+            input: {
+                fontFamily: 'Gilroy, sans-serif',
+            },
+        },
         MuiTypography: {
             h1: {
                 fontFamily: 'Gilroy, sans-serif',

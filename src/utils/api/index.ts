@@ -1,10 +1,16 @@
 import axios from 'axios';
 import { Item } from '@/entities';
-import { FetchCatalogByFilterParams, SendEmailParams } from './types';
+import {
+    FetchCatalogByFilterParams,
+    FetchFAQRespone,
+    SendEmailParams,
+} from './types';
+import { client } from '../client';
+import { gql } from '@apollo/client';
 
 /**
  * Запрашивает из contentful CMS карточки по текущему фильтру
- * @param param0 Параметры фильтров
+ * @param filters Параметры фильтров
  * @param page Текущая страница в каталоге
  * @returns Объект с новыми карточками
  */
@@ -24,3 +30,21 @@ export const fetchCatalogByFilter = (
 
 export const sendEmail = (params: SendEmailParams): Promise<void> =>
     axios.post('/api/send-email', params);
+
+const FAQEntityID = '50kulGjR4KrEMHAomWqIgM';
+
+export const fetchFAQ = (): Promise<FetchFAQRespone> =>
+    client.query({
+        query: gql`
+        {
+            faqList(id: "${FAQEntityID}") {
+                itemsCollection {
+                    items {
+                        title
+                        text
+                    }
+                }
+            }
+        }
+        `,
+    });

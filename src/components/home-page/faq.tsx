@@ -11,6 +11,8 @@ import {
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { NB_SP, MDASH } from '@/constants';
 import { BlockTitle, MainButton } from '@/components/common';
+import { useRequest } from 'ahooks';
+import { fetchFAQ } from '@/utils';
 
 const LIST = [
     {
@@ -146,6 +148,14 @@ export const FAQ: FC = () => {
         )
     );
 
+    const request = useRequest(fetchFAQ, {
+        formatResult: (resp) =>
+            resp.data.faqList.itemsCollection.items.map((card, i) => ({
+                ...card,
+                id: i + 1 >= 10 ? `${i + 1}` : `0${i + 1}`,
+            })),
+    });
+
     /**
      * Обработчик клика на кнопку показать еще
      */
@@ -184,6 +194,10 @@ export const FAQ: FC = () => {
         []
     );
 
+    if (request.loading || !request.data) {
+        return null;
+    }
+
     return (
         <Container>
             <BlockTitle>
@@ -196,7 +210,7 @@ export const FAQ: FC = () => {
                 alignItems="center"
                 className={classes.listContainer}
             >
-                {LIST.map((item, i) => {
+                {request.data.map((item, i) => {
                     if (i > 4 && !isShowMoreClicked) return null;
 
                     return (

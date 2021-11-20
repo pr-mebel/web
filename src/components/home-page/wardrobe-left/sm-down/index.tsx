@@ -10,6 +10,7 @@ import { TABS, ADDITIONAL } from '../constants';
 import img1 from 'public/images/home-page/wardrobe-left/wardrobe-1.jpg';
 import img2 from 'public/images/home-page/wardrobe-left/wardrobe-2.jpg';
 import img3 from 'public/images/home-page/wardrobe-left/wardrobe-3.jpg';
+import { usePagination } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
     imgContainer: {
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
     option: {
         color: 'black',
-        transition: 'all 1.3s linear',
+        transition: 'all 0.3s linear',
         marginBottom: '16px',
         cursor: 'pointer',
         '&:hover': {
@@ -62,18 +63,21 @@ const useStyles = makeStyles((theme) => ({
 
 export const WardrobeLeftSmDown: FC = () => {
     const classes = useStyles();
-    const [activePage, setActivePage] = useState(0);
     const [activeTabIndex, setActiveTabIndex] = useState(0);
+
+    const { current, onReset, onSet, swipableHandlers } = usePagination({
+        total: ADDITIONAL.length,
+    });
 
     /**
      * Переключает вкладки по клику
      */
     const handleClick = useCallback(
         (index) => () => {
-            setActivePage(0);
+            onReset();
             setActiveTabIndex(index);
         },
-        []
+        [onReset]
     );
 
     return (
@@ -101,14 +105,19 @@ export const WardrobeLeftSmDown: FC = () => {
                         ))}
                     </ul>
                 </Grid>
-                <Grid item xs={12} className={classes.imgContainer}>
+                <Grid
+                    item
+                    xs={12}
+                    className={classes.imgContainer}
+                    {...swipableHandlers}
+                >
                     <Image
                         src={img1}
                         layout="fill"
                         alt="Однотонный"
                         className={cn(classes.image, {
                             [classes.selectedImage]:
-                                activePage === 0 && activeTabIndex === 0,
+                                current === 0 && activeTabIndex === 0,
                         })}
                         placeholder="blur"
                     />
@@ -118,7 +127,7 @@ export const WardrobeLeftSmDown: FC = () => {
                         alt="Комбинированный"
                         className={cn(classes.image, {
                             [classes.selectedImage]:
-                                activePage === 0 && activeTabIndex === 1,
+                                current === 0 && activeTabIndex === 1,
                         })}
                         placeholder="blur"
                     />
@@ -128,7 +137,7 @@ export const WardrobeLeftSmDown: FC = () => {
                         alt="Кобминированный с Alcantara"
                         className={cn(classes.image, {
                             [classes.selectedImage]:
-                                activePage === 0 && activeTabIndex === 2,
+                                current === 0 && activeTabIndex === 2,
                         })}
                         placeholder="blur"
                     />
@@ -138,7 +147,7 @@ export const WardrobeLeftSmDown: FC = () => {
                             src={img}
                             alt={title}
                             className={cn(classes.image, {
-                                [classes.selectedImage]: activePage - 1 === i,
+                                [classes.selectedImage]: current - 1 === i,
                             })}
                             layout="fill"
                             objectFit="contain"
@@ -148,16 +157,16 @@ export const WardrobeLeftSmDown: FC = () => {
                 </Grid>
                 <Grid item xs={12}>
                     <Pagination
-                        numberOfPages={ADDITIONAL.length}
-                        activeIndex={activePage}
-                        onChange={setActivePage}
+                        numberOfPages={ADDITIONAL.length + 1}
+                        activeIndex={current}
+                        onChange={onSet}
                     />
                 </Grid>
-                {activePage !== 0 ? (
+                {current !== 0 ? (
                     <Grid item xs={10} className={classes.textBottom}>
                         <WardrobeAdditionalBlock
-                            title={ADDITIONAL[activePage - 1].data.title}
-                            text={ADDITIONAL[activePage - 1].data.text}
+                            title={ADDITIONAL[current - 1].data.title}
+                            text={ADDITIONAL[current - 1].data.text}
                         />
                     </Grid>
                 ) : (

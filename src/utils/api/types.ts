@@ -32,13 +32,7 @@ export type UploadFilesParams = {
 
 export type FetchFAQRespone = {
     data: {
-        faqList: {
-            itemsCollection: {
-                items: {
-                    title: string;
-                    text: string;
-                }[];
-            };
-        };
-    };
+        title: string;
+        text: string;
+    }[];
 };

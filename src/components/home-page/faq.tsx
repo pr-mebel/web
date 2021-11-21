@@ -150,7 +150,7 @@ export const FAQ: FC = () => {
 
     const request = useRequest(fetchFAQ, {
         formatResult: (resp) =>
-            resp.data.faqList.itemsCollection.items.map((card, i) => ({
+            resp.data.map((card, i) => ({
                 ...card,
                 id: i + 1 >= 10 ? `${i + 1}` : `0${i + 1}`,
             })),

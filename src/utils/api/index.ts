@@ -5,8 +5,6 @@ import {
     FetchFAQRespone,
     SendEmailParams,
 } from './types';
-import { client } from '../client';
-import { gql } from '@apollo/client';
 
 /**
  * Запрашивает из contentful CMS карточки по текущему фильтру
@@ -31,20 +29,4 @@ export const fetchCatalogByFilter = (
 export const sendEmail = (params: SendEmailParams): Promise<void> =>
     axios.post('/api/send-email', params);
 
-const FAQEntityID = '50kulGjR4KrEMHAomWqIgM';
-
-export const fetchFAQ = (): Promise<FetchFAQRespone> =>
-    client.query({
-        query: gql`
-        {
-            faqList(id: "${FAQEntityID}") {
-                itemsCollection {
-                    items {
-                        title
-                        text
-                    }
-                }
-            }
-        }
-        `,
-    });
+export const fetchFAQ = (): Promise<FetchFAQRespone> => axios.post('/api/faq');

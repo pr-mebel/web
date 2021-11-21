@@ -134,7 +134,7 @@ const HomePage: FC = () => {
                 </section>
 
                 {/* Наше производство */}
-                <section className={classes.ourProduction}>
+                <section id="production" className={classes.ourProduction}>
                     <OurProduction />
                 </section>
 

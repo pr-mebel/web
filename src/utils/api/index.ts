@@ -1,10 +1,14 @@
 import axios from 'axios';
 import { Item } from '@/entities';
-import { FetchCatalogByFilterParams, SendEmailParams } from './types';
+import {
+    FetchCatalogByFilterParams,
+    FetchFAQRespone,
+    SendEmailParams,
+} from './types';
 
 /**
  * Запрашивает из contentful CMS карточки по текущему фильтру
- * @param param0 Параметры фильтров
+ * @param filters Параметры фильтров
  * @param page Текущая страница в каталоге
  * @returns Объект с новыми карточками
  */
@@ -24,3 +28,5 @@ export const fetchCatalogByFilter = (
 
 export const sendEmail = (params: SendEmailParams): Promise<void> =>
     axios.post('/api/send-email', params);
+
+export const fetchFAQ = (): Promise<FetchFAQRespone> => axios.post('/api/faq');

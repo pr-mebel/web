@@ -1,5 +1,5 @@
 import { checkIfNameAndValueAreKnown, fetchCatalogByFilter } from '@/utils';
-import { useMount, useRequest, useUpdateEffect } from 'ahooks';
+import { useRequest } from 'ahooks';
 import { Filter, FilterField, FilterValue, Item, SectionID } from '@/entities';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { batchSize } from '@/constants';
@@ -19,6 +19,7 @@ export const useCards = () => {
     const [list, setList] = useState<Item[]>([]);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(false);
+    const [isDataOutdated, setIsDataOutdated] = useState(false);
     const [currentItemID, setCurrentItemID] = useState<number | null>(null);
     const cardModal = useModal({
         onClose: () => {
@@ -27,7 +28,7 @@ export const useCards = () => {
     });
     const cardModalFullScreen = useModal();
 
-    const request = useRequest(fetchCatalogByFilter, {
+    const { run, loading } = useRequest(fetchCatalogByFilter, {
         manual: true,
         onSuccess: (res) => {
             setList((prev) => [...prev, ...res.data.items]);
@@ -81,6 +82,7 @@ export const useCards = () => {
             setList([]);
             setPage(1);
             setHasMore(false);
+            setIsDataOutdated(true);
         },
         []
     );
@@ -113,36 +115,40 @@ export const useCards = () => {
     const handleDownloadMoreCards = useCallback(() => {
         setPage((prev) => prev + 1);
         setHasMore(false);
+        setIsDataOutdated(true);
     }, []);
 
-    useMount(() => {
-        const { query } = router;
+    useEffect(() => {
+        const { query, isReady } = router;
         let res: Partial<Filter> = {};
 
-        if (Object.values(query).length) {
-            Object.entries(query).forEach(([key, value]) => {
-                if (typeof value === 'string') {
-                    const pair = { name: key, value };
+        if (!isReady) return;
 
-                    if (checkIfNameAndValueAreKnown(pair)) {
-                        res = {
-                            ...res,
-                            [pair.name]: pair.value,
-                        };
-                    }
+        Object.entries(query).forEach(([key, value]) => {
+            if (typeof value === 'string') {
+                const pair = { name: key, value };
+
+                if (checkIfNameAndValueAreKnown(pair)) {
+                    res = {
+                        ...res,
+                        [pair.name]: pair.value,
+                    };
                 }
-            });
-
-            if (Object.values(res).length) {
-                setFilters((prev) => ({
-                    ...prev,
-                    ...res,
-                }));
             }
+        });
+
+        if (Object.values(res).length) {
+            setFilters((prev) => ({
+                ...prev,
+                ...res,
+            }));
         }
 
-        request.run(filters, page);
-    });
+        setList([]);
+        setPage(1);
+        setHasMore(false);
+        setIsDataOutdated(true);
+    }, [router]);
 
     useEffect(() => {
         if (hasMore && currentItemID && list.length - 5 <= currentItemID) {
@@ -150,9 +156,12 @@ export const useCards = () => {
         }
     }, [list, currentItemID, hasMore, handleDownloadMoreCards]);
 
-    useUpdateEffect(() => {
-        request.run(filters, page);
-    }, [filters, page]);
+    useEffect(() => {
+        if (isDataOutdated) {
+            run(filters, page);
+            setIsDataOutdated(false);
+        }
+    }, [isDataOutdated, filters, page, run]);
 
     return {
         filters,
@@ -160,7 +169,7 @@ export const useCards = () => {
         selectedItem,
         bounds,
         hasMore,
-        isLoading: request.loading,
+        isLoading: loading,
         cardModal: {
             ...cardModal,
             onOpenNext: handleGoToNextCard,

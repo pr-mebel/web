@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
         right: '5px',
         position: 'absolute',
         zIndex: 10,
+        background: 'rgba(255, 255, 255, 0.4)',
     },
     imgContainer: {
         width: '100%',

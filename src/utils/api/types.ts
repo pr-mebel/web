@@ -29,3 +29,10 @@ export type SendEmailParams = {
 export type UploadFilesParams = {
     files: FileList;
 };
+
+export type FetchFAQRespone = {
+    data: {
+        title: string;
+        text: string;
+    }[];
+};

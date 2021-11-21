@@ -165,7 +165,7 @@ export const Questions: FC = () => {
                         className={classes.title}
                         gutterBottom
                     >
-                        Остались вопросы?
+                        Остались вопросы?{' '}
                         <Hidden smUp>
                             <br />
                         </Hidden>
@@ -177,7 +177,7 @@ export const Questions: FC = () => {
                         А&nbsp;если вы&nbsp;хотите получить расчет конкретной
                         модели, прикрепите свои эскизы или план помещения
                         с&nbsp;описанием пожеланий и&nbsp;наш дизайнер
-                        в&nbsp;кротчайшие сроки подготовит для вас предложение!
+                        в&nbsp;кратчайшие сроки подготовит для вас предложение!
                     </Typography>
                 </Hidden>
                 <form onSubmit={handleSubmit(onSubmit)}>

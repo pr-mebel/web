@@ -9,11 +9,17 @@ import { BlockTitle, SubmitButton } from '@/components/common';
 
 import bgImg from 'public/images/home-page/questions-form/1.jpg';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
         padding: '80px 0',
         position: 'relative',
         width: '100%',
+        [theme.breakpoints.down('sm')]: {
+            padding: '60px 0',
+        },
+        [theme.breakpoints.down('xs')]: {
+            padding: '40px 0',
+        },
     },
     title: {
         color: 'white',
@@ -57,7 +63,7 @@ const useStyles = makeStyles({
         marginTop: '36px',
         marginBottom: '24px',
     },
-});
+}));
 
 export const QuestionsForm: FC = () => {
     const classes = useStyles();
@@ -82,6 +88,7 @@ export const QuestionsForm: FC = () => {
                 src={bgImg}
                 alt="Заполните форму ниже. Наш менеджер свяжется с вами и ответит на вопросы"
                 layout="fill"
+                objectFit="cover"
                 placeholder="blur"
             />
             <Container className={classes.container}>

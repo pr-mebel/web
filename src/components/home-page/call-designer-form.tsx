@@ -8,8 +8,11 @@ import { SubmitButton } from '@/components/common';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        background: theme.palette.grey[900],
+        background: '#303030',
         padding: '65px 0',
+        [theme.breakpoints.down('xs')]: {
+            padding: '40px 0',
+        },
     },
     inputInner: {
         color: 'white',

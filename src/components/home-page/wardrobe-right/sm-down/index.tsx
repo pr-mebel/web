@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography, Grid } from '@material-ui/core';
 import { BlockTitle, MainButton, Pagination } from '@/components/common';
@@ -8,6 +8,7 @@ import { ADDITIONAL } from '../constants';
 import { WardrobeAdditionalBlock } from '../../wardrobe-additional-block';
 
 import defaultImage from 'public/images/home-page/wardrobe-right/wardrobe-1.jpg';
+import { usePagination } from '@/hooks';
 
 const useStyles = makeStyles(() => ({
     contentSm: {
@@ -40,7 +41,9 @@ const useStyles = makeStyles(() => ({
 
 export const WardrobeRightSmDown = () => {
     const classes = useStyles();
-    const [activePage, setActivePage] = useState(0);
+    const { current, onSet, swipableHandlers } = usePagination({
+        total: ADDITIONAL.length,
+    });
 
     return (
         <Container>
@@ -56,14 +59,19 @@ export const WardrobeRightSmDown = () => {
                 justifyContent="center"
                 className={classes.contentSm}
             >
-                <Grid item xs={12} className={classes.imgContainer}>
+                <Grid
+                    item
+                    xs={12}
+                    className={classes.imgContainer}
+                    {...swipableHandlers}
+                >
                     <Image
                         src={defaultImage}
                         layout="fill"
                         alt="Шкаф исключительного качества"
                         placeholder="blur"
                         className={cn(classes.image, {
-                            [classes.selectedImage]: activePage === 0,
+                            [classes.selectedImage]: current === 0,
                         })}
                         quality={100}
                     />
@@ -73,7 +81,7 @@ export const WardrobeRightSmDown = () => {
                             src={img}
                             alt={title}
                             className={cn(classes.image, {
-                                [classes.selectedImage]: activePage - 1 === i,
+                                [classes.selectedImage]: current - 1 === i,
                             })}
                             layout="fill"
                             objectFit="contain"
@@ -84,15 +92,15 @@ export const WardrobeRightSmDown = () => {
                 <Grid item xs={12}>
                     <Pagination
                         numberOfPages={ADDITIONAL.length}
-                        activeIndex={activePage}
-                        onChange={setActivePage}
+                        activeIndex={current}
+                        onChange={onSet}
                     />
                 </Grid>
-                {activePage !== 0 ? (
+                {current !== 0 ? (
                     <Grid item xs={10} className={classes.textBottom}>
                         <WardrobeAdditionalBlock
-                            title={ADDITIONAL[activePage - 1].data.title}
-                            text={ADDITIONAL[activePage - 1].data.text}
+                            title={ADDITIONAL[current - 1].data.title}
+                            text={ADDITIONAL[current - 1].data.text}
                         />
                     </Grid>
                 ) : (

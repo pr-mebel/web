@@ -5,6 +5,12 @@ const accessToken =
         ? process.env.CONTENTFUL_ACCESS_TOKEN
         : process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN;
 
+console.log(
+    process.env.NODE_ENV,
+    process.env.CONTENTFUL_ACCESS_TOKEN,
+    process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
+);
+
 /**
  * Клиент для обращения к contentful CMS
  */

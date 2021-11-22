@@ -8,7 +8,6 @@ import theme from '@/theme';
  */
 export default class MyDocument extends Document {
     render() {
-        console.log(process.env.NODE_ENV);
         return (
             <Html lang="ru">
                 <Head>

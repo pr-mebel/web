@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 const accessToken =
-    process.env.NODE_ENV === 'production'
+    process.env.VERCEL_ENV === 'production'
         ? process.env.CONTENTFUL_ACCESS_TOKEN
         : process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN;
 

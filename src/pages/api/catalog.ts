@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { gql } from '@apollo/client';
-import { client } from '@/utils/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { parseContentfulCatalog } from '@/normalizers';
 import { batchSize } from '@/constants';
 import {
@@ -16,6 +16,23 @@ type Output = {
 };
 
 const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
+    const accessToken =
+        process.env.NODE_ENV === 'production'
+            ? process.env.CONTENTFUL_ACCESS_TOKEN
+            : process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN;
+
+    /**
+     * Клиент для обращения к contentful CMS
+     */
+    const client = new ApolloClient({
+        uri: `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/`,
+        headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${accessToken}`,
+        },
+        cache: new InMemoryCache(),
+    });
+
     const {
         page,
         filters: { style, doorType, section },

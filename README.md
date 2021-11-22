@@ -2,28 +2,35 @@
 
 ## Доступные команды
 
+### Подтянуть .env
+
+```
+npx vercel link
+npx vercel env pull
+```
+
 ### Запуск в dev режиме с hot-reload
 
 ```
-npm run dev
+yarn dev
 ```
 
 ### Билд
 
 ```
-npm run build
+yarn build
 ```
 
 ### Запуск в prod режиме
 
 ```
-npm run start
+yarn start
 ```
 
 ### Typescript линтер
 
 ```
-npm run typecheck:watch
+yarn typecheck:watch
 ```
 
 ## Технологии

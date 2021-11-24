@@ -239,7 +239,9 @@ export const FAQ: FC = () => {
                                     <Typography>{item.title}</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                    <Typography>{item.text}</Typography>
+                                    <Typography variant="body2">
+                                        {item.text}
+                                    </Typography>
                                 </AccordionDetails>
                             </Accordion>
                         </Grid>

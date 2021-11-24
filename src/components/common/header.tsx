@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: '0 10px 20px rgba(0,0,0,.1)',
         transition: '.1s height',
         [theme.breakpoints.down('md')]: {
-            height: '50px',
+            height: '60px',
         },
     },
     rootDense: {

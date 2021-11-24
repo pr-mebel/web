@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
             fontSize: '20px',
             fontWeight: '300',
             color: 'black',
-            content: '"/"',
+            content: '"|"',
             right: '-20px',
             bottom: '0',
         },

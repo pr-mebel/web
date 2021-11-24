@@ -91,7 +91,7 @@ export const WardrobeRightSmDown = () => {
                 </Grid>
                 <Grid item xs={12}>
                     <Pagination
-                        numberOfPages={ADDITIONAL.length}
+                        numberOfPages={ADDITIONAL.length + 1}
                         activeIndex={current}
                         onChange={onSet}
                     />

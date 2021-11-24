@@ -29,4 +29,7 @@ export const fetchCatalogByFilter = (
 export const sendEmail = (params: SendEmailParams): Promise<void> =>
     axios.post('/api/send-email', params);
 
+export const verifyPhone = (params: { phone: string }): Promise<void> =>
+    axios.post('/api/verify-phone', params);
+
 export const fetchFAQ = (): Promise<FetchFAQRespone> => axios.post('/api/faq');

@@ -88,6 +88,7 @@ export const WardrobeSnippet: FC<Props> = ({ title, text, img, direction }) => {
                 open={popup.isOpen}
                 className={classes.popover}
                 anchorEl={anchorEl}
+                disableRestoreFocus
                 anchorOrigin={{
                     vertical: 'center',
                     horizontal: direction as

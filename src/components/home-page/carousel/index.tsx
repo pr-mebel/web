@@ -5,6 +5,7 @@ import { Container } from '@material-ui/core';
 import { useInterval } from '@/utils';
 import { PAGES } from './constants';
 import { Page, Pagination } from './components';
+import { usePagination } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -81,23 +82,16 @@ export const Carousel: FC = () => {
     const classes = useStyles();
     const rootRef = useRef<HTMLDivElement>(null);
 
-    const [activeSlide, setActiveSlide] = useState(0);
+    const { current, onNext, onPrev, onSet, swipableHandlers } = usePagination({
+        total: PAGES.length - 1,
+    });
+
     const [windowWidth, setWindowWidth] = useState(0);
 
     /**
      * Крутит карусель
      */
-    const { pause, unpause } = useInterval(
-        () =>
-            setActiveSlide((prev) => {
-                if (prev < PAGES.length - 1) {
-                    return prev + 1;
-                }
-
-                return 0;
-            }),
-        7000
-    );
+    const { pause, unpause } = useInterval(onNext, 7000);
 
     /**
      * Перезапускает интервал прокрутки карусели
@@ -109,32 +103,20 @@ export const Carousel: FC = () => {
     }, [pause, unpause]);
 
     /**
-     * Обработчик стрелочку назад
+     * Обработчик стрелочки назад
      */
     const handleClickPrev = useCallback(() => {
         resetInterval();
-        setActiveSlide((prev) => {
-            if (prev > 0) {
-                return prev - 1;
-            }
-
-            return PAGES.length - 1;
-        });
-    }, [resetInterval]);
+        onPrev();
+    }, [resetInterval, onPrev]);
 
     /**
-     * Обработчик стрелочку вперед
+     * Обработчик стрелочки вперед
      */
     const handleClickNext = useCallback(() => {
         resetInterval();
-        setActiveSlide((prev) => {
-            if (prev < PAGES.length - 1) {
-                return prev + 1;
-            }
-
-            return 0;
-        });
-    }, [resetInterval]);
+        onNext();
+    }, [resetInterval, onNext]);
 
     /**
      * Переключает слайд
@@ -142,9 +124,9 @@ export const Carousel: FC = () => {
     const handleChangeSlide = useCallback(
         (value) => {
             resetInterval();
-            setActiveSlide(value);
+            onSet(value);
         },
-        [resetInterval]
+        [resetInterval, onSet]
     );
 
     /**
@@ -207,8 +189,9 @@ export const Carousel: FC = () => {
             <div
                 className={classes.slider}
                 style={{
-                    transform: `translateX(-${windowWidth * activeSlide}px)`,
+                    transform: `translateX(-${windowWidth * current}px)`,
                 }}
+                {...swipableHandlers}
             >
                 {PAGES.map((page, id) => (
                     <Page
@@ -252,7 +235,7 @@ export const Carousel: FC = () => {
                         />
                     </svg>
                     <Pagination
-                        currentPage={activeSlide}
+                        currentPage={current}
                         numberOfPages={PAGES.length}
                         onChangeSlide={handleChangeSlide}
                     />

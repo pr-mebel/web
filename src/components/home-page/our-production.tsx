@@ -10,23 +10,23 @@ import img from 'public/images/home-page/our-production/1.jpg';
 
 const LIST = addIdsToArrayOfObjects([
     {
-        title: 'Квалифицированный персонал',
+        title: 'Квалифицированный\nперсонал',
         text: `Все сотрудники нашей фабрики имеют многолетний опыт работы
         и${NB_SP}проходят ежегодную аттестацию.`,
     },
     {
-        title: 'Инженерное 3D-проектирование',
+        title: 'Инженерное\n3D-проектирование',
         text: `Каждый проект проходит стадию инженерного 3D-проектирования,
         что обеспечивает максимально качественную реализацию проекта.`,
     },
     {
-        title: 'Промышленное оборудование',
+        title: 'Промышленное\nоборудование',
         text: `Наша фабрика оснащена европейским промышленным оборудованием
         с${NB_SP}числовым программным управлением.
         Максимум автоматизации, минимум ручного труда.`,
     },
     {
-        title: 'Контроль качества на всех участках',
+        title: 'Контроль качества\nна всех участках',
         text: `Качество нашей продукции оценивается более чем
         по${NB_SP}1000${NB_SP}параметрам, что позволяет
         свести риск возникновения брака к${NB_SP}минимуму.`,
@@ -45,6 +45,10 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '16px',
         lineHeight: '18px',
         fontWeight: 400,
+        whiteSpace: 'pre-line',
+        [theme.breakpoints.down('xs')]: {
+            whiteSpace: 'initial',
+        },
     },
     text: {
         marginTop: '24px',
@@ -80,7 +84,7 @@ export const OurProduction: FC = () => {
                     placeholder="blur"
                 />
             </div>
-            <Grid container spacing={4}>
+            <Grid container spacing={6}>
                 {LIST.map((item) => (
                     <Grid key={item.id} item xs={12} sm={6} md={3}>
                         <BlockTitle>

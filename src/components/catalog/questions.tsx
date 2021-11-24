@@ -1,12 +1,6 @@
 import React, { FC, useCallback, useRef, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-    Container,
-    Typography,
-    Grid,
-    TextField,
-    Hidden,
-} from '@material-ui/core';
+import { Container, Typography, Grid, Hidden } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import {
@@ -15,10 +9,10 @@ import {
     uploadFiles,
     openFormSubmitPopup,
 } from '@/redux';
-import { getFileDeclination } from '@/utils';
+import { formatPhoneInput, getFileDeclination } from '@/utils';
 import PublishIcon from '@material-ui/icons/Publish';
 import ClearIcon from '@material-ui/icons/Clear';
-import { BlockTitle, SubmitButton } from '@/components/common';
+import { BlockTitle, SubmitButton, Input } from '@/components';
 
 const useStyles = makeStyles({
     root: {
@@ -37,17 +31,6 @@ const useStyles = makeStyles({
     },
     inputContainer: {
         marginBottom: '15px',
-    },
-    inputInner: {
-        color: 'white',
-        '&:placeholder': {
-            color: 'white',
-        },
-    },
-    inputRoot: {
-        '&:hover&:before,&:before': {
-            borderColor: 'white',
-        },
     },
     inputLabel: {
         color: 'white',
@@ -189,26 +172,15 @@ export const Questions: FC = () => {
                                 xs={12}
                                 className={classes.inputContainer}
                             >
-                                <TextField
-                                    inputRef={register}
+                                <Input
+                                    ref={register}
                                     name="name"
-                                    type="text"
-                                    autoComplete="name"
-                                    InputProps={{
-                                        classes: {
-                                            root: classes.inputRoot,
-                                            input: classes.inputInner,
-                                        },
-                                    }}
-                                    InputLabelProps={{
-                                        classes: {
-                                            root: classes.inputLabel,
-                                        },
-                                    }}
-                                    fullWidth
                                     placeholder="Имя"
-                                    label="Имя"
+                                    type="text"
+                                    fullWidth
+                                    autoComplete="name"
                                     required
+                                    darkMode
                                 />
                             </Grid>
                             <Grid
@@ -216,26 +188,20 @@ export const Questions: FC = () => {
                                 xs={12}
                                 className={classes.inputContainer}
                             >
-                                <TextField
-                                    inputRef={register}
+                                <Input
+                                    ref={register}
                                     name="tel"
-                                    type="tel"
-                                    autoComplete="tel"
-                                    InputProps={{
-                                        classes: {
-                                            root: classes.inputRoot,
-                                            input: classes.inputInner,
-                                        },
-                                    }}
-                                    InputLabelProps={{
-                                        classes: {
-                                            root: classes.inputLabel,
-                                        },
-                                    }}
-                                    fullWidth
                                     placeholder="Телефон"
-                                    label="Телефон"
+                                    type="tel"
+                                    fullWidth
+                                    autoComplete="tel"
                                     required
+                                    darkMode
+                                    onChange={(event) => {
+                                        event.target.value = formatPhoneInput(
+                                            event.target.value
+                                        );
+                                    }}
                                 />
                             </Grid>
                             <Grid
@@ -243,49 +209,28 @@ export const Questions: FC = () => {
                                 xs={12}
                                 className={classes.inputContainer}
                             >
-                                <TextField
-                                    inputRef={register}
+                                <Input
+                                    ref={register}
                                     name="email"
-                                    type="email"
-                                    autoComplete="email"
-                                    InputProps={{
-                                        classes: {
-                                            root: classes.inputRoot,
-                                            input: classes.inputInner,
-                                        },
-                                    }}
-                                    InputLabelProps={{
-                                        classes: {
-                                            root: classes.inputLabel,
-                                        },
-                                    }}
-                                    fullWidth
                                     placeholder="E-mail"
-                                    label="E-mail"
+                                    type="email"
+                                    fullWidth
+                                    autoComplete="email"
                                     required
+                                    darkMode
                                 />
                             </Grid>
-                            <TextField
-                                inputRef={register}
+                            <Input
+                                ref={register}
                                 name="description"
+                                type="text"
                                 fullWidth
                                 multiline
-                                className={classes.textarea}
-                                InputProps={{
-                                    classes: {
-                                        root: classes.inputRoot,
-                                        input: classes.inputInner,
-                                    },
-                                }}
-                                InputLabelProps={{
-                                    classes: {
-                                        root: classes.inputLabel,
-                                    },
-                                }}
-                                variant="filled"
-                                placeholder="Описание"
-                                label="Описание"
                                 rows={5}
+                                placeholder="Описание"
+                                className={classes.textarea}
+                                required
+                                darkMode
                             />
                             <Grid
                                 container

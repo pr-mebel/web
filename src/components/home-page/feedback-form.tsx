@@ -1,13 +1,7 @@
 import React, { FC, useRef, useCallback, useState } from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import {
-    Container,
-    Grid,
-    Typography,
-    TextField,
-    Hidden,
-} from '@material-ui/core';
+import { Container, Grid, Typography, Hidden } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import {
@@ -18,27 +12,13 @@ import {
 } from '@/redux';
 import PublishIcon from '@material-ui/icons/Publish';
 import ClearIcon from '@material-ui/icons/Clear';
-import { getFileDeclination } from '@/utils';
-import { SubmitButton } from '@/components/common';
+import { formatPhoneInput, getFileDeclination } from '@/utils';
+import { SubmitButton, Input } from '@/components';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         background: theme.palette.grey[900],
         padding: '63px 0',
-    },
-    inputInner: {
-        color: 'white',
-        '&:placeholder': {
-            color: 'white',
-        },
-    },
-    inputRoot: {
-        '&:hover&:before,&:before': {
-            borderColor: 'white',
-        },
-    },
-    inputLabel: {
-        color: 'white',
     },
     text: {
         color: 'white',
@@ -175,49 +155,32 @@ export const FeedbackForm: FC = () => {
                             spacing={smDown ? 2 : 4}
                         >
                             <Grid item xs={12} md={6}>
-                                <TextField
-                                    inputRef={register}
+                                <Input
+                                    ref={register}
                                     name="name"
-                                    type="text"
-                                    autoComplete="name"
-                                    InputProps={{
-                                        classes: {
-                                            root: classes.inputRoot,
-                                            input: classes.inputInner,
-                                        },
-                                    }}
-                                    InputLabelProps={{
-                                        classes: {
-                                            root: classes.inputLabel,
-                                        },
-                                    }}
-                                    fullWidth
                                     placeholder="Имя"
-                                    label="Имя"
+                                    type="text"
+                                    fullWidth
+                                    autoComplete="name"
                                     required
+                                    darkMode
                                 />
                             </Grid>
                             <Grid item xs={12} md={6}>
-                                <TextField
-                                    inputRef={register}
+                                <Input
+                                    ref={register}
                                     name="tel"
-                                    type="tel"
-                                    autoComplete="tel"
-                                    InputProps={{
-                                        classes: {
-                                            root: classes.inputRoot,
-                                            input: classes.inputInner,
-                                        },
-                                    }}
-                                    InputLabelProps={{
-                                        classes: {
-                                            root: classes.inputLabel,
-                                        },
-                                    }}
-                                    fullWidth
                                     placeholder="Телефон"
-                                    label="Телефон"
+                                    type="tel"
+                                    fullWidth
+                                    autoComplete="tel"
                                     required
+                                    darkMode
+                                    onChange={(event) => {
+                                        event.target.value = formatPhoneInput(
+                                            event.target.value
+                                        );
+                                    }}
                                 />
                             </Grid>
                             <Hidden smDown>

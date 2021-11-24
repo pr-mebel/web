@@ -1,13 +1,14 @@
 import React, { FC, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Typography, Grid, TextField } from '@material-ui/core';
+import { Container, Typography, Grid, Hidden } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import { submitForm, saveForm } from '@/redux';
-import { BlockTitle, SubmitButton } from '@/components/common';
+import { BlockTitle, SubmitButton, Input } from '@/components';
 
 import bgImg from 'public/images/home-page/questions-form/1.jpg';
+import { formatPhoneInput } from '@/utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,22 +30,8 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '40px',
         marginBottom: '60px',
     },
-    inputInner: {
-        color: 'white',
-        '&:placeholder': {
-            color: 'white',
-        },
-    },
-    inputRoot: {
-        '&:hover&:before,&:before': {
-            borderColor: 'white',
-        },
-    },
     inputLabel: {
         color: 'white',
-    },
-    textarea: {
-        marginTop: '20px',
     },
     container: {
         position: 'relative',
@@ -104,76 +91,52 @@ export const QuestionsForm: FC = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Grid container>
                         <Grid item xs={1} md={3} />
-                        <Grid item xs={10} md={6} container>
-                            <Grid item xs={5}>
-                                <TextField
-                                    inputRef={register}
+                        <Grid item xs={10} md={6} container spacing={2}>
+                            <Grid item xs={12} sm={5}>
+                                <Input
+                                    ref={register}
                                     name="name"
-                                    type="text"
-                                    autoComplete="name"
-                                    InputProps={{
-                                        classes: {
-                                            root: classes.inputRoot,
-                                            input: classes.inputInner,
-                                        },
-                                    }}
-                                    InputLabelProps={{
-                                        classes: {
-                                            root: classes.inputLabel,
-                                        },
-                                    }}
-                                    fullWidth
                                     placeholder="Имя"
-                                    label="Имя"
-                                    required
-                                />
-                            </Grid>
-                            <Grid item xs={2} />
-                            <Grid item xs={5}>
-                                <TextField
-                                    inputRef={register}
-                                    name="tel"
-                                    type="tel"
-                                    autoComplete="tel"
-                                    InputProps={{
-                                        classes: {
-                                            root: classes.inputRoot,
-                                            input: classes.inputInner,
-                                        },
-                                    }}
-                                    InputLabelProps={{
-                                        classes: {
-                                            root: classes.inputLabel,
-                                        },
-                                    }}
+                                    type="name"
                                     fullWidth
-                                    placeholder="Телефон"
-                                    label="Телефон"
+                                    autoComplete="name"
                                     required
+                                    darkMode
                                 />
                             </Grid>
-                            <TextField
-                                inputRef={register}
-                                name="description"
-                                fullWidth
-                                multiline
-                                className={classes.textarea}
-                                InputProps={{
-                                    classes: {
-                                        root: classes.inputRoot,
-                                        input: classes.inputInner,
-                                    },
-                                }}
-                                InputLabelProps={{
-                                    classes: {
-                                        root: classes.inputLabel,
-                                    },
-                                }}
-                                variant="filled"
-                                placeholder="Описание"
-                                label="Описание"
-                                rows={5}
-                            />
+                            <Hidden xsDown>
+                                <Grid item sm={2} />
+                            </Hidden>
+                            <Grid item xs={12} sm={5}>
+                                <Input
+                                    ref={register}
+                                    name="tel"
+                                    placeholder="Телефон"
+                                    type="tel"
+                                    fullWidth
+                                    autoComplete="tel"
+                                    required
+                                    darkMode
+                                    onChange={(event) => {
+                                        event.target.value = formatPhoneInput(
+                                            event.target.value
+                                        );
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Input
+                                    ref={register}
+                                    name="description"
+                                    placeholder="Описание"
+                                    type="text"
+                                    fullWidth
+                                    required
+                                    darkMode
+                                    rows={5}
+                                    multiline
+                                />
+                            </Grid>
                         </Grid>
                         <Grid
                             item

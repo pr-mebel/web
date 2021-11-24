@@ -1,17 +1,18 @@
 import React, { FC, useCallback, useContext, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { Dialog, Grid, Typography, TextField } from '@material-ui/core';
+import { Dialog, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PublishIcon from '@material-ui/icons/Publish';
 import ClearIcon from '@material-ui/icons/Clear';
-import { getFileDeclination, orderFormCtx } from '@/utils';
+import { formatPhoneInput, getFileDeclination, orderFormCtx } from '@/utils';
 import {
     openFormSubmitPopup,
     saveForm,
     submitForm,
     uploadFiles,
 } from '@/redux';
+import { Input } from './input';
 import { SubmitButton } from './submit-button';
 
 const useStyles = makeStyles((theme) => ({
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
         right: '5px',
         position: 'absolute',
         zIndex: 10,
+        background: 'rgba(255, 255, 255, 0.4)',
     },
     text: {
         fontSize: '14px',
@@ -52,9 +54,9 @@ const useStyles = makeStyles((theme) => ({
     },
     form: {
         marginTop: '20px',
-    },
-    input: {
-        marginBottom: '10px',
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        rowGap: '10px',
     },
     inputFile: {
         display: 'none',
@@ -215,50 +217,46 @@ export const OrderFormPopup: FC = () => {
                         className={classes.form}
                         onSubmit={handleSubmit(onSubmit)}
                     >
-                        <TextField
-                            inputRef={register}
+                        <Input
+                            ref={register}
                             name="name"
-                            type="text"
-                            autoComplete="name"
-                            className={classes.input}
-                            fullWidth
                             placeholder="Имя"
-                            label="Имя"
+                            type="text"
+                            fullWidth
+                            autoComplete="name"
                             required
                         />
-                        <TextField
-                            inputRef={register}
+                        <Input
+                            ref={register}
                             name="tel"
-                            type="tel"
-                            autoComplete="tel"
-                            className={classes.input}
-                            fullWidth
                             placeholder="Телефон"
-                            label="Телефон"
-                            required
-                        />
-                        <TextField
-                            inputRef={register}
-                            name="email"
-                            type="email"
-                            autoComplete="email"
-                            className={classes.input}
+                            type="tel"
                             fullWidth
-                            placeholder="Почта"
-                            label="Почта"
+                            autoComplete="tel"
+                            required
+                            onChange={(event) => {
+                                event.target.value = formatPhoneInput(
+                                    event.target.value
+                                );
+                            }}
+                        />
+                        <Input
+                            ref={register}
+                            name="email"
+                            placeholder="E-mail"
+                            type="email"
+                            fullWidth
+                            autoComplete="email"
                             required
                         />
-                        <TextField
+                        <Input
                             inputRef={register}
                             name="description"
                             fullWidth
                             multiline
-                            label="Описание"
-                            required
-                            variant="outlined"
-                            placeholder="Описание"
-                            className={classes.input}
                             rows={5}
+                            required
+                            placeholder="Описание"
                         />
                         <input
                             type="file"

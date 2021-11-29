@@ -10,6 +10,7 @@ import {
     Collection,
     Filter,
 } from '@/entities';
+import { isVercelEnvDev } from '@/utils';
 
 type Output = {
     result: SectionCollection | Collection;
@@ -31,7 +32,7 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
                 doorType === ('any' as DoorTypeID)
                     ? gql`
                 {
-                    result: ${section}SectionCollection(limit: 1) {
+                    result: ${section}SectionCollection(limit: 1, preview: ${isVercelEnvDev()}) {
                         items {
                             cardsCollection(limit: ${batchSize}, skip: ${
                           batchSize * (page - 1)
@@ -70,7 +71,7 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
                         ${doorType !== 'any' ? `${doorType}: true` : ''}
                     }, order: [id_ASC], limit: ${batchSize}, skip: ${
                           batchSize * (page - 1)
-                      }){
+                      }, preview: ${isVercelEnvDev()}){
                         total
                         items {
                             id

@@ -17,10 +17,10 @@ const messageBuilder = ({
         path: unknown;
     }[];
 }) => ({
-    to: 'zakaz@pr-mebel.com',
-    replyTo: email || 'zakaz@pr-mebel.com',
+    to: 'zakaz@pr-mebel.ru',
+    replyTo: email || 'zakaz@pr-mebel.ru',
     message: {
-        subject: `Расчет | ${name} | ${tel}`,
+        subject: `[ТЕСТ] Расчет | ${name} | ${tel}`,
         html: `
             <p><strong>Имя:</strong><br>${name}</p>
             <p><strong>Телефон:</strong><br>${tel}</p>

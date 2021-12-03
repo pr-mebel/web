@@ -19,11 +19,24 @@ export default class MyDocument extends Document {
                 </Head>
                 <body>
                     {process.env.VERCEL_ENV === 'production' && (
-                        <div
-                            dangerouslySetInnerHTML={{
-                                __html: '<!-- Yandex.Metrika counter --> <script type="text/javascript" > (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(86578512, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/86578512" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->',
-                            }}
-                        />
+                        <>
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: '<!-- Yandex.Metrika counter --> <script type="text/javascript" > (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(86578512, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/86578512" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->',
+                                }}
+                            />
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: `
+                                        <script>
+                                            (function(w,d,u){
+                                                var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/60000|0);
+                                                var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
+                                            })(window,document,'https://cdn-ru.bitrix24.ru/b2399491/crm/site_button/loader_3_q6v4tx.js');
+                                        </script>`,
+                                }}
+                            />
+                        </>
                     )}
                     <Main />
                     <NextScript />

@@ -1,31 +1,42 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import nextConnect from 'next-connect';
 import multer from 'multer';
 import nodemailer from 'nodemailer';
-import { promises as fs } from 'fs';
 
 const upload = multer({
-    storage: multer.diskStorage({
-        destination: './public/uploads',
-        filename: (req, file, cb) => cb(null, file.originalname),
-    }),
-});
-
-const apiRoute = nextConnect({
-    onNoMatch(req: NextApiRequest, res: NextApiResponse) {
-        res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
-    },
+    storage: multer.memoryStorage(),
 });
 
 const uploadMiddleware = upload.array('theFiles');
 
-apiRoute.use(uploadMiddleware);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const runMiddleware = (req: NextApiRequest, res: NextApiResponse, fn: any) => {
+    return new Promise((resolve, reject) => {
+        fn(req, res, (result: unknown) => {
+            if (result instanceof Error) {
+                return reject(result);
+            }
+
+            return resolve(result);
+        });
+    });
+};
 
 interface Request extends NextApiRequest {
     files: Express.Multer.File[];
 }
 
-apiRoute.post(async (req: Request, res: NextApiResponse) => {
+type Body = {
+    email?: string;
+    name: string;
+    tel: string;
+    description?: string;
+};
+
+const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
+    await runMiddleware(req, res, uploadMiddleware);
+
+    const { email, name, tel, description } = req.body as Body;
+
     try {
         const transporter = nodemailer.createTransport({
             host: 'smtp.mail.ru',
@@ -42,25 +53,30 @@ apiRoute.post(async (req: Request, res: NextApiResponse) => {
         await transporter.sendMail({
             from: process.env.MAILRU_USER,
             to: process.env.MAILRU_USER,
-            replyTo: 'zakaz@pr-mebel.ru',
-            subject: 'TEST',
-            text: 'Hello world?',
-            html: '<b>Hello world?</b>',
+            replyTo: email || 'zakaz@pr-mebel.ru',
+            subject: `[ТЕСТ] Расчет | ${name} | ${tel}`,
+            html: `
+                <p><strong>Имя:</strong><br>${name}</p>
+                <p><strong>Телефон:</strong><br>${tel}</p>
+                ${email ? `<p><strong>Почта:</strong><br>${email}</p>` : ''}
+                ${
+                    description
+                        ? `<p><strong>Описание:</strong><br>${description}</p>`
+                        : ''
+                }
+            `,
             attachments: req.files.map((file) => ({
                 filename: file.filename,
-                path: file.path,
+                content: file.buffer,
+                contentType: file.mimetype,
             })),
         });
-
-        await Promise.all(req.files.map((file) => fs.unlink(file.path)));
-
-        console.log('finished');
     } catch (error) {
         res.status(500).json(error);
     }
-});
+};
 
-export default apiRoute;
+export default sendEmailV2;
 
 export const config = {
     api: {

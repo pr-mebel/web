@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import nextConnect from 'next-connect';
 import multer from 'multer';
 import nodemailer from 'nodemailer';
-import { unlink } from 'fs/promises';
+import { promises as fs } from 'fs';
 
 const upload = multer({
     storage: multer.diskStorage({
@@ -52,7 +52,7 @@ apiRoute.post(async (req: Request, res: NextApiResponse) => {
             })),
         });
 
-        await Promise.all(req.files.map((file) => unlink(file.path)));
+        await Promise.all(req.files.map((file) => fs.unlink(file.path)));
 
         console.log('finished');
     } catch (error) {

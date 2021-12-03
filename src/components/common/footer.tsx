@@ -1,9 +1,9 @@
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 import { Container, Typography, Grid, Hidden } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from '@/components/common';
 import { Instagram, Vkontakte, Facebook, LogoFooter } from '@/components';
-import { orderFormCtx } from '@/utils';
+import { useContactFormModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -101,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Footer: FC = () => {
     const classes = useStyles();
-    const orderForm = useContext(orderFormCtx);
+    const contactFormModal = useContactFormModal();
 
     return (
         <footer className={classes.root}>
@@ -296,7 +296,10 @@ export const Footer: FC = () => {
                     >
                         <div>
                             <Typography className={classes.columnTitle}>
-                                <Link asButton onClick={orderForm.onOpen}>
+                                <Link
+                                    asButton
+                                    onClick={contactFormModal.onOpen}
+                                >
                                     Связаться с нами
                                 </Link>
                             </Typography>
@@ -306,7 +309,7 @@ export const Footer: FC = () => {
                                         <Link
                                             asButton
                                             className={classes.listItem}
-                                            onClick={orderForm.onOpen}
+                                            onClick={contactFormModal.onOpen}
                                         >
                                             Заказать звонок
                                         </Link>
@@ -317,7 +320,7 @@ export const Footer: FC = () => {
                                         <Link
                                             asButton
                                             className={classes.listItem}
-                                            onClick={orderForm.onOpen}
+                                            onClick={contactFormModal.onOpen}
                                         >
                                             Получить проект
                                         </Link>
@@ -328,7 +331,7 @@ export const Footer: FC = () => {
                                         <Link
                                             asButton
                                             className={classes.listItem}
-                                            onClick={orderForm.onOpen}
+                                            onClick={contactFormModal.onOpen}
                                         >
                                             Вызвать дизайнера замерщика
                                         </Link>

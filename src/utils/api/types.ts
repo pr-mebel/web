@@ -21,9 +21,7 @@ export type SendEmailParams = {
     name: string;
     tel: string;
     description?: string;
-    files?: {
-        name: string;
-    }[];
+    files?: File[];
 };
 
 export type UploadFilesParams = {

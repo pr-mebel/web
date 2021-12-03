@@ -1,19 +1,13 @@
-import React, { FC, useCallback, useContext, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { FC, useCallback, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Dialog, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PublishIcon from '@material-ui/icons/Publish';
 import ClearIcon from '@material-ui/icons/Clear';
-import { formatPhoneInput, getFileDeclination, orderFormCtx } from '@/utils';
-import {
-    openFormSubmitPopup,
-    saveForm,
-    submitForm,
-    uploadFiles,
-} from '@/redux';
+import { formatPhoneInput, getFileDeclination, sendEmail } from '@/utils';
 import { Input } from './input';
 import { SubmitButton } from './submit-button';
+import { useContactFormModal, useFormSubmitModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
     paperRoot: {
@@ -111,11 +105,9 @@ const useStyles = makeStyles((theme) => ({
 
 export const OrderFormPopup: FC = () => {
     const classes = useStyles();
-    const dispatch = useDispatch();
-    const orderForm = useContext(orderFormCtx);
-    const [fileNames, setFileNames] = useState<FileList>(
-        [] as unknown as FileList
-    );
+    const contactFormModal = useContactFormModal();
+    const formSubmitModal = useFormSubmitModal();
+    const [fileList, setFileList] = useState<FileList | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { register, handleSubmit } = useForm();
 
@@ -124,10 +116,10 @@ export const OrderFormPopup: FC = () => {
      */
     const handleClosePopup = useCallback(() => {
         if (fileInputRef.current) {
-            orderForm.onClose();
+            contactFormModal.onClose();
             fileInputRef.current.value = '';
         }
-    }, [fileInputRef, orderForm]);
+    }, [fileInputRef, contactFormModal]);
 
     /**
      * Имитирует клик по инпуту файлов
@@ -141,7 +133,7 @@ export const OrderFormPopup: FC = () => {
      */
     const handleFileUploadChange = useCallback(() => {
         if (fileInputRef.current?.files) {
-            setFileNames(fileInputRef.current.files);
+            setFileList(fileInputRef.current.files);
         }
     }, [fileInputRef]);
 
@@ -151,7 +143,7 @@ export const OrderFormPopup: FC = () => {
     const handleDeleteSelectedFiles = useCallback(() => {
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
-            setFileNames([] as unknown as FileList);
+            setFileList([] as unknown as FileList);
         }
     }, [fileInputRef]);
 
@@ -160,23 +152,19 @@ export const OrderFormPopup: FC = () => {
      */
     const onSubmit = useCallback(
         (data) => {
-            orderForm.onClose();
-            dispatch(saveForm(data));
-            if (fileNames.length && fileInputRef.current) {
-                dispatch(uploadFiles(fileNames));
-                dispatch(openFormSubmitPopup());
-                fileInputRef.current.value = '';
-                setFileNames([] as unknown as FileList);
-            } else {
-                dispatch(submitForm());
-            }
+            contactFormModal.onClose();
+            sendEmail({
+                ...data,
+                files: [...(fileList || [])],
+            });
+            formSubmitModal.onOpen();
         },
-        [fileNames, fileInputRef, dispatch, orderForm]
+        [fileList, contactFormModal, formSubmitModal]
     );
 
     return (
         <Dialog
-            open={orderForm.isOpen}
+            open={contactFormModal.isOpen}
             onClose={handleClosePopup}
             scroll="body"
             fullWidth
@@ -250,13 +238,14 @@ export const OrderFormPopup: FC = () => {
                             required
                         />
                         <Input
-                            inputRef={register}
+                            ref={register}
                             name="description"
+                            placeholder="Описание"
+                            type="text"
                             fullWidth
                             multiline
                             rows={5}
                             required
-                            placeholder="Описание"
                         />
                         <input
                             type="file"
@@ -281,7 +270,7 @@ export const OrderFormPopup: FC = () => {
                                 <PublishIcon className={classes.icon} />
                                 <Typography>Прикрепить эскизы</Typography>
                             </Grid>
-                            {!!fileNames.length && (
+                            {!!fileList?.length && (
                                 <Grid
                                     item
                                     xs={12}
@@ -293,9 +282,9 @@ export const OrderFormPopup: FC = () => {
                                         className={classes.fileInputText}
                                     >
                                         {`${
-                                            fileNames.length
+                                            fileList.length
                                         }\xA0${getFileDeclination(
-                                            fileNames.length
+                                            fileList.length
                                         )}`}
                                         <ClearIcon
                                             className={classes.deleteFilesIcon}

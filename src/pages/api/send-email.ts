@@ -6,7 +6,7 @@ const upload = multer({
     storage: multer.memoryStorage(),
 });
 
-const uploadMiddleware = upload.array('theFiles');
+const uploadMiddleware = upload.array('files');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const runMiddleware = (req: NextApiRequest, res: NextApiResponse, fn: any) => {

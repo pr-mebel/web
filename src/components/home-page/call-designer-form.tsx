@@ -2,10 +2,9 @@ import React, { FC, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Container } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { saveForm, submitForm } from '@/redux';
 import { SubmitButton, Input } from '@/components';
-import { formatPhoneInput } from '@/utils';
+import { formatPhoneInput, sendEmail } from '@/utils';
+import { useFormSubmitModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const CallDesignerForm: FC = () => {
     const classes = useStyles();
-    const dispatch = useDispatch();
+    const formSubmitModal = useFormSubmitModal();
     const { register, handleSubmit, reset } = useForm();
 
     /**
@@ -40,11 +39,14 @@ export const CallDesignerForm: FC = () => {
      */
     const onSubmit = useCallback(
         (data) => {
-            dispatch(saveForm(data));
-            dispatch(submitForm());
+            sendEmail({
+                ...data,
+                files: [],
+            });
+            formSubmitModal.onOpen();
             reset();
         },
-        [reset, dispatch]
+        [reset, formSubmitModal]
     );
 
     return (

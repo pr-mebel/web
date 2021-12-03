@@ -26,8 +26,21 @@ export const fetchCatalogByFilter = (
         page,
     });
 
-export const sendEmail = (params: SendEmailParams): Promise<void> =>
-    axios.post('/api/send-email', params);
+export const sendEmail = (params: SendEmailParams): Promise<void> => {
+    const formData = new FormData();
+
+    formData.append('name', params.name);
+    formData.append('tel', params.tel);
+    formData.append('email', params.email || '');
+    formData.append('description', params.description || '');
+    params.files?.forEach((file) => {
+        formData.append('files', file);
+    });
+
+    return axios.post('/api/send-email', formData, {
+        headers: { 'content-type': 'multipart/form-data' },
+    });
+};
 
 export const verifyPhone = (params: { phone: string }): Promise<void> =>
     axios.post('/api/verify-phone', params);

@@ -1,14 +1,13 @@
 import React, { FC, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography, Grid, Hidden } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import Image from 'next/image';
-import { submitForm, saveForm } from '@/redux';
 import { BlockTitle, SubmitButton, Input } from '@/components';
 
 import bgImg from 'public/images/home-page/questions-form/1.jpg';
-import { formatPhoneInput } from '@/utils';
+import { formatPhoneInput, sendEmail } from '@/utils';
+import { useFormSubmitModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -54,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const QuestionsForm: FC = () => {
     const classes = useStyles();
-    const dispatch = useDispatch();
+    const formSubmitModal = useFormSubmitModal();
     const { register, handleSubmit, reset } = useForm();
 
     /**
@@ -62,11 +61,14 @@ export const QuestionsForm: FC = () => {
      */
     const onSubmit = useCallback(
         (data) => {
-            dispatch(saveForm(data));
-            dispatch(submitForm());
+            sendEmail({
+                ...data,
+                files: [],
+            });
+            formSubmitModal.onOpen();
             reset();
         },
-        [reset, dispatch]
+        [reset, formSubmitModal]
     );
 
     return (

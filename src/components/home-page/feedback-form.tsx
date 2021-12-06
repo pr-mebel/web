@@ -5,7 +5,8 @@ import { Container, Grid, Typography, Hidden } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import PublishIcon from '@material-ui/icons/Publish';
 import ClearIcon from '@material-ui/icons/Clear';
-import { formatPhoneInput, getFileDeclination, sendEmail } from '@/utils';
+import { formatPhoneInput, getFileDeclination } from '@/utils';
+import { sendEmail } from '@/api';
 import { SubmitButton, Input } from '@/components';
 import { useFormSubmitModal } from '@/hooks';
 

@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { gql } from '@apollo/client';
-import { client } from '@/utils/client';
+import { client } from '@/api/client';
 import { isVercelEnvDev } from '@/utils';
 
 const FAQEntityID = '50kulGjR4KrEMHAomWqIgM';

@@ -6,7 +6,8 @@ import Image from 'next/image';
 import { BlockTitle, SubmitButton, Input } from '@/components';
 
 import bgImg from 'public/images/home-page/questions-form/1.jpg';
-import { formatPhoneInput, sendEmail } from '@/utils';
+import { formatPhoneInput } from '@/utils';
+import { sendEmail } from '@/api';
 import { useFormSubmitModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({

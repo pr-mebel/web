@@ -11,7 +11,7 @@ import {
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { BlockTitle, MainButton } from '@/components/common';
 import { useRequest } from 'ahooks';
-import { fetchFAQ } from '@/utils';
+import { fetchFAQ } from '@/api';
 
 const useStyles = makeStyles((theme) => ({
     listContainer: {

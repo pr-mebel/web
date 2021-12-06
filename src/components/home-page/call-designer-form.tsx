@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Container } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { SubmitButton, Input } from '@/components';
-import { formatPhoneInput, sendEmail } from '@/utils';
+import { formatPhoneInput } from '@/utils';
+import { sendEmail } from '@/api';
 import { useFormSubmitModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({

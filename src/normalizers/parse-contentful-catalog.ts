@@ -1,6 +1,6 @@
 import { SectionCollection, Collection } from '@/entities';
 import { ApolloQueryResult } from '@apollo/client';
-import { CatalogResponse } from '@/utils/api/types';
+import { CatalogResponse } from '@/api/types';
 
 const checkIfTypenameisASection = (
     data: SectionCollection | Collection

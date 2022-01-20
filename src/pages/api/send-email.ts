@@ -1,90 +1,87 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { storage, firestore } from '@/lib';
+import multer from 'multer';
+import nodemailer from 'nodemailer';
 
-const messageBuilder = ({
-    email,
-    name,
-    tel,
-    description,
-    attachments,
-}: {
-    email?: string;
-    name: string;
-    tel: string;
-    description?: string;
-    attachments?: {
-        filename: unknown;
-        path: unknown;
-    }[];
-}) => ({
-    to: 'zakaz@pr-mebel.com',
-    replyTo: email || 'zakaz@pr-mebel.com',
-    message: {
-        subject: `Расчет | ${name} | ${tel}`,
-        html: `
-            <p><strong>Имя:</strong><br>${name}</p>
-            <p><strong>Телефон:</strong><br>${tel}</p>
-            ${email ? `<p><strong>Почта:</strong><br>${email}</p>` : ''}
-            ${
-                description
-                    ? `<p><strong>Описание:</strong><br>${description}</p>`
-                    : ''
-            }
-        `,
-        attachments,
-    },
+const upload = multer({
+    storage: multer.memoryStorage(),
 });
+
+const uploadMiddleware = upload.array('files');
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const runMiddleware = (req: NextApiRequest, res: NextApiResponse, fn: any) => {
+    return new Promise((resolve, reject) => {
+        fn(req, res, (result: unknown) => {
+            if (result instanceof Error) {
+                return reject(result);
+            }
+
+            return resolve(result);
+        });
+    });
+};
+
+interface Request extends NextApiRequest {
+    files: Express.Multer.File[];
+}
 
 type Body = {
     email?: string;
     name: string;
     tel: string;
     description?: string;
-    files?: FileList;
 };
 
-const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
-    const { email, name, tel, description, files } = req.body as Body;
-    const storageRef = storage().ref();
+const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
+    await runMiddleware(req, res, uploadMiddleware);
 
-    if (files) {
-        const refs = [...files].map(
-            (file) =>
-                storageRef.child(file.name).getDownloadURL() as Promise<string>
-        );
+    const { email, name, tel, description } = req.body as Body;
 
-        await Promise.all(refs).then(async (fileLinks) => {
-            const attachments = fileLinks.map((fileLink, i) => ({
-                filename: [...files][i].name,
-                path: fileLink,
-            }));
-
-            await firestore()
-                .collection('mail')
-                .add(
-                    messageBuilder({
-                        email,
-                        name,
-                        tel,
-                        description,
-                        attachments,
-                    })
-                )
-                .then(() => res.status(200));
+    try {
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.mail.ru',
+            port: 465,
+            secure: true,
+            auth: {
+                user: 'zakaz@pr-mebel.ru',
+                pass: 'nobiele000',
+            },
         });
-    } else {
-        await firestore()
-            .collection('mail')
-            .add(
-                messageBuilder({
-                    email,
-                    name,
-                    tel,
-                    description,
-                })
-            )
-            .then(() => res.json(200));
+
+        const message = await transporter.sendMail({
+            from: 'zakaz@pr-mebel.ru',
+            to: 'zakaz@pr-mebel.ru',
+            replyTo: email || 'zakaz@pr-mebel.ru',
+            subject: `[ТЕСТ] Расчет | ${name} | ${tel}`,
+            html: `
+                <p><strong>Имя:</strong><br>${name}</p>
+                <p><strong>Телефон:</strong><br>${tel}</p>
+                ${email ? `<p><strong>Почта:</strong><br>${email}</p>` : ''}
+                ${
+                    description
+                        ? `<p><strong>Описание:</strong><br>${description}</p>`
+                        : ''
+                }
+            `,
+            attachments: req.files.map((file) => ({
+                filename: file.filename,
+                content: file.buffer,
+                contentType: file.mimetype,
+            })),
+        });
+
+        console.log(message);
+
+        res.status(200).json({ data: 'success' });
+    } catch (error) {
+        res.status(500).json(error);
     }
 };
 
-export default sendEmail;
+export default sendEmailV2;
+
+export const config = {
+    api: {
+        bodyParser: false,
+    },
+};

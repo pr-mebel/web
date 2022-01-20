@@ -15,13 +15,13 @@ const imgAdd11 = '/images/home-page/wardrobe-left/11.jpg';
 
 export const TABS = addIdsToArrayOfObjects([
     {
-        title: 'Однотонный',
+        title: 'Кобминированный с Alcantara',
     },
     {
         title: 'Комбинированный',
     },
     {
-        title: 'Кобминированный с Alcantara',
+        title: 'Однотонный',
     },
 ]);
 

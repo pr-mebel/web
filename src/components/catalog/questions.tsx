@@ -1,18 +1,13 @@
 import React, { FC, useCallback, useRef, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography, Grid, Hidden } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import {
-    saveForm,
-    submitForm,
-    uploadFiles,
-    openFormSubmitPopup,
-} from '@/redux';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
+import { sendEmail } from '@/api';
 import PublishIcon from '@material-ui/icons/Publish';
 import ClearIcon from '@material-ui/icons/Clear';
 import { BlockTitle, SubmitButton, Input } from '@/components';
+import { useFormSubmitModal } from '@/hooks';
 
 const useStyles = makeStyles({
     root: {
@@ -86,11 +81,9 @@ const useStyles = makeStyles({
 
 export const Questions: FC = () => {
     const classes = useStyles();
-    const dispatch = useDispatch();
+    const formSubmitModal = useFormSubmitModal();
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const [fileNames, setFileNames] = useState<FileList>(
-        [] as unknown as FileList
-    );
+    const [fileList, setFileList] = useState<FileList | null>(null);
     const { register, handleSubmit, reset } = useForm();
 
     /**
@@ -105,7 +98,7 @@ export const Questions: FC = () => {
      */
     const handleFileUploadChange = useCallback(() => {
         if (fileInputRef.current?.files) {
-            setFileNames(fileInputRef.current.files);
+            setFileList(fileInputRef.current.files);
         }
     }, [fileInputRef]);
 
@@ -115,7 +108,7 @@ export const Questions: FC = () => {
     const handleDeleteSelectedFiles = useCallback(() => {
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
-            setFileNames([] as unknown as FileList);
+            setFileList(null);
         }
     }, []);
 
@@ -124,19 +117,14 @@ export const Questions: FC = () => {
      */
     const onSubmit = useCallback(
         (data) => {
-            dispatch(saveForm(data));
-            dispatch(submitForm());
-            if (fileNames.length && fileInputRef.current) {
-                dispatch(uploadFiles(fileNames));
-                dispatch(openFormSubmitPopup());
-                fileInputRef.current.value = '';
-                setFileNames([] as unknown as FileList);
-            } else {
-                dispatch(submitForm());
-            }
+            sendEmail({
+                ...data,
+                files: [...(fileList || [])],
+            });
+            formSubmitModal.onOpen();
             reset();
         },
-        [fileNames, reset, dispatch]
+        [fileList, reset, formSubmitModal]
     );
 
     return (
@@ -260,7 +248,7 @@ export const Questions: FC = () => {
                                         Прикрепить эскизы
                                     </Typography>
                                 </Grid>
-                                {!!fileNames.length && (
+                                {!!fileList?.length && (
                                     <Grid
                                         item
                                         xs={12}
@@ -272,9 +260,9 @@ export const Questions: FC = () => {
                                             className={classes.fileInputText}
                                         >
                                             {`${
-                                                fileNames.length
+                                                fileList.length
                                             }\xA0${getFileDeclination(
-                                                fileNames.length
+                                                fileList.length
                                             )}`}
                                             <ClearIcon
                                                 className={

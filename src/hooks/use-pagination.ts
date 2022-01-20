@@ -1,12 +1,26 @@
-import { useState, useCallback } from 'react';
+import { useInterval } from '@/utils';
+import { useState, useCallback, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
 
 type UsePaginationParams = {
     total: number;
+    changePageIntervalTime?: number;
+    resetIntervalTime?: number;
+    resetIntervalOnChange?: boolean;
+    onBeforeNext?: (...arg0: unknown[]) => unknown;
+    onBeforePrev?: (...arg0: unknown[]) => unknown;
 };
 
-export const usePagination = ({ total }: UsePaginationParams) => {
+export const usePagination = ({
+    total,
+    resetIntervalTime,
+    changePageIntervalTime,
+    resetIntervalOnChange,
+    onBeforeNext,
+    onBeforePrev,
+}: UsePaginationParams) => {
     const [activePage, setActivePage] = useState(0);
+    const [triggered, setTriggered] = useState(false);
 
     const handleReset = useCallback(() => {
         setActivePage(0);
@@ -17,6 +31,8 @@ export const usePagination = ({ total }: UsePaginationParams) => {
     }, []);
 
     const handleNextPage = useCallback(() => {
+        setTriggered(true);
+        onBeforeNext?.();
         setActivePage((prev) => {
             if (prev === total) {
                 return 0;
@@ -24,9 +40,11 @@ export const usePagination = ({ total }: UsePaginationParams) => {
 
             return prev + 1;
         });
-    }, [total]);
+    }, [total, onBeforeNext]);
 
     const handlePrevPage = useCallback(() => {
+        setTriggered(true);
+        onBeforePrev?.();
         setActivePage((prev) => {
             if (prev === 0) {
                 return total;
@@ -34,7 +52,16 @@ export const usePagination = ({ total }: UsePaginationParams) => {
 
             return prev - 1;
         });
-    }, [total]);
+    }, [total, onBeforePrev]);
+
+    /**
+     * Крутит карусель
+     */
+    const { pause, unpause, reset } = useInterval(
+        handleNextPage,
+        changePageIntervalTime ?? null,
+        resetIntervalTime
+    );
 
     const handlers = useSwipeable({
         onSwipedLeft: () => handleNextPage(),
@@ -42,9 +69,23 @@ export const usePagination = ({ total }: UsePaginationParams) => {
         preventDefaultTouchmoveEvent: true,
     });
 
+    useEffect(() => {
+        if (triggered) {
+            setTriggered(false);
+            if (resetIntervalOnChange) {
+                reset();
+            }
+        }
+    }, [triggered, resetIntervalOnChange, reset]);
+
     return {
         current: activePage,
         swipableHandlers: handlers,
+        interval: {
+            pause,
+            unpause,
+            reset,
+        },
         onSet: handleSet,
         onReset: handleReset,
         onNext: handleNextPage,

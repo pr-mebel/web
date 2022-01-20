@@ -1,6 +1,6 @@
-import React, { FC, useCallback, useContext } from 'react';
+import React, { FC, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { orderFormCtx } from '@/utils';
+import { useContactFormModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,7 +42,7 @@ type Props = {
 
 export const MainButton: FC<Props> = ({ disabled, children, onClick }) => {
     const classes = useStyles();
-    const orderForm = useContext(orderFormCtx);
+    const contactFormModal = useContactFormModal();
 
     /**
      * Обработчик клика по кнопке
@@ -51,9 +51,9 @@ export const MainButton: FC<Props> = ({ disabled, children, onClick }) => {
         if (onClick) {
             onClick();
         } else {
-            orderForm.onOpen();
+            contactFormModal.onOpen();
         }
-    }, [orderForm, onClick]);
+    }, [contactFormModal, onClick]);
 
     return (
         <button

@@ -1,4 +1,5 @@
-import { checkIfNameAndValueAreKnown, fetchCatalogByFilter } from '@/utils';
+import { checkIfNameAndValueAreKnown } from '@/utils';
+import { fetchCatalogByFilter } from '@/api';
 import { useRequest } from 'ahooks';
 import { Filter, FilterField, FilterValue, Item, SectionID } from '@/entities';
 import { useCallback, useEffect, useMemo, useState } from 'react';

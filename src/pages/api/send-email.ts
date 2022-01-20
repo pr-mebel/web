@@ -43,16 +43,14 @@ const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
             port: 465,
             secure: true,
             auth: {
-                user: process.env.MAILRU_USER,
-                pass: process.env.MAILRU_PASS,
+                user: 'zakaz@pr-mebel.ru',
+                pass: 'nobiele000',
             },
         });
 
-        res.status(200).json({ data: 'success' });
-
-        await transporter.sendMail({
-            from: process.env.MAILRU_USER,
-            to: process.env.MAILRU_USER,
+        const message = await transporter.sendMail({
+            from: 'zakaz@pr-mebel.ru',
+            to: 'zakaz@pr-mebel.ru',
             replyTo: email || 'zakaz@pr-mebel.ru',
             subject: `[ТЕСТ] Расчет | ${name} | ${tel}`,
             html: `
@@ -71,6 +69,10 @@ const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
                 contentType: file.mimetype,
             })),
         });
+
+        console.log(message);
+
+        res.status(200).json({ data: 'success' });
     } catch (error) {
         res.status(500).json(error);
     }

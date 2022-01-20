@@ -6,7 +6,8 @@ import { useRef, useCallback, useEffect, useState } from 'react';
  */
 export const useInterval = (
     callback: (...args: unknown[]) => unknown,
-    delay: number | null
+    delay: number | null,
+    resetIntervalTime = 0
 ) => {
     const savedCallback = useRef<typeof callback>(noop);
     const intervalId = useRef<NodeJS.Timeout | null>(null);
@@ -25,6 +26,12 @@ export const useInterval = (
             clearInterval(intervalId.current);
         }
     }, [intervalId]);
+
+    const reset = useCallback(() => {
+        pause();
+
+        setTimeout(unpause, resetIntervalTime);
+    }, [pause, unpause, resetIntervalTime]);
 
     // Remember the latest function.
     useEffect(() => {
@@ -49,5 +56,6 @@ export const useInterval = (
     return {
         pause,
         unpause,
+        reset,
     };
 };

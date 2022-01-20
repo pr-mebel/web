@@ -4,34 +4,12 @@ import { Typography } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { LoadingBackground } from '@/components/common';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         paddingTop: '66.66%',
         position: 'relative',
         overflow: 'hidden',
         cursor: 'pointer',
-        '&:hover $tooltip': {
-            transform: 'translateY(0)',
-        },
-        '&:hover $img': {
-            transform: 'scale(1.1)',
-        },
-        '&:hover': {
-            '&::after': {
-                background: 'rgba(0, 0, 0, .3)',
-            },
-        },
-        '&::after': {
-            top: '0',
-            left: '0',
-            width: '100%',
-            height: '100%',
-            content: '""',
-            zIndex: '20',
-            position: 'absolute',
-            background: 'rgba(0,0,0,0)',
-            transition: 'background .3s',
-        },
     },
     img: {
         position: 'absolute',
@@ -59,6 +37,32 @@ const useStyles = makeStyles(() => ({
         color: 'white',
         bottom: '5px',
         right: '5px',
+    },
+    [theme.breakpoints.up('xs')]: {
+        root: {
+            '&:hover $tooltip': {
+                transform: 'translateY(0)',
+            },
+            '&:hover $img': {
+                transform: 'scale(1.1)',
+            },
+            '&:hover': {
+                '&::after': {
+                    background: 'rgba(0, 0, 0, .3)',
+                },
+            },
+            '&::after': {
+                top: '0',
+                left: '0',
+                width: '100%',
+                height: '100%',
+                content: '""',
+                zIndex: '20',
+                position: 'absolute',
+                background: 'rgba(0,0,0,0)',
+                transition: 'background .3s',
+            },
+        },
     },
 }));
 

@@ -1,10 +1,8 @@
-import React, { FC, useCallback, useEffect, useMemo } from 'react';
+import React, { FC, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Dialog, Grid, Typography, CircularProgress } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
-import { submitForm, closeFormSubmitPopup } from '@/redux';
+import { Dialog, Grid, Typography } from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
-import { getFormState } from '@/selectors';
+import { useFormSubmitModal } from '@/hooks';
 
 const useStyles = makeStyles({
     root: {
@@ -44,67 +42,33 @@ const useStyles = makeStyles({
 
 export const FormSubmitPopup: FC = () => {
     const classes = useStyles();
-    const dispatch = useDispatch();
-    const { files, isOpen } = useSelector(getFormState);
+    const formSubmitModal = useFormSubmitModal();
 
-    /**
-     * Флаг, показывающий, что все выбранные файлы загружены
-     */
-    const allUploaded = useMemo(
-        () => files.every((file) => file.progress === 100) || !files.length,
-        [files]
-    );
-
-    /**
-     * Процент полностью загруженных файлов
-     */
-    const percentageOfUploaded = useMemo(
-        () =>
-            (files.reduce((acc, curr) => {
-                if (curr.progress === 100) {
-                    return acc + 1;
-                }
-
-                return acc;
-            }, 0) /
-                files.length) *
-            100,
-        [files]
-    );
-
-    const handleClose = useCallback(() => {
-        dispatch(closeFormSubmitPopup());
-    }, [dispatch]);
-
-    /**
-     * Отправляет форму после того как все файлы загружены
-     */
     useEffect(() => {
-        if (allUploaded && files.length) {
-            dispatch(submitForm());
+        if (formSubmitModal.isOpen) {
+            setTimeout(() => formSubmitModal.onClose(), 5000);
         }
-    }, [allUploaded, files, dispatch]);
+    }, [formSubmitModal]);
 
     return (
-        <Dialog open={isOpen} onClose={handleClose} fullWidth maxWidth="sm">
+        <Dialog
+            open={formSubmitModal.isOpen}
+            onClose={formSubmitModal.onClose}
+            fullWidth
+            maxWidth="sm"
+        >
             <div className={classes.root}>
                 <ClearIcon
                     className={classes.closeIcon}
-                    onClick={handleClose}
+                    onClick={formSubmitModal.onClose}
                 />
                 <Typography variant="body1" align="center" gutterBottom>
-                    {!allUploaded ? (
-                        'Загрузка файлов'
-                    ) : (
-                        <>
-                            <img
-                                src="images/common/form-submit-popup/1.svg"
-                                alt="Письмо отправлено"
-                                className={classes.icon}
-                            />
-                            <span>Письмо отправлено</span>
-                        </>
-                    )}
+                    <img
+                        src="images/common/form-submit-popup/1.svg"
+                        alt="Письмо отправлено"
+                        className={classes.icon}
+                    />
+                    <span>Письмо отправлено</span>
                 </Typography>
                 <Grid
                     container
@@ -112,27 +76,16 @@ export const FormSubmitPopup: FC = () => {
                     alignItems="center"
                     className={classes.container}
                 >
-                    {!allUploaded ? (
-                        <CircularProgress
-                            size={80}
-                            variant="static"
-                            value={percentageOfUploaded}
-                        />
-                    ) : (
-                        <Grid item xs={12} className={classes.textContainer}>
-                            <Typography
-                                align="center"
-                                className={classes.textMain}
-                            >
-                                Спасибо за обращение!
-                            </Typography>
-                            <Typography align="center">
-                                Наши менеджеры обязательно
-                                <br />
-                                свяжутся с Вами в блажйшее время.
-                            </Typography>
-                        </Grid>
-                    )}
+                    <Grid item xs={12} className={classes.textContainer}>
+                        <Typography align="center" className={classes.textMain}>
+                            Спасибо за обращение!
+                        </Typography>
+                        <Typography align="center">
+                            Наши менеджеры обязательно
+                            <br />
+                            свяжутся с Вами в блажйшее время.
+                        </Typography>
+                    </Grid>
                 </Grid>
             </div>
         </Dialog>

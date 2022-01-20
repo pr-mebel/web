@@ -3,21 +3,16 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Container, Grid, Typography, Hidden } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import {
-    saveForm,
-    submitForm,
-    openFormSubmitPopup,
-    uploadFiles,
-} from '@/redux';
 import PublishIcon from '@material-ui/icons/Publish';
 import ClearIcon from '@material-ui/icons/Clear';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
+import { sendEmail } from '@/api';
 import { SubmitButton, Input } from '@/components';
+import { useFormSubmitModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        background: theme.palette.grey[900],
+        background: '#303030',
         padding: '63px 0',
     },
     text: {
@@ -87,13 +82,11 @@ const useStyles = makeStyles((theme) => ({
 export const FeedbackForm: FC = () => {
     const classes = useStyles();
     const theme = useTheme();
-    const dispatch = useDispatch();
+    const formSubmitModal = useFormSubmitModal();
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { register, handleSubmit, reset } = useForm();
-    const [fileNames, setFileNames] = useState<FileList>(
-        [] as unknown as FileList
-    );
+    const [fileList, setFileList] = useState<FileList | null>(null);
 
     /**
      * Имитирует клик на инпут файла
@@ -107,7 +100,7 @@ export const FeedbackForm: FC = () => {
      */
     const handleFileUploadChange = useCallback(() => {
         if (fileInputRef.current?.files) {
-            setFileNames(fileInputRef.current.files);
+            setFileList(fileInputRef.current.files);
         }
     }, [fileInputRef]);
 
@@ -117,7 +110,7 @@ export const FeedbackForm: FC = () => {
     const handleClearFiles = useCallback(() => {
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
-            setFileNames([] as unknown as FileList);
+            setFileList(null);
         }
     }, [fileInputRef]);
 
@@ -126,18 +119,14 @@ export const FeedbackForm: FC = () => {
      */
     const onSubmit = useCallback(
         (data) => {
-            dispatch(saveForm(data));
-            if (fileNames.length && fileInputRef.current) {
-                dispatch(uploadFiles(fileNames));
-                dispatch(openFormSubmitPopup());
-                fileInputRef.current.value = '';
-                setFileNames([] as unknown as FileList);
-            } else {
-                dispatch(submitForm());
-            }
+            sendEmail({
+                ...data,
+                files: [...(fileList || [])],
+            });
+            formSubmitModal.onOpen();
             reset();
         },
-        [reset, fileNames, fileInputRef, dispatch]
+        [reset, fileList, formSubmitModal]
     );
 
     return (
@@ -230,7 +219,7 @@ export const FeedbackForm: FC = () => {
                                 </div>
                             </Grid>
                             <Grid item xs={6}>
-                                {!!fileNames.length && (
+                                {!!fileList?.length && (
                                     <Grid
                                         item
                                         xs={12}
@@ -241,9 +230,9 @@ export const FeedbackForm: FC = () => {
                                             className={classes.fileInputText}
                                         >
                                             {`${
-                                                fileNames.length
+                                                fileList.length
                                             }\xA0${getFileDeclination(
-                                                fileNames.length
+                                                fileList.length
                                             )}`}
                                             <ClearIcon
                                                 className={

@@ -1,10 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import form from './reducers/form';
+import formSubmitModal from './slices/form-submit-modal';
+import contactFormModal from './slices/contact-form-modal';
 
 export const rootReducer = combineReducers({
-    form,
+    formSubmitModal,
+    contactFormModal,
 });
 
 export type State = ReturnType<typeof rootReducer>;
-
-export * from './reducers';

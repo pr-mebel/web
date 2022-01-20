@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect, useRef, FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import cn from 'classnames';
 import { Container } from '@material-ui/core';
-import { useInterval } from '@/utils';
 import { PAGES } from './constants';
 import { Page, Pagination } from './components';
 import { usePagination } from '@/hooks';
@@ -82,51 +81,24 @@ export const Carousel: FC = () => {
     const classes = useStyles();
     const rootRef = useRef<HTMLDivElement>(null);
 
-    const { current, onNext, onPrev, onSet, swipableHandlers } = usePagination({
-        total: PAGES.length - 1,
-    });
+    const { current, interval, onNext, onPrev, onSet, swipableHandlers } =
+        usePagination({
+            total: PAGES.length - 1,
+            changePageIntervalTime: 7000,
+            resetIntervalTime: 3000,
+            resetIntervalOnChange: true,
+        });
 
     const [windowWidth, setWindowWidth] = useState(0);
-
-    /**
-     * Крутит карусель
-     */
-    const { pause, unpause } = useInterval(onNext, 7000);
-
-    /**
-     * Перезапускает интервал прокрутки карусели
-     */
-    const resetInterval = useCallback(() => {
-        pause();
-
-        setTimeout(unpause, 10000);
-    }, [pause, unpause]);
-
-    /**
-     * Обработчик стрелочки назад
-     */
-    const handleClickPrev = useCallback(() => {
-        resetInterval();
-        onPrev();
-    }, [resetInterval, onPrev]);
-
-    /**
-     * Обработчик стрелочки вперед
-     */
-    const handleClickNext = useCallback(() => {
-        resetInterval();
-        onNext();
-    }, [resetInterval, onNext]);
 
     /**
      * Переключает слайд
      */
     const handleChangeSlide = useCallback(
         (value) => {
-            resetInterval();
             onSet(value);
         },
-        [resetInterval, onSet]
+        [onSet]
     );
 
     /**
@@ -154,9 +126,9 @@ export const Carousel: FC = () => {
     useEffect(() => {
         const handleVisibilityChange = () => {
             if (document.visibilityState === 'hidden') {
-                pause();
+                interval.pause();
             } else {
-                unpause();
+                interval.unpause();
             }
         };
 
@@ -168,7 +140,7 @@ export const Carousel: FC = () => {
                 handleVisibilityChange
             );
         };
-    }, [pause, unpause]);
+    }, [interval]);
 
     return (
         <div className={classes.root} ref={rootRef}>
@@ -179,7 +151,7 @@ export const Carousel: FC = () => {
                     classes.nav
                 )}
                 viewBox="0 0 14 24"
-                onClick={handleClickPrev}
+                onClick={onPrev}
             >
                 <path
                     d="M11.857 23.448a.807.807 0 0 0 .585.242.827.827 0 0 0 .585-1.41L2.746 12l10.28-10.28a.827.827 0 0 0-1.17-1.168L.994 11.416a.827.827 0 0 0 0 1.168l10.863 10.864z"
@@ -211,7 +183,7 @@ export const Carousel: FC = () => {
                     classes.nav
                 )}
                 viewBox="0 0 14 24"
-                onClick={handleClickNext}
+                onClick={onNext}
             >
                 <path
                     d="M2.143 23.448a.807.807 0 0 1-.585.242.827.827 0 0 1-.584-1.41L11.253 12 .973 1.72A.827.827 0 0 1 2.144.553l10.863 10.864a.827.827 0 0 1 0 1.168L2.143 23.449z"
@@ -227,7 +199,7 @@ export const Carousel: FC = () => {
                             classes.nav
                         )}
                         viewBox="0 0 14 24"
-                        onClick={handleClickPrev}
+                        onClick={onPrev}
                     >
                         <path
                             d="M11.857 23.448a.807.807 0 0 0 .585.242.827.827 0 0 0 .585-1.41L2.746 12l10.28-10.28a.827.827 0 0 0-1.17-1.168L.994 11.416a.827.827 0 0 0 0 1.168l10.863 10.864z"
@@ -246,7 +218,7 @@ export const Carousel: FC = () => {
                             classes.nav
                         )}
                         viewBox="0 0 14 24"
-                        onClick={handleClickNext}
+                        onClick={onNext}
                     >
                         <path
                             d="M2.143 23.448a.807.807 0 0 1-.585.242.827.827 0 0 1-.584-1.41L11.253 12 .973 1.72A.827.827 0 0 1 2.144.553l10.863 10.864a.827.827 0 0 1 0 1.168L2.143 23.449z"

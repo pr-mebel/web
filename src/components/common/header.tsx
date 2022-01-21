@@ -14,6 +14,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { Facebook, Vkontakte, Instagram, LogoHeader } from '@/components';
 import { Link } from './link';
 import { MainButton } from './main-button';
+import { useAnalytics } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -146,6 +147,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Header: FC = () => {
+    const analytics = useAnalytics();
     const classes = useStyles();
 
     const theme = useTheme();
@@ -323,6 +325,7 @@ export const Header: FC = () => {
                                     <Typography
                                         variant="body2"
                                         className={classes.text}
+                                        onClick={analytics.onHeaderPhoneClick}
                                     >
                                         <Link to="tel:+74952780285" external>
                                             +7 (495) 278-02-85
@@ -395,7 +398,11 @@ export const Header: FC = () => {
                             </Link>
                         </div>
                         <div>
-                            <Typography className={classes.text} align="center">
+                            <Typography
+                                className={classes.text}
+                                align="center"
+                                onClick={analytics.onHeaderPhoneClick}
+                            >
                                 <Link to="tel:+74952780285" external>
                                     +7 (495) 278-02-85
                                 </Link>
@@ -515,6 +522,7 @@ export const Header: FC = () => {
                                     variant="body2"
                                     className={classes.text}
                                     align="center"
+                                    onClick={analytics.onHeaderPhoneClick}
                                 >
                                     <Link to="tel:+74952780285" external>
                                         +7 (495) 278-02-85

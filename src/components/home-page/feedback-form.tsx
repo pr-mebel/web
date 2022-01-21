@@ -8,7 +8,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
 import { sendEmail } from '@/api';
 import { SubmitButton, Input } from '@/components';
-import { useFormSubmitModal } from '@/hooks';
+import { useAnalytics, useFormSubmitModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -80,6 +80,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const FeedbackForm: FC = () => {
+    const analytics = useAnalytics();
     const classes = useStyles();
     const theme = useTheme();
     const formSubmitModal = useFormSubmitModal();
@@ -123,10 +124,11 @@ export const FeedbackForm: FC = () => {
                 ...data,
                 files: [...(fileList || [])],
             });
+            analytics.onSendEmail('proekt');
             formSubmitModal.onOpen();
             reset();
         },
-        [reset, fileList, formSubmitModal]
+        [reset, fileList, formSubmitModal, analytics]
     );
 
     return (

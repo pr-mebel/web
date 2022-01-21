@@ -3,7 +3,7 @@ import { Container, Typography, Grid, Hidden } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from '@/components/common';
 import { Instagram, Vkontakte, Facebook, LogoFooter } from '@/components';
-import { useContactFormModal } from '@/hooks';
+import { useAnalytics, useContactFormModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -100,6 +100,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Footer: FC = () => {
+    const analytics = useAnalytics();
     const classes = useStyles();
     const contactFormModal = useContactFormModal();
 
@@ -353,7 +354,11 @@ export const Footer: FC = () => {
                 </Grid>
                 <Grid container alignItems="center" className={classes.social}>
                     <Grid item xs={12}>
-                        <Typography variant="body1" align="center">
+                        <Typography
+                            variant="body1"
+                            align="center"
+                            onClick={analytics.onFooterPhoneClick}
+                        >
                             <Link to="tel:+7(495)2780285" external>
                                 +7 (495) 278-02-85
                             </Link>

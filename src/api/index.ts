@@ -28,8 +28,6 @@ export const fetchCatalogByFilter = (
     });
 
 export const sendEmail = (params: SendEmailParams): Promise<void> => {
-    console.log('send-email');
-
     const formData = new FormData();
 
     formData.append('name', params.name);

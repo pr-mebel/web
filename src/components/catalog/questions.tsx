@@ -7,7 +7,7 @@ import { sendEmail } from '@/api';
 import PublishIcon from '@material-ui/icons/Publish';
 import ClearIcon from '@material-ui/icons/Clear';
 import { BlockTitle, SubmitButton, Input } from '@/components';
-import { useFormSubmitModal } from '@/hooks';
+import { useAnalytics, useFormSubmitModal } from '@/hooks';
 
 const useStyles = makeStyles({
     root: {
@@ -80,6 +80,7 @@ const useStyles = makeStyles({
 });
 
 export const Questions: FC = () => {
+    const analytics = useAnalytics();
     const classes = useStyles();
     const formSubmitModal = useFormSubmitModal();
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -121,10 +122,11 @@ export const Questions: FC = () => {
                 ...data,
                 files: [...(fileList || [])],
             });
+            analytics.onSendEmail('vopros_katalog');
             formSubmitModal.onOpen();
             reset();
         },
-        [fileList, reset, formSubmitModal]
+        [fileList, reset, formSubmitModal, analytics]
     );
 
     return (

@@ -8,7 +8,7 @@ import { formatPhoneInput, getFileDeclination } from '@/utils';
 import { sendEmail } from '@/api';
 import { Input } from './input';
 import { SubmitButton } from './submit-button';
-import { useContactFormModal, useFormSubmitModal } from '@/hooks';
+import { useAnalytics, useContactFormModal, useFormSubmitModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
     paperRoot: {
@@ -105,6 +105,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const OrderFormPopup: FC = () => {
+    const analytics = useAnalytics();
     const classes = useStyles();
     const contactFormModal = useContactFormModal();
     const formSubmitModal = useFormSubmitModal();
@@ -158,9 +159,11 @@ export const OrderFormPopup: FC = () => {
                 ...data,
                 files: [...(fileList || [])],
             });
+            analytics.onSendEmail('zakazat_modal');
+            analytics.onContactMeModalSubmitted();
             formSubmitModal.onOpen();
         },
-        [fileList, contactFormModal, formSubmitModal]
+        [fileList, contactFormModal, formSubmitModal, analytics]
     );
 
     return (

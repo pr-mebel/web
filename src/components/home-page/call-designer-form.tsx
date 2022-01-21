@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { SubmitButton, Input } from '@/components';
 import { formatPhoneInput } from '@/utils';
 import { sendEmail } from '@/api';
-import { useFormSubmitModal } from '@/hooks';
+import { useAnalytics, useFormSubmitModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const CallDesignerForm: FC = () => {
+    const analytics = useAnalytics();
     const classes = useStyles();
     const formSubmitModal = useFormSubmitModal();
     const { register, handleSubmit, reset } = useForm();
@@ -44,10 +45,11 @@ export const CallDesignerForm: FC = () => {
                 ...data,
                 files: [],
             });
+            analytics.onSendEmail('designer');
             formSubmitModal.onOpen();
             reset();
         },
-        [reset, formSubmitModal]
+        [reset, formSubmitModal, analytics]
     );
 
     return (

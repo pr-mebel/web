@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import cn from 'classnames';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -13,6 +13,8 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import MailIcon from '@material-ui/icons/Mail';
 import LocalParkingIcon from '@material-ui/icons/LocalParking';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
+import { useInView } from 'react-intersection-observer';
+import { useAnalytics } from '@/hooks';
 import { BlockTitle, Link } from '@/components/common';
 
 // TODO: Заменить на SVG
@@ -87,12 +89,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Map: FC = () => {
+    const analytics = useAnalytics();
     const classes = useStyles();
     const theme = useTheme();
     const isXsDown = useMediaQuery(theme.breakpoints.down('xs'));
+    const { ref, inView } = useInView({
+        triggerOnce: true,
+    });
+
+    useEffect(() => {
+        if (inView) {
+            analytics.onContactsInView();
+        }
+    }, [inView, analytics]);
 
     return (
-        <Container>
+        <Container innerRef={ref}>
             <BlockTitle>
                 <Typography variant="h4">Приезжайте к нам в гости!</Typography>
             </BlockTitle>
@@ -115,7 +127,10 @@ export const Map: FC = () => {
                         </li>
                         <li className={classes.listItem}>
                             <PhoneIcon className={classes.icon} />
-                            <Typography variant="body2">
+                            <Typography
+                                variant="body2"
+                                onClick={analytics.onContactsPhoneClick}
+                            >
                                 <Link to="tel:+7(495)2780285" external>
                                     +7 (495) 278-02-85
                                 </Link>
@@ -123,7 +138,10 @@ export const Map: FC = () => {
                         </li>
                         <li className={classes.listItem}>
                             <MailIcon className={classes.icon} />
-                            <Typography variant="body2">
+                            <Typography
+                                variant="body2"
+                                onClick={analytics.onContactsMailClick}
+                            >
                                 E-mail:
                                 {'\xA0'}
                                 <Link
@@ -212,6 +230,7 @@ export const Map: FC = () => {
                         <Typography
                             variant="body2"
                             className={classes.messageText}
+                            onClick={analytics.onContactsMailClick}
                         >
                             <Link to="mailto:zakaz@pr-mebel.ru" external>
                                 Написать письмо

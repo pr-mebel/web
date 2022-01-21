@@ -8,7 +8,7 @@ import { BlockTitle, SubmitButton, Input } from '@/components';
 import bgImg from 'public/images/home-page/questions-form/1.jpg';
 import { formatPhoneInput } from '@/utils';
 import { sendEmail } from '@/api';
-import { useFormSubmitModal } from '@/hooks';
+import { useAnalytics, useFormSubmitModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const QuestionsForm: FC = () => {
+    const analytics = useAnalytics();
     const classes = useStyles();
     const formSubmitModal = useFormSubmitModal();
     const { register, handleSubmit, reset } = useForm();
@@ -66,10 +67,11 @@ export const QuestionsForm: FC = () => {
                 ...data,
                 files: [],
             });
+            analytics.onSendEmail('vopros');
             formSubmitModal.onOpen();
             reset();
         },
-        [reset, formSubmitModal]
+        [reset, formSubmitModal, analytics]
     );
 
     return (

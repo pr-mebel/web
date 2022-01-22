@@ -1,5 +1,6 @@
-import React, { FC, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import React, { FC, useCallback } from 'react';
+
 import { useContactFormModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
@@ -56,12 +57,7 @@ export const MainButton: FC<Props> = ({ disabled, children, onClick }) => {
     }, [contactFormModal, onClick]);
 
     return (
-        <button
-            type="button"
-            disabled={!!disabled}
-            className={classes.root}
-            onClick={handleClick}
-        >
+        <button type="button" disabled={!!disabled} className={classes.root} onClick={handleClick}>
             {children}
         </button>
     );

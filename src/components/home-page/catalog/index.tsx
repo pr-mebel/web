@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Typography, Grid } from '@material-ui/core';
+import React, { FC } from 'react';
+
 import { BlockTitle, MainButton } from '../../common';
-import { CATALOG } from './constants';
 import { CatalogCard } from './components';
+import { CATALOG } from './constants';
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -40,11 +41,7 @@ export const Catalog: FC = () => {
                     </Grid>
                 ))}
             </Grid>
-            <Grid
-                container
-                justifyContent="center"
-                className={classes.buttonContainer}
-            >
+            <Grid container justifyContent="center" className={classes.buttonContainer}>
                 <Grid item xs={10} sm={6} md={4}>
                     <MainButton>Рассчитать стоимость</MainButton>
                 </Grid>

@@ -1,11 +1,9 @@
 import axios from 'axios';
+
 import { Item } from '@/entities';
-import {
-    FetchCatalogByFilterParams,
-    FetchFAQRespone,
-    SendEmailParams,
-} from './types';
+
 import { endpoints } from './endpoints';
+import { FetchCatalogByFilterParams, FetchFAQRespone, SendEmailParams } from './types';
 
 /**
  * Запрашивает из contentful CMS карточки по текущему фильтру
@@ -34,6 +32,7 @@ export const sendEmail = (params: SendEmailParams): Promise<void> => {
     formData.append('tel', params.tel);
     formData.append('email', params.email || '');
     formData.append('description', params.description || '');
+    formData.append('meta', JSON.stringify(params.meta) || '');
     params.files?.forEach((file) => {
         formData.append('files', file);
     });
@@ -43,5 +42,4 @@ export const sendEmail = (params: SendEmailParams): Promise<void> => {
     });
 };
 
-export const fetchFAQ = (): Promise<FetchFAQRespone> =>
-    axios.post(endpoints.getFaq);
+export const fetchFAQ = (): Promise<FetchFAQRespone> => axios.post(endpoints.getFaq);

@@ -1,16 +1,17 @@
-import React, { FC, useState, useCallback } from 'react';
-import cn from 'classnames';
+import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Typography, Grid } from '@material-ui/core';
+import cn from 'classnames';
 import Image from 'next/image';
-import { BlockTitle, MainButton, Pagination } from '@/components/common';
-import { WardrobeAdditionalBlock } from '../../wardrobe-additional-block';
-import { TABS, ADDITIONAL } from '../constants';
-
 import img1 from 'public/images/home-page/wardrobe-left/wardrobe-1.jpg';
 import img2 from 'public/images/home-page/wardrobe-left/wardrobe-2.jpg';
 import img3 from 'public/images/home-page/wardrobe-left/wardrobe-3.jpg';
+import React, { FC, useCallback, useState } from 'react';
+
+import { BlockTitle, MainButton, Pagination } from '@/components/common';
 import { usePagination } from '@/hooks';
+
+import { WardrobeAdditionalBlock } from '../../wardrobe-additional-block';
+import { ADDITIONAL, TABS } from '../constants';
 
 const useStyles = makeStyles((theme) => ({
     imgContainer: {
@@ -83,9 +84,7 @@ export const WardrobeLeftSmDown: FC = () => {
     return (
         <Container>
             <BlockTitle>
-                <Typography variant="h4">
-                    Комфорт и удобство, продуманное до&nbsp;мелочей
-                </Typography>
+                <Typography variant="h4">Комфорт и удобство, продуманное до&nbsp;мелочей</Typography>
             </BlockTitle>
             <Grid container justifyContent="center">
                 <Grid item xs>
@@ -105,19 +104,13 @@ export const WardrobeLeftSmDown: FC = () => {
                         ))}
                     </ul>
                 </Grid>
-                <Grid
-                    item
-                    xs={12}
-                    className={classes.imgContainer}
-                    {...swipableHandlers}
-                >
+                <Grid item xs={12} className={classes.imgContainer} {...swipableHandlers}>
                     <Image
                         src={img1}
                         layout="fill"
                         alt="Однотонный"
                         className={cn(classes.image, {
-                            [classes.selectedImage]:
-                                current === 0 && activeTabIndex === 0,
+                            [classes.selectedImage]: current === 0 && activeTabIndex === 0,
                         })}
                         placeholder="blur"
                     />
@@ -126,8 +119,7 @@ export const WardrobeLeftSmDown: FC = () => {
                         layout="fill"
                         alt="Комбинированный"
                         className={cn(classes.image, {
-                            [classes.selectedImage]:
-                                current === 0 && activeTabIndex === 1,
+                            [classes.selectedImage]: current === 0 && activeTabIndex === 1,
                         })}
                         placeholder="blur"
                     />
@@ -136,8 +128,7 @@ export const WardrobeLeftSmDown: FC = () => {
                         layout="fill"
                         alt="Кобминированный с Alcantara"
                         className={cn(classes.image, {
-                            [classes.selectedImage]:
-                                current === 0 && activeTabIndex === 2,
+                            [classes.selectedImage]: current === 0 && activeTabIndex === 2,
                         })}
                         placeholder="blur"
                     />
@@ -156,11 +147,7 @@ export const WardrobeLeftSmDown: FC = () => {
                     ))}
                 </Grid>
                 <Grid item xs={12}>
-                    <Pagination
-                        numberOfPages={ADDITIONAL.length + 1}
-                        activeIndex={current}
-                        onChange={onSet}
-                    />
+                    <Pagination numberOfPages={ADDITIONAL.length + 1} activeIndex={current} onChange={onSet} />
                 </Grid>
                 {current !== 0 ? (
                     <Grid item xs={10} className={classes.textBottom}>
@@ -172,20 +159,14 @@ export const WardrobeLeftSmDown: FC = () => {
                 ) : (
                     <Grid item xs={10} className={classes.textBottom}>
                         <Typography variant="body2">
-                            Мы&nbsp;разработали специальные решения для
-                            оптимизации хранения ваших вещей, которые позволяют
-                            сделать ежедневно пользование мебелью не&nbsp;только
-                            удобным и&nbsp;комфортным, но&nbsp;еще
-                            и&nbsp;приятным
+                            Мы&nbsp;разработали специальные решения для оптимизации хранения ваших вещей, которые
+                            позволяют сделать ежедневно пользование мебелью не&nbsp;только удобным и&nbsp;комфортным,
+                            но&nbsp;еще и&nbsp;приятным
                         </Typography>
                     </Grid>
                 )}
             </Grid>
-            <Grid
-                container
-                justifyContent="center"
-                className={classes.buttonContainer}
-            >
+            <Grid container justifyContent="center" className={classes.buttonContainer}>
                 <Grid item xs={10} sm={6} md={4}>
                     <MainButton>Рассчитать стоимость</MainButton>
                 </Grid>

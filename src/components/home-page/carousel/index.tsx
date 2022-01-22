@@ -1,10 +1,12 @@
-import React, { useState, useCallback, useEffect, useRef, FC } from 'react';
+import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import cn from 'classnames';
-import { Container } from '@material-ui/core';
-import { PAGES } from './constants';
-import { Page, Pagination } from './components';
+import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
+
 import { usePagination } from '@/hooks';
+
+import { Page, Pagination } from './components';
+import { PAGES } from './constants';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -81,13 +83,12 @@ export const Carousel: FC = () => {
     const classes = useStyles();
     const rootRef = useRef<HTMLDivElement>(null);
 
-    const { current, interval, onNext, onPrev, onSet, swipableHandlers } =
-        usePagination({
-            total: PAGES.length - 1,
-            changePageIntervalTime: 7000,
-            resetIntervalTime: 3000,
-            resetIntervalOnChange: true,
-        });
+    const { current, interval, onNext, onPrev, onSet, swipableHandlers } = usePagination({
+        total: PAGES.length - 1,
+        changePageIntervalTime: 7000,
+        resetIntervalTime: 3000,
+        resetIntervalOnChange: true,
+    });
 
     const [windowWidth, setWindowWidth] = useState(0);
 
@@ -135,21 +136,14 @@ export const Carousel: FC = () => {
         document.addEventListener('visibilitychange', handleVisibilityChange);
 
         return () => {
-            document.removeEventListener(
-                'visibilitychange',
-                handleVisibilityChange
-            );
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
         };
     }, [interval]);
 
     return (
         <div className={classes.root} ref={rootRef}>
             <svg
-                className={cn(
-                    classes.prevDesktop,
-                    classes.navDesktop,
-                    classes.nav
-                )}
+                className={cn(classes.prevDesktop, classes.navDesktop, classes.nav)}
                 viewBox="0 0 14 24"
                 onClick={onPrev}
             >
@@ -177,11 +171,7 @@ export const Carousel: FC = () => {
                 ))}
             </div>
             <svg
-                className={cn(
-                    classes.nextDesktop,
-                    classes.navDesktop,
-                    classes.nav
-                )}
+                className={cn(classes.nextDesktop, classes.navDesktop, classes.nav)}
                 viewBox="0 0 14 24"
                 onClick={onNext}
             >
@@ -193,11 +183,7 @@ export const Carousel: FC = () => {
             <div className={classes.paginationContainer}>
                 <Container className={classes.paginationInnerContainer}>
                     <svg
-                        className={cn(
-                            classes.prevMobile,
-                            classes.navMobile,
-                            classes.nav
-                        )}
+                        className={cn(classes.prevMobile, classes.navMobile, classes.nav)}
                         viewBox="0 0 14 24"
                         onClick={onPrev}
                     >
@@ -206,17 +192,9 @@ export const Carousel: FC = () => {
                             fill="#fff"
                         />
                     </svg>
-                    <Pagination
-                        currentPage={current}
-                        numberOfPages={PAGES.length}
-                        onChangeSlide={handleChangeSlide}
-                    />
+                    <Pagination currentPage={current} numberOfPages={PAGES.length} onChangeSlide={handleChangeSlide} />
                     <svg
-                        className={cn(
-                            classes.nextMobile,
-                            classes.navMobile,
-                            classes.nav
-                        )}
+                        className={cn(classes.nextMobile, classes.navMobile, classes.nav)}
                         viewBox="0 0 14 24"
                         onClick={onNext}
                     >

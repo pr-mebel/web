@@ -1,8 +1,7 @@
-import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Image from 'next/image';
-
 import img from 'public/images/common/shop-img/1.png';
+import React, { FC } from 'react';
 
 const useStyles = makeStyles({
     root: {
@@ -17,12 +16,7 @@ export const ShopImg: FC = () => {
 
     return (
         <div className={classes.root}>
-            <Image
-                src={img}
-                layout="fill"
-                alt="Изображение салона"
-                placeholder="blur"
-            />
+            <Image src={img} layout="fill" alt="Изображение салона" placeholder="blur" />
         </div>
     );
 };

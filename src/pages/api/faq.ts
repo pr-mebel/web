@@ -1,7 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { gql } from '@apollo/client';
+import type { NextApiRequest, NextApiResponse } from 'next';
+
 import { client } from '@/api/client';
-import { isVercelEnvDev } from '@/utils';
+import { isProduction } from '@/utils';
 
 const FAQEntityID = '50kulGjR4KrEMHAomWqIgM';
 
@@ -21,7 +22,7 @@ const faq = async (_: NextApiRequest, res: NextApiResponse) => {
         const resp = await client.query<FetchFAQRespone>({
             query: gql`
                 {
-                    faqList(id: "${FAQEntityID}", preview: ${isVercelEnvDev()}) {
+                    faqList(id: "${FAQEntityID}", preview: ${!isProduction()}) {
                         itemsCollection {
                             items {
                                 title

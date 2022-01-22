@@ -17,6 +17,5 @@ const formSubmitModalSlice = createSlice({
     },
 });
 
-export const { openFormSubmitModal, closeFormSubmitModal } =
-    formSubmitModalSlice.actions;
+export const { openFormSubmitModal, closeFormSubmitModal } = formSubmitModalSlice.actions;
 export default formSubmitModalSlice.reducer;

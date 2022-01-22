@@ -1,15 +1,10 @@
-import React, { FC, useCallback } from 'react';
-import cn from 'classnames';
+import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Grid } from '@material-ui/core';
-import {
-    SectionID,
-    StyleID,
-    DoorTypeID,
-    FilterField,
-    FilterValue,
-} from '@/entities';
+import cn from 'classnames';
+import React, { FC, useCallback } from 'react';
+
 import { filters as filterOptions } from '@/constants';
+import { DoorTypeID, FilterField, FilterValue, SectionID, StyleID } from '@/entities';
 
 const useStyles = makeStyles((theme) => ({
     option: {
@@ -75,42 +70,16 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
 
     return (
         <Grid container spacing={2} alignItems="flex-start">
-            {!(
-                filter.section === 'accessories' ||
-                filter.section === 'lightingSystems'
-            ) && (
-                <Grid
-                    item
-                    container
-                    xs={12}
-                    sm={filter.section === 'cupboard' ? 6 : 12}
-                >
-                    <Grid
-                        item
-                        container
-                        xs={12}
-                        justifyContent="center"
-                        className={classes.firstOptionsGroup}
-                    >
-                        <Typography
-                            variant="body1"
-                            className={classes.subtitle}
-                        >
+            {!(filter.section === 'accessories' || filter.section === 'lightingSystems') && (
+                <Grid item container xs={12} sm={filter.section === 'cupboard' ? 6 : 12}>
+                    <Grid item container xs={12} justifyContent="center" className={classes.firstOptionsGroup}>
+                        <Typography variant="body1" className={classes.subtitle}>
                             Стиль
                         </Typography>
                     </Grid>
-                    <Grid
-                        item
-                        container
-                        xs={12}
-                        justifyContent="center"
-                        className={classes.optionsContainer}
-                    >
+                    <Grid item container xs={12} justifyContent="center" className={classes.optionsContainer}>
                         {filterOptions.styles.map((option, i) => {
-                            if (
-                                option.id === 'designer' &&
-                                filter.section === 'wardrobe'
-                            ) {
+                            if (option.id === 'designer' && filter.section === 'wardrobe') {
                                 return null;
                             }
 
@@ -121,13 +90,9 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                                         variant="body2"
                                         component="span"
                                         className={cn(classes.option, {
-                                            [classes.selectedOption]:
-                                                filter.style === option.id,
+                                            [classes.selectedOption]: filter.style === option.id,
                                         })}
-                                        onClick={handleClick(
-                                            'style',
-                                            option.id
-                                        )}
+                                        onClick={handleClick('style', option.id)}
                                     >
                                         {option.title}
                                     </Typography>
@@ -136,24 +101,16 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
 
                             return (
                                 <React.Fragment key={option.id}>
-                                    <Typography
-                                        variant="body2"
-                                        component="span"
-                                        className={classes.dash}
-                                    >
+                                    <Typography variant="body2" component="span" className={classes.dash}>
                                         -
                                     </Typography>
                                     <Typography
                                         variant="body2"
                                         component="span"
                                         className={cn(classes.option, {
-                                            [classes.selectedOption]:
-                                                filter.style === option.id,
+                                            [classes.selectedOption]: filter.style === option.id,
                                         })}
-                                        onClick={handleClick(
-                                            'style',
-                                            option.id
-                                        )}
+                                        onClick={handleClick('style', option.id)}
                                     >
                                         {option.title}
                                     </Typography>
@@ -165,27 +122,12 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
             )}
             {filter.section === 'cupboard' && (
                 <Grid item container xs={12} sm={6}>
-                    <Grid
-                        item
-                        container
-                        xs={12}
-                        justifyContent="center"
-                        className={classes.secondOptionsGroup}
-                    >
-                        <Typography
-                            variant="body1"
-                            className={classes.subtitle}
-                        >
+                    <Grid item container xs={12} justifyContent="center" className={classes.secondOptionsGroup}>
+                        <Typography variant="body1" className={classes.subtitle}>
                             Тип открывания дверей
                         </Typography>
                     </Grid>
-                    <Grid
-                        item
-                        container
-                        xs={12}
-                        justifyContent="center"
-                        className={classes.optionsContainer}
-                    >
+                    <Grid item container xs={12} justifyContent="center" className={classes.optionsContainer}>
                         {filterOptions.doorTypes.map((option, i) => {
                             if (i !== filterOptions.doorTypes.length - 1) {
                                 return (
@@ -194,22 +136,13 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                                             variant="body2"
                                             component="span"
                                             className={cn(classes.option, {
-                                                [classes.selectedOption]:
-                                                    filter.doorType ===
-                                                    option.id,
+                                                [classes.selectedOption]: filter.doorType === option.id,
                                             })}
-                                            onClick={handleClick(
-                                                'doorType',
-                                                option.id
-                                            )}
+                                            onClick={handleClick('doorType', option.id)}
                                         >
                                             {option.title}
                                         </Typography>
-                                        <Typography
-                                            variant="body2"
-                                            component="span"
-                                            className={classes.dash}
-                                        >
+                                        <Typography variant="body2" component="span" className={classes.dash}>
                                             -
                                         </Typography>
                                     </React.Fragment>
@@ -222,8 +155,7 @@ export const BottomFilters: FC<Props> = ({ filter, onChange }) => {
                                     variant="body2"
                                     component="span"
                                     className={cn(classes.option, {
-                                        [classes.selectedOption]:
-                                            filter.doorType === option.id,
+                                        [classes.selectedOption]: filter.doorType === option.id,
                                     })}
                                     onClick={handleClick('doorType', option.id)}
                                 >

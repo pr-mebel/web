@@ -1,7 +1,7 @@
-import React, { FC, useCallback } from 'react';
-import cn from 'classnames';
-import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import cn from 'classnames';
+import React, { FC, useCallback } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     tabs: {
@@ -77,11 +77,7 @@ export const Tabs: FC<Props> = ({ activeTab, tabs, onChange }) => {
                         })}
                         onClick={handeChangeTab(i)}
                     >
-                        <Typography
-                            component="span"
-                            variant="h6"
-                            color="inherit"
-                        >
+                        <Typography component="span" variant="h6" color="inherit">
                             {tab.data.title}
                         </Typography>
                     </li>

@@ -1,7 +1,9 @@
-import React, { FC } from 'react';
 import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { MainButton, Loader } from '@/components/common';
+import React, { FC } from 'react';
+
+import { Loader, MainButton } from '@/components/common';
+
 import { Card } from './components';
 
 const useStyles = makeStyles((theme) => ({
@@ -35,13 +37,7 @@ type GalleryProps = {
     onLoadMore: () => void;
 };
 
-export const Gallery: FC<GalleryProps> = ({
-    items,
-    isLoading,
-    hasMore,
-    onCardClick,
-    onLoadMore,
-}) => {
+export const Gallery: FC<GalleryProps> = ({ items, isLoading, hasMore, onCardClick, onLoadMore }) => {
     const classes = useStyles();
 
     return (
@@ -62,21 +58,14 @@ export const Gallery: FC<GalleryProps> = ({
             {items.length === 0 && !isLoading && (
                 <div className={classes.notFound}>
                     <Typography align="center">
-                        По заданному фильтру ничего не найдено. Пожалуйста,
-                        поменяйте запрос.
+                        По заданному фильтру ничего не найдено. Пожалуйста, поменяйте запрос.
                     </Typography>
                 </div>
             )}
             {!!hasMore && (
-                <Grid
-                    container
-                    justifyContent="center"
-                    className={classes.buttonContainer}
-                >
+                <Grid container justifyContent="center" className={classes.buttonContainer}>
                     <Grid item xs={10} sm={8} md={6}>
-                        <MainButton onClick={onLoadMore}>
-                            Показать еще
-                        </MainButton>
+                        <MainButton onClick={onLoadMore}>Показать еще</MainButton>
                     </Grid>
                 </Grid>
             )}

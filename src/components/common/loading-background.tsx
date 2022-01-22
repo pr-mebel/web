@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
+import cn from 'classnames';
+import React, { FC } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     '@keyframes pulse': {

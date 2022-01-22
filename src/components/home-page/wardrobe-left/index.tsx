@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
 import { Hidden } from '@material-ui/core';
-import { WardrobeLeftSmDown } from './sm-down';
+import React, { FC } from 'react';
+
 import { WardrobeLeftMdUp } from './md-up';
+import { WardrobeLeftSmDown } from './sm-down';
 
 export const WardrobeLeft: FC = () => (
     <>

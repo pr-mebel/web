@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
-import { noop } from 'lodash';
-import cn from 'classnames';
-import NextLink from 'next/link';
-import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import cn from 'classnames';
+import { noop } from 'lodash';
+import NextLink from 'next/link';
+import React, { FC } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,23 +25,12 @@ type Props = {
     onClick?: React.MouseEventHandler<HTMLSpanElement>;
 };
 
-export const Link: FC<Props> = ({
-    to = '/',
-    external,
-    asButton,
-    children,
-    className = '',
-    onClick = noop,
-}) => {
+export const Link: FC<Props> = ({ to = '/', external, asButton, children, className = '', onClick = noop }) => {
     const classes = useStyles();
 
     if (asButton) {
         return (
-            <Typography
-                component="a"
-                className={cn(classes.root, className)}
-                onClick={onClick}
-            >
+            <Typography component="a" className={cn(classes.root, className)} onClick={onClick}>
                 {children}
             </Typography>
         );
@@ -49,12 +38,7 @@ export const Link: FC<Props> = ({
 
     if (external) {
         return (
-            <a
-                href={to}
-                className={cn(classes.root, className)}
-                target="_blank"
-                rel="noopener noreferrer"
-            >
+            <a href={to} className={cn(classes.root, className)} target="_blank" rel="noopener noreferrer">
                 {children}
             </a>
         );

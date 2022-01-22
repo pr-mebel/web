@@ -1,12 +1,13 @@
-import React from 'react';
+import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Typography, Grid } from '@material-ui/core';
-import { BlockTitle, MainButton } from '@/components/common';
 import Image from 'next/image';
-import { ADDITIONAL } from '../constants';
-import { WardrobeSnippet } from '../../wardrobe-snippet';
-
 import defaultImage from 'public/images/home-page/wardrobe-right/wardrobe-1.jpg';
+import React from 'react';
+
+import { BlockTitle, MainButton } from '@/components/common';
+
+import { WardrobeSnippet } from '../../wardrobe-snippet';
+import { ADDITIONAL } from '../constants';
 
 const useStyles = makeStyles((theme) => ({
     description: {
@@ -50,10 +51,9 @@ export const WardrobeRightMdUp = () => {
             <Grid container spacing={6}>
                 <Grid item xs={6} className={classes.description}>
                     <Typography variant="body1">
-                        Каждое наше изделие это сложный инженерный продукт,
-                        включающий в&nbsp;себя передовые мировые стандарты
-                        производства мебели. Все это сделано для того, чтобы
-                        наша мебель безупречно служила вам долгие годы
+                        Каждое наше изделие это сложный инженерный продукт, включающий в&nbsp;себя передовые мировые
+                        стандарты производства мебели. Все это сделано для того, чтобы наша мебель безупречно служила
+                        вам долгие годы
                     </Typography>
                 </Grid>
                 <Grid item xs={6}>
@@ -85,11 +85,7 @@ export const WardrobeRightMdUp = () => {
                     </div>
                 </Grid>
             </Grid>
-            <Grid
-                container
-                justifyContent="center"
-                className={classes.buttonContainer}
-            >
+            <Grid container justifyContent="center" className={classes.buttonContainer}>
                 <Grid item xs={10} sm={6} md={4}>
                     <MainButton>Рассчитать стоимость</MainButton>
                 </Grid>

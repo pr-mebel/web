@@ -1,13 +1,12 @@
-import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { filters } from '@/constants';
 import cn from 'classnames';
 import Image from 'next/image';
-
+import accessories from 'public/images/catalog/lead/accessories.jpg';
 import cupboard from 'public/images/catalog/lead/cupboard.jpg';
 import wardrobe from 'public/images/catalog/lead/wardrobe.jpg';
-import accessories from 'public/images/catalog/lead/accessories.jpg';
+import React, { FC } from 'react';
 
+import { filters } from '@/constants';
 import { addIdsToArrayOfObjects } from '@/utils';
 
 export const images = addIdsToArrayOfObjects([

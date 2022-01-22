@@ -1,11 +1,12 @@
-import React, { FC, useCallback } from 'react';
+import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Container } from '@material-ui/core';
+import React, { FC, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
-import { SubmitButton, Input } from '@/components';
-import { formatPhoneInput } from '@/utils';
+
 import { sendEmail } from '@/api';
+import { Input, SubmitButton } from '@/components';
 import { useAnalytics, useFormSubmitModal } from '@/hooks';
+import { formatPhoneInput } from '@/utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,6 +45,9 @@ export const CallDesignerForm: FC = () => {
             sendEmail({
                 ...data,
                 files: [],
+                meta: {
+                    place: 'Главная/Вызвать дизайнера',
+                },
             });
             analytics.onSendEmail('designer');
             formSubmitModal.onOpen();
@@ -83,35 +87,21 @@ export const CallDesignerForm: FC = () => {
                                     required
                                     darkMode
                                     onChange={(event) => {
-                                        event.target.value = formatPhoneInput(
-                                            event.target.value
-                                        );
+                                        event.target.value = formatPhoneInput(event.target.value);
                                     }}
                                 />
                             </Grid>
                         </Grid>
-                        <Grid
-                            item
-                            xs={12}
-                            container
-                            justifyContent="center"
-                            className={classes.buttonContainer}
-                        >
+                        <Grid item xs={12} container justifyContent="center" className={classes.buttonContainer}>
                             <Grid item xs={10} sm={6} md={4}>
                                 <SubmitButton>Вызвать дизайнера</SubmitButton>
                             </Grid>
                         </Grid>
                         <Grid item xs container justifyContent="center">
                             <Grid item xs={10} sm={6}>
-                                <Typography
-                                    variant="body2"
-                                    className={classes.text}
-                                    align="center"
-                                >
-                                    Нажимая кнопку &laquo;Вызвать
-                                    дизайнера&raquo;, я&nbsp;даю согласие
-                                    на&nbsp;обработку персональных данных
-                                    и&nbsp;подтверждаю, что ознакомлен с&nbsp;
+                                <Typography variant="body2" className={classes.text} align="center">
+                                    Нажимая кнопку &laquo;Вызвать дизайнера&raquo;, я&nbsp;даю согласие
+                                    на&nbsp;обработку персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
                                     <a
                                         href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
                                         className={classes.copyrightLink}

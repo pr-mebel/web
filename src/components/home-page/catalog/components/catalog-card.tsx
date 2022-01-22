@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
-import cn from 'classnames';
+import { Hidden, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Hidden } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import cn from 'classnames';
+import React, { FC } from 'react';
+
 import { CardImage } from './card-image';
 
 const useStyles = makeStyles((theme) => ({
@@ -159,13 +160,7 @@ type Props = {
     href: string;
 };
 
-export const CatalogCard: FC<Props> = ({
-    cardID,
-    title,
-    subtitle,
-    caption,
-    href,
-}) => {
+export const CatalogCard: FC<Props> = ({ cardID, title, subtitle, caption, href }) => {
     const classes = useStyles();
 
     return (
@@ -178,24 +173,16 @@ export const CatalogCard: FC<Props> = ({
                         </div>
                         <div className={classes.hoverTextContainer}>
                             <div>
-                                <Typography
-                                    variant="h5"
-                                    className={classes.title}
-                                >
+                                <Typography variant="h5" className={classes.title}>
                                     {title}
                                 </Typography>
-                                <Typography className={classes.subtitle}>
-                                    {subtitle}
-                                </Typography>
+                                <Typography className={classes.subtitle}>{subtitle}</Typography>
                             </div>
                         </div>
                         <ArrowForwardIcon className={classes.arrow} />
                     </div>
                     <div className={classes.captionContainer}>
-                        <Typography
-                            className={classes.caption}
-                            component="span"
-                        >
+                        <Typography className={classes.caption} component="span">
                             {caption}
                         </Typography>
                     </div>
@@ -206,13 +193,7 @@ export const CatalogCard: FC<Props> = ({
                             <CardImage id={cardID} />
                         </div>
                         <div className={classes.imgHeader}>
-                            <Typography
-                                component="span"
-                                className={cn(
-                                    classes.caption,
-                                    classes.captionSm
-                                )}
-                            >
+                            <Typography component="span" className={cn(classes.caption, classes.captionSm)}>
                                 {caption}
                             </Typography>
                         </div>

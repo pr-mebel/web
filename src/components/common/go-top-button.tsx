@@ -1,7 +1,7 @@
-import React, { FC, useCallback } from 'react';
-import cn from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import cn from 'classnames';
+import React, { FC, useCallback } from 'react';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -48,12 +48,7 @@ export const GoTopButton: FC = () => {
                 [classes.rootVisible]: trigger,
             })}
         >
-            <svg
-                width="50"
-                height="50"
-                viewBox="0 0 50 50"
-                className={classes.img}
-            >
+            <svg width="50" height="50" viewBox="0 0 50 50" className={classes.img}>
                 <path
                     d="M36.449 32.572a.807.807 0 0 1 .241.584.827.827 0 0 1-1.41.584L25 23.462l-10.279 10.28a.827.827 0 0 1-1.169-1.17l10.864-10.863a.827.827 0 0 1 1.169 0l10.864 10.864z"
                     fill="black"

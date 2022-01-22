@@ -1,1 +1,1 @@
-export const isVercelEnvDev = () => process.env.VERCEL_ENV !== 'production';
+export const isProduction = () => process.env.VERCEL_ENV === 'production';

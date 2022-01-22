@@ -4,19 +4,13 @@ export const PAGES = addIdsToArrayOfObjects([
     {
         titles: addIdsToArrayOfObjects(['Частный мебельер']),
         subtitles: [],
-        texts: addIdsToArrayOfObjects([
-            'Шоу-рум мебели премиум класса',
-            'по индивидуальным дизайн-проектам',
-        ]),
+        texts: addIdsToArrayOfObjects(['Шоу-рум мебели премиум класса', 'по индивидуальным дизайн-проектам']),
         to: '/catalog',
     },
     {
         titles: addIdsToArrayOfObjects(['Элегантная классика']),
         subtitles: addIdsToArrayOfObjects(['в лучших традициях', 'качества']),
-        texts: addIdsToArrayOfObjects([
-            'Премиальные детали',
-            'Изысканный дизайн',
-        ]),
+        texts: addIdsToArrayOfObjects(['Премиальные детали', 'Изысканный дизайн']),
         to: '/catalog?section=cupboard&style=classic',
     },
     {
@@ -30,33 +24,21 @@ export const PAGES = addIdsToArrayOfObjects([
         to: '/catalog?section=wardrobe',
     },
     {
-        titles: addIdsToArrayOfObjects([
-            'Дизайнерская мебель',
-            'в стиле модерн',
-        ]),
+        titles: addIdsToArrayOfObjects(['Дизайнерская мебель', 'в стиле модерн']),
         subtitles: [],
-        texts: addIdsToArrayOfObjects([
-            'Совершенный стиль',
-            'Безупречное качество',
-        ]),
+        texts: addIdsToArrayOfObjects(['Совершенный стиль', 'Безупречное качество']),
         to: '/catalog?section=cupboard&style=modern',
     },
     {
         titles: addIdsToArrayOfObjects(['Комфорт, продуманный', 'до мелочей']),
         subtitles: [],
-        texts: addIdsToArrayOfObjects([
-            'Эксклюзивные решения',
-            'для организации хранения',
-        ]),
+        texts: addIdsToArrayOfObjects(['Эксклюзивные решения', 'для организации хранения']),
         to: '/catalog?section=accessories',
     },
     {
         titles: addIdsToArrayOfObjects(['Истинное качество', 'в деталях']),
         subtitles: [],
-        texts: addIdsToArrayOfObjects([
-            'Современные мебельные технологии,',
-            'материалы и комплектующие',
-        ]),
+        texts: addIdsToArrayOfObjects(['Современные мебельные технологии,', 'материалы и комплектующие']),
         to: '/catalog?section=lightingSystems',
     },
 ]);

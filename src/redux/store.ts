@@ -1,9 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
+
+import { isProduction } from '@/utils';
+
 import { rootReducer } from './index';
 
 const store = configureStore({
     reducer: rootReducer,
-    devTools: process.env.NODE_ENV === 'development',
+    devTools: !isProduction(),
     preloadedState: {},
 });
 

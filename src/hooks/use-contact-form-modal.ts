@@ -1,10 +1,8 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { State } from '@/redux';
-import {
-    openContactFormModal,
-    closeContactFormModal,
-} from '@/redux/slices/contact-form-modal';
+import { closeContactFormModal, openContactFormModal } from '@/redux/slices/contact-form-modal';
 
 export const useContactFormModal = () => {
     const dispatch = useDispatch();

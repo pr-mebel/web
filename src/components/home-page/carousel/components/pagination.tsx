@@ -1,8 +1,8 @@
-import React, { FC, useCallback } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import cn from 'classnames';
 import { range } from 'lodash';
+import React, { FC, useCallback } from 'react';
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -53,11 +53,7 @@ type Props = {
     onChangeSlide: (arg0: number) => void;
 };
 
-export const Pagination: FC<Props> = ({
-    currentPage,
-    numberOfPages,
-    onChangeSlide,
-}) => {
+export const Pagination: FC<Props> = ({ currentPage, numberOfPages, onChangeSlide }) => {
     const classes = useStyles();
 
     /**
@@ -81,9 +77,7 @@ export const Pagination: FC<Props> = ({
                     })}
                     onClick={handleClick(index)}
                 >
-                    <Typography className={classes.text}>
-                        {index + 1}
-                    </Typography>
+                    <Typography className={classes.text}>{index + 1}</Typography>
                 </button>
             ))}
         </div>

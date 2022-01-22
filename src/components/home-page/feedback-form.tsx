@@ -1,14 +1,15 @@
-import React, { FC, useRef, useCallback, useState } from 'react';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Container, Grid, Hidden, Typography } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Container, Grid, Typography, Hidden } from '@material-ui/core';
-import { useForm } from 'react-hook-form';
-import PublishIcon from '@material-ui/icons/Publish';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ClearIcon from '@material-ui/icons/Clear';
-import { formatPhoneInput, getFileDeclination } from '@/utils';
+import PublishIcon from '@material-ui/icons/Publish';
+import React, { FC, useCallback, useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
+
 import { sendEmail } from '@/api';
-import { SubmitButton, Input } from '@/components';
+import { Input, SubmitButton } from '@/components';
 import { useAnalytics, useFormSubmitModal } from '@/hooks';
+import { formatPhoneInput, getFileDeclination } from '@/utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -87,7 +88,7 @@ export const FeedbackForm: FC = () => {
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { register, handleSubmit, reset } = useForm();
-    const [fileList, setFileList] = useState<FileList | null>(null);
+    const [fileList, setFileList] = useState<File[]>([]);
 
     /**
      * Имитирует клик на инпут файла
@@ -100,8 +101,9 @@ export const FeedbackForm: FC = () => {
      * Сохраняет выбранные файлы в массив
      */
     const handleFileUploadChange = useCallback(() => {
-        if (fileInputRef.current?.files) {
-            setFileList(fileInputRef.current.files);
+        if (fileInputRef.current?.files && fileInputRef.current.files) {
+            const files = fileInputRef.current.files;
+            setFileList((prev) => [...prev, ...files]);
         }
     }, [fileInputRef]);
 
@@ -111,7 +113,7 @@ export const FeedbackForm: FC = () => {
     const handleClearFiles = useCallback(() => {
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
-            setFileList(null);
+            setFileList([]);
         }
     }, [fileInputRef]);
 
@@ -122,7 +124,10 @@ export const FeedbackForm: FC = () => {
         (data) => {
             sendEmail({
                 ...data,
-                files: [...(fileList || [])],
+                files: fileList,
+                meta: {
+                    place: 'Главная/Расчет стоимости',
+                },
             });
             analytics.onSendEmail('proekt');
             formSubmitModal.onOpen();
@@ -137,14 +142,7 @@ export const FeedbackForm: FC = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Grid container justifyContent="center">
                         <Grid item xs={1} />
-                        <Grid
-                            item
-                            xs={10}
-                            md={6}
-                            container
-                            direction="row"
-                            spacing={smDown ? 2 : 4}
-                        >
+                        <Grid item xs={10} md={6} container direction="row" spacing={smDown ? 2 : 4}>
                             <Grid item xs={12} md={6}>
                                 <Input
                                     ref={register}
@@ -168,24 +166,16 @@ export const FeedbackForm: FC = () => {
                                     required
                                     darkMode
                                     onChange={(event) => {
-                                        event.target.value = formatPhoneInput(
-                                            event.target.value
-                                        );
+                                        event.target.value = formatPhoneInput(event.target.value);
                                     }}
                                 />
                             </Grid>
                             <Hidden smDown>
                                 <Grid item xs={12}>
-                                    <Typography
-                                        variant="body2"
-                                        className={classes.text}
-                                    >
-                                        Прикрепите, пожалуйста, эскизы вашей
-                                        мебели или просто план помещения
-                                        с&nbsp;описанием ваших пожеланий
-                                        и&nbsp;наш дизайнер в&nbsp;кратчайшие
-                                        сроки подготовит для вас свои
-                                        предложения.
+                                    <Typography variant="body2" className={classes.text}>
+                                        Прикрепите, пожалуйста, эскизы вашей мебели или просто план помещения
+                                        с&nbsp;описанием ваших пожеланий и&nbsp;наш дизайнер в&nbsp;кратчайшие сроки
+                                        подготовит для вас свои предложения.
                                     </Typography>
                                 </Grid>
                             </Hidden>
@@ -208,10 +198,7 @@ export const FeedbackForm: FC = () => {
                                     className={classes.inputFile}
                                     onChange={handleFileUploadChange}
                                 />
-                                <div
-                                    onClick={handleFileInputClick}
-                                    className={classes.publish}
-                                >
+                                <div onClick={handleFileInputClick} className={classes.publish}>
                                     <PublishIcon className={classes.icon} />
                                     <Typography className={classes.textPublish}>
                                         Прикрепить
@@ -222,54 +209,25 @@ export const FeedbackForm: FC = () => {
                             </Grid>
                             <Grid item xs={6}>
                                 {!!fileList?.length && (
-                                    <Grid
-                                        item
-                                        xs={12}
-                                        container
-                                        justifyContent="center"
-                                    >
-                                        <Typography
-                                            className={classes.fileInputText}
-                                        >
-                                            {`${
-                                                fileList.length
-                                            }\xA0${getFileDeclination(
-                                                fileList.length
-                                            )}`}
-                                            <ClearIcon
-                                                className={
-                                                    classes.deleteFilesIcon
-                                                }
-                                                onClick={handleClearFiles}
-                                            />
+                                    <Grid item xs={12} container justifyContent="center">
+                                        <Typography className={classes.fileInputText}>
+                                            {`${fileList.length}\xA0${getFileDeclination(fileList.length)}`}
+                                            <ClearIcon className={classes.deleteFilesIcon} onClick={handleClearFiles} />
                                         </Typography>
                                     </Grid>
                                 )}
                             </Grid>
                         </Grid>
-                        <Grid
-                            item
-                            xs={12}
-                            container
-                            justifyContent="center"
-                            className={classes.buttonContainer}
-                        >
+                        <Grid item xs={12} container justifyContent="center" className={classes.buttonContainer}>
                             <Grid item xs={10} sm={6} md={4}>
-                                <SubmitButton>
-                                    Рассчитать стоимость
-                                </SubmitButton>
+                                <SubmitButton>Рассчитать стоимость</SubmitButton>
                             </Grid>
                         </Grid>
                         <Grid item xs container justifyContent="center">
                             <Grid item xs={12} sm={8} md={6}>
-                                <Typography
-                                    className={classes.copyText}
-                                    align="center"
-                                >
-                                    Нажимая кнопку &laquo;Рассчитать
-                                    стоимость&raquo;, я&nbsp;даю согласие
-                                    на&nbsp;обработку персональных данных
-                                    и&nbsp;подтверждаю, что ознакомлен с&nbsp;
+                                <Typography className={classes.copyText} align="center">
+                                    Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие
+                                    на&nbsp;обработку персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
                                     <a
                                         href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
                                         className={classes.copyrightLink}

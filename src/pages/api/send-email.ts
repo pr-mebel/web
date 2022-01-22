@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import multer from 'multer';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
 const upload = multer({
@@ -30,12 +30,13 @@ type Body = {
     name: string;
     tel: string;
     description?: string;
+    meta?: string;
 };
 
 const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
     await runMiddleware(req, res, uploadMiddleware);
 
-    const { email, name, tel, description } = req.body as Body;
+    const { email, name, tel, description, meta } = req.body as Body;
 
     try {
         const transporter = nodemailer.createTransport({
@@ -48,7 +49,7 @@ const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
             },
         });
 
-        const message = await transporter.sendMail({
+        await transporter.sendMail({
             from: 'zakaz@pr-mebel.ru',
             to: 'zakaz@pr-mebel.ru',
             replyTo: email || 'zakaz@pr-mebel.ru',
@@ -57,11 +58,8 @@ const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
                 <p><strong>Имя:</strong><br>${name}</p>
                 <p><strong>Телефон:</strong><br>${tel}</p>
                 ${email ? `<p><strong>Почта:</strong><br>${email}</p>` : ''}
-                ${
-                    description
-                        ? `<p><strong>Описание:</strong><br>${description}</p>`
-                        : ''
-                }
+                ${description ? `<p><strong>Описание:</strong><br>${description}</p>` : ''}
+                ${meta && `<p>Дополнительная информация<br>${meta}</p>`}
             `,
             attachments: req.files.map((file) => ({
                 filename: file.filename,
@@ -69,8 +67,6 @@ const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
                 contentType: file.mimetype,
             })),
         });
-
-        console.log(message);
 
         res.status(200).json({ data: 'success' });
     } catch (error) {

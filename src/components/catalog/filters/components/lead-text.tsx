@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
 import { Typography } from '@material-ui/core';
-import { useTheme, makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { NB_SP, MDASH } from '@/constants';
+import React, { FC } from 'react';
+
+import { MDASH, NB_SP } from '@/constants';
 import { SectionID } from '@/entities';
 
 const text0large = `

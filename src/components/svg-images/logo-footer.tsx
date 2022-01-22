@@ -1,20 +1,10 @@
-import React, { FC } from 'react';
 import classnames from 'classnames';
+import React, { FC } from 'react';
+
 import { SVGProps } from './types';
 
-export const LogoFooter: FC<SVGProps> = ({
-    width = 350,
-    height = 88,
-    fill = 'none',
-    className,
-}) => (
-    <svg
-        width={width}
-        height={height}
-        viewBox="0 0 350 88"
-        fill={fill}
-        className={classnames(className)}
-    >
+export const LogoFooter: FC<SVGProps> = ({ width = 350, height = 88, fill = 'none', className }) => (
+    <svg width={width} height={height} viewBox="0 0 350 88" fill={fill} className={classnames(className)}>
         <path
             d="M176.88 2.181v3.09h1.875V2.039h6.082V0h-16.41v2.181h8.453zm-28.606 8.693h1.938V2.18h9.076V0h-11.03l.016 10.874zm30.481 40.633v-7.712h-1.875v7.712h-9.974v2.118h17.593v-2.118h-5.744zm6.256-20.933v-1.897h-6.256V10.194h-1.875v2.52h-8.453v1.992h8.453v24.165h1.875v-8.297h6.256zm-25.723-15.868v-1.991h-9.076v-1.841h-1.938v24.26h1.938V14.706h9.076zm40.337-12.643v11.695h2.104V0h-16.892v2.039l14.788.023zM194.11 28.7v1.897h5.515v20.91h-5.987v2.117h8.091V18.681h-2.104v9.996l-5.515.024zm-43.898 22.806v-11.45h-1.938v13.568h18.632v-2.118h-16.694z"
             fill="#E30613"

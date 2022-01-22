@@ -1,7 +1,8 @@
-import React, { FC, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Dialog, Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import ClearIcon from '@material-ui/icons/Clear';
+import React, { FC, useEffect } from 'react';
+
 import { useFormSubmitModal } from '@/hooks';
 
 const useStyles = makeStyles({
@@ -51,31 +52,14 @@ export const FormSubmitPopup: FC = () => {
     }, [formSubmitModal]);
 
     return (
-        <Dialog
-            open={formSubmitModal.isOpen}
-            onClose={formSubmitModal.onClose}
-            fullWidth
-            maxWidth="sm"
-        >
+        <Dialog open={formSubmitModal.isOpen} onClose={formSubmitModal.onClose} fullWidth maxWidth="sm">
             <div className={classes.root}>
-                <ClearIcon
-                    className={classes.closeIcon}
-                    onClick={formSubmitModal.onClose}
-                />
+                <ClearIcon className={classes.closeIcon} onClick={formSubmitModal.onClose} />
                 <Typography variant="body1" align="center" gutterBottom>
-                    <img
-                        src="images/common/form-submit-popup/1.svg"
-                        alt="Письмо отправлено"
-                        className={classes.icon}
-                    />
+                    <img src="images/common/form-submit-popup/1.svg" alt="Письмо отправлено" className={classes.icon} />
                     <span>Письмо отправлено</span>
                 </Typography>
-                <Grid
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                    className={classes.container}
-                >
+                <Grid container justifyContent="center" alignItems="center" className={classes.container}>
                     <Grid item xs={12} className={classes.textContainer}>
                         <Typography align="center" className={classes.textMain}>
                             Спасибо за обращение!

@@ -1,17 +1,11 @@
-import React, { useState, useCallback, FC } from 'react';
+import { Accordion, AccordionDetails, AccordionSummary, Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-    Container,
-    Typography,
-    Grid,
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-} from '@material-ui/core';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import { BlockTitle, MainButton } from '@/components/common';
 import { useRequest } from 'ahooks';
+import React, { FC, useCallback, useState } from 'react';
+
 import { fetchFAQ } from '@/api';
+import { BlockTitle, MainButton } from '@/components/common';
 
 const useStyles = makeStyles((theme) => ({
     listContainer: {
@@ -78,41 +72,24 @@ export const FAQ: FC = () => {
             <BlockTitle>
                 <Typography variant="h4">Часто задаваемые вопросы</Typography>
             </BlockTitle>
-            <Grid
-                container
-                spacing={3}
-                direction="column"
-                alignItems="center"
-                className={classes.listContainer}
-            >
+            <Grid container spacing={3} direction="column" alignItems="center" className={classes.listContainer}>
                 {request.data.map((item, i) => {
                     if (i > 4 && !isShowMoreClicked) return null;
 
                     return (
                         <Grid item xs={12} md={10} key={item.id}>
-                            <Accordion
-                                onChange={handleChange(i)}
-                                expanded={i === expandedItemID}
-                            >
+                            <Accordion onChange={handleChange(i)} expanded={i === expandedItemID}>
                                 <AccordionSummary
-                                    expandIcon={
-                                        <ArrowForwardIosIcon
-                                            className={classes.dropdownIcon}
-                                        />
-                                    }
+                                    expandIcon={<ArrowForwardIosIcon className={classes.dropdownIcon} />}
                                     classes={{
                                         content: classes.summaryContainer,
                                     }}
                                 >
-                                    <Typography className={classes.number}>
-                                        {item.id}
-                                    </Typography>
+                                    <Typography className={classes.number}>{item.id}</Typography>
                                     <Typography>{item.title}</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                    <Typography variant="body2">
-                                        {item.text}
-                                    </Typography>
+                                    <Typography variant="body2">{item.text}</Typography>
                                 </AccordionDetails>
                             </Accordion>
                         </Grid>
@@ -120,15 +97,9 @@ export const FAQ: FC = () => {
                 })}
             </Grid>
             {!isShowMoreClicked && (
-                <Grid
-                    container
-                    justifyContent="center"
-                    className={classes.buttonContainer}
-                >
+                <Grid container justifyContent="center" className={classes.buttonContainer}>
                     <Grid item xs={10} sm={6} md={4}>
-                        <MainButton onClick={handleShowMore}>
-                            Показать еще
-                        </MainButton>
+                        <MainButton onClick={handleShowMore}>Показать еще</MainButton>
                     </Grid>
                 </Grid>
             )}

@@ -1,9 +1,11 @@
-import React, { FC } from 'react';
+import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { Container, Typography, Grid } from '@material-ui/core';
+import React, { FC } from 'react';
+
 import { BlockTitle } from '@/components/common';
-import { NB_SP, MDASH } from '@/constants';
+import { MDASH, NB_SP } from '@/constants';
+
 import { Card, Icon } from './components';
 
 const useStyles = makeStyles({
@@ -26,11 +28,7 @@ export const About: FC = () => {
             <BlockTitle>
                 <Typography variant="h4">О нас</Typography>
             </BlockTitle>
-            <Typography
-                variant="h5"
-                align="center"
-                className={classes.titleMiddle}
-            >
+            <Typography variant="h5" align="center" className={classes.titleMiddle}>
                 Почему нас выбрали уже более 10 000 клиентов?
             </Typography>
             <Grid container spacing={isXsDown ? 2 : 4} className={classes.grid}>
@@ -91,11 +89,7 @@ export const About: FC = () => {
                     />
                 </Grid>
             </Grid>
-            <Typography
-                variant="h5"
-                align="center"
-                className={classes.titleMiddle}
-            >
+            <Typography variant="h5" align="center" className={classes.titleMiddle}>
                 Приходите, нам есть чем вас удивить!
             </Typography>
         </Container>

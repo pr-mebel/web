@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import React, { FC } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     '@keyframes spin': {
@@ -44,14 +44,7 @@ export const Loader: FC = () => {
     const classes = useStyles();
 
     return (
-        <Grid
-            item
-            xs={12}
-            container
-            justifyContent="center"
-            alignItems="center"
-            className={classes.root}
-        >
+        <Grid item xs={12} container justifyContent="center" alignItems="center" className={classes.root}>
             <div className={classes.loader} />
         </Grid>
     );

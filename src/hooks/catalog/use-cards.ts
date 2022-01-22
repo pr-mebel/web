@@ -1,11 +1,13 @@
-import { checkIfNameAndValueAreKnown } from '@/utils';
-import { fetchCatalogByFilter } from '@/api';
 import { useRequest } from 'ahooks';
-import { Filter, FilterField, FilterValue, Item, SectionID } from '@/entities';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { batchSize } from '@/constants';
-import { useModal } from '..';
 import { useRouter } from 'next/router';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+
+import { fetchCatalogByFilter } from '@/api';
+import { batchSize } from '@/constants';
+import { Filter, FilterField, FilterValue, Item, SectionID } from '@/entities';
+import { checkIfNameAndValueAreKnown } from '@/utils';
+
+import { useModal } from '..';
 
 const initialFilters = {
     doorType: 'any',
@@ -67,26 +69,23 @@ export const useCards = () => {
         return null;
     }, [list, currentItemID]);
 
-    const handleChangeFilter = useCallback(
-        ({ name, value }: { name: FilterField; value: FilterValue }) => {
-            if (name === 'section') {
-                setFilters({
-                    ...initialFilters,
-                    [name]: value as SectionID,
-                });
-            } else {
-                setFilters((prev) => ({
-                    ...prev,
-                    [name]: value,
-                }));
-            }
-            setList([]);
-            setPage(1);
-            setHasMore(false);
-            setIsDataOutdated(true);
-        },
-        []
-    );
+    const handleChangeFilter = useCallback(({ name, value }: { name: FilterField; value: FilterValue }) => {
+        if (name === 'section') {
+            setFilters({
+                ...initialFilters,
+                [name]: value as SectionID,
+            });
+        } else {
+            setFilters((prev) => ({
+                ...prev,
+                [name]: value,
+            }));
+        }
+        setList([]);
+        setPage(1);
+        setHasMore(false);
+        setIsDataOutdated(true);
+    }, []);
 
     const handleClickCard = useCallback(
         (itemID: number) => {

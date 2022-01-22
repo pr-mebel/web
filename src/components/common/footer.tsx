@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
-import { Container, Typography, Grid, Hidden } from '@material-ui/core';
+import { Container, Grid, Hidden, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import React, { FC } from 'react';
+
+import { Facebook, Instagram, LogoFooter, Vkontakte } from '@/components';
 import { Link } from '@/components/common';
-import { Instagram, Vkontakte, Facebook, LogoFooter } from '@/components';
 import { useAnalytics, useContactFormModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
@@ -107,11 +108,7 @@ export const Footer: FC = () => {
     return (
         <footer className={classes.root}>
             <Container>
-                <Grid
-                    container
-                    justifyContent="center"
-                    className={classes.logoContainer}
-                >
+                <Grid container justifyContent="center" className={classes.logoContainer}>
                     <Grid item xs={12}>
                         <Link to="/">
                             <LogoFooter className={classes.logo} />
@@ -122,15 +119,7 @@ export const Footer: FC = () => {
                     </Grid>
                 </Grid>
                 <Grid container spacing={4}>
-                    <Grid
-                        item
-                        xs={12}
-                        sm={6}
-                        md={3}
-                        container
-                        direction="column"
-                        alignItems="center"
-                    >
+                    <Grid item xs={12} sm={6} md={3} container direction="column" alignItems="center">
                         <div>
                             <Typography className={classes.columnTitle}>
                                 <Link to="/catalog">Каталог</Link>
@@ -138,40 +127,28 @@ export const Footer: FC = () => {
                             <ul className={classes.list}>
                                 <li>
                                     <Typography variant="body1" gutterBottom>
-                                        <Link
-                                            to="/catalog?section=cupboard&style=classic"
-                                            className={classes.listItem}
-                                        >
+                                        <Link to="/catalog?section=cupboard&style=classic" className={classes.listItem}>
                                             Шкафы классические
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link
-                                            to="/catalog?section=cupboard&style=modern"
-                                            className={classes.listItem}
-                                        >
+                                        <Link to="/catalog?section=cupboard&style=modern" className={classes.listItem}>
                                             Шкафы современные
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link
-                                            to="/catalog?section=wardrobe&style=classic"
-                                            className={classes.listItem}
-                                        >
+                                        <Link to="/catalog?section=wardrobe&style=classic" className={classes.listItem}>
                                             Гардеробные классические
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link
-                                            to="/catalog?section=wardrobe&style=modern"
-                                            className={classes.listItem}
-                                        >
+                                        <Link to="/catalog?section=wardrobe&style=modern" className={classes.listItem}>
                                             Гардеробные современные
                                         </Link>
                                     </Typography>
@@ -179,15 +156,7 @@ export const Footer: FC = () => {
                             </ul>
                         </div>
                     </Grid>
-                    <Grid
-                        item
-                        xs={12}
-                        sm={6}
-                        md={3}
-                        container
-                        direction="column"
-                        alignItems="center"
-                    >
+                    <Grid item xs={12} sm={6} md={3} container direction="column" alignItems="center">
                         <div>
                             <Typography className={classes.columnTitle}>
                                 <Link to="/#advantages">Преимущества</Link>
@@ -195,30 +164,21 @@ export const Footer: FC = () => {
                             <ul className={classes.list}>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link
-                                            to="/#advantages"
-                                            className={classes.listItem}
-                                        >
+                                        <Link to="/#advantages" className={classes.listItem}>
                                             Наши материалы
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link
-                                            to="/#comfort"
-                                            className={classes.listItem}
-                                        >
+                                        <Link to="/#comfort" className={classes.listItem}>
                                             Комфорт и удобство
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link
-                                            to="/#quality"
-                                            className={classes.listItem}
-                                        >
+                                        <Link to="/#quality" className={classes.listItem}>
                                             Исключительное качество
                                         </Link>
                                     </Typography>
@@ -226,59 +186,36 @@ export const Footer: FC = () => {
                             </ul>
                         </div>
                     </Grid>
-                    <Grid
-                        item
-                        xs={12}
-                        sm={6}
-                        md={3}
-                        container
-                        direction="column"
-                        alignItems="center"
-                    >
+                    <Grid item xs={12} sm={6} md={3} container direction="column" alignItems="center">
                         <div>
                             <Typography className={classes.columnTitle}>
                                 <Link to="/#about">О нас</Link>
                             </Typography>
                             <ul className={classes.list}>
                                 <li>
-                                    <Typography
-                                        gutterBottom
-                                        className={classes.listItem}
-                                    >
-                                        <Link
-                                            to="/#about"
-                                            className={classes.listItem}
-                                        >
+                                    <Typography gutterBottom className={classes.listItem}>
+                                        <Link to="/#about" className={classes.listItem}>
                                             Почему следует выбрать нас
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link
-                                            to="/#production"
-                                            className={classes.listItem}
-                                        >
+                                        <Link to="/#production" className={classes.listItem}>
                                             Наше производство
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link
-                                            to="/#how-to-order"
-                                            className={classes.listItem}
-                                        >
+                                        <Link to="/#how-to-order" className={classes.listItem}>
                                             Как заказать нашу мебель
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link
-                                            to="/#faq"
-                                            className={classes.listItem}
-                                        >
+                                        <Link to="/#faq" className={classes.listItem}>
                                             Часто задаваемые вопросы
                                         </Link>
                                     </Typography>
@@ -286,64 +223,38 @@ export const Footer: FC = () => {
                             </ul>
                         </div>
                     </Grid>
-                    <Grid
-                        item
-                        xs={12}
-                        sm={6}
-                        md={3}
-                        container
-                        direction="column"
-                        alignItems="center"
-                    >
+                    <Grid item xs={12} sm={6} md={3} container direction="column" alignItems="center">
                         <div>
                             <Typography className={classes.columnTitle}>
-                                <Link
-                                    asButton
-                                    onClick={contactFormModal.onOpen}
-                                >
+                                <Link asButton onClick={contactFormModal.onOpen}>
                                     Связаться с нами
                                 </Link>
                             </Typography>
                             <ul className={classes.list}>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link
-                                            asButton
-                                            className={classes.listItem}
-                                            onClick={contactFormModal.onOpen}
-                                        >
+                                        <Link asButton className={classes.listItem} onClick={contactFormModal.onOpen}>
                                             Заказать звонок
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link
-                                            asButton
-                                            className={classes.listItem}
-                                            onClick={contactFormModal.onOpen}
-                                        >
+                                        <Link asButton className={classes.listItem} onClick={contactFormModal.onOpen}>
                                             Получить проект
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link
-                                            asButton
-                                            className={classes.listItem}
-                                            onClick={contactFormModal.onOpen}
-                                        >
+                                        <Link asButton className={classes.listItem} onClick={contactFormModal.onOpen}>
                                             Вызвать дизайнера замерщика
                                         </Link>
                                     </Typography>
                                 </li>
                                 <li>
                                     <Typography gutterBottom>
-                                        <Link
-                                            to="/#questions"
-                                            className={classes.listItem}
-                                        >
+                                        <Link to="/#questions" className={classes.listItem}>
                                             Задать вопрос
                                         </Link>
                                     </Typography>
@@ -354,37 +265,20 @@ export const Footer: FC = () => {
                 </Grid>
                 <Grid container alignItems="center" className={classes.social}>
                     <Grid item xs={12}>
-                        <Typography
-                            variant="body1"
-                            align="center"
-                            onClick={analytics.onFooterPhoneClick}
-                        >
+                        <Typography variant="body1" align="center" onClick={analytics.onFooterPhoneClick}>
                             <Link to="tel:+7(495)2780285" external>
                                 +7 (495) 278-02-85
                             </Link>
                         </Typography>
-                        <Typography
-                            variant="body1"
-                            className={classes.address}
-                            align="center"
-                        >
+                        <Typography variant="body1" className={classes.address} align="center">
                             м. Сокол, ул. Балтийская, д.9. С 10:00 до 20:00
                         </Typography>
-                        <Typography
-                            className={classes.socialTitle}
-                            align="center"
-                        >
+                        <Typography className={classes.socialTitle} align="center">
                             Мы в соц.сетях
                         </Typography>
                     </Grid>
                     <Grid item xs={3} sm={4} />
-                    <Grid
-                        item
-                        xs={6}
-                        sm={4}
-                        container
-                        className={classes.socialIconsContainer}
-                    >
+                    <Grid item xs={6} sm={4} container className={classes.socialIconsContainer}>
                         <Grid item xs={4} container justifyContent="center">
                             <a href="https://vk.com/public185518769">
                                 <Vkontakte className={classes.socialIcon} />
@@ -403,12 +297,7 @@ export const Footer: FC = () => {
                     </Grid>
                     <Grid item xs={3} sm={4} />
                     <Grid item xs={12}>
-                        <Typography
-                            variant="body2"
-                            gutterBottom
-                            className={classes.copyContainer}
-                            align="center"
-                        >
+                        <Typography variant="body2" gutterBottom className={classes.copyContainer} align="center">
                             <Link
                                 className={classes.copyLink}
                                 to="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
@@ -430,8 +319,8 @@ export const Footer: FC = () => {
                         <Typography variant="body2" align="center">
                             &copy; Частный Мебельер
                             <span className={classes.verticalLine}>|</span>
-                            2020 Все права защищены законом. Копирование и
-                            цитирование только с письменного разрешения автора.
+                            2020 Все права защищены законом. Копирование и цитирование только с письменного разрешения
+                            автора.
                         </Typography>
                     </Grid>
                 </Grid>

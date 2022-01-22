@@ -1,7 +1,8 @@
-import React, { FC, useCallback } from 'react';
-import cn from 'classnames';
-import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import cn from 'classnames';
+import React, { FC, useCallback } from 'react';
+
 import { filters } from '@/constants';
 import { FilterField, FilterValue, SectionID } from '@/entities';
 
@@ -76,8 +77,7 @@ export const SectionPicker: FC<Props> = ({ options, value, onChange }) => {
                                 <Typography
                                     variant="body1"
                                     className={cn(classes.option, {
-                                        [classes.selectedOption]:
-                                            value === section.id,
+                                        [classes.selectedOption]: value === section.id,
                                     })}
                                     onClick={handleClick(section.id)}
                                 >

@@ -1,12 +1,7 @@
 import { noop } from 'lodash';
-import { useState, useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
-export const useModal = ({
-    initialOpen = false,
-    onOpen = noop,
-    onClose = noop,
-    onToggle = noop,
-} = {}) => {
+export const useModal = ({ initialOpen = false, onOpen = noop, onClose = noop, onToggle = noop } = {}) => {
     const [isOpen, setIsOpen] = useState(initialOpen);
 
     const handleOpen = useCallback(

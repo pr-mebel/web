@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import { Grid, Hidden, Typography } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { Grid, Typography, Hidden } from '@material-ui/core';
+import React, { FC } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     rowTop: {
@@ -46,10 +46,7 @@ export const Card: FC<Props> = ({ img, title, text }) => {
                 <div className={classes.rowTop}>
                     {img}
                     <div className={classes.titleContainer}>
-                        <Typography
-                            variant={isXsDown ? 'h5' : 'h6'}
-                            className={classes.title}
-                        >
+                        <Typography variant={isXsDown ? 'h5' : 'h6'} className={classes.title}>
                             {title}
                         </Typography>
                     </div>
@@ -66,10 +63,7 @@ export const Card: FC<Props> = ({ img, title, text }) => {
                         {img}
                     </Grid>
                     <Grid item xs={10}>
-                        <Typography
-                            variant={isXsDown ? 'h5' : 'h6'}
-                            className={classes.title}
-                        >
+                        <Typography variant={isXsDown ? 'h5' : 'h6'} className={classes.title}>
                             {title}
                         </Typography>
                     </Grid>

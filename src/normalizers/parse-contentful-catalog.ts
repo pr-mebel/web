@@ -1,10 +1,9 @@
-import { SectionCollection, Collection } from '@/entities';
 import { ApolloQueryResult } from '@apollo/client';
-import { CatalogResponse } from '@/api/types';
 
-const checkIfTypenameisASection = (
-    data: SectionCollection | Collection
-): data is SectionCollection => {
+import { CatalogResponse } from '@/api/types';
+import { Collection, SectionCollection } from '@/entities';
+
+const checkIfTypenameisASection = (data: SectionCollection | Collection): data is SectionCollection => {
     const { __typename } = data;
 
     return (

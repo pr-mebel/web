@@ -1,4 +1,4 @@
-import { NB_SP, MDASH } from '@/constants';
+import { MDASH, NB_SP } from '@/constants';
 import { addIdsToArrayOfObjects } from '@/utils';
 
 const imgAdd1 = '/images/home-page/wardrobe-left/1.jpg';

@@ -1,12 +1,12 @@
-import React, { FC } from 'react';
+import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Typography, Grid } from '@material-ui/core';
 import Image from 'next/image';
-import { addIdsToArrayOfObjects } from '@/utils';
-import { NB_SP } from '@/constants';
-import { BlockTitle, MainButton } from '@/components/common';
-
 import img from 'public/images/home-page/our-production/1.jpg';
+import React, { FC } from 'react';
+
+import { BlockTitle, MainButton } from '@/components/common';
+import { NB_SP } from '@/constants';
+import { addIdsToArrayOfObjects } from '@/utils';
 
 const LIST = addIdsToArrayOfObjects([
     {
@@ -77,21 +77,13 @@ export const OurProduction: FC = () => {
                 <Typography variant="h4">Наше производство</Typography>
             </BlockTitle>
             <div className={classes.imgContainer}>
-                <Image
-                    src={img}
-                    alt="Производство"
-                    layout="fill"
-                    placeholder="blur"
-                />
+                <Image src={img} alt="Производство" layout="fill" placeholder="blur" />
             </div>
             <Grid container spacing={6}>
                 {LIST.map((item) => (
                     <Grid key={item.id} item xs={12} sm={6} md={3}>
                         <BlockTitle>
-                            <Typography
-                                variant="h6"
-                                className={classes.sectionTitle}
-                            >
+                            <Typography variant="h6" className={classes.sectionTitle}>
                                 {item.data.title}
                             </Typography>
                         </BlockTitle>
@@ -102,21 +94,12 @@ export const OurProduction: FC = () => {
                 ))}
                 <Grid container justifyContent="center">
                     <Grid item xs={12} md={10}>
-                        <Typography
-                            variant="h5"
-                            className={classes.bottomTitle}
-                            align="center"
-                        >
-                            Современные технологии производства для идеального
-                            качества вашей мебели
+                        <Typography variant="h5" className={classes.bottomTitle} align="center">
+                            Современные технологии производства для идеального качества вашей мебели
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid
-                    container
-                    justifyContent="center"
-                    className={classes.buttonContainer}
-                >
+                <Grid container justifyContent="center" className={classes.buttonContainer}>
                     <Grid item xs={10} sm={6} md={4}>
                         <MainButton>Получить проект</MainButton>
                     </Grid>

@@ -1,7 +1,8 @@
-import React, { FC, useCallback } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import React, { FC, useCallback } from 'react';
+
 import { LoadingBackground } from '@/components/common';
 
 const useStyles = makeStyles((theme) => ({
@@ -73,12 +74,7 @@ type Props = {
     onClick: (arg0: number) => void;
 };
 
-export const Card: FC<Props> = ({
-    imageUrlMin,
-    collection,
-    currentItemId,
-    onClick,
-}) => {
+export const Card: FC<Props> = ({ imageUrlMin, collection, currentItemId, onClick }) => {
     const classes = useStyles();
 
     /**
@@ -91,15 +87,9 @@ export const Card: FC<Props> = ({
     return (
         <LoadingBackground>
             <div className={classes.root} onClick={handleClick}>
-                <img
-                    className={classes.img}
-                    src={imageUrlMin}
-                    alt={`Товар из коллекции ${collection}`}
-                />
+                <img className={classes.img} src={imageUrlMin} alt={`Товар из коллекции ${collection}`} />
                 <div className={classes.tooltip}>
-                    <Typography className={classes.tooltipText}>
-                        {collection}
-                    </Typography>
+                    <Typography className={classes.tooltipText}>{collection}</Typography>
                     <ArrowForwardIcon className={classes.arrow} />
                 </div>
             </div>

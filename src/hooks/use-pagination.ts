@@ -1,6 +1,7 @@
-import { useInterval } from '@/utils';
-import { useState, useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
+
+import { useInterval } from '@/hooks';
 
 type UsePaginationParams = {
     total: number;
@@ -57,11 +58,7 @@ export const usePagination = ({
     /**
      * Крутит карусель
      */
-    const { pause, unpause, reset } = useInterval(
-        handleNextPage,
-        changePageIntervalTime ?? null,
-        resetIntervalTime
-    );
+    const { pause, unpause, reset } = useInterval(handleNextPage, changePageIntervalTime ?? null, resetIntervalTime);
 
     const handlers = useSwipeable({
         onSwipedLeft: () => handleNextPage(),

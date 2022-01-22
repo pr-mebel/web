@@ -1,14 +1,15 @@
-import React from 'react';
+import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Typography, Grid } from '@material-ui/core';
-import { BlockTitle, MainButton, Pagination } from '@/components/common';
 import cn from 'classnames';
 import Image from 'next/image';
-import { ADDITIONAL } from '../constants';
-import { WardrobeAdditionalBlock } from '../../wardrobe-additional-block';
-
 import defaultImage from 'public/images/home-page/wardrobe-right/wardrobe-1.jpg';
+import React from 'react';
+
+import { BlockTitle, MainButton, Pagination } from '@/components/common';
 import { usePagination } from '@/hooks';
+
+import { WardrobeAdditionalBlock } from '../../wardrobe-additional-block';
+import { ADDITIONAL } from '../constants';
 
 const useStyles = makeStyles(() => ({
     contentSm: {
@@ -54,17 +55,8 @@ export const WardrobeRightSmDown = () => {
                     нашей мебели
                 </Typography>
             </BlockTitle>
-            <Grid
-                container
-                justifyContent="center"
-                className={classes.contentSm}
-            >
-                <Grid
-                    item
-                    xs={12}
-                    className={classes.imgContainer}
-                    {...swipableHandlers}
-                >
+            <Grid container justifyContent="center" className={classes.contentSm}>
+                <Grid item xs={12} className={classes.imgContainer} {...swipableHandlers}>
                     <Image
                         src={defaultImage}
                         layout="fill"
@@ -90,11 +82,7 @@ export const WardrobeRightSmDown = () => {
                     ))}
                 </Grid>
                 <Grid item xs={12}>
-                    <Pagination
-                        numberOfPages={ADDITIONAL.length + 1}
-                        activeIndex={current}
-                        onChange={onSet}
-                    />
+                    <Pagination numberOfPages={ADDITIONAL.length + 1} activeIndex={current} onChange={onSet} />
                 </Grid>
                 {current !== 0 ? (
                     <Grid item xs={10} className={classes.textBottom}>
@@ -106,19 +94,14 @@ export const WardrobeRightSmDown = () => {
                 ) : (
                     <Grid item xs={10} className={classes.textBottom}>
                         <Typography variant="body2">
-                            Каждое наше изделие это сложный инженерный продукт,
-                            включающий в&nbsp;себя передовые мировые стандарты
-                            производства мебели. Все это сделано для того, чтобы
-                            наша мебель безупречно служила вам долгие годы
+                            Каждое наше изделие это сложный инженерный продукт, включающий в&nbsp;себя передовые мировые
+                            стандарты производства мебели. Все это сделано для того, чтобы наша мебель безупречно
+                            служила вам долгие годы
                         </Typography>
                     </Grid>
                 )}
             </Grid>
-            <Grid
-                container
-                justifyContent="center"
-                className={classes.buttonContainer}
-            >
+            <Grid container justifyContent="center" className={classes.buttonContainer}>
                 <Grid item xs={10} sm={6} md={4}>
                     <MainButton>Рассчитать стоимость</MainButton>
                 </Grid>

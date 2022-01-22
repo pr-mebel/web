@@ -1,2 +1,2 @@
-export * from './tabs';
 export * from './options';
+export * from './tabs';

@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
-import cn from 'classnames';
-import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import { PageImage } from './components';
+import { makeStyles } from '@material-ui/core/styles';
+import cn from 'classnames';
 import Link from 'next/link';
+import React, { FC } from 'react';
+
+import { PageImage } from './components';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -183,29 +184,20 @@ export const Page: FC<Props> = ({ pageID, titles, subtitles, texts, to }) => {
 
             <div className={classes.pageContent}>
                 {titles.map((titleWrapper) => (
-                    <Typography
-                        key={titleWrapper.id}
-                        className={cn(classes.text, classes.title)}
-                    >
+                    <Typography key={titleWrapper.id} className={cn(classes.text, classes.title)}>
                         {titleWrapper.data}
                     </Typography>
                 ))}
                 <div>
                     {subtitles?.map((subtitleWrapper) => (
-                        <Typography
-                            key={subtitleWrapper.id}
-                            className={cn(classes.text, classes.subtitle)}
-                        >
+                        <Typography key={subtitleWrapper.id} className={cn(classes.text, classes.subtitle)}>
                             {subtitleWrapper.data}
                         </Typography>
                     ))}
                 </div>
                 <div>
                     {texts.map((textWrapper) => (
-                        <Typography
-                            key={textWrapper.id}
-                            className={cn(classes.text, classes.bottomText)}
-                        >
+                        <Typography key={textWrapper.id} className={cn(classes.text, classes.bottomText)}>
                             {textWrapper.data}
                         </Typography>
                     ))}
@@ -213,9 +205,7 @@ export const Page: FC<Props> = ({ pageID, titles, subtitles, texts, to }) => {
                 <div className={classes.buttonContainer}>
                     <Link href={to} passHref>
                         <button type="button" className={classes.button}>
-                            <Typography className={classes.buttonText}>
-                                Подробнее
-                            </Typography>
+                            <Typography className={classes.buttonText}>Подробнее</Typography>
                         </button>
                     </Link>
                 </div>

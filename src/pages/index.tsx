@@ -1,23 +1,24 @@
-import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import React, { FC } from 'react';
+
 import {
-    DesignOffer,
-    Carousel,
-    Description,
-    Catalog,
-    FeedbackForm,
-    Advantages,
-    WardrobeLeft,
-    WardrobeRight,
     About,
+    Advantages,
     CallDesigner,
     CallDesignerForm,
-    OurProduction,
-    HowToOrder,
+    Carousel,
+    Catalog,
+    Description,
+    DesignOffer,
     FAQ,
+    FeedbackForm,
+    HowToOrder,
+    Map,
+    OurProduction,
     QuestionsForm,
     ShopImg,
-    Map,
+    WardrobeLeft,
+    WardrobeRight,
 } from '@/components';
 
 const marginTop80 = {

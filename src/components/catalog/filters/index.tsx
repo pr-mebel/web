@@ -1,17 +1,13 @@
-import React, { FC } from 'react';
-import { find } from 'lodash';
-import { makeStyles } from '@material-ui/core/styles';
 import { Container, Typography } from '@material-ui/core';
-import { filters as filterOptions } from '@/constants';
-import {
-    SectionID,
-    StyleID,
-    DoorTypeID,
-    FilterField,
-    FilterValue,
-} from '@/entities';
+import { makeStyles } from '@material-ui/core/styles';
+import { find } from 'lodash';
+import React, { FC } from 'react';
+
 import { BlockTitle, Link } from '@/components/common';
-import { LeadText, SectionPicker, BottomFilters } from './components';
+import { filters as filterOptions } from '@/constants';
+import { DoorTypeID, FilterField, FilterValue, SectionID, StyleID } from '@/entities';
+
+import { BottomFilters, LeadText, SectionPicker } from './components';
 
 const useStyles = makeStyles((theme) => ({
     breadcrumbs: {
@@ -75,20 +71,11 @@ export const Filters: FC<Props> = ({ filter, onChange }) => {
                 <LeadText selectedSection={filter.section} />
             </section>
             <section className={classes.sectionPickerSection}>
-                <SectionPicker
-                    options={filterOptions.sections}
-                    value={filter.section}
-                    onChange={onChange}
-                />
+                <SectionPicker options={filterOptions.sections} value={filter.section} onChange={onChange} />
             </section>
             <section className={classes.secondTitle}>
                 <BlockTitle>
-                    <Typography variant="h4">
-                        {
-                            find(filterOptions.sections, { id: filter.section })
-                                ?.title
-                        }
-                    </Typography>
+                    <Typography variant="h4">{find(filterOptions.sections, { id: filter.section })?.title}</Typography>
                 </BlockTitle>
             </section>
             <section className={classes.bottomFiltersSection}>

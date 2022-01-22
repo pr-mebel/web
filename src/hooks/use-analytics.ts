@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import { isProduction } from '@/utils';
+
 export const useAnalytics = () => {
     const [ready, setReady] = useState(false);
 
@@ -59,7 +61,7 @@ export const useAnalytics = () => {
     }, [ready]);
 
     useEffect(() => {
-        setReady(true);
+        setReady(isProduction());
     }, []);
 
     return {

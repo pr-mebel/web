@@ -1,9 +1,8 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
-const accessToken =
-    process.env.VERCEL_ENV === 'production'
-        ? process.env.CONTENTFUL_ACCESS_TOKEN
-        : process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN;
+import { isProduction } from '@/utils';
+
+const accessToken = isProduction() ? process.env.CONTENTFUL_ACCESS_TOKEN : process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN;
 
 /**
  * Клиент для обращения к contentful CMS

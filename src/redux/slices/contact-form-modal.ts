@@ -17,6 +17,5 @@ const contactFormModalSlice = createSlice({
     },
 });
 
-export const { openContactFormModal, closeContactFormModal } =
-    contactFormModalSlice.actions;
+export const { openContactFormModal, closeContactFormModal } = contactFormModalSlice.actions;
 export default contactFormModalSlice.reducer;

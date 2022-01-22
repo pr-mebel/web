@@ -1,10 +1,4 @@
-import {
-    SectionID,
-    StyleID,
-    DoorTypeID,
-    SectionCollection,
-    Collection,
-} from '@/entities';
+import { Collection, DoorTypeID, SectionCollection, SectionID, StyleID } from '@/entities';
 
 export type FetchCatalogByFilterParams = {
     section: SectionID;
@@ -21,6 +15,7 @@ export type SendEmailParams = {
     name: string;
     tel: string;
     description?: string;
+    meta?: Record<string, unknown>;
     files?: File[];
 };
 

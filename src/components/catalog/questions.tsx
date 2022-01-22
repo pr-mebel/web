@@ -1,13 +1,14 @@
-import React, { FC, useCallback, useRef, useState } from 'react';
+import { Container, Grid, Hidden, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Typography, Grid, Hidden } from '@material-ui/core';
-import { useForm } from 'react-hook-form';
-import { formatPhoneInput, getFileDeclination } from '@/utils';
-import { sendEmail } from '@/api';
-import PublishIcon from '@material-ui/icons/Publish';
 import ClearIcon from '@material-ui/icons/Clear';
-import { BlockTitle, SubmitButton, Input } from '@/components';
+import PublishIcon from '@material-ui/icons/Publish';
+import React, { FC, useCallback, useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+import { sendEmail } from '@/api';
+import { BlockTitle, Input, SubmitButton } from '@/components';
 import { useAnalytics, useFormSubmitModal } from '@/hooks';
+import { formatPhoneInput, getFileDeclination } from '@/utils';
 
 const useStyles = makeStyles({
     root: {
@@ -84,7 +85,7 @@ export const Questions: FC = () => {
     const classes = useStyles();
     const formSubmitModal = useFormSubmitModal();
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const [fileList, setFileList] = useState<FileList | null>(null);
+    const [fileList, setFileList] = useState<File[]>([]);
     const { register, handleSubmit, reset } = useForm();
 
     /**
@@ -98,8 +99,10 @@ export const Questions: FC = () => {
      * Загружает выбранные файлы на сервер
      */
     const handleFileUploadChange = useCallback(() => {
-        if (fileInputRef.current?.files) {
-            setFileList(fileInputRef.current.files);
+        if (fileInputRef.current?.files && fileInputRef.current.files) {
+            const files = fileInputRef.current.files;
+
+            setFileList((prev) => [...prev, ...files]);
         }
     }, [fileInputRef]);
 
@@ -109,7 +112,7 @@ export const Questions: FC = () => {
     const handleDeleteSelectedFiles = useCallback(() => {
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
-            setFileList(null);
+            setFileList([]);
         }
     }, []);
 
@@ -120,7 +123,10 @@ export const Questions: FC = () => {
         (data) => {
             sendEmail({
                 ...data,
-                files: [...(fileList || [])],
+                files: fileList,
+                meta: {
+                    place: 'Каталог/Остались вопросы?',
+                },
             });
             analytics.onSendEmail('vopros_katalog');
             formSubmitModal.onOpen();
@@ -133,11 +139,7 @@ export const Questions: FC = () => {
         <div className={classes.root}>
             <Container className={classes.container}>
                 <BlockTitle>
-                    <Typography
-                        variant="h4"
-                        className={classes.title}
-                        gutterBottom
-                    >
+                    <Typography variant="h4" className={classes.title} gutterBottom>
                         Остались вопросы?{' '}
                         <Hidden smUp>
                             <br />
@@ -147,21 +149,16 @@ export const Questions: FC = () => {
                 </BlockTitle>
                 <Hidden smDown>
                     <Typography className={classes.subtitle} gutterBottom>
-                        А&nbsp;если вы&nbsp;хотите получить расчет конкретной
-                        модели, прикрепите свои эскизы или план помещения
-                        с&nbsp;описанием пожеланий и&nbsp;наш дизайнер
-                        в&nbsp;кратчайшие сроки подготовит для вас предложение!
+                        А&nbsp;если вы&nbsp;хотите получить расчет конкретной модели, прикрепите свои эскизы или план
+                        помещения с&nbsp;описанием пожеланий и&nbsp;наш дизайнер в&nbsp;кратчайшие сроки подготовит для
+                        вас предложение!
                     </Typography>
                 </Hidden>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Grid container>
                         <Grid item xs={1} sm={3} />
                         <Grid item xs={10} sm={6} container>
-                            <Grid
-                                item
-                                xs={12}
-                                className={classes.inputContainer}
-                            >
+                            <Grid item xs={12} className={classes.inputContainer}>
                                 <Input
                                     ref={register}
                                     name="name"
@@ -173,11 +170,7 @@ export const Questions: FC = () => {
                                     darkMode
                                 />
                             </Grid>
-                            <Grid
-                                item
-                                xs={12}
-                                className={classes.inputContainer}
-                            >
+                            <Grid item xs={12} className={classes.inputContainer}>
                                 <Input
                                     ref={register}
                                     name="tel"
@@ -188,17 +181,11 @@ export const Questions: FC = () => {
                                     required
                                     darkMode
                                     onChange={(event) => {
-                                        event.target.value = formatPhoneInput(
-                                            event.target.value
-                                        );
+                                        event.target.value = formatPhoneInput(event.target.value);
                                     }}
                                 />
                             </Grid>
-                            <Grid
-                                item
-                                xs={12}
-                                className={classes.inputContainer}
-                            >
+                            <Grid item xs={12} className={classes.inputContainer}>
                                 <Input
                                     ref={register}
                                     name="email"
@@ -222,11 +209,7 @@ export const Questions: FC = () => {
                                 required
                                 darkMode
                             />
-                            <Grid
-                                container
-                                justifyContent="center"
-                                className={classes.files}
-                            >
+                            <Grid container justifyContent="center" className={classes.files}>
                                 <input
                                     type="file"
                                     multiple
@@ -244,48 +227,22 @@ export const Questions: FC = () => {
                                     className={classes.fileInputContainer}
                                 >
                                     <PublishIcon className={classes.icon} />
-                                    <Typography
-                                        className={classes.fileInputText}
-                                    >
-                                        Прикрепить эскизы
-                                    </Typography>
+                                    <Typography className={classes.fileInputText}>Прикрепить эскизы</Typography>
                                 </Grid>
                                 {!!fileList?.length && (
-                                    <Grid
-                                        item
-                                        xs={12}
-                                        sm={5}
-                                        container
-                                        justifyContent="center"
-                                    >
-                                        <Typography
-                                            className={classes.fileInputText}
-                                        >
-                                            {`${
-                                                fileList.length
-                                            }\xA0${getFileDeclination(
-                                                fileList.length
-                                            )}`}
+                                    <Grid item xs={12} sm={5} container justifyContent="center">
+                                        <Typography className={classes.fileInputText}>
+                                            {`${fileList.length}\xA0${getFileDeclination(fileList.length)}`}
                                             <ClearIcon
-                                                className={
-                                                    classes.deleteFilesIcon
-                                                }
-                                                onClick={
-                                                    handleDeleteSelectedFiles
-                                                }
+                                                className={classes.deleteFilesIcon}
+                                                onClick={handleDeleteSelectedFiles}
                                             />
                                         </Typography>
                                     </Grid>
                                 )}
                             </Grid>
                         </Grid>
-                        <Grid
-                            item
-                            xs={12}
-                            container
-                            justifyContent="center"
-                            className={classes.buttonContainer}
-                        >
+                        <Grid item xs={12} container justifyContent="center" className={classes.buttonContainer}>
                             <Grid item xs={8} sm={6} md={4}>
                                 <SubmitButton>Отправить</SubmitButton>
                             </Grid>
@@ -293,10 +250,8 @@ export const Questions: FC = () => {
                         <Grid item xs={1} sm={2} md={3} />
                         <Grid item xs={10} sm={8} md={6}>
                             <Typography className={classes.text} align="center">
-                                Нажимая кнопку &laquo;Рассчитать
-                                стоимость&raquo;, я&nbsp;даю согласие
-                                на&nbsp;обработку персональных данных
-                                и&nbsp;подтверждаю, что ознакомлен с&nbsp;
+                                Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие на&nbsp;обработку
+                                персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
                                 <a
                                     href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
                                     className={classes.copyrightLink}

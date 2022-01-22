@@ -1,16 +1,11 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { gql } from '@apollo/client';
+import type { NextApiRequest, NextApiResponse } from 'next';
+
 import { client } from '@/api/client';
-import { parseContentfulCatalog } from '@/normalizers';
 import { batchSize } from '@/constants';
-import {
-    StyleID,
-    DoorTypeID,
-    SectionCollection,
-    Collection,
-    Filter,
-} from '@/entities';
-import { isVercelEnvDev } from '@/utils';
+import { Collection, DoorTypeID, Filter, SectionCollection, StyleID } from '@/entities';
+import { parseContentfulCatalog } from '@/normalizers';
+import { isProduction } from '@/utils';
 
 type Output = {
     result: SectionCollection | Collection;
@@ -28,21 +23,15 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         const data = await client.query<Output>({
             query:
-                style === ('any' as StyleID) &&
-                doorType === ('any' as DoorTypeID)
+                style === ('any' as StyleID) && doorType === ('any' as DoorTypeID)
                     ? gql`
                 {
-                    result: ${section}SectionCollection(limit: 1, preview: ${isVercelEnvDev()}) {
+                    result: ${section}SectionCollection(limit: 1, preview: ${!isProduction()}) {
                         items {
-                            cardsCollection(limit: ${batchSize}, skip: ${
-                          batchSize * (page - 1)
-                      }) {
+                            cardsCollection(limit: ${batchSize}, skip: ${batchSize * (page - 1)}) {
                                 total
                                 items {
-                                    ... on ${
-                                        section[0].toUpperCase() +
-                                        section.slice(1)
-                                    } {
+                                    ... on ${section[0].toUpperCase() + section.slice(1)} {
                                         id
                                         collection
                                         description
@@ -71,7 +60,7 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
                         ${doorType !== 'any' ? `${doorType}: true` : ''}
                     }, order: [id_ASC], limit: ${batchSize}, skip: ${
                           batchSize * (page - 1)
-                      }, preview: ${isVercelEnvDev()}){
+                      }, preview: ${!isProduction()}){
                         total
                         items {
                             id

@@ -1,6 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import formSubmitModal from './slices/form-submit-modal';
+
 import contactFormModal from './slices/contact-form-modal';
+import formSubmitModal from './slices/form-submit-modal';
 
 export const rootReducer = combineReducers({
     formSubmitModal,

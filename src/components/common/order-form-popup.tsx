@@ -1,14 +1,16 @@
-import React, { FC, useCallback, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { Dialog, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import PublishIcon from '@material-ui/icons/Publish';
 import ClearIcon from '@material-ui/icons/Clear';
-import { formatPhoneInput, getFileDeclination } from '@/utils';
+import PublishIcon from '@material-ui/icons/Publish';
+import React, { FC, useCallback, useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
+
 import { sendEmail } from '@/api';
+import { useAnalytics, useContactFormModal, useFormSubmitModal } from '@/hooks';
+import { formatPhoneInput, getFileDeclination } from '@/utils';
+
 import { Input } from './input';
 import { SubmitButton } from './submit-button';
-import { useAnalytics, useContactFormModal, useFormSubmitModal } from '@/hooks';
 
 const useStyles = makeStyles((theme) => ({
     paperRoot: {
@@ -109,8 +111,8 @@ export const OrderFormPopup: FC = () => {
     const classes = useStyles();
     const contactFormModal = useContactFormModal();
     const formSubmitModal = useFormSubmitModal();
-    const [fileList, setFileList] = useState<FileList | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const [fileList, setFileList] = useState<File[]>([]);
     const { register, handleSubmit } = useForm();
 
     /**
@@ -134,8 +136,9 @@ export const OrderFormPopup: FC = () => {
      * Сохраняет новые загруженные файлы в массив
      */
     const handleFileUploadChange = useCallback(() => {
-        if (fileInputRef.current?.files) {
-            setFileList(fileInputRef.current.files);
+        if (fileInputRef.current?.files && fileInputRef.current.files) {
+            const files = fileInputRef.current.files;
+            setFileList((prev) => [...prev, ...files]);
         }
     }, [fileInputRef]);
 
@@ -145,7 +148,7 @@ export const OrderFormPopup: FC = () => {
     const handleDeleteSelectedFiles = useCallback(() => {
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
-            setFileList([] as unknown as FileList);
+            setFileList([]);
         }
     }, [fileInputRef]);
 
@@ -157,7 +160,10 @@ export const OrderFormPopup: FC = () => {
             contactFormModal.onClose();
             sendEmail({
                 ...data,
-                files: [...(fileList || [])],
+                files: fileList,
+                meta: {
+                    place: 'Модальное окно',
+                },
             });
             analytics.onSendEmail('zakazat_modal');
             analytics.onContactMeModalSubmitted();
@@ -177,10 +183,7 @@ export const OrderFormPopup: FC = () => {
                 className: classes.paperRoot,
             }}
         >
-            <ClearIcon
-                className={classes.closeIcon}
-                onClick={handleClosePopup}
-            />
+            <ClearIcon className={classes.closeIcon} onClick={handleClosePopup} />
             <div className={classes.imgContainer}>
                 <img
                     className={classes.img}
@@ -193,22 +196,13 @@ export const OrderFormPopup: FC = () => {
                     Расчет стоимости проекта
                 </Typography>
                 <Grid item xs={12} className={classes.textContainer}>
-                    <Typography
-                        variant="body1"
-                        align="center"
-                        className={classes.text}
-                    >
-                        Отправьте эскизы, план помещения или просто напишите
-                        свои пожелания к&nbsp;будущему проекту
-                        и&nbsp;мы&nbsp;подготовим для Вас индивидуальное
-                        предложение
+                    <Typography variant="body1" align="center" className={classes.text}>
+                        Отправьте эскизы, план помещения или просто напишите свои пожелания к&nbsp;будущему проекту
+                        и&nbsp;мы&nbsp;подготовим для Вас индивидуальное предложение
                     </Typography>
                 </Grid>
                 <Grid item xs={11} sm={10}>
-                    <form
-                        className={classes.form}
-                        onSubmit={handleSubmit(onSubmit)}
-                    >
+                    <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                         <Input
                             ref={register}
                             name="name"
@@ -227,9 +221,7 @@ export const OrderFormPopup: FC = () => {
                             autoComplete="tel"
                             required
                             onChange={(event) => {
-                                event.target.value = formatPhoneInput(
-                                    event.target.value
-                                );
+                                event.target.value = formatPhoneInput(event.target.value);
                             }}
                         />
                         <Input
@@ -258,38 +250,15 @@ export const OrderFormPopup: FC = () => {
                             className={classes.inputFile}
                             onChange={handleFileUploadChange}
                         />
-                        <Grid
-                            container
-                            justifyContent="center"
-                            className={classes.files}
-                        >
-                            <Grid
-                                item
-                                xs={12}
-                                sm={7}
-                                container
-                                justifyContent="center"
-                                onClick={handleFileInputClick}
-                            >
+                        <Grid container justifyContent="center" className={classes.files}>
+                            <Grid item xs={12} sm={7} container justifyContent="center" onClick={handleFileInputClick}>
                                 <PublishIcon className={classes.icon} />
                                 <Typography>Прикрепить эскизы</Typography>
                             </Grid>
                             {!!fileList?.length && (
-                                <Grid
-                                    item
-                                    xs={12}
-                                    sm={5}
-                                    container
-                                    justifyContent="center"
-                                >
-                                    <Typography
-                                        className={classes.fileInputText}
-                                    >
-                                        {`${
-                                            fileList.length
-                                        }\xA0${getFileDeclination(
-                                            fileList.length
-                                        )}`}
+                                <Grid item xs={12} sm={5} container justifyContent="center">
+                                    <Typography className={classes.fileInputText}>
+                                        {`${fileList.length}\xA0${getFileDeclination(fileList.length)}`}
                                         <ClearIcon
                                             className={classes.deleteFilesIcon}
                                             onClick={handleDeleteSelectedFiles}
@@ -299,14 +268,9 @@ export const OrderFormPopup: FC = () => {
                             )}
                         </Grid>
                         <SubmitButton>Рассчитать стоимость</SubmitButton>
-                        <Typography
-                            variant="body2"
-                            align="center"
-                            className={classes.copy}
-                        >
-                            Нажимая кнопку &laquo;Рассчитать стоимость&raquo;,
-                            я&nbsp;даю согласие на&nbsp;обработку персональных
-                            данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
+                        <Typography variant="body2" align="center" className={classes.copy}>
+                            Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие на&nbsp;обработку
+                            персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
                             <a
                                 href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
                                 className={classes.copyrightLink}

@@ -37,17 +37,13 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => (
                     <title>Частный мебельер - салон мебели премиум-класса</title>
                     <meta property="og:title" content="Частный мебельер - салон мебели премиум-класса" />
                     <meta property="og:locale" content="ru_RU" />
-                    {/* PWA primary color */}
-                    <meta name="theme-color" content={theme.palette.primary.main} />
-                    <meta content="af51c3e9352991d1" name="yandex-verification" />
-                    <meta content="fe86c27432cb6049" name="yandex-verification" />
-                    <meta content="5stp2baz27773j5xm7q9o0torwuokr" name="facebook-domain-verification" />
-                    <meta content="3287bb5b0336ebb7" name="yandex-verification" />
-                    {isProduction() && (
-                        <>
-                            {/* Google Tag Manager */}
-                            <Script id="google-tag-manager" strategy="afterInteractive">
-                                {`(function (w, d, s, l, i) {
+                </Head>
+
+                {isProduction() && (
+                    <>
+                        {/* Google Tag Manager */}
+                        <Script id="google-tag-manager" strategy="afterInteractive">
+                            {`(function (w, d, s, l, i) {
                                         w[l] = w[l] || [];
                                         w[l].push({
                                             'gtm.start':
@@ -60,20 +56,20 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => (
                                             'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
                                         f.parentNode.insertBefore(j, f);
                                     })(window, document, 'script', 'dataLayer', 'GTM-5G36Q89');`}
-                            </Script>
-                            {/* Google Analytics */}
-                            <Script id="google-analytics" strategy="afterInteractive">
-                                {`window.ga = window.ga || function () {
+                        </Script>
+                        {/* Google Analytics */}
+                        <Script id="google-analytics" strategy="afterInteractive">
+                            {`window.ga = window.ga || function () {
                                         (ga.q = ga.q || []).push(arguments)
                                     };
                                     ga.l = +new Date;
                                     ga('create', 'UA-145856436-1', 'auto');
                                     ga('send', 'pageview');`}
-                            </Script>
-                            <Script src="https://www.google-analytics.com/analytics.js" strategy="afterInteractive" />
-                            {/* Yandex Metrika [54949111, 86537628] */}
-                            <Script id="yandex-metrika" strategy="afterInteractive">
-                                {`(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                        </Script>
+                        <Script src="https://www.google-analytics.com/analytics.js" strategy="afterInteractive" />
+                        {/* Yandex Metrika [54949111, 86537628] */}
+                        <Script id="yandex-metrika" strategy="afterInteractive">
+                            {`(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
                                         m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
                                         (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
                                     
@@ -91,17 +87,17 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => (
                                             accurateTrackBounce: true,
                                             trackHash: true
                                         });`}
-                            </Script>
-                            {/* Bitrix messenger */}
-                            <Script id="bitrix-manager" strategy="lazyOnload">
-                                {`(function(w,d,u){
+                        </Script>
+                        {/* Bitrix messenger */}
+                        <Script id="bitrix-manager" strategy="lazyOnload">
+                            {`(function(w,d,u){
                                                     var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/60000|0);
                                                     var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
                                                 })(window,document,'https://cdn-ru.bitrix24.ru/b2399491/crm/site_button/loader_3_q6v4tx.js');`}
-                            </Script>
-                            {/* Facebook Pixel Code */}
-                            <Script id="facebook-pixel" strategy="afterInteractive">
-                                {`!function(f,b,e,v,n,t,s)
+                        </Script>
+                        {/* Facebook Pixel Code */}
+                        <Script id="facebook-pixel" strategy="afterInteractive">
+                            {`!function(f,b,e,v,n,t,s)
                                         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
                                         n.callMethod.apply(n,arguments):n.queue.push(arguments)};
                                         if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
@@ -111,10 +107,10 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => (
                                         'https://connect.facebook.net/en_US/fbevents.js');
                                         fbq('init', '364548827793450');
                                         fbq('track', 'PageView');`}
-                            </Script>
-                            {/* Rating Mail.ru counter */}
-                            <Script id="mail.ru-counter" strategy="afterInteractive">
-                                {`var _tmr = window._tmr || (window._tmr = []);
+                        </Script>
+                        {/* Rating Mail.ru counter */}
+                        <Script id="mail.ru-counter" strategy="afterInteractive">
+                            {`var _tmr = window._tmr || (window._tmr = []);
                                         _tmr.push({id: "3136628", type: "pageView", start: (new Date()).getTime(), pid: "USER_ID"});
                                         (function (d, w, id) {
                                             if (d.getElementById(id)) return;
@@ -133,10 +129,9 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => (
                                                 f();
                                             }
                                         })(document, window, "topmailru-code");`}
-                            </Script>
-                        </>
-                    )}
-                </Head>
+                        </Script>
+                    </>
+                )}
 
                 <Header />
                 <Component {...pageProps} />

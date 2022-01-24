@@ -20,6 +20,7 @@ import {
     WardrobeLeft,
     WardrobeRight,
 } from '@/components';
+import { isProduction } from '@/utils';
 
 const marginTop80 = {
     marginTop: '80px',
@@ -78,7 +79,7 @@ const HomePage: FC = () => {
                 <section id="carousel" className={classes.carousel}>
                     <Carousel />
                 </section>
-                <button onClick={() => console.log(process.env.VERCEL_ENV)}>button</button>
+                <button onClick={() => console.log(isProduction())}>button</button>
 
                 {/* Текст под каруселью */}
                 <section className={classes.description}>

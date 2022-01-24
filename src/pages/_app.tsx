@@ -39,6 +39,8 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => (
                     <meta property="og:locale" content="ru_RU" />
                 </Head>
 
+                {console.log(isProduction())}
+
                 {isProduction() && (
                     <>
                         {/* Google Tag Manager */}

@@ -2,8 +2,6 @@ import { ServerStyleSheets } from '@material-ui/core/styles';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
 
-import theme from '@/theme';
-
 /**
  * https://material-ui.com/styles/advanced/#next-js
  */
@@ -11,14 +9,7 @@ export default class MyDocument extends Document {
     render() {
         return (
             <Html lang="ru">
-                <Head>
-                    {/* PWA primary color */}
-                    <meta name="theme-color" content={theme.palette.primary.main} />
-                    <meta content="af51c3e9352991d1" name="yandex-verification" />
-                    <meta content="fe86c27432cb6049" name="yandex-verification" />
-                    <meta content="5stp2baz27773j5xm7q9o0torwuokr" name="facebook-domain-verification" />
-                    <meta content="3287bb5b0336ebb7" name="yandex-verification" />
-                </Head>
+                <Head />
                 <body>
                     <Main />
                     <NextScript />

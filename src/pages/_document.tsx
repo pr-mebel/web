@@ -23,6 +23,7 @@ export default class MyDocument extends Document {
                 <body>
                     {isProduction() && (
                         <>
+                            {console.log('here')}
                             {/* Google Tag Manager */}
                             <div
                                 dangerouslySetInnerHTML={{

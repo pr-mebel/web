@@ -20,6 +20,7 @@ import {
     WardrobeLeft,
     WardrobeRight,
 } from '@/components';
+import { isProduction } from '@/utils';
 
 const marginTop80 = {
     marginTop: '80px',
@@ -71,6 +72,8 @@ const useStyles = makeStyles((theme) => ({
 
 const HomePage: FC = () => {
     const classes = useStyles();
+
+    console.log(isProduction());
 
     return (
         <>

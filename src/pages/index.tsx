@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 const HomePage: FC = () => {
     const classes = useStyles();
 
-    console.log(process.env.VERCEL_ENV);
+    console.log(process.env.CONTENTFUL_SPACE_ID);
 
     return (
         <>

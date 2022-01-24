@@ -78,6 +78,7 @@ const HomePage: FC = () => {
                 <section id="carousel" className={classes.carousel}>
                     <Carousel />
                 </section>
+                <button onClick={() => console.log(process.env.VERCEL_ENV)}>button</button>
 
                 {/* Текст под каруселью */}
                 <section className={classes.description}>

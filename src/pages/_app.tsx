@@ -21,12 +21,20 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => (
                     <meta name="yandex-verification" content="6eb5436d905f1d91" />
                     <meta
                         name="description"
-                        content="Мы создаем эксклюзивный проект будущего изделия, который
+                        content="Мы создадим эксклюзивный проект будущего изделия, который
+                не просто идеально впишется в ваш интерьер, а будет комфортен,
+                удобен и функционален в использовании, и прослужит долгие годы."
+                    />
+                    <meta
+                        name="og:description"
+                        content="Мы создадим эксклюзивный проект будущего изделия, который
                 не просто идеально впишется в ваш интерьер, а будет комфортен,
                 удобен и функционален в использовании, и прослужит долгие годы."
                     />
                     <meta name="canonical" content="https://pr-mebel.com" />
                     <title>Частный мебельер - салон мебели премиум-класса</title>
+                    <meta property="og:title" content="Частный мебельер - салон мебели премиум-класса" />
+                    <meta property="og:locale" content="ru_RU" />
                 </Head>
 
                 <Header />

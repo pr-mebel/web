@@ -11,7 +11,7 @@ import { isProduction } from '@/utils';
 export default class MyDocument extends Document {
     render() {
         return (
-            <Html lang="ru">
+            <Html lang="ru" prefix="og: https://ogp.me/ns#">
                 <Head>
                     {/* PWA primary color */}
                     <meta name="theme-color" content={theme.palette.primary.main} />

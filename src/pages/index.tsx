@@ -72,14 +72,13 @@ const useStyles = makeStyles((theme) => ({
 const HomePage: FC = () => {
     const classes = useStyles();
 
-    console.log(process.env);
-
     return (
         <>
             <main>
                 <section id="carousel" className={classes.carousel}>
                     <Carousel />
                 </section>
+                <button onClick={() => console.log(process.env.VERCEL_ENV)}>button</button>
 
                 {/* Текст под каруселью */}
                 <section className={classes.description}>

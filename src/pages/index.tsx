@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 const HomePage: FC = () => {
     const classes = useStyles();
 
-    console.log(JSON.stringify(process.env));
+    console.log(process.env);
 
     return (
         <>

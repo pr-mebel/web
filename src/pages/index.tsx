@@ -72,6 +72,8 @@ const useStyles = makeStyles((theme) => ({
 const HomePage: FC = () => {
     const classes = useStyles();
 
+    console.log(process.env);
+
     return (
         <>
             <main>

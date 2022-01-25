@@ -3,7 +3,8 @@ import '../styles/globals.css';
 import { ThemeProvider } from '@material-ui/core/styles';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import React, { FC } from 'react';
+import { useRouter } from 'next/router';
+import React, { FC, useEffect } from 'react';
 import { Provider } from 'react-redux';
 
 import { Footer, FormSubmitPopup, GoTopButton, Header, OrderFormPopup } from '@/components';
@@ -12,6 +13,17 @@ import { ScriptsList } from '@/scripts/sciprts-list';
 import theme from '@/theme';
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
+    const router = useRouter();
+
+    // Альтернатива document.referrer
+    // https://www.grouparoo.com/blog/getting-previous-path-nextjs
+    useEffect(() => {
+        const prevPath = sessionStorage.getItem('currentPath');
+
+        sessionStorage.setItem('prevPath', prevPath || '');
+        sessionStorage.setItem('currentPath', router.pathname);
+    }, [router.asPath, router.pathname]);
+
     return (
         <React.StrictMode>
             <Provider store={store}>

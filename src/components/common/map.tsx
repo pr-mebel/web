@@ -90,6 +90,7 @@ export const Map: FC = () => {
     const classes = useStyles();
     const theme = useTheme();
     const isXsDown = useMediaQuery(theme.breakpoints.down('xs'));
+    const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
     const { ref, inView } = useInView({
         triggerOnce: true,
     });
@@ -155,15 +156,29 @@ export const Map: FC = () => {
                         <li className={classes.listItem}>
                             <img src={yandex} alt="Яндекс" className={classes.icon} />
                             <Typography variant="body2" className={classes.mapsText}>
-                                <Link to="https://yandex.ru/maps/-/CCQtFQdaLA" external>
-                                    Открыть в яндекс навигаторе
+                                <Link
+                                    to={
+                                        isDesktop
+                                            ? 'https://yandex.ru/maps/-/CCQtFQdaLA'
+                                            : 'yandexnavi://build_route_on_map?lat_to=55.809176&lon_to=37.512955'
+                                    }
+                                    external
+                                >
+                                    Открыть в Яндекс навигаторе
                                 </Link>
                             </Typography>
                         </li>
                         <li className={classes.listItem}>
                             <img src={google} alt="Google" className={classes.icon} />
                             <Typography variant="body2" className={classes.mapsText}>
-                                <Link to="https://goo.gl/maps/WZTKJ95GqKgV5YPr7" external>
+                                <Link
+                                    to={
+                                        isDesktop
+                                            ? 'https://goo.gl/maps/WZTKJ95GqKgV5YPr7'
+                                            : 'comgooglemaps://?q=55.809176,37.512955'
+                                    }
+                                    external
+                                >
                                     Открыть Google Maps
                                 </Link>
                             </Typography>

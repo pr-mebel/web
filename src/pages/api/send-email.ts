@@ -2,6 +2,9 @@ import multer from 'multer';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
+import { dateTemplateWithTime } from '@/constants';
+import { format } from '@/utils';
+
 const upload = multer({
     storage: multer.memoryStorage(),
 });
@@ -29,6 +32,7 @@ type Body = {
     email?: string;
     name: string;
     tel: string;
+    place: string;
     description?: string;
     meta?: string;
 };
@@ -36,7 +40,7 @@ type Body = {
 const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
     await runMiddleware(req, res, uploadMiddleware);
 
-    const { email, name, tel, description, meta } = req.body as Body;
+    const { email, name, tel, description, meta, place } = req.body as Body;
 
     try {
         const transporter = nodemailer.createTransport({
@@ -49,17 +53,20 @@ const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
             },
         });
 
+        const currentTime = format(new Date(), dateTemplateWithTime);
+
         await transporter.sendMail({
-            from: 'zakaz@pr-mebel.ru',
+            from: `${place} | ${tel} | ${currentTime}`,
             to: 'zakaz@pr-mebel.ru',
             replyTo: email || 'zakaz@pr-mebel.ru',
-            subject: `[ТЕСТ] Расчет | ${name} | ${tel}`,
+            subject: `${name} | ${tel} | ${currentTime}`,
             html: `
+                <p><strong>Кнопка:</strong><br>${place}</p>
                 <p><strong>Имя:</strong><br>${name}</p>
                 <p><strong>Телефон:</strong><br>${tel}</p>
-                ${email ? `<p><strong>Почта:</strong><br>${email}</p>` : ''}
-                ${description ? `<p><strong>Описание:</strong><br>${description}</p>` : ''}
-                ${meta && `<p>Дополнительная информация<br>${meta}</p>`}
+                <p><strong>Почта:</strong><br>${email || '-'}</p>
+                <p><strong>Описание:</strong><br>${description || '-'}</p>
+                <p>Дополнительная информация<br>${meta || '-'}</p>
             `,
             attachments: req.files.map((file) => ({
                 filename: file.filename,

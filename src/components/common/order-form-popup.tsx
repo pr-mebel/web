@@ -5,7 +5,7 @@ import PublishIcon from '@material-ui/icons/Publish';
 import React, { FC, useCallback, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { sendEmail } from '@/api';
+import { useSendEmail } from '@/api';
 import { useAnalytics, useContactFormModal, useFormSubmitModal } from '@/hooks';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
 
@@ -114,6 +114,7 @@ export const OrderFormPopup: FC = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [fileList, setFileList] = useState<File[]>([]);
     const { register, handleSubmit } = useForm();
+    const { onSendEmail } = useSendEmail({ place: 'Модальное окно' });
 
     /**
      * Закрывает попап
@@ -158,18 +159,15 @@ export const OrderFormPopup: FC = () => {
     const onSubmit = useCallback(
         (data) => {
             contactFormModal.onClose();
-            sendEmail({
+            onSendEmail({
                 ...data,
                 files: fileList,
-                meta: {
-                    place: 'Модальное окно',
-                },
             });
             analytics.onSendEmail('zakazat_modal');
             analytics.onContactMeModalSubmitted();
             formSubmitModal.onOpen();
         },
-        [fileList, contactFormModal, formSubmitModal, analytics]
+        [fileList, contactFormModal, formSubmitModal, analytics, onSendEmail]
     );
 
     return (

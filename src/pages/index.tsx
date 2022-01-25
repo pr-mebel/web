@@ -20,6 +20,7 @@ import {
     WardrobeLeft,
     WardrobeRight,
 } from '@/components';
+import { useTrackUtm } from '@/hooks';
 
 const marginTop80 = {
     marginTop: '80px',
@@ -70,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const HomePage: FC = () => {
+    useTrackUtm();
     const classes = useStyles();
 
     return (

@@ -5,7 +5,7 @@ import bgImg from 'public/images/home-page/questions-form/1.jpg';
 import React, { FC, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { sendEmail } from '@/api';
+import { useSendEmail } from '@/api';
 import { BlockTitle, Input, SubmitButton } from '@/components';
 import { useAnalytics, useFormSubmitModal } from '@/hooks';
 import { formatPhoneInput } from '@/utils';
@@ -57,24 +57,22 @@ export const QuestionsForm: FC = () => {
     const classes = useStyles();
     const formSubmitModal = useFormSubmitModal();
     const { register, handleSubmit, reset } = useForm();
+    const { onSendEmail } = useSendEmail({ place: 'Главная/Остались вопросы?' });
 
     /**
      * Отправляет форму
      */
     const onSubmit = useCallback(
         (data) => {
-            sendEmail({
+            onSendEmail({
                 ...data,
                 files: [],
-                meta: {
-                    place: 'Главная/Остались вопросы?',
-                },
             });
             analytics.onSendEmail('vopros');
             formSubmitModal.onOpen();
             reset();
         },
-        [reset, formSubmitModal, analytics]
+        [reset, formSubmitModal, analytics, onSendEmail]
     );
 
     return (

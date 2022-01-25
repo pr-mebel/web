@@ -1,4 +1,4 @@
-import { Container, Grid, Hidden, Typography } from '@material-ui/core';
+import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Image from 'next/image';
 import bgImg from 'public/images/home-page/questions-form/1.jpg';
@@ -21,9 +21,34 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('xs')]: {
             padding: '40px 0',
         },
+        '&::after': {
+            position: 'absolute',
+            content: '""',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0, 0, 0, .7)',
+        },
     },
     title: {
         color: 'white',
+        fontSize: '30px',
+        lineHeight: '35px',
+        fontWeight: 300,
+        textTransform: 'uppercase',
+        '@media (max-width: 480px)': {
+            fontSize: '20px',
+            lineHeight: '23px',
+        },
+        '@media (max-width: 767px)': {
+            fontSize: '22px',
+            lineHeight: '25px',
+        },
+        '@media (max-width: 1199px)': {
+            fontSize: '26px',
+            lineHeight: '30px',
+        },
     },
     subtitle: {
         color: 'white',
@@ -86,7 +111,7 @@ export const QuestionsForm: FC = () => {
             />
             <Container className={classes.container}>
                 <BlockTitle>
-                    <Typography variant="h4" className={classes.title}>
+                    <Typography variant="h3" className={classes.title}>
                         Остались вопросы?
                     </Typography>
                 </BlockTitle>
@@ -96,8 +121,8 @@ export const QuestionsForm: FC = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Grid container>
                         <Grid item xs={1} md={3} />
-                        <Grid item xs={10} md={6} container spacing={2}>
-                            <Grid item xs={12} sm={5}>
+                        <Grid item xs={10} md={6} container spacing={4}>
+                            <Grid item xs={12} sm={6}>
                                 <Input
                                     ref={register}
                                     name="name"
@@ -109,10 +134,7 @@ export const QuestionsForm: FC = () => {
                                     darkMode
                                 />
                             </Grid>
-                            <Hidden xsDown>
-                                <Grid item sm={2} />
-                            </Hidden>
-                            <Grid item xs={12} sm={5}>
+                            <Grid item xs={12} sm={6}>
                                 <Input
                                     ref={register}
                                     name="tel"

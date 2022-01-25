@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     form: {
-        marginTop: '20px',
+        marginTop: '30px',
         display: 'grid',
         gridTemplateColumns: '1fr',
         rowGap: '10px',
@@ -199,7 +199,7 @@ export const OrderFormPopup: FC = () => {
                         и&nbsp;мы&nbsp;подготовим для Вас индивидуальное предложение
                     </Typography>
                 </Grid>
-                <Grid item xs={11} sm={10}>
+                <Grid item xs={9} sm={8}>
                     <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                         <Input
                             ref={register}
@@ -249,12 +249,12 @@ export const OrderFormPopup: FC = () => {
                             onChange={handleFileUploadChange}
                         />
                         <Grid container justifyContent="center" className={classes.files}>
-                            <Grid item xs={12} sm={7} container justifyContent="center" onClick={handleFileInputClick}>
+                            <Grid item xs={12} container justifyContent="center" onClick={handleFileInputClick}>
                                 <PublishIcon className={classes.icon} />
                                 <Typography>Прикрепить эскизы</Typography>
                             </Grid>
                             {!!fileList?.length && (
-                                <Grid item xs={12} sm={5} container justifyContent="center">
+                                <Grid item xs={12} container justifyContent="center">
                                     <Typography className={classes.fileInputText}>
                                         {`${fileList.length}\xA0${getFileDeclination(fileList.length)}`}
                                         <ClearIcon

@@ -1,6 +1,5 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import React, { FC, useCallback } from 'react';
 
 import { LoadingBackground } from '@/components/common';
@@ -29,14 +28,27 @@ const useStyles = makeStyles((theme) => ({
         left: '0',
         padding: '5px 40px 5px 15px',
         backgroundColor: 'rgba(119, 119, 119, 0.72)',
+        '&:after': {
+            position: 'absolute',
+            right: '25px',
+            height: '100%',
+            content: '""',
+            top: '0',
+            width: '.5px',
+            background: 'white',
+        },
     },
     tooltipText: {
         color: 'white',
+        fontSize: '12px',
     },
     arrow: {
         position: 'absolute',
         color: 'white',
-        bottom: '5px',
+        width: '12px',
+        height: '12px',
+        top: '50%',
+        transform: 'translateY(-50%)',
         right: '5px',
     },
     [theme.breakpoints.up('xs')]: {
@@ -90,7 +102,20 @@ export const Card: FC<Props> = ({ imageUrlMin, collection, currentItemId, onClic
                 <img className={classes.img} src={imageUrlMin} alt={`Товар из коллекции ${collection}`} />
                 <div className={classes.tooltip}>
                     <Typography className={classes.tooltipText}>{collection}</Typography>
-                    <ArrowForwardIcon className={classes.arrow} />
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={classes.arrow}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                    </svg>
                 </div>
             </div>
         </LoadingBackground>

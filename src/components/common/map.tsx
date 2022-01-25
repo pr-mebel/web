@@ -237,7 +237,12 @@ export const Map: FC = () => {
                                 'control.TypeSelector',
                             ]}
                         >
-                            <Placemark defaultGeometry={[55.808543, 37.512389]} />
+                            <Placemark
+                                options={{
+                                    iconColor: theme.palette.primary.main,
+                                }}
+                                defaultGeometry={[55.808543, 37.512389]}
+                            />
                         </YMap>
                     </YMapsProvider>
                 </Grid>

@@ -10,7 +10,7 @@ export const formatPhoneInput = (rawValue: string) => {
         return '';
     }
 
-    if (value[0] !== '8') {
+    if (value[0] !== '8' && value[0] !== '7') {
         value = `8${value}`;
     }
 

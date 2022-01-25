@@ -6,7 +6,7 @@ import PublishIcon from '@material-ui/icons/Publish';
 import React, { FC, useCallback, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { sendEmail } from '@/api';
+import { useSendEmail } from '@/api';
 import { Input, SubmitButton } from '@/components';
 import { useAnalytics, useFormSubmitModal } from '@/hooks';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
@@ -89,6 +89,7 @@ export const FeedbackForm: FC = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { register, handleSubmit, reset } = useForm();
     const [fileList, setFileList] = useState<File[]>([]);
+    const { onSendEmail } = useSendEmail({ place: 'Главная/Расчет стоимости' });
 
     /**
      * Имитирует клик на инпут файла
@@ -122,18 +123,15 @@ export const FeedbackForm: FC = () => {
      */
     const onSubmit = useCallback(
         (data) => {
-            sendEmail({
+            onSendEmail({
                 ...data,
                 files: fileList,
-                meta: {
-                    place: 'Главная/Расчет стоимости',
-                },
             });
             analytics.onSendEmail('proekt');
             formSubmitModal.onOpen();
             reset();
         },
-        [reset, fileList, formSubmitModal, analytics]
+        [reset, fileList, formSubmitModal, analytics, onSendEmail]
     );
 
     return (

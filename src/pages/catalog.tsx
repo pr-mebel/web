@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
 import { CardPopup, DesignOffer, Filters, Gallery, Lead, Map, Questions, ShopImg } from '@/components';
+import { useTrackUtm } from '@/hooks';
 import { useCards } from '@/hooks/catalog/use-cards';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Catalog: FC = () => {
+    useTrackUtm();
     const classes = useStyles();
     const {
         filters,

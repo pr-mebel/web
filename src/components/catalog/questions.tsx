@@ -5,7 +5,7 @@ import PublishIcon from '@material-ui/icons/Publish';
 import React, { FC, useCallback, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { sendEmail } from '@/api';
+import { useSendEmail } from '@/api';
 import { BlockTitle, Input, SubmitButton } from '@/components';
 import { useAnalytics, useFormSubmitModal } from '@/hooks';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
@@ -87,6 +87,7 @@ export const Questions: FC = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [fileList, setFileList] = useState<File[]>([]);
     const { register, handleSubmit, reset } = useForm();
+    const { onSendEmail } = useSendEmail({ place: 'Каталог/Остались вопросы?' });
 
     /**
      * Обработчик клика на инпут загрузки файла
@@ -121,18 +122,15 @@ export const Questions: FC = () => {
      */
     const onSubmit = useCallback(
         (data) => {
-            sendEmail({
+            onSendEmail({
                 ...data,
                 files: fileList,
-                meta: {
-                    place: 'Каталог/Остались вопросы?',
-                },
             });
             analytics.onSendEmail('vopros_katalog');
             formSubmitModal.onOpen();
             reset();
         },
-        [fileList, reset, formSubmitModal, analytics]
+        [fileList, reset, formSubmitModal, analytics, onSendEmail]
     );
 
     return (

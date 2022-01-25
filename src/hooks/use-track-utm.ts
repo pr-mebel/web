@@ -6,9 +6,11 @@ export const useTrackUtm = () => {
     const router = useRouter();
 
     useEffect(() => {
+        const prevPath = sessionStorage.getItem('prevPath');
+
         if (
             router.isReady && // Параметры запроса прогрузились
-            !document.referrer.includes(document.domain) && // Пришли с другого домена
+            !prevPath && // Пришли с другого домена
             !isEmpty(router.query) // Объект запроса не пустой
         ) {
             localStorage.setItem('utm', JSON.stringify(router.query));

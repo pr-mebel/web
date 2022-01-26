@@ -50,6 +50,18 @@ const useStyles = makeStyles((theme) => ({
             whiteSpace: 'initial',
         },
     },
+    listWrapper: {
+        display: 'grid',
+        rowGap: '18px',
+        gridTemplateColumns: '1fr 1fr 1fr',
+        [theme.breakpoints.down('sm')]: {
+            gridTemplateColumns: '1fr 1fr',
+        },
+        [theme.breakpoints.down('xs')]: {
+            gridTemplateColumns: '1fr',
+        },
+    },
+    listItem: {},
     text: {
         marginTop: '24px',
         fontSize: '15px',
@@ -68,6 +80,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * 
+ * @returns <Grid  item xs={12} sm={6} md={3}>
+                        
+                    </Grid>
+ */
+
 export const OurProduction: FC = () => {
     const classes = useStyles();
 
@@ -79,9 +98,9 @@ export const OurProduction: FC = () => {
             <div className={classes.imgContainer}>
                 <Image src={img} alt="Производство" layout="fill" placeholder="blur" />
             </div>
-            <Grid container spacing={6}>
+            <div className={classes.listWrapper}>
                 {LIST.map((item) => (
-                    <Grid key={item.id} item xs={12} sm={6} md={3}>
+                    <div key={item.id} className={classes.listItem}>
                         <BlockTitle>
                             <Typography variant="h6" className={classes.sectionTitle}>
                                 {item.data.title}
@@ -90,7 +109,7 @@ export const OurProduction: FC = () => {
                         <Typography className={classes.text} variant="body2">
                             {item.data.text}
                         </Typography>
-                    </Grid>
+                    </div>
                 ))}
                 <Grid item xs={12} container justifyContent="center">
                     <Grid item xs={12} md={10}>
@@ -104,7 +123,7 @@ export const OurProduction: FC = () => {
                         <MainButton>Получить проект</MainButton>
                     </Grid>
                 </Grid>
-            </Grid>
+            </div>
         </Container>
     );
 };

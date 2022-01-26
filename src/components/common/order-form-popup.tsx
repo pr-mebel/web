@@ -229,7 +229,6 @@ export const OrderFormPopup: FC = () => {
                             type="email"
                             fullWidth
                             autoComplete="email"
-                            required
                         />
                         <Input
                             ref={register}
@@ -239,7 +238,6 @@ export const OrderFormPopup: FC = () => {
                             fullWidth
                             multiline
                             rows={5}
-                            required
                         />
                         <input
                             type="file"

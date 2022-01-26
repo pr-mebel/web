@@ -156,7 +156,6 @@ export const QuestionsForm: FC = () => {
                                     placeholder="Описание"
                                     type="text"
                                     fullWidth
-                                    required
                                     darkMode
                                     rows={5}
                                     multiline

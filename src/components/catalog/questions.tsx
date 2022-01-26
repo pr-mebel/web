@@ -191,7 +191,6 @@ export const Questions: FC = () => {
                                     type="email"
                                     fullWidth
                                     autoComplete="email"
-                                    required
                                     darkMode
                                 />
                             </Grid>
@@ -204,7 +203,6 @@ export const Questions: FC = () => {
                                 rows={5}
                                 placeholder="Описание"
                                 className={classes.textarea}
-                                required
                                 darkMode
                             />
                             <Grid container justifyContent="center" className={classes.files}>

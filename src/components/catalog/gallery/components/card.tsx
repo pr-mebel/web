@@ -1,5 +1,6 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Image from 'next/image';
 import React, { FC, useCallback } from 'react';
 
 import { LoadingBackground } from '@/components/common';
@@ -13,8 +14,6 @@ const useStyles = makeStyles((theme) => ({
     },
     img: {
         position: 'absolute',
-        width: '100%',
-        height: '100%',
         top: '0',
         left: '0',
         transition: 'all .5s',
@@ -99,7 +98,7 @@ export const Card: FC<Props> = ({ imageUrlMin, collection, currentItemId, onClic
     return (
         <LoadingBackground>
             <div className={classes.root} onClick={handleClick}>
-                <img className={classes.img} src={imageUrlMin} alt={`Товар из коллекции ${collection}`} />
+                <Image layout="fill" objectFit="cover" src={imageUrlMin} alt={`Товар из коллекции ${collection}`} />
                 <div className={classes.tooltip}>
                     <Typography className={classes.tooltipText}>{collection}</Typography>
                     <svg

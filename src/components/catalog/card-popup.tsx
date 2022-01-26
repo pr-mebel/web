@@ -152,24 +152,21 @@ const CardPopupComponent: FC<Props> = ({
                     <LoadingBackground>
                         <div className={classes.imgContainer}>
                             {hasPrev && (
-                                <>
-                                    <div className={cn(classes.arrow, classes.arrowLeft)} onClick={onClickBack}>
-                                        <ArrowBack className={classes.icon} />
-                                    </div>
-                                </>
+                                <div className={cn(classes.arrow, classes.arrowLeft)} onClick={onClickBack}>
+                                    <ArrowBack className={classes.icon} />
+                                </div>
                             )}
                             <Image
                                 src={selectedItem.imageMedium.url}
                                 key={selectedItem.imageMedium.url}
                                 alt="Картинка в модальном окне"
                                 layout="fill"
+                                objectFit="cover"
                             />
                             {hasNext && (
-                                <>
-                                    <div className={cn(classes.arrow, classes.arrowRight)} onClick={onClickForward}>
-                                        <ArrowForward className={classes.icon} />
-                                    </div>
-                                </>
+                                <div className={cn(classes.arrow, classes.arrowRight)} onClick={onClickForward}>
+                                    <ArrowForward className={classes.icon} />
+                                </div>
                             )}
                         </div>
                     </LoadingBackground>

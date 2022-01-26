@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
             transform: 'scale(1.1)',
         },
         '&:hover $imageContainer:after': {
-            background: 'rgba(0,0,0,.3)',
+            background: 'rgba(0,0,0,.5)',
         },
         '&:hover $hoverTextContainer': {
             opacity: 1,

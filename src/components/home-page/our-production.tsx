@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
         minHeight: '114px',
     },
     buttonContainer: {
-        marginTop: '30px',
+        marginTop: '10px',
     },
     bottomTitle: {
         marginTop: '30px',
@@ -92,14 +92,14 @@ export const OurProduction: FC = () => {
                         </Typography>
                     </Grid>
                 ))}
-                <Grid container justifyContent="center">
+                <Grid item xs={12} container justifyContent="center">
                     <Grid item xs={12} md={10}>
                         <Typography variant="h5" className={classes.bottomTitle} align="center">
                             Современные технологии производства для идеального качества вашей мебели
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid container justifyContent="center" className={classes.buttonContainer}>
+                <Grid item xs={12} container justifyContent="center" className={classes.buttonContainer}>
                     <Grid item xs={10} sm={6} md={4}>
                         <MainButton>Получить проект</MainButton>
                     </Grid>

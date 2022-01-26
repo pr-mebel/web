@@ -55,25 +55,42 @@ const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
 
         const currentTime = format(new Date(), dateTemplateWithTime);
 
-        await transporter.sendMail({
-            from: `${place} | ${tel} | ${currentTime}`,
-            to: 'zakaz@pr-mebel.ru',
-            replyTo: email || 'zakaz@pr-mebel.ru',
-            subject: `${name} | ${tel} | ${currentTime}`,
-            html: `
+        await transporter.sendMail(
+            {
+                from: {
+                    address: 'zakaz@pr-mebel.ru',
+                    name: `${place} | ${tel} | ${currentTime}`,
+                },
+                to: 'zakaz@pr-mebel.ru',
+                replyTo: email || 'zakaz@pr-mebel.ru',
+                subject: `${name} | ${tel} | ${currentTime}`,
+                html: `
                 <p><strong>Кнопка:</strong><br>${place}</p>
                 <p><strong>Имя:</strong><br>${name}</p>
                 <p><strong>Телефон:</strong><br>${tel}</p>
                 <p><strong>Почта:</strong><br>${email || '-'}</p>
                 <p><strong>Описание:</strong><br>${description || '-'}</p>
-                <p>Дополнительная информация<br>${meta || '-'}</p>
+                <hr>
+                ${
+                    meta
+                        ? `
+                    <p>Дополнительная информация<br>
+                        ${Object.entries(JSON.parse(meta)).reduce(
+                            (acc, val) => `${acc}<p><strong>${val[0]}:</strong> ${val[1]}</p>`,
+                            ''
+                        )}
+                    </p>`
+                        : ''
+                }
             `,
-            attachments: req.files.map((file) => ({
-                filename: file.filename,
-                content: file.buffer,
-                contentType: file.mimetype,
-            })),
-        });
+                attachments: req.files.map((file) => ({
+                    filename: file.filename,
+                    content: file.buffer,
+                    contentType: file.mimetype,
+                })),
+            },
+            console.log
+        );
 
         res.status(200).json({ data: 'success' });
     } catch (error) {

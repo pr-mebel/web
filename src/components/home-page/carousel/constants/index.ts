@@ -10,7 +10,7 @@ export const PAGES = addIdsToArrayOfObjects([
     {
         titles: addIdsToArrayOfObjects(['Элегантная классика']),
         subtitles: addIdsToArrayOfObjects(['в лучших традициях', 'качества']),
-        texts: addIdsToArrayOfObjects(['Премиальные детали', 'Изысканный дизайн']),
+        texts: addIdsToArrayOfObjects(['Премиальные материалы', 'Изысканный дизайн']),
         to: '/catalog?section=cupboard&style=classic',
     },
     {

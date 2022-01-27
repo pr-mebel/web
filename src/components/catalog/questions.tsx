@@ -217,7 +217,9 @@ export const Questions: FC = () => {
                             onChange={handleFileUploadChange}
                         />
                         <PublishIcon className={classes.icon} />
-                        <Typography className={classes.fileInputText}>Прикрепить эскизы</Typography>
+                        <Typography className={classes.fileInputText} style={{ textTransform: 'uppercase' }}>
+                            Прикрепить эскизы
+                        </Typography>
                     </div>
                     {!!fileList?.length && (
                         <div className={classes.fileListWrapper}>

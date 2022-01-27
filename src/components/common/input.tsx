@@ -7,6 +7,8 @@ const useStyles = makeStyles({
     input: {
         paddingLeft: '30px',
         paddingRight: '30px',
+        fontSize: '14px',
+        lineHeight: '16px',
     },
 
     inputDark: {

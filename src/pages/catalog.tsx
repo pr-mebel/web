@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
-import { CardPopup, DesignOffer, Filters, Gallery, Lead, Map, Questions, ShopImg } from '@/components';
+import { CardPopup, DesignOffer, Filters, Gallery, Lead, Map, Questions, ShopImg, TextBlock } from '@/components';
 import { useTrackUtm } from '@/hooks';
 import { useCards } from '@/hooks/catalog/use-cards';
 
@@ -68,6 +68,9 @@ const Catalog: FC = () => {
                         onCardClick={onCardClick}
                         onLoadMore={onDownloadMore}
                     />
+                </section>
+                <section className={classes.designOfferSection}>
+                    <TextBlock />
                 </section>
                 <section className={classes.designOfferSection}>
                     <DesignOffer />

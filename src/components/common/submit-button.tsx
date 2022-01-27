@@ -3,7 +3,9 @@ import React, { FC } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        lineHeight: '45px',
+        lineHeight: '43px',
+        paddingTop: '0',
+        paddingBottom: '0',
         background: theme.palette.primary.main,
         textAlign: 'center',
         fontSize: '12px',

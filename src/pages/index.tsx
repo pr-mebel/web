@@ -23,11 +23,13 @@ import {
 import { useTrackUtm } from '@/hooks';
 
 const marginTop80 = {
-    marginTop: '80px',
+    marginTop: '-80px',
+    paddingTop: '160px',
 };
 
 const marginTop40 = {
-    marginTop: '40px',
+    marginTop: '-40px',
+    paddingTop: '80px',
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -102,11 +104,7 @@ const HomePage: FC = () => {
                 </section>
 
                 {/* Преимущества нашей продукции */}
-                <section
-                    id="advantages"
-                    // ref={(el) => { refsMap.current['#advantages'] = el; }}
-                    className={classes.advantages}
-                >
+                <section id="advantages" className={classes.advantages}>
                     <Advantages />
                 </section>
 
@@ -126,7 +124,7 @@ const HomePage: FC = () => {
                 </section>
 
                 {/* Закажите выезд дизайнера-замерщика сегодня
-          и получите проект мебели в течение 24 часов */}
+                    и получите проект мебели в течение 24 часов */}
                 <section id="call-designer" className={classes.callDesigner}>
                     <CallDesigner />
                 </section>

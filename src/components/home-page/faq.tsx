@@ -5,7 +5,7 @@ import { useRequest } from 'ahooks';
 import React, { FC, useCallback, useState } from 'react';
 
 import { fetchFAQ } from '@/api';
-import { BlockTitle, MainButton } from '@/components/common';
+import { BlockTitle, ButtonContainer, MainButton } from '@/components';
 
 const useStyles = makeStyles((theme) => ({
     listContainer: {
@@ -97,11 +97,11 @@ export const FAQ: FC = () => {
                 })}
             </Grid>
             {!isShowMoreClicked && (
-                <Grid container justifyContent="center" className={classes.buttonContainer}>
-                    <Grid item xs={10} sm={6} md={4}>
+                <div className={classes.buttonContainer}>
+                    <ButtonContainer>
                         <MainButton onClick={handleShowMore}>Показать еще</MainButton>
-                    </Grid>
-                </Grid>
+                    </ButtonContainer>
+                </div>
             )}
         </Container>
     );

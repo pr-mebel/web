@@ -4,3 +4,4 @@ export * from './filters';
 export * from './gallery';
 export * from './lead';
 export * from './questions';
+export * from './text-block';

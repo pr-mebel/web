@@ -4,7 +4,7 @@ import React, { FC, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useSendEmail } from '@/api';
-import { Input, SubmitButton } from '@/components';
+import { ButtonContainer, Input, SubmitButton } from '@/components';
 import { useAnalytics, useFormSubmitModal } from '@/hooks';
 import { formatPhoneInput } from '@/utils';
 
@@ -89,10 +89,10 @@ export const CallDesignerForm: FC = () => {
                                 />
                             </Grid>
                         </Grid>
-                        <Grid item xs={12} container justifyContent="center" className={classes.buttonContainer}>
-                            <Grid item xs={10} sm={6} md={4}>
+                        <Grid item xs={12} className={classes.buttonContainer}>
+                            <ButtonContainer>
                                 <SubmitButton>Вызвать дизайнера</SubmitButton>
-                            </Grid>
+                            </ButtonContainer>
                         </Grid>
                         <Grid item xs container justifyContent="center">
                             <Grid item xs={10} sm={6}>

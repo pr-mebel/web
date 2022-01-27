@@ -3,7 +3,9 @@ import React, { FC } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        lineHeight: '45px',
+        lineHeight: '43px',
+        paddingTop: '0',
+        paddingBottom: '0',
         background: theme.palette.primary.main,
         textAlign: 'center',
         fontSize: '12px',
@@ -25,6 +27,11 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')]: {
         root: {
             fontSize: '10px',
+        },
+    },
+    '@media (max-width: 991px)': {
+        root: {
+            lineHeight: '38px',
         },
     },
 }));

@@ -1,4 +1,5 @@
 export * from './block-title';
+export * from './button-container';
 export * from './design-offer';
 export * from './footer';
 export * from './form-submit-popup';

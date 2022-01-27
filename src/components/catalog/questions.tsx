@@ -1,4 +1,4 @@
-import { Container, Grid, Hidden, Typography } from '@material-ui/core';
+import { Container, Hidden, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ClearIcon from '@material-ui/icons/Clear';
 import PublishIcon from '@material-ui/icons/Publish';
@@ -25,8 +25,15 @@ const useStyles = makeStyles({
         margin: '40px 0',
         color: 'white',
     },
-    inputContainer: {
-        marginBottom: '15px',
+    form: {
+        maxWidth: '380px',
+        margin: '20px auto 0',
+        background: 'rgba(89, 89, 89, 0.46)',
+        borderRadius: '5px',
+        padding: '40px',
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        rowGap: '15px',
     },
     inputLabel: {
         color: 'white',
@@ -39,26 +46,24 @@ const useStyles = makeStyles({
         zIndex: 10,
     },
     text: {
+        margin: '20px auto 0',
+        maxWidth: '545px',
         color: 'white',
-        fontSize: '14px',
+        fontSize: '12px',
         fontWeight: 100,
         lineHeight: '100%',
     },
     copyrightLink: {
         color: 'white',
     },
-    buttonContainer: {
-        marginTop: '36px',
-        marginBottom: '24px',
-    },
     inputFile: {
         display: 'none',
     },
-    files: {
-        marginTop: '30px',
-        marginBottom: '20px',
-    },
     fileInputContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '10px',
         cursor: 'pointer',
     },
     icon: {
@@ -68,15 +73,22 @@ const useStyles = makeStyles({
     deleteFilesIcon: {
         cursor: 'pointer',
         color: 'white',
-        width: '20px',
-        height: '20px',
+        width: '16px',
+        height: '16px',
         position: 'absolute',
-        right: '-30px',
-        bottom: '1px',
+        right: '-20px',
+        bottom: '0',
     },
     fileInputText: {
+        fontSize: '12px',
+        lineHeight: '1.4',
         color: 'white',
         position: 'relative',
+    },
+    fileListWrapper: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 
@@ -152,114 +164,83 @@ export const Questions: FC = () => {
                         вас предложение!
                     </Typography>
                 </Hidden>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <Grid container>
-                        <Grid item xs={1} sm={3} />
-                        <Grid item xs={10} sm={6} container>
-                            <Grid item xs={12} className={classes.inputContainer}>
-                                <Input
-                                    ref={register}
-                                    name="name"
-                                    placeholder="Имя"
-                                    type="text"
-                                    fullWidth
-                                    autoComplete="name"
-                                    required
-                                    darkMode
-                                />
-                            </Grid>
-                            <Grid item xs={12} className={classes.inputContainer}>
-                                <Input
-                                    ref={register}
-                                    name="tel"
-                                    placeholder="Телефон"
-                                    type="tel"
-                                    fullWidth
-                                    autoComplete="tel"
-                                    required
-                                    darkMode
-                                    onChange={(event) => {
-                                        event.target.value = formatPhoneInput(event.target.value);
-                                    }}
-                                />
-                            </Grid>
-                            <Grid item xs={12} className={classes.inputContainer}>
-                                <Input
-                                    ref={register}
-                                    name="email"
-                                    placeholder="E-mail"
-                                    type="email"
-                                    fullWidth
-                                    autoComplete="email"
-                                    required
-                                    darkMode
-                                />
-                            </Grid>
-                            <Input
-                                ref={register}
-                                name="description"
-                                type="text"
-                                fullWidth
-                                multiline
-                                rows={5}
-                                placeholder="Описание"
-                                className={classes.textarea}
-                                required
-                                darkMode
-                            />
-                            <Grid container justifyContent="center" className={classes.files}>
-                                <input
-                                    type="file"
-                                    multiple
-                                    ref={fileInputRef}
-                                    className={classes.inputFile}
-                                    onChange={handleFileUploadChange}
-                                />
-                                <Grid
-                                    item
-                                    xs={12}
-                                    sm={7}
-                                    container
-                                    justifyContent="center"
-                                    onClick={handleFileInputClick}
-                                    className={classes.fileInputContainer}
-                                >
-                                    <PublishIcon className={classes.icon} />
-                                    <Typography className={classes.fileInputText}>Прикрепить эскизы</Typography>
-                                </Grid>
-                                {!!fileList?.length && (
-                                    <Grid item xs={12} sm={5} container justifyContent="center">
-                                        <Typography className={classes.fileInputText}>
-                                            {`${fileList.length}\xA0${getFileDeclination(fileList.length)}`}
-                                            <ClearIcon
-                                                className={classes.deleteFilesIcon}
-                                                onClick={handleDeleteSelectedFiles}
-                                            />
-                                        </Typography>
-                                    </Grid>
-                                )}
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={12} container justifyContent="center" className={classes.buttonContainer}>
-                            <Grid item xs={8} sm={6} md={4}>
-                                <SubmitButton>Отправить</SubmitButton>
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={1} sm={2} md={3} />
-                        <Grid item xs={10} sm={8} md={6}>
-                            <Typography className={classes.text} align="center">
-                                Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие на&nbsp;обработку
-                                персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
-                                <a
-                                    href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
-                                    className={classes.copyrightLink}
-                                >
-                                    пользовательским соглашением
-                                </a>
+                <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+                    <Input
+                        ref={register}
+                        name="name"
+                        placeholder="Имя"
+                        type="text"
+                        fullWidth
+                        autoComplete="name"
+                        required
+                        darkMode
+                    />
+                    <Input
+                        ref={register}
+                        name="tel"
+                        placeholder="Телефон"
+                        type="tel"
+                        fullWidth
+                        autoComplete="tel"
+                        required
+                        darkMode
+                        onChange={(event) => {
+                            event.target.value = formatPhoneInput(event.target.value);
+                        }}
+                    />
+                    <Input
+                        ref={register}
+                        name="email"
+                        placeholder="E-mail"
+                        type="email"
+                        fullWidth
+                        autoComplete="email"
+                        darkMode
+                    />
+                    <Input
+                        ref={register}
+                        name="description"
+                        type="text"
+                        fullWidth
+                        multiline
+                        rows={5}
+                        placeholder="Ваш вопрос"
+                        className={classes.textarea}
+                        darkMode
+                    />
+                    <div className={classes.fileInputContainer} onClick={handleFileInputClick}>
+                        <input
+                            type="file"
+                            multiple
+                            ref={fileInputRef}
+                            className={classes.inputFile}
+                            onChange={handleFileUploadChange}
+                        />
+                        <PublishIcon className={classes.icon} />
+                        <Typography className={classes.fileInputText} style={{ textTransform: 'uppercase' }}>
+                            Прикрепить эскизы
+                        </Typography>
+                    </div>
+                    {!!fileList?.length && (
+                        <div className={classes.fileListWrapper}>
+                            <Typography className={classes.fileInputText}>
+                                {`${fileList.length}\xA0${getFileDeclination(fileList.length)}`}
+                                <ClearIcon className={classes.deleteFilesIcon} onClick={handleDeleteSelectedFiles} />
                             </Typography>
-                        </Grid>
-                    </Grid>
+                        </div>
+                    )}
+                    <SubmitButton>Отправить</SubmitButton>
                 </form>
+                <Typography className={classes.text} align="center">
+                    Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие на&nbsp;обработку
+                    персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
+                    <a
+                        href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
+                        className={classes.copyrightLink}
+                    >
+                        пользовательским соглашением
+                    </a>
+                </Typography>
             </Container>
         </div>
     );

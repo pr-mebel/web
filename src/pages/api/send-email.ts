@@ -89,10 +89,11 @@ const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
                     contentType: file.mimetype,
                 })),
             },
-            console.log
+            (error, info) => {
+                console.log(error, info);
+                res.status(200).json({ error, info });
+            }
         );
-
-        res.status(200).json({ data: 'success' });
     } catch (error) {
         res.status(500).json(error);
     }

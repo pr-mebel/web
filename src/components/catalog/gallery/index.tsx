@@ -2,7 +2,7 @@ import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
-import { Loader, MainButton } from '@/components/common';
+import { ButtonContainer, Loader, MainButton } from '@/components';
 
 import { Card } from './components';
 
@@ -63,11 +63,11 @@ export const Gallery: FC<GalleryProps> = ({ items, isLoading, hasMore, onCardCli
                 </div>
             )}
             {!!hasMore && (
-                <Grid container justifyContent="center" className={classes.buttonContainer}>
-                    <Grid item xs={10} sm={8} md={6}>
+                <div className={classes.buttonContainer}>
+                    <ButtonContainer>
                         <MainButton onClick={onLoadMore}>Показать еще</MainButton>
-                    </Grid>
-                </Grid>
+                    </ButtonContainer>
+                </div>
             )}
         </Container>
     );

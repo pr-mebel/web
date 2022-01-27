@@ -4,7 +4,7 @@ import Image from 'next/image';
 import defaultImage from 'public/images/home-page/wardrobe-right/wardrobe-1.jpg';
 import React from 'react';
 
-import { BlockTitle, MainButton } from '@/components/common';
+import { BlockTitle, ButtonContainer, MainButton } from '@/components/common';
 
 import { WardrobeSnippet } from '../../wardrobe-snippet';
 import { ADDITIONAL } from '../constants';
@@ -85,11 +85,11 @@ export const WardrobeRightMdUp = () => {
                     </div>
                 </Grid>
             </Grid>
-            <Grid container justifyContent="center" className={classes.buttonContainer}>
-                <Grid item xs={10} sm={6} md={4}>
+            <div className={classes.buttonContainer}>
+                <ButtonContainer>
                     <MainButton>Рассчитать стоимость</MainButton>
-                </Grid>
-            </Grid>
+                </ButtonContainer>
+            </div>
         </Container>
     );
 };

@@ -15,9 +15,10 @@ import { SubmitButton } from './submit-button';
 const useStyles = makeStyles((theme) => ({
     paperRoot: {
         position: 'relative',
+        maxWidth: '434px',
     },
     content: {
-        padding: '20px',
+        padding: '20px 35px 35px',
     },
     title: {
         fontSize: '20px',
@@ -50,10 +51,11 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     form: {
-        marginTop: '30px',
+        margin: '35px auto 0',
         display: 'grid',
         gridTemplateColumns: '1fr',
-        rowGap: '10px',
+        rowGap: '15px',
+        maxWidth: '255px',
     },
     inputFile: {
         display: 'none',
@@ -88,19 +90,32 @@ const useStyles = makeStyles((theme) => ({
     },
     deleteFilesIcon: {
         cursor: 'pointer',
-        width: '20px',
-        height: '20px',
+        width: '16px',
+        height: '16px',
         position: 'absolute',
-        right: '-30px',
-        bottom: '1px',
+        right: '-20px',
+        bottom: '0px',
+    },
+    fileInputContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        cursor: 'pointer',
     },
     fileInputText: {
+        fontSize: '12px',
+        lineHeight: '1.4',
         position: 'relative',
+    },
+    fileListWrapper: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     [theme.breakpoints.down('xs')]: {
         paperRoot: {
             maxWidth: 'unset !important',
-            width: 'calc(100% - 8px)',
+            width: 'calc(100% - 16px)',
             margin: 'auto',
         },
     },
@@ -175,8 +190,6 @@ export const OrderFormPopup: FC = () => {
             open={contactFormModal.isOpen}
             onClose={handleClosePopup}
             scroll="body"
-            fullWidth
-            maxWidth="xs"
             PaperProps={{
                 className: classes.paperRoot,
             }}
@@ -199,7 +212,7 @@ export const OrderFormPopup: FC = () => {
                         и&nbsp;мы&nbsp;подготовим для Вас индивидуальное предложение
                     </Typography>
                 </Grid>
-                <Grid item xs={9} sm={8}>
+                <Grid item xs={12}>
                     <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                         <Input
                             ref={register}
@@ -229,7 +242,6 @@ export const OrderFormPopup: FC = () => {
                             type="email"
                             fullWidth
                             autoComplete="email"
-                            required
                         />
                         <Input
                             ref={register}
@@ -239,7 +251,6 @@ export const OrderFormPopup: FC = () => {
                             fullWidth
                             multiline
                             rows={5}
-                            required
                         />
                         <input
                             type="file"
@@ -248,36 +259,36 @@ export const OrderFormPopup: FC = () => {
                             className={classes.inputFile}
                             onChange={handleFileUploadChange}
                         />
-                        <Grid container justifyContent="center" className={classes.files}>
-                            <Grid item xs={12} container justifyContent="center" onClick={handleFileInputClick}>
-                                <PublishIcon className={classes.icon} />
-                                <Typography>Прикрепить эскизы</Typography>
-                            </Grid>
-                            {!!fileList?.length && (
-                                <Grid item xs={12} container justifyContent="center">
-                                    <Typography className={classes.fileInputText}>
-                                        {`${fileList.length}\xA0${getFileDeclination(fileList.length)}`}
-                                        <ClearIcon
-                                            className={classes.deleteFilesIcon}
-                                            onClick={handleDeleteSelectedFiles}
-                                        />
-                                    </Typography>
-                                </Grid>
-                            )}
-                        </Grid>
+                        <div className={classes.fileInputContainer} onClick={handleFileInputClick}>
+                            <PublishIcon className={classes.icon} />
+                            <Typography className={classes.fileInputText} style={{ textTransform: 'uppercase' }}>
+                                Прикрепить эскизы
+                            </Typography>
+                        </div>
+                        {!!fileList?.length && (
+                            <div className={classes.fileListWrapper}>
+                                <Typography className={classes.fileInputText}>
+                                    {`${fileList.length}\xA0${getFileDeclination(fileList.length)}`}
+                                    <ClearIcon
+                                        className={classes.deleteFilesIcon}
+                                        onClick={handleDeleteSelectedFiles}
+                                    />
+                                </Typography>
+                            </div>
+                        )}
                         <SubmitButton>Рассчитать стоимость</SubmitButton>
-                        <Typography variant="body2" align="center" className={classes.copy}>
-                            Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие на&nbsp;обработку
-                            персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
-                            <a
-                                href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
-                                className={classes.copyrightLink}
-                            >
-                                пользовательским соглашением
-                            </a>
-                        </Typography>
                     </form>
                 </Grid>
+                <Typography variant="body2" align="center" className={classes.copy}>
+                    Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие на&nbsp;обработку
+                    персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
+                    <a
+                        href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
+                        className={classes.copyrightLink}
+                    >
+                        пользовательским соглашением
+                    </a>
+                </Typography>
             </Grid>
         </Dialog>
     );

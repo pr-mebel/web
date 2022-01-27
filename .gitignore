@@ -22,6 +22,7 @@ tsconfig.tsbuildinfo
 .DS_Store
 *.pem
 /public/uploads
+.vscode
 
 
 # debug

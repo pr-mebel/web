@@ -5,7 +5,7 @@ import Image from 'next/image';
 import defaultImage from 'public/images/home-page/wardrobe-right/wardrobe-1.jpg';
 import React from 'react';
 
-import { BlockTitle, MainButton, Pagination } from '@/components/common';
+import { BlockTitle, ButtonContainer, MainButton, Pagination } from '@/components/common';
 import { usePagination } from '@/hooks';
 
 import { WardrobeAdditionalBlock } from '../../wardrobe-additional-block';
@@ -101,11 +101,11 @@ export const WardrobeRightSmDown = () => {
                     </Grid>
                 )}
             </Grid>
-            <Grid container justifyContent="center" className={classes.buttonContainer}>
-                <Grid item xs={10} sm={6} md={4}>
+            <div className={classes.buttonContainer}>
+                <ButtonContainer>
                     <MainButton>Рассчитать стоимость</MainButton>
-                </Grid>
-            </Grid>
+                </ButtonContainer>
+            </div>
         </Container>
     );
 };

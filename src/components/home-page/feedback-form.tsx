@@ -7,7 +7,7 @@ import React, { FC, useCallback, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useSendEmail } from '@/api';
-import { Input, SubmitButton } from '@/components';
+import { ButtonContainer, Input, SubmitButton } from '@/components';
 import { useAnalytics, useFormSubmitModal } from '@/hooks';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
 
@@ -216,10 +216,10 @@ export const FeedbackForm: FC = () => {
                                 )}
                             </Grid>
                         </Grid>
-                        <Grid item xs={12} container justifyContent="center" className={classes.buttonContainer}>
-                            <Grid item xs={10} sm={6} md={4}>
+                        <Grid item xs={12} className={classes.buttonContainer}>
+                            <ButtonContainer>
                                 <SubmitButton>Рассчитать стоимость</SubmitButton>
-                            </Grid>
+                            </ButtonContainer>
                         </Grid>
                         <Grid item xs container justifyContent="center">
                             <Grid item xs={12} sm={8} md={6}>

@@ -1,7 +1,10 @@
 import { CMSCardCollectionID, CMSSectionCollectionID } from './content-model';
 
-type Image = {
+export type Image = {
     url: string;
+    title: string;
+    width: string;
+    height: string;
 };
 
 export type Collection = {

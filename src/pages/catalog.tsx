@@ -90,7 +90,6 @@ const Catalog: FC = () => {
                     hasNext={bounds?.hasNext}
                     hasPrev={bounds?.hasPrev}
                     selectedItem={selectedItem}
-                    isLoading={isLoading}
                     isOpen={cardModal.isOpen}
                     onClose={cardModal.handleClose}
                     onClickBack={cardModal.onOpenPrev}

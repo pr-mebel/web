@@ -6,11 +6,12 @@ import Image from 'next/image';
 import React, { FC, memo, MouseEventHandler } from 'react';
 
 import { Facebook, Instagram, Vkontakte } from '@/components';
-import { Loader, LoadingBackground, MainButton } from '@/components/common';
+import { LoadingBackground, MainButton } from '@/components/common';
 
 const useStyles = makeStyles((theme) => ({
     paperRoot: {
         position: 'relative',
+        maxWidth: '1110px',
     },
     closeIcon: {
         cursor: 'pointer',
@@ -22,13 +23,17 @@ const useStyles = makeStyles((theme) => ({
         zIndex: 10,
         background: 'rgba(255, 255, 255, 0.4)',
     },
+    container: {
+        display: 'grid',
+        gridTemplateColumns: '750px 1fr',
+    },
     imgContainer: {
         width: '100%',
-        paddingTop: '66.66%',
+        paddingTop: '75%',
         position: 'relative',
     },
     descriptionContainer: {
-        padding: '20px',
+        padding: '25px 30px 20px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -68,30 +73,30 @@ const useStyles = makeStyles((theme) => ({
     text: {
         fontSize: '16px',
     },
-    loaderContainer: {
-        position: 'absolute',
-        top: '0',
-        left: '0',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 100,
-        width: '100%',
-        height: '100%',
-        background: 'rgba(0, 0, 0, .3)',
+    '@media (max-width: 1199px)': {
+        paperRoot: {
+            maxWidth: '850px',
+        },
+        container: {
+            gridTemplateColumns: '480px 1fr',
+        },
     },
     [theme.breakpoints.down('sm')]: {
         paperRoot: {
             height: '100%',
         },
+        loadingBackground: {
+            height: 'auto',
+        },
         container: {
             height: '100%',
+            display: 'flex',
+            gridTemplateColumns: 'unset',
             flexDirection: 'column',
             flexWrap: 'nowrap',
         },
-        gridItem: {
-            flexGrow: '0',
-            flexBasis: 'unset',
+        descriptionContainer: {
+            height: '100%',
         },
     },
 }));
@@ -102,7 +107,6 @@ type ImageProps = {
 
 type Props = {
     isOpen: boolean;
-    isLoading: boolean;
     selectedItem: {
         id: string;
         collection: string;
@@ -121,7 +125,6 @@ type Props = {
 const CardPopupComponent: FC<Props> = ({
     selectedItem,
     isOpen,
-    isLoading,
     hasPrev,
     hasNext,
     onClose,
@@ -135,43 +138,35 @@ const CardPopupComponent: FC<Props> = ({
             open={isOpen}
             onClose={onClose}
             fullWidth
-            maxWidth="lg"
             className={classes.root}
             PaperProps={{
                 className: classes.paperRoot,
             }}
         >
             <ClearIcon className={classes.closeIcon} onClick={onClose} />
-            <Grid container className={classes.container}>
-                <Grid item xs={12} md={7} className={classes.gridItem}>
-                    {isLoading && (
-                        <div className={classes.loaderContainer}>
-                            <Loader />
-                        </div>
-                    )}
-                    <LoadingBackground>
-                        <div className={classes.imgContainer}>
-                            {hasPrev && (
-                                <div className={cn(classes.arrow, classes.arrowLeft)} onClick={onClickBack}>
-                                    <ArrowBack className={classes.icon} />
-                                </div>
-                            )}
-                            <Image
-                                src={selectedItem.imageMedium.url}
-                                key={selectedItem.imageMedium.url}
-                                alt="Картинка в модальном окне"
-                                layout="fill"
-                                objectFit="cover"
-                            />
-                            {hasNext && (
-                                <div className={cn(classes.arrow, classes.arrowRight)} onClick={onClickForward}>
-                                    <ArrowForward className={classes.icon} />
-                                </div>
-                            )}
-                        </div>
-                    </LoadingBackground>
-                </Grid>
-                <Grid item xs={12} md={5} className={classes.descriptionContainer}>
+            <div className={classes.container}>
+                <LoadingBackground className={classes.loadingBackground}>
+                    <div className={classes.imgContainer}>
+                        {hasPrev && (
+                            <div className={cn(classes.arrow, classes.arrowLeft)} onClick={onClickBack}>
+                                <ArrowBack className={classes.icon} />
+                            </div>
+                        )}
+                        <Image
+                            src={selectedItem.imageMedium.url}
+                            key={selectedItem.imageMedium.url}
+                            alt="Картинка в модальном окне"
+                            layout="fill"
+                            objectFit="cover"
+                        />
+                        {hasNext && (
+                            <div className={cn(classes.arrow, classes.arrowRight)} onClick={onClickForward}>
+                                <ArrowForward className={classes.icon} />
+                            </div>
+                        )}
+                    </div>
+                </LoadingBackground>
+                <div className={classes.descriptionContainer}>
                     <div className={classes.descriptionContainerTop}>
                         <Typography variant="body1" gutterBottom className={classes.title}>
                             Коллекция:&nbsp;
@@ -219,8 +214,8 @@ const CardPopupComponent: FC<Props> = ({
                             </Grid>
                         </Grid>
                     </div>
-                </Grid>
-            </Grid>
+                </div>
+            </div>
         </Dialog>
     );
 };

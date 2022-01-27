@@ -78,10 +78,10 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
                             imageFull: image {
                                 url(transform: {
                                     format: WEBP
-                                    title
-                                    width
-                                    height
                                 })
+                                title
+                                width
+                                height
                             }
                             imageMedium: image {
                                 url(transform: {
@@ -98,10 +98,10 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
                                     width: 435
                                     height: 290
                                     format: WEBP
-                                    title
-                                    width
-                                    height
                                 })
+                                title
+                                width
+                                height
                             }
                             sys {
                                 id

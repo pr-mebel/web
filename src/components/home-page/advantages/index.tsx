@@ -11,7 +11,7 @@ import img5 from 'public/images/home-page/advantages/5.jpg';
 import img6 from 'public/images/home-page/advantages/6.jpg';
 import React, { FC } from 'react';
 
-import { BlockTitle, MainButton } from '@/components/common';
+import { BlockTitle, ButtonContainer, MainButton } from '@/components/common';
 import { usePagination } from '@/hooks';
 import { addIdsToArrayOfObjects } from '@/utils';
 
@@ -363,10 +363,10 @@ export const Advantages: FC = () => {
                     </Grid>
                 </Grid>
             </Hidden>
-            <Grid item xs={12} container justifyContent="center" className={classes.buttonContainer}>
-                <Grid item xs={10} sm={6} md={4}>
+            <Grid item xs={12} className={classes.buttonContainer}>
+                <ButtonContainer>
                     <MainButton>Рассчитать стоимость</MainButton>
-                </Grid>
+                </ButtonContainer>
             </Grid>
         </Container>
     );

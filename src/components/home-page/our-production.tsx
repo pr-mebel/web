@@ -4,7 +4,7 @@ import Image from 'next/image';
 import img from 'public/images/home-page/our-production/1.jpg';
 import React, { FC } from 'react';
 
-import { BlockTitle, MainButton } from '@/components/common';
+import { BlockTitle, ButtonContainer, MainButton } from '@/components';
 import { NB_SP } from '@/constants';
 import { addIdsToArrayOfObjects } from '@/utils';
 
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     listWrapper: {
         display: 'grid',
         rowGap: '18px',
-        gridTemplateColumns: '1fr 1fr 1fr',
+        gridTemplateColumns: '1fr 1fr 1fr 1fr',
         [theme.breakpoints.down('sm')]: {
             gridTemplateColumns: '1fr 1fr',
         },
@@ -61,7 +61,6 @@ const useStyles = makeStyles((theme) => ({
             gridTemplateColumns: '1fr',
         },
     },
-    listItem: {},
     text: {
         marginTop: '24px',
         fontSize: '15px',
@@ -80,13 +79,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-/**
- * 
- * @returns <Grid  item xs={12} sm={6} md={3}>
-                        
-                    </Grid>
- */
-
 export const OurProduction: FC = () => {
     const classes = useStyles();
 
@@ -100,7 +92,7 @@ export const OurProduction: FC = () => {
             </div>
             <div className={classes.listWrapper}>
                 {LIST.map((item) => (
-                    <div key={item.id} className={classes.listItem}>
+                    <div key={item.id}>
                         <BlockTitle>
                             <Typography variant="h6" className={classes.sectionTitle}>
                                 {item.data.title}
@@ -111,19 +103,19 @@ export const OurProduction: FC = () => {
                         </Typography>
                     </div>
                 ))}
-                <Grid item xs={12} container justifyContent="center">
-                    <Grid item xs={12} md={10}>
-                        <Typography variant="h5" className={classes.bottomTitle} align="center">
-                            Современные технологии производства для идеального качества вашей мебели
-                        </Typography>
-                    </Grid>
-                </Grid>
-                <Grid item xs={12} container justifyContent="center" className={classes.buttonContainer}>
-                    <Grid item xs={10} sm={6} md={4}>
-                        <MainButton>Получить проект</MainButton>
-                    </Grid>
-                </Grid>
             </div>
+            <Grid item xs={12} container justifyContent="center">
+                <Grid item xs={12} md={10}>
+                    <Typography variant="h5" className={classes.bottomTitle} align="center">
+                        Современные технологии производства для идеального качества вашей мебели
+                    </Typography>
+                </Grid>
+            </Grid>
+            <Grid item xs={12} className={classes.buttonContainer}>
+                <ButtonContainer>
+                    <MainButton>Получить проект</MainButton>
+                </ButtonContainer>
+            </Grid>
         </Container>
     );
 };

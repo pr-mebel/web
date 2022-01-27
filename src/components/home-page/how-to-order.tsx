@@ -2,7 +2,7 @@ import { Container, Grid, Hidden, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
-import { BlockTitle, MainButton } from '@/components/common';
+import { BlockTitle, ButtonContainer, MainButton } from '@/components';
 import { NB_SP } from '@/constants';
 
 const LIST = [
@@ -158,10 +158,10 @@ export const HowToOrder: FC = () => {
                         </Grid>
                     ))}
                 </Hidden>
-                <Grid item xs={12} container justifyContent="center" className={classes.buttonContainer}>
-                    <Grid item xs={10} sm={6} md={4}>
+                <Grid item xs={12} className={classes.buttonContainer}>
+                    <ButtonContainer>
                         <MainButton>Оставить заявку</MainButton>
-                    </Grid>
+                    </ButtonContainer>
                 </Grid>
             </Grid>
         </Container>

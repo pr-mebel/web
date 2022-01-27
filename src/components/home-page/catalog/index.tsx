@@ -2,7 +2,7 @@ import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
-import { BlockTitle, MainButton } from '../../common';
+import { BlockTitle, ButtonContainer, MainButton } from '../../common';
 import { CatalogCard } from './components';
 import { CATALOG } from './constants';
 
@@ -41,11 +41,11 @@ export const Catalog: FC = () => {
                     </Grid>
                 ))}
             </Grid>
-            <Grid container justifyContent="center" className={classes.buttonContainer}>
-                <Grid item xs={10} sm={6} md={4}>
+            <div className={classes.buttonContainer}>
+                <ButtonContainer>
                     <MainButton>Рассчитать стоимость</MainButton>
-                </Grid>
-            </Grid>
+                </ButtonContainer>
+            </div>
         </Container>
     );
 };

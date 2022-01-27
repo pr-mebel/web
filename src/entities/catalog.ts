@@ -1,6 +1,4 @@
-type Image = {
-    url: string;
-};
+import { Image } from '.';
 
 export type Item = {
     collection: string;

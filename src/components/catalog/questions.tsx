@@ -229,9 +229,7 @@ export const Questions: FC = () => {
                             </Typography>
                         </div>
                     )}
-                    <div>
-                        <SubmitButton>Отправить</SubmitButton>
-                    </div>
+                    <SubmitButton>Отправить</SubmitButton>
                 </form>
                 <Typography className={classes.text} align="center">
                     Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие на&nbsp;обработку

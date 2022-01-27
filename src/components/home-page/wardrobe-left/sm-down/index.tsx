@@ -7,7 +7,7 @@ import img2 from 'public/images/home-page/wardrobe-left/wardrobe-2.jpg';
 import img3 from 'public/images/home-page/wardrobe-left/wardrobe-3.jpg';
 import React, { FC, useCallback, useState } from 'react';
 
-import { BlockTitle, MainButton, Pagination } from '@/components/common';
+import { BlockTitle, ButtonContainer, MainButton, Pagination } from '@/components/common';
 import { usePagination } from '@/hooks';
 
 import { WardrobeAdditionalBlock } from '../../wardrobe-additional-block';
@@ -166,11 +166,11 @@ export const WardrobeLeftSmDown: FC = () => {
                     </Grid>
                 )}
             </Grid>
-            <Grid container justifyContent="center" className={classes.buttonContainer}>
-                <Grid item xs={10} sm={6} md={4}>
+            <div className={classes.buttonContainer}>
+                <ButtonContainer>
                     <MainButton>Рассчитать стоимость</MainButton>
-                </Grid>
-            </Grid>
+                </ButtonContainer>
+            </div>
         </Container>
     );
 };

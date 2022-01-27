@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Image from 'next/image';
 import bgImg from 'public/images/home-page/questions-form/1.jpg';
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
             left: '0',
             width: '100%',
             height: '100%',
-            background: 'rgba(0, 0, 0, .7)',
+            background: 'rgba(0, 0, 0, .8)',
         },
     },
     title: {
@@ -50,6 +50,16 @@ const useStyles = makeStyles((theme) => ({
             lineHeight: '30px',
         },
     },
+    form: {
+        maxWidth: '380px',
+        margin: '20px auto 0',
+        background: 'rgba(89, 89, 89, 0.46)',
+        borderRadius: '5px',
+        padding: '40px',
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        rowGap: '15px',
+    },
     subtitle: {
         color: 'white',
         marginTop: '40px',
@@ -62,9 +72,14 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
         zIndex: 10,
     },
+    textarea: {
+        marginTop: '20px',
+    },
     text: {
+        margin: '20px auto 0',
+        maxWidth: '545px',
         color: 'white',
-        fontSize: '14px',
+        fontSize: '12px',
         fontWeight: 100,
         lineHeight: '100%',
     },
@@ -72,8 +87,7 @@ const useStyles = makeStyles((theme) => ({
         color: 'white',
     },
     buttonContainer: {
-        marginTop: '36px',
-        marginBottom: '24px',
+        marginTop: '12px',
     },
 }));
 
@@ -118,71 +132,55 @@ export const QuestionsForm: FC = () => {
                 <Typography variant="h6" className={classes.subtitle}>
                     Заполните форму ниже. Наш менеджер свяжется с вами и ответит на вопросы
                 </Typography>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <Grid container>
-                        <Grid item xs={1} md={3} />
-                        <Grid item xs={10} md={6} container spacing={4}>
-                            <Grid item xs={12} sm={6}>
-                                <Input
-                                    ref={register}
-                                    name="name"
-                                    placeholder="Имя"
-                                    type="name"
-                                    fullWidth
-                                    autoComplete="name"
-                                    required
-                                    darkMode
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <Input
-                                    ref={register}
-                                    name="tel"
-                                    placeholder="Телефон"
-                                    type="tel"
-                                    fullWidth
-                                    autoComplete="tel"
-                                    required
-                                    darkMode
-                                    onChange={(event) => {
-                                        event.target.value = formatPhoneInput(event.target.value);
-                                    }}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Input
-                                    ref={register}
-                                    name="description"
-                                    placeholder="Описание"
-                                    type="text"
-                                    fullWidth
-                                    darkMode
-                                    rows={5}
-                                    multiline
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={12} container justifyContent="center" className={classes.buttonContainer}>
-                            <Grid item xs={10} sm={6} md={4}>
-                                <SubmitButton>Задать вопрос</SubmitButton>
-                            </Grid>
-                        </Grid>
-                        <Grid item xs container justifyContent="center">
-                            <Grid item xs={10} md={6}>
-                                <Typography className={classes.text} align="center">
-                                    Нажимая кнопку &laquo;Задать вопрос&raquo;, я&nbsp;даю согласие на&nbsp;обработку
-                                    персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
-                                    <a
-                                        href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
-                                        className={classes.copyrightLink}
-                                    >
-                                        пользовательским соглашением
-                                    </a>
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+                    <Input
+                        ref={register}
+                        name="name"
+                        placeholder="Имя"
+                        type="text"
+                        fullWidth
+                        autoComplete="name"
+                        required
+                        darkMode
+                    />
+                    <Input
+                        ref={register}
+                        name="tel"
+                        placeholder="Телефон"
+                        type="tel"
+                        fullWidth
+                        autoComplete="tel"
+                        required
+                        darkMode
+                        onChange={(event) => {
+                            event.target.value = formatPhoneInput(event.target.value);
+                        }}
+                    />
+                    <Input
+                        ref={register}
+                        name="description"
+                        type="text"
+                        fullWidth
+                        multiline
+                        rows={5}
+                        placeholder="Ваш вопрос"
+                        className={classes.textarea}
+                        darkMode
+                    />
+                    <div className={classes.buttonContainer}>
+                        <SubmitButton>Отправить</SubmitButton>
+                    </div>
                 </form>
+                <Typography className={classes.text} align="center">
+                    Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие на&nbsp;обработку
+                    персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
+                    <a
+                        href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
+                        className={classes.copyrightLink}
+                    >
+                        пользовательским соглашением
+                    </a>
+                </Typography>
             </Container>
         </div>
     );

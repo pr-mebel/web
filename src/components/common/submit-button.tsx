@@ -29,6 +29,11 @@ const useStyles = makeStyles((theme) => ({
             fontSize: '10px',
         },
     },
+    '@media (max-width: 991px)': {
+        root: {
+            lineHeight: '38px',
+        },
+    },
 }));
 
 export const SubmitButton: FC = ({ children }) => {

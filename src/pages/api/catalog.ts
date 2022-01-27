@@ -37,12 +37,21 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
                                         description
                                         imageFull: image {
                                             url(transform: {format: WEBP})
+                                            title
+                                            width
+                                            height
                                         }
                                         imageMedium: image {
                                             url(transform: {width: 750, height: 500, format: WEBP})
+                                            title
+                                            width
+                                            height
                                         }
                                         imageMinified: image {
                                             url(transform: {width: 435, height: 290, format: WEBP})
+                                            title
+                                            width
+                                            height
                                         }
                                         sys {
                                             id
@@ -69,6 +78,9 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
                             imageFull: image {
                                 url(transform: {
                                     format: WEBP
+                                    title
+                                    width
+                                    height
                                 })
                             }
                             imageMedium: image {
@@ -77,12 +89,18 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
                                     height: 500
                                     format: WEBP
                                 })
+                                title
+                                width
+                                height
                             }
                             imageMinified: image {
                                 url(transform: {
                                     width: 435
                                     height: 290
                                     format: WEBP
+                                    title
+                                    width
+                                    height
                                 })
                             }
                             sys {

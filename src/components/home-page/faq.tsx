@@ -1,5 +1,12 @@
-import { Accordion, AccordionDetails, AccordionSummary, Container, Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import {
+    Accordion as MuiAccordion,
+    AccordionDetails,
+    AccordionSummary,
+    Container,
+    Grid,
+    Typography,
+} from '@material-ui/core';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { useRequest } from 'ahooks';
 import React, { FC, useCallback, useState } from 'react';
@@ -7,12 +14,30 @@ import React, { FC, useCallback, useState } from 'react';
 import { fetchFAQ } from '@/api';
 import { BlockTitle, ButtonContainer, MainButton } from '@/components';
 
+const Accordion = withStyles({
+    root: {
+        border: '1px solid rgba(235,47,70,.2)',
+        boxShadow: 'none',
+        '&:not(:last-child)': {
+            borderBottom: 0,
+        },
+        '&:before': {
+            display: 'none',
+        },
+        '&$expanded': {
+            margin: 'auto',
+        },
+    },
+    expanded: {},
+})(MuiAccordion);
+
 const useStyles = makeStyles((theme) => ({
     listContainer: {
         marginTop: '30px',
     },
     summaryContainer: {
         alignItems: 'center',
+        margin: '0',
     },
     number: {
         fontSize: '40px',
@@ -77,8 +102,8 @@ export const FAQ: FC = () => {
                     if (i > 4 && !isShowMoreClicked) return null;
 
                     return (
-                        <Grid item xs={12} md={10} key={item.id}>
-                            <Accordion onChange={handleChange(i)} expanded={i === expandedItemID}>
+                        <Grid item xs={12} md={8} key={item.id}>
+                            <Accordion square onChange={handleChange(i)} expanded={i === expandedItemID}>
                                 <AccordionSummary
                                     expandIcon={<ArrowForwardIosIcon className={classes.dropdownIcon} />}
                                     classes={{

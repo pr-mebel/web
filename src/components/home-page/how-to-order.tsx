@@ -63,6 +63,20 @@ const useStyles = makeStyles((theme) => ({
             lineHeight: '70px',
         },
     },
+    sectionTitle: {
+        fontSize: '16px',
+        lineHeight: '18px',
+        fontWeight: 400,
+        whiteSpace: 'pre-line',
+        [theme.breakpoints.down('xs')]: {
+            whiteSpace: 'initial',
+        },
+    },
+    listWrapper: {
+        display: 'grid',
+        rowGap: '18px',
+        gridTemplateColumns: '1fr',
+    },
     title: {
         fontSize: '16px',
     },
@@ -72,9 +86,7 @@ const useStyles = makeStyles((theme) => ({
     buttonContainer: {
         marginTop: '36px',
         '@media (max-width: 960px)': {
-            '&': {
-                marginTop: '0',
-            },
+            marginTop: '18px',
         },
     },
 }));
@@ -87,12 +99,14 @@ export const HowToOrder: FC = () => {
             <BlockTitle>
                 <Typography variant="h4">Как заказать нашу мебель</Typography>
             </BlockTitle>
-            <Grid container spacing={4} className={classes.container}>
-                <Hidden xsDown>
+            <Hidden xsDown>
+                <Grid container spacing={6} className={classes.container}>
                     <Grid item xs={4} className={classes.item}>
                         <Typography className={classes.number}>01</Typography>
                         <BlockTitle>
-                            <Typography variant="h6">Оставьте заявку на сайте или закажите звонок</Typography>
+                            <Typography variant="h6" className={classes.sectionTitle}>
+                                Оставьте заявку на сайте или закажите звонок
+                            </Typography>
                         </BlockTitle>
                         <Typography variant="body2" className={classes.text}>
                             Наш менеджер свяжется с&nbsp;вами, ответит на&nbsp;все вопросы, и&nbsp;предложит вам
@@ -102,7 +116,9 @@ export const HowToOrder: FC = () => {
                     <Grid item xs={4} className={classes.item}>
                         <Typography className={classes.number}>02</Typography>
                         <BlockTitle>
-                            <Typography variant="h6">Разработка дизайн-проекта мебели</Typography>
+                            <Typography variant="h6" className={classes.sectionTitle}>
+                                Разработка дизайн-проекта мебели
+                            </Typography>
                         </BlockTitle>
                         <Typography variant="body2" className={classes.text}>
                             Вы&nbsp;можете прислать ваши эскизы или просто планировки нам и&nbsp;наши специалисты
@@ -112,7 +128,9 @@ export const HowToOrder: FC = () => {
                     <Grid item xs={4} className={classes.item}>
                         <Typography className={classes.number}>03</Typography>
                         <BlockTitle>
-                            <Typography variant="h6">Выезд дизайнера-замерщика на дом</Typography>
+                            <Typography variant="h6" className={classes.sectionTitle}>
+                                Выезд дизайнера-замерщика на дом
+                            </Typography>
                         </BlockTitle>
                         <Typography variant="body2" className={classes.text}>
                             Наш специалист приедет в&nbsp;удобное для вас время, сделает нужные замеры и&nbsp;согласует
@@ -124,7 +142,9 @@ export const HowToOrder: FC = () => {
                         <Grid item xs={6} className={classes.item}>
                             <Typography className={classes.number}>04</Typography>
                             <BlockTitle>
-                                <Typography variant="h6">Изготовление мебели</Typography>
+                                <Typography variant="h6" className={classes.sectionTitle}>
+                                    Изготовление мебели
+                                </Typography>
                             </BlockTitle>
                             <Typography variant="body2" className={classes.text}>
                                 Наша мебель изготавливается на&nbsp;промышленных обрабатывающих центрах с&nbsp;числовым
@@ -135,7 +155,9 @@ export const HowToOrder: FC = () => {
                         <Grid item xs={6} className={classes.item}>
                             <Typography className={classes.number}>05</Typography>
                             <BlockTitle>
-                                <Typography variant="h6">Доставка и монтаж</Typography>
+                                <Typography variant="h6" className={classes.sectionTitle}>
+                                    Доставка и монтаж
+                                </Typography>
                             </BlockTitle>
                             <Typography variant="body2" className={classes.text}>
                                 Собственная служба сервиса доставит и&nbsp;установит вашу мебель в&nbsp;оговоренное
@@ -144,10 +166,12 @@ export const HowToOrder: FC = () => {
                             </Typography>
                         </Grid>
                     </Grid>
-                </Hidden>
-                <Hidden smUp>
+                </Grid>
+            </Hidden>
+            <Hidden smUp>
+                <div className={classes.listWrapper}>
                     {LIST.map((item) => (
-                        <Grid key={item.id} item xs={12} className={classes.item}>
+                        <div key={item.id}>
                             <Typography className={classes.number}>{item.id}</Typography>
                             <BlockTitle>
                                 <Typography variant="h6">{item.title}</Typography>
@@ -155,15 +179,15 @@ export const HowToOrder: FC = () => {
                             <Typography variant="body2" className={classes.text}>
                                 {item.text}
                             </Typography>
-                        </Grid>
+                        </div>
                     ))}
-                </Hidden>
-                <Grid item xs={12} className={classes.buttonContainer}>
-                    <ButtonContainer>
-                        <MainButton>Оставить заявку</MainButton>
-                    </ButtonContainer>
-                </Grid>
-            </Grid>
+                </div>
+            </Hidden>
+            <div className={classes.buttonContainer}>
+                <ButtonContainer>
+                    <MainButton>Оставить заявку</MainButton>
+                </ButtonContainer>
+            </div>
         </Container>
     );
 };

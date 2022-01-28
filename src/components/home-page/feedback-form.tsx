@@ -129,9 +129,10 @@ export const FeedbackForm: FC = () => {
             });
             analytics.onSendEmail('proekt');
             formSubmitModal.onOpen();
+            handleClearFiles();
             reset();
         },
-        [reset, fileList, formSubmitModal, analytics, onSendEmail]
+        [reset, fileList, formSubmitModal, analytics, onSendEmail, handleClearFiles]
     );
 
     return (

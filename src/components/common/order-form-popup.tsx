@@ -180,9 +180,10 @@ export const OrderFormPopup: FC = () => {
             });
             analytics.onSendEmail('zakazat_modal');
             analytics.onContactMeModalSubmitted();
+            handleDeleteSelectedFiles();
             formSubmitModal.onOpen();
         },
-        [fileList, contactFormModal, formSubmitModal, analytics, onSendEmail]
+        [fileList, contactFormModal, formSubmitModal, analytics, onSendEmail, handleDeleteSelectedFiles]
     );
 
     return (

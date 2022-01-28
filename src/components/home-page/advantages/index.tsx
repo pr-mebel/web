@@ -142,6 +142,19 @@ const useStyles = makeStyles((theme) => ({
     buttonContainer: {
         marginTop: '32px',
     },
+    caption: {
+        position: 'absolute',
+        top: '0',
+        left: '0',
+        background: 'rgba(0,0,0,.5)',
+        width: '100%',
+        height: '40px',
+        zIndex: 10,
+        color: 'white',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     [theme.breakpoints.down('xs')]: {
         buttonContainer: {
             marginTop: '20px',
@@ -276,10 +289,12 @@ export const Advantages: FC = () => {
                             </Typography>
                         </BlockTitle>
                     </Grid>
-                    <Grid item xs={12} className={classes.tabs}>
-                        <Tabs tabs={TABS} activeTab={current} onChange={onSet} />
-                    </Grid>
                     <Grid item xs={10} className={classes.imgContainer}>
+                        <div className={classes.caption}>
+                            <Typography component="span" variant="h5">
+                                {TABS[current].data.title}
+                            </Typography>
+                        </div>
                         <svg className={cn(classes.icon, classes.iconPrev)} viewBox="0 0 14 24" onClick={onPrev}>
                             <path
                                 d="M11.857 23.448a.807.807 0 0 0 .585.242.827.827 0 0 0 .585-1.41L2.746 12l10.28-10.28a.827.827 0 0 0-1.17-1.168L.994 11.416a.827.827 0 0 0 0 1.168l10.863 10.864z"

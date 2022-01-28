@@ -12,6 +12,7 @@ export const ScriptsList = () => {
     return (
         <>
             <Script src="https://www.google-analytics.com/analytics.js" strategy="afterInteractive" />
+            <Script src="//cdn.callibri.ru/callibri.js" type="text/javascript" strategy="afterInteractive" />
             <Script
                 id="google-tag-manager"
                 strategy="afterInteractive"

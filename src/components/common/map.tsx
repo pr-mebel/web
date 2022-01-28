@@ -107,7 +107,7 @@ export const Map: FC = () => {
                 <Typography variant="h4">Приезжайте к нам в гости!</Typography>
             </BlockTitle>
             <Grid container className={classes.content}>
-                <Grid item xs={12} sm={5}>
+                <Grid item xs={12} sm={5} className="contact__connect">
                     <Typography variant="body2">
                         Мы&nbsp;с&nbsp;удовольствием покажем весь ассортимент нашей мебели и&nbsp;поможем вам сделать
                         правильный выбор.

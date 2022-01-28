@@ -140,9 +140,10 @@ export const Questions: FC = () => {
             });
             analytics.onSendEmail('vopros_katalog');
             formSubmitModal.onOpen();
+            handleDeleteSelectedFiles();
             reset();
         },
-        [fileList, reset, formSubmitModal, analytics, onSendEmail]
+        [fileList, reset, formSubmitModal, analytics, onSendEmail, handleDeleteSelectedFiles]
     );
 
     return (

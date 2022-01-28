@@ -42,7 +42,7 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
                                             height
                                         }
                                         imageMedium: image {
-                                            url(transform: {width: 750, height: 500, format: WEBP})
+                                            url(transform: {format: WEBP})
                                             title
                                             width
                                             height
@@ -85,8 +85,6 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
                             }
                             imageMedium: image {
                                 url(transform: {
-                                    width: 750
-                                    height: 500
                                     format: WEBP
                                 })
                                 title

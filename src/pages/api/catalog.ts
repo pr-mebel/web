@@ -48,7 +48,7 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
                                             height
                                         }
                                         imageMinified: image {
-                                            url(transform: {width: 435, height: 290, format: WEBP})
+                                            url(transform: {width: 750, height: 500, format: WEBP})
                                             title
                                             width
                                             height
@@ -93,8 +93,8 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
                             }
                             imageMinified: image {
                                 url(transform: {
-                                    width: 435
-                                    height: 290
+                                    width: 750
+                                    height: 500
                                     format: WEBP
                                 })
                                 title

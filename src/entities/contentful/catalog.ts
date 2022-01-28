@@ -1,5 +1,3 @@
-import { CMSCardCollectionID, CMSSectionCollectionID } from './content-model';
-
 export type Image = {
     url: string;
     title: string;
@@ -7,20 +5,28 @@ export type Image = {
     height: string;
 };
 
-export type Collection = {
-    items: {
-        collection: string;
-        description: string;
+export type Item = {
+    collection: string;
+    description: string;
+    id: string;
+    modern?: boolean | null;
+    classic?: boolean | null;
+    neoclassic?: boolean | null;
+    designer?: boolean | null;
+    coupe?: boolean | null;
+    swing?: boolean | null;
+    folding?: boolean | null;
+    imageFull: Image;
+    imageMedium: Image;
+    imageMinified: Image;
+    sys: {
         id: string;
-        imageFull: Image;
-        imageMedium: Image;
-        imageMinified: Image;
-        sys: {
-            id: string;
-        };
-    }[];
+    };
+};
+
+export type Collection = {
+    items: Item[];
     total: number;
-    __typename: CMSCardCollectionID;
 };
 
 export type SectionCollection = {
@@ -28,5 +34,4 @@ export type SectionCollection = {
         cardsCollection: Collection;
     }[];
     total: number;
-    __typename: CMSSectionCollectionID;
 };

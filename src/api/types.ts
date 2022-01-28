@@ -1,15 +1,3 @@
-import { Collection, DoorTypeID, SectionCollection, SectionID, StyleID } from '@/entities';
-
-export type FetchCatalogByFilterParams = {
-    section: SectionID;
-    style: StyleID;
-    doorType: DoorTypeID;
-};
-
-export interface CatalogResponse {
-    result: SectionCollection | Collection;
-}
-
 export type SendEmailParams = {
     email?: string;
     name: string;

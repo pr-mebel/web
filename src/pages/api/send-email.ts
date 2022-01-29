@@ -79,6 +79,10 @@ const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
                                     (acc, val) => `${acc}<p><strong>${val[0]}:</strong> ${val[1]}</p>`,
                                     ''
                                 )}
+                                ${
+                                    req.cookies['_ym_uid'] &&
+                                    `<p><strong>_ym_uid:</strong> ${req.cookies['_ym_uid']}</p>`
+                                }
                             </p>`
                         : ''
                 }

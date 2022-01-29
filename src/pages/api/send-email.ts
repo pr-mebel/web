@@ -24,9 +24,9 @@ const runMiddleware = (req: NextApiRequest, res: NextApiResponse, fn: any) => {
     });
 };
 
-interface Request extends NextApiRequest {
+type Request = NextApiRequest & {
     files: Express.Multer.File[];
-}
+};
 
 type Body = {
     email?: string;

@@ -2,7 +2,8 @@ import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
-import { BlockTitle } from '../block-title';
+import { BlockTitle } from '@/components';
+
 import { DesignCard, Icon } from './components';
 
 const useStyles = makeStyles((theme) => ({

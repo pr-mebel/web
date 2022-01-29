@@ -6,11 +6,9 @@ import React, { FC, useCallback, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useSendEmail } from '@/api';
+import { Input, SubmitButton } from '@/components';
 import { useAnalytics, useContactFormModal, useFormSubmitModal } from '@/hooks';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
-
-import { Input } from './input';
-import { SubmitButton } from './submit-button';
 
 const useStyles = makeStyles((theme) => ({
     paperRoot: {

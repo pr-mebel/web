@@ -2,7 +2,14 @@ import Script from 'next/script';
 
 import { isProduction } from '@/utils';
 
-import { BitrixMessenger, FacebookPixel, GoogleAnalytics, GoogleTagManger, MailRuCounter, YandexMetrika } from '.';
+import {
+    BitrixMessenger,
+    FacebookPixel,
+    GoogleAnalytics,
+    GoogleTagManger,
+    MailRuCounter,
+    YandexMetrika,
+} from './scripts';
 
 export const ScriptsList = () => {
     if (!isProduction()) {

@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const FAQ: FC = () => {
+export const Faq: FC = () => {
     const classes = useStyles();
     const [isShowMoreClicked, setIsShowMoreClicked] = useState(false);
     const [expandedItemID, setExpandedItemID] = useState<number | null>(null);

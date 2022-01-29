@@ -78,12 +78,7 @@ export const WardrobeSnippet: FC<Props> = ({ title, text, img, direction }) => {
 
     return (
         <div onMouseEnter={popup.handleOpen} onMouseLeave={popup.handleClose}>
-            <div
-                // TODO: Проверить нужно ли
-                // aria-owns={popup.isOpen ? 'mouse-over-popover' : undefined}
-                aria-haspopup="true"
-                className={classes.circle}
-            />
+            <div aria-haspopup="true" className={classes.circle} />
             <Popover
                 id="mouse-over-popover"
                 open={popup.isOpen}

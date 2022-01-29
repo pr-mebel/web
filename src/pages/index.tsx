@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
+import { DesignOffer, Map, ShopImg } from '@/blocks/common';
 import {
     About,
     Advantages,
@@ -9,17 +10,14 @@ import {
     Carousel,
     Catalog,
     Description,
-    DesignOffer,
-    FAQ,
+    Faq,
     FeedbackForm,
     HowToOrder,
-    Map,
     OurProduction,
     QuestionsForm,
-    ShopImg,
     WardrobeLeft,
     WardrobeRight,
-} from '@/components';
+} from '@/blocks/home-page';
 import { useTrackUtm } from '@/hooks';
 
 const marginTop80 = {
@@ -77,94 +75,92 @@ const HomePage: FC = () => {
     const classes = useStyles();
 
     return (
-        <>
-            <main>
-                <section id="carousel" className={classes.carousel}>
-                    <Carousel />
-                </section>
+        <main>
+            <section id="carousel" className={classes.carousel}>
+                <Carousel />
+            </section>
 
-                {/* Текст под каруселью */}
-                <section className={classes.description}>
-                    <Description />
-                </section>
+            {/* Текст под каруселью */}
+            <section className={classes.description}>
+                <Description />
+            </section>
 
-                {/* Ссылки на каталог */}
-                <section id="catalog" className={classes.catalog}>
-                    <Catalog />
-                </section>
+            {/* Ссылки на каталог */}
+            <section id="catalog" className={classes.catalog}>
+                <Catalog />
+            </section>
 
-                {/* Получите дизайн-проект и стомость вашего проекта сегодня */}
-                <section id="design-offer" className={classes.designOffer}>
-                    <DesignOffer />
-                </section>
+            {/* Получите дизайн-проект и стомость вашего проекта сегодня */}
+            <section id="design-offer" className={classes.designOffer}>
+                <DesignOffer />
+            </section>
 
-                {/* Форма рассчёта стоимости с прикладыванием файла */}
-                <section className={classes.feedbackForm}>
-                    <FeedbackForm />
-                </section>
+            {/* Форма рассчёта стоимости с прикладыванием файла */}
+            <section className={classes.feedbackForm}>
+                <FeedbackForm />
+            </section>
 
-                {/* Преимущества нашей продукции */}
-                <section id="advantages" className={classes.advantages}>
-                    <Advantages />
-                </section>
+            {/* Преимущества нашей продукции */}
+            <section id="advantages" className={classes.advantages}>
+                <Advantages />
+            </section>
 
-                {/* Комфорт и удобство, продуманное до мелочей */}
-                <section id="comfort" className={classes.wardrobeLeft}>
-                    <WardrobeLeft />
-                </section>
+            {/* Комфорт и удобство, продуманное до мелочей */}
+            <section id="comfort" className={classes.wardrobeLeft}>
+                <WardrobeLeft />
+            </section>
 
-                {/* Исключтельное качество нашей мебели */}
-                <section id="quality" className={classes.wardrobeRight}>
-                    <WardrobeRight />
-                </section>
+            {/* Исключтельное качество нашей мебели */}
+            <section id="quality" className={classes.wardrobeRight}>
+                <WardrobeRight />
+            </section>
 
-                {/* О нас */}
-                <section id="about" className={classes.about}>
-                    <About />
-                </section>
+            {/* О нас */}
+            <section id="about" className={classes.about}>
+                <About />
+            </section>
 
-                {/* Закажите выезд дизайнера-замерщика сегодня
+            {/* Закажите выезд дизайнера-замерщика сегодня
                     и получите проект мебели в течение 24 часов */}
-                <section id="call-designer" className={classes.callDesigner}>
-                    <CallDesigner />
-                </section>
+            <section id="call-designer" className={classes.callDesigner}>
+                <CallDesigner />
+            </section>
 
-                {/* Форма вызова дизайнера-замерщика */}
-                <section className={classes.callDesignerForm}>
-                    <CallDesignerForm />
-                </section>
+            {/* Форма вызова дизайнера-замерщика */}
+            <section className={classes.callDesignerForm}>
+                <CallDesignerForm />
+            </section>
 
-                {/* Наше производство */}
-                <section id="production" className={classes.ourProduction}>
-                    <OurProduction />
-                </section>
+            {/* Наше производство */}
+            <section id="production" className={classes.ourProduction}>
+                <OurProduction />
+            </section>
 
-                {/* Как заказать нашу мебель */}
-                <section id="how-to-order" className={classes.howToOrder}>
-                    <HowToOrder />
-                </section>
+            {/* Как заказать нашу мебель */}
+            <section id="how-to-order" className={classes.howToOrder}>
+                <HowToOrder />
+            </section>
 
-                {/* Часто задаваемые вопросы */}
-                <section id="faq" className={classes.faq}>
-                    <FAQ />
-                </section>
+            {/* Часто задаваемые вопросы */}
+            <section id="faq" className={classes.faq}>
+                <Faq />
+            </section>
 
-                {/* Форма "Остались вопросы?" */}
-                <section id="questions" className={classes.questionsForm}>
-                    <QuestionsForm />
-                </section>
+            {/* Форма "Остались вопросы?" */}
+            <section id="questions" className={classes.questionsForm}>
+                <QuestionsForm />
+            </section>
 
-                {/* Изображение магазина */}
-                <section id="shop-img" className={classes.shopImg}>
-                    <ShopImg />
-                </section>
+            {/* Изображение магазина */}
+            <section id="shop-img" className={classes.shopImg}>
+                <ShopImg />
+            </section>
 
-                {/* Магазин на карте */}
-                <section id="contacts" className={classes.contacts}>
-                    <Map />
-                </section>
-            </main>
-        </>
+            {/* Магазин на карте */}
+            <section id="contacts" className={classes.contacts}>
+                <Map />
+            </section>
+        </main>
     );
 };
 

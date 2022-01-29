@@ -6,7 +6,7 @@ import React from 'react';
  * https://material-ui.com/styles/advanced/#next-js
  */
 export default class MyDocument extends Document {
-    render() {
+    public render() {
         return (
             <Html lang="ru">
                 <Head />

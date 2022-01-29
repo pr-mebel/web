@@ -7,9 +7,9 @@ import { useRouter } from 'next/router';
 import React, { FC, useEffect } from 'react';
 import { Provider } from 'react-redux';
 
-import { Footer, FormSubmitPopup, GoTopButton, Header, OrderFormPopup } from '@/components';
+import { Footer, FormSubmitPopup, GoTopButton, Header, OrderFormPopup } from '@/blocks/common';
 import store from '@/redux/store';
-import { ScriptsList } from '@/scripts/sciprts-list';
+import { ScriptsList } from '@/scripts';
 import theme from '@/theme';
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => {

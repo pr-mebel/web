@@ -2,7 +2,8 @@ import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
-import { BlockTitle, ButtonContainer, MainButton } from '../../common';
+import { BlockTitle, ButtonContainer, MainButton } from '@/components';
+
 import { CatalogCard } from './components';
 import { CATALOG } from './constants';
 

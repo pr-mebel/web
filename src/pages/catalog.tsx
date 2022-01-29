@@ -1,7 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
-import { CardPopup, DesignOffer, Filters, Gallery, Lead, Map, Questions, ShopImg, TextBlock } from '@/components';
+import { CardPopup, Filters, Gallery, Lead, Questions, TextBlock } from '@/blocks/catalog';
+import { DesignOffer, Map, ShopImg } from '@/blocks/common';
 import { useTrackUtm } from '@/hooks';
 import { useCards } from '@/hooks/catalog/use-cards';
 

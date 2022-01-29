@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
+import { DesignOffer, Map, ShopImg } from '@/blocks/common';
 import {
     About,
     Advantages,
@@ -9,17 +10,14 @@ import {
     Carousel,
     Catalog,
     Description,
-    DesignOffer,
     FAQ,
     FeedbackForm,
     HowToOrder,
-    Map,
     OurProduction,
     QuestionsForm,
-    ShopImg,
     WardrobeLeft,
     WardrobeRight,
-} from '@/components';
+} from '@/blocks/home-page';
 import { useTrackUtm } from '@/hooks';
 
 const marginTop80 = {

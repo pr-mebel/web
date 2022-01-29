@@ -5,11 +5,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import cn from 'classnames';
 import React, { FC, useCallback, useState } from 'react';
 
-import { Facebook, Instagram, LogoHeader, Vkontakte } from '@/components';
+import { Facebook, Instagram, Link, LogoHeader, MainButton, Vkontakte } from '@/components';
 import { useAnalytics } from '@/hooks';
-
-import { Link } from './link';
-import { MainButton } from './main-button';
 
 const useStyles = makeStyles((theme) => ({
     root: {

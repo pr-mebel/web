@@ -48,19 +48,19 @@ const getRequest = (section: SectionID) => {
                                 description
                                 ${filters}
                                 imageFull: image {
-                                    url(transform: {format: WEBP})
+                                    url(transform: {quality: 80, format: WEBP})
                                     title
                                     width
                                     height
                                 }
                                 imageMedium: image {
-                                    url(transform: {format: WEBP})
+                                    url(transform: {quality: 70, format: WEBP})
                                     title
                                     width
                                     height
                                 }
                                 imageMinified: image {
-                                    url(transform: {width: 750, height: 500, format: WEBP})
+                                    url(transform: {quality: 20, format: WEBP})
                                     title
                                     width
                                     height

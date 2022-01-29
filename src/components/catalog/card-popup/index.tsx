@@ -2,8 +2,7 @@ import { Dialog, Grid, Typography, useMediaQuery } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { ArrowBack, ArrowForward, Clear as ClearIcon } from '@material-ui/icons';
 import cn from 'classnames';
-import Image from 'next/image';
-import React, { FC, memo, MouseEventHandler } from 'react';
+import React, { FC, memo } from 'react';
 
 import { Facebook, Instagram, Vkontakte } from '@/components';
 import { LoadingBackground, MainButton } from '@/components/common';
@@ -117,9 +116,9 @@ type Props = {
     };
     hasPrev?: boolean;
     hasNext?: boolean;
-    onClose: MouseEventHandler<SVGSVGElement>;
-    onClickBack: MouseEventHandler<HTMLDivElement>;
-    onClickForward: MouseEventHandler<HTMLDivElement>;
+    onClose: () => void;
+    onClickBack: () => void;
+    onClickForward: () => void;
 };
 
 const CardPopupComponent: FC<Props> = ({
@@ -156,19 +155,24 @@ const CardPopupComponent: FC<Props> = ({
                                     <ArrowBack className={classes.icon} />
                                 </div>
                             )}
-                            <div style={{ cursor: isSmDown ? 'default' : 'pointer' }}>
-                                <Image
-                                    src={selectedItem.imageMedium.url}
-                                    alt="Картинка в модальном окне"
-                                    layout="fill"
-                                    objectFit="cover"
-                                    onClick={() => {
-                                        if (!isSmDown) {
-                                            fullscreenModal.handleOpen();
-                                        }
-                                    }}
-                                />
-                            </div>
+                            <div
+                                style={{
+                                    backgroundImage: `url(${selectedItem.imageMedium.url})`,
+                                    backgroundPosition: 'center',
+                                    backgroundSize: 'cover',
+                                    cursor: isSmDown ? 'default' : 'pointer',
+                                    position: 'absolute',
+                                    top: '0',
+                                    left: '0',
+                                    width: '100%',
+                                    height: '100%',
+                                }}
+                                onClick={() => {
+                                    if (!isSmDown) {
+                                        fullscreenModal.handleOpen();
+                                    }
+                                }}
+                            />
                             {hasNext && (
                                 <div className={cn(classes.arrow, classes.arrowRight)} onClick={onClickForward}>
                                     <ArrowForward className={classes.icon} />

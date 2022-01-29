@@ -1,8 +1,8 @@
 export type Image = {
     url: string;
     title: string;
-    width: string;
-    height: string;
+    width: number;
+    height: number;
 };
 
 export type Item = {

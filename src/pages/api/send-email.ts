@@ -74,12 +74,12 @@ const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
                 ${
                     meta
                         ? `
-                    <p>Дополнительная информация<br>
-                        ${Object.entries(JSON.parse(meta)).reduce(
-                            (acc, val) => `${acc}<p><strong>${val[0]}:</strong> ${val[1]}</p>`,
-                            ''
-                        )}
-                    </p>`
+                            <p>Дополнительная информация<br>
+                                ${Object.entries(JSON.parse(meta)).reduce(
+                                    (acc, val) => `${acc}<p><strong>${val[0]}:</strong> ${val[1]}</p>`,
+                                    ''
+                                )}
+                            </p>`
                         : ''
                 }
             `,

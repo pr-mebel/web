@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-import { Item } from '@/entities';
+import { Item, SectionID } from '@/entities';
 
 import { endpoints } from './endpoints';
-import { FetchCatalogByFilterParams, FetchFAQRespone } from './types';
+import { FetchFAQRespone } from './types';
 
 /**
  * Запрашивает из contentful CMS карточки по текущему фильтру
@@ -11,18 +11,9 @@ import { FetchCatalogByFilterParams, FetchFAQRespone } from './types';
  * @param page Текущая страница в каталоге
  * @returns Объект с новыми карточками
  */
-export const fetchCatalogByFilter = (
-    filters: FetchCatalogByFilterParams,
-    page: number
-): Promise<{
-    data: {
-        items: Item[];
-        total: number;
-    };
-}> =>
-    axios.post(endpoints.getCaltalogByFilter, {
-        filters,
-        page,
+export const fetchCatalogByFilter = (section: SectionID) =>
+    axios.post<Item[]>(endpoints.getCaltalogByFilter, {
+        section,
     });
 
 export const fetchFAQ = (): Promise<FetchFAQRespone> => axios.post(endpoints.getFaq);

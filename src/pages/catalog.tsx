@@ -50,7 +50,7 @@ const Catalog: FC = () => {
         cardModal,
         onChangeFilter,
         onCardClick,
-        onDownloadMore,
+        onShowMore,
     } = useCards();
 
     return (
@@ -66,7 +66,7 @@ const Catalog: FC = () => {
                         isLoading={isLoading}
                         hasMore={hasMore}
                         onCardClick={onCardClick}
-                        onLoadMore={onDownloadMore}
+                        onLoadMore={onShowMore}
                     />
                 </section>
                 <section className={classes.designOfferSection}>

@@ -2,117 +2,90 @@ import { gql } from '@apollo/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { client } from '@/api/client';
-import { batchSize } from '@/constants';
-import { Collection, DoorTypeID, Filter, SectionCollection, StyleID } from '@/entities';
-import { parseContentfulCatalog } from '@/normalizers';
+import { SectionCollection, SectionID } from '@/entities';
 import { isProduction } from '@/utils';
 
 type Output = {
-    result: SectionCollection | Collection;
+    result: SectionCollection;
 };
 
-const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
-    const {
-        page,
-        filters: { style, doorType, section },
-    } = req.body as {
-        page: number;
-        filters: Filter;
-    };
+const getRequest = (section: SectionID) => {
+    let filters = '';
 
-    try {
-        const data = await client.query<Output>({
-            query:
-                style === ('any' as StyleID) && doorType === ('any' as DoorTypeID)
-                    ? gql`
-                {
-                    result: ${section}SectionCollection(limit: 1, preview: ${!isProduction()}) {
+    switch (section) {
+        case 'cupboard': {
+            filters = `
+                modern
+                classic
+                neoclassic
+                designer
+                coupe
+                swing
+                folding
+            `;
+            break;
+        }
+        case 'wardrobe': {
+            filters = `
+                modern
+                classic
+                neoclassic
+            `;
+            break;
+        }
+    }
+
+    return gql`
+        {
+            result: ${section}SectionCollection(limit: 1, preview: ${!isProduction()}) {
+                items {
+                    cardsCollection {
+                        total
                         items {
-                            cardsCollection(limit: ${batchSize}, skip: ${batchSize * (page - 1)}) {
-                                total
-                                items {
-                                    ... on ${section[0].toUpperCase() + section.slice(1)} {
-                                        id
-                                        collection
-                                        description
-                                        imageFull: image {
-                                            url(transform: {format: WEBP})
-                                            title
-                                            width
-                                            height
-                                        }
-                                        imageMedium: image {
-                                            url(transform: {width: 750, height: 500, format: WEBP})
-                                            title
-                                            width
-                                            height
-                                        }
-                                        imageMinified: image {
-                                            url(transform: {width: 435, height: 290, format: WEBP})
-                                            title
-                                            width
-                                            height
-                                        }
-                                        sys {
-                                            id
-                                        }
-                                    }
+                            ... on ${section[0].toUpperCase() + section.slice(1)} {
+                                id
+                                collection
+                                description
+                                ${filters}
+                                imageFull: image {
+                                    url(transform: {quality: 80, format: WEBP})
+                                    title
+                                    width
+                                    height
+                                }
+                                imageMedium: image {
+                                    url(transform: {quality: 70, format: WEBP})
+                                    title
+                                    width
+                                    height
+                                }
+                                imageMinified: image {
+                                    url(transform: {quality: 20, format: WEBP})
+                                    title
+                                    width
+                                    height
+                                }
+                                sys {
+                                    id
                                 }
                             }
                         }
                     }
-                }`
-                    : gql`
-                {
-                    result: ${section}Collection(where: {
-                        ${style !== 'any' ? `${style}: true` : ''}
-                        ${doorType !== 'any' ? `${doorType}: true` : ''}
-                    }, order: [id_ASC], limit: ${batchSize}, skip: ${
-                          batchSize * (page - 1)
-                      }, preview: ${!isProduction()}){
-                        total
-                        items {
-                            id
-                            collection
-                            description
-                            imageFull: image {
-                                url(transform: {
-                                    format: WEBP
-                                })
-                                title
-                                width
-                                height
-                            }
-                            imageMedium: image {
-                                url(transform: {
-                                    width: 750
-                                    height: 500
-                                    format: WEBP
-                                })
-                                title
-                                width
-                                height
-                            }
-                            imageMinified: image {
-                                url(transform: {
-                                    width: 435
-                                    height: 290
-                                    format: WEBP
-                                })
-                                title
-                                width
-                                height
-                            }
-                            sys {
-                                id
-                            }
-                        }
-                    }
-                }`,
-        });
-        const resData = parseContentfulCatalog(data);
+                }
+            }
+        }
+    `;
+};
 
-        return res.status(200).json(resData);
+const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
+    const { section } = req.body as {
+        section: SectionID;
+    };
+
+    try {
+        const data = await client.query<Output>({ query: getRequest(section) });
+
+        return res.status(200).json(data.data.result.items[0].cardsCollection.items);
     } catch (error) {
         return res.status(500).json(error);
     }

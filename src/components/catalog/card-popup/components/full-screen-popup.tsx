@@ -1,9 +1,7 @@
 import { Dialog } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Clear as ClearIcon } from '@material-ui/icons';
-import cn from 'classnames';
-import Image from 'next/image';
-import React, { FC, memo, MouseEventHandler, useState } from 'react';
+import React, { FC, MouseEventHandler, useMemo } from 'react';
 
 import { Image as ImageType } from '@/entities';
 
@@ -41,36 +39,48 @@ type Props = {
     onClose: MouseEventHandler<SVGSVGElement>;
 };
 
-const FullscreenCardPopupComponent: FC<Props> = ({ image, isOpen, onClose }) => {
+export const FullscreenCardPopup: FC<Props> = ({ image, isOpen, onClose }) => {
     const classes = useStyles();
-    const [loaded, setLoaded] = useState(false);
+
+    const { width, height } = useMemo(() => {
+        const padding = 32;
+        const windowWidth = window.innerWidth - padding > 1920 ? 1920 : window.innerWidth - padding;
+        const windowHeight = window.innerHeight - padding;
+        const windowAspectRatio = windowWidth / windowHeight;
+        const imageAspectRatio = image.width / image.height;
+
+        if (imageAspectRatio <= windowAspectRatio) {
+            console.log('here');
+            return {
+                height: `${windowHeight}px`,
+                width: `${windowHeight * imageAspectRatio}px`,
+            };
+        }
+
+        return {
+            width: `${windowWidth}px`,
+            height: `${windowWidth / imageAspectRatio}px`,
+        };
+    }, [image.width, image.height]);
 
     return (
         <Dialog
             open={isOpen}
             onClose={onClose}
-            maxWidth="xl"
+            maxWidth={false}
             PaperProps={{
+                style: {
+                    backgroundRepeat: 'no-repeat',
+                    backgroundImage: isOpen ? `url(${image.url})` : 'none',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    width,
+                    height,
+                },
                 className: classes.paperRoot,
             }}
         >
             <ClearIcon className={classes.closeIcon} onClick={onClose} />
-            <div
-                className={cn(classes.imageContainer, {
-                    [classes.imageContainerVisible]: loaded,
-                })}
-            >
-                <Image
-                    src={image.url}
-                    width={image.width}
-                    height={image.height}
-                    className={classes.image}
-                    alt={image.title}
-                    onLoadingComplete={() => setLoaded(true)}
-                />
-            </div>
         </Dialog>
     );
 };
-
-export const FullscreenCardPopup = memo(FullscreenCardPopupComponent);

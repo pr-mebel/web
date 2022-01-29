@@ -1,1 +1,1 @@
-export const batchSize = 42;
+export const batchSize = 12;

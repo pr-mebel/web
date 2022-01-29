@@ -58,12 +58,13 @@ export const FAQ: FC = () => {
     const [isShowMoreClicked, setIsShowMoreClicked] = useState(false);
     const [expandedItemID, setExpandedItemID] = useState<number | null>(null);
 
-    const request = useRequest(fetchFAQ, {
-        formatResult: (resp) =>
-            resp.data.map((card, i) => ({
-                ...card,
-                id: i + 1 >= 10 ? `${i + 1}` : `0${i + 1}`,
-            })),
+    const request = useRequest(async () => {
+        const resp = await fetchFAQ();
+
+        return resp.data.map((card, i) => ({
+            ...card,
+            id: i + 1 >= 10 ? `${i + 1}` : `0${i + 1}`,
+        }));
     });
 
     /**

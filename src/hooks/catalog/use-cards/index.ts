@@ -23,7 +23,7 @@ export const useCards = () => {
     });
     const cardModalFullScreen = useModal();
 
-    const { run, loading } = useRequest(fetchCatalogByFilter, {
+    const { run } = useRequest(fetchCatalogByFilter, {
         manual: true,
         onSuccess: (res, params) => {
             dispatch({
@@ -195,7 +195,7 @@ export const useCards = () => {
             });
             run(state.filters.section);
         }
-    }, [run, loading, router.isReady, state]);
+    }, [run, router.isReady, state]);
 
     useEffect(() => {
         if (hasMore && state.currentItemID && currentList.length - 5 <= state.currentItemID) {
@@ -209,7 +209,7 @@ export const useCards = () => {
         selectedItem,
         hasMore,
         bounds,
-        isLoading: loading,
+        isLoading: state.loading,
         cardModal: {
             ...cardModal,
             onOpenNext: handleGoToNextCard,

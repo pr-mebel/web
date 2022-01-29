@@ -1,4 +1,4 @@
-import '../styles/globals.css';
+import '../theme/globals.css';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import type { AppProps } from 'next/app';

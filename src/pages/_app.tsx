@@ -47,6 +47,24 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
                         <meta content="fe86c27432cb6049" name="yandex-verification" />
                         <meta content="5stp2baz27773j5xm7q9o0torwuokr" name="facebook-domain-verification" />
                         <meta content="3287bb5b0336ebb7" name="yandex-verification" />
+                        {/* Facebook Meta Tags */}
+                        <meta property="og:url" content="https://pr-mebel.ru" />
+                        <meta property="og:title" content="Частный мебельер - салон мебели премиум-класса" />
+                        <meta
+                            property="og:description"
+                            content="Мы создаем эксклюзивный проект будущего изделия, который не просто идеально впишется в ваш интерьер, а будет комфортен, удобен и функционален в использовании, и прослужит долгие годы."
+                        />
+                        <meta property="og:image" content="" />
+                        {/* Twitter Meta Tags */}
+                        <meta name="twitter:card" content="summary_large_image" />
+                        <meta property="twitter:domain" content="pr-mebel.ru" />
+                        <meta property="twitter:url" content="https://pr-mebel.ru" />
+                        <meta name="twitter:title" content="Частный мебельер - салон мебели премиум-класса" />
+                        <meta
+                            name="twitter:description"
+                            content="Мы создаем эксклюзивный проект будущего изделия, который не просто идеально впишется в ваш интерьер, а будет комфортен, удобен и функционален в использовании, и прослужит долгие годы."
+                        />
+                        <meta name="twitter:image" content="" />
                     </Head>
 
                     <ScriptsList />

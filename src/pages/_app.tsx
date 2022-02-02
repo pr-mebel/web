@@ -28,6 +28,7 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
         <React.StrictMode>
             <Provider store={store}>
                 <ThemeProvider theme={theme}>
+                    <ScriptsList />
                     <Head>
                         <meta charSet="utf-8" />
                         <link rel="icon" href="/favicon.ico" />
@@ -66,8 +67,6 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
                         />
                         <meta name="twitter:image" content="" />
                     </Head>
-
-                    <ScriptsList />
 
                     <Header />
                     <Component {...pageProps} />

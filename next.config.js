@@ -5,4 +5,11 @@ module.exports = {
     images: {
         domains: ['images.ctfassets.net'],
     },
+    redirects: async () => [
+        {
+            source: '/catalog.html*',
+            destination: '/catalog',
+            permanent: true,
+        },
+    ],
 };

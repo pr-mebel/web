@@ -7,7 +7,7 @@ module.exports = {
     },
     redirects: async () => [
         {
-            source: '/catalog.html*',
+            source: '/catalog.html',
             destination: '/catalog',
             permanent: true,
         },

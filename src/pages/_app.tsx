@@ -59,6 +59,9 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
                             property="og:image"
                             content="https://images.ctfassets.net/u9cvun9ln2na/7xCjy27fsfaLeyan7Itntt/30c2f52f8ed579b344b00aaa7a501705/top-img3.jpg"
                         />
+                        <meta property="og:image:width" content="300" />
+                        <meta property="og:image:height" content="300" />
+                        <meta property="og:type" content="website" />
                         {/* Twitter Meta Tags */}
                         <meta name="twitter:card" content="summary_large_image" />
                         <meta property="twitter:domain" content="pr-mebel.ru" />

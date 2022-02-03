@@ -1,3 +1,4 @@
+import { withSentry } from '@sentry/nextjs';
 import multer from 'multer';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
@@ -24,7 +25,7 @@ const runMiddleware = (req: NextApiRequest, res: NextApiResponse, fn: any) => {
     });
 };
 
-type Request = NextApiRequest & {
+type MulterBody = NextApiRequest & {
     files: Express.Multer.File[];
 };
 
@@ -37,10 +38,11 @@ type Body = {
     meta?: string;
 };
 
-const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
+const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
     await runMiddleware(req, res, uploadMiddleware);
 
     const { email, name, tel, description, meta, place } = req.body as Body;
+    const { files } = req as MulterBody;
 
     try {
         const transporter = nodemailer.createTransport({
@@ -87,7 +89,7 @@ const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
                         : ''
                 }
             `,
-                attachments: req.files.map((file) => ({
+                attachments: files.map((file) => ({
                     filename: file.filename,
                     content: file.buffer,
                     contentType: file.mimetype,
@@ -103,7 +105,7 @@ const sendEmailV2 = async (req: Request, res: NextApiResponse) => {
     }
 };
 
-export default sendEmailV2;
+export default withSentry(sendEmailV2);
 
 export const config = {
     api: {

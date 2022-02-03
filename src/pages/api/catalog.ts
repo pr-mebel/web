@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import { withSentry } from '@sentry/nextjs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { client } from '@/api/client';
@@ -91,4 +92,4 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 };
 
-export default catalog;
+export default withSentry(catalog);

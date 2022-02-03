@@ -1,4 +1,6 @@
-module.exports = {
+const { withSentryConfig } = require('@sentry/nextjs');
+
+const moduleExports = {
     env: {
         VERCEL_ENV: process.env.VERCEL_ENV,
     },
@@ -13,3 +15,9 @@ module.exports = {
         },
     ],
 };
+
+const sentryWebpackPluginOptions = {
+    silent: true,
+};
+
+module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);

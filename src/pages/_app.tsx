@@ -55,7 +55,10 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
                             property="og:description"
                             content="Мы создаем эксклюзивный проект будущего изделия, который не просто идеально впишется в ваш интерьер, а будет комфортен, удобен и функционален в использовании, и прослужит долгие годы."
                         />
-                        <meta property="og:image" content="" />
+                        <meta
+                            property="og:image"
+                            content="https://images.ctfassets.net/u9cvun9ln2na/7xCjy27fsfaLeyan7Itntt/30c2f52f8ed579b344b00aaa7a501705/top-img3.jpg"
+                        />
                         {/* Twitter Meta Tags */}
                         <meta name="twitter:card" content="summary_large_image" />
                         <meta property="twitter:domain" content="pr-mebel.ru" />
@@ -65,7 +68,10 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }) => {
                             name="twitter:description"
                             content="Мы создаем эксклюзивный проект будущего изделия, который не просто идеально впишется в ваш интерьер, а будет комфортен, удобен и функционален в использовании, и прослужит долгие годы."
                         />
-                        <meta name="twitter:image" content="" />
+                        <meta
+                            name="twitter:image"
+                            content="https://images.ctfassets.net/u9cvun9ln2na/7xCjy27fsfaLeyan7Itntt/30c2f52f8ed579b344b00aaa7a501705/top-img3.jpg"
+                        />
                     </Head>
 
                     <Header />

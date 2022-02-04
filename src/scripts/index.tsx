@@ -19,7 +19,7 @@ export const ScriptsList = () => {
     return (
         <>
             <Script src="https://af.click.ru/af.js?id=10173" strategy="beforeInteractive" />
-            <Script src="https://www.google-analytics.com/analytics.js" strategy="afterInteractive" />
+            <Script src="https://www.google-analytics.com/analytics.js" strategy="beforeInteractive" />
             <Script src="//cdn.callibri.ru/callibri.js" type="text/javascript" strategy="afterInteractive" />
             <Script
                 id="google-tag-manager"
@@ -30,14 +30,14 @@ export const ScriptsList = () => {
             />
             <Script
                 id="google-analytics"
-                strategy="afterInteractive"
+                strategy="beforeInteractive"
                 dangerouslySetInnerHTML={{
                     __html: GoogleAnalytics,
                 }}
             />
             <Script
                 id="yandex-metrika"
-                strategy="afterInteractive"
+                strategy="beforeInteractive"
                 dangerouslySetInnerHTML={{
                     __html: YandexMetrika,
                 }}

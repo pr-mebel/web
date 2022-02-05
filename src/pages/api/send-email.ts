@@ -1,9 +1,11 @@
+import { Prisma } from '@prisma/client';
 import { withSentry } from '@sentry/nextjs';
 import multer from 'multer';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
 import { dateTemplateWithTime } from '@/constants';
+import { prisma } from '@/lib/prisma';
 import { format } from '@/utils';
 
 const upload = multer({
@@ -44,18 +46,36 @@ const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
     const { email, name, tel, description, meta, place } = req.body as Body;
     const { files } = req as MulterBody;
 
+    const parsedMeta: Prisma.JsonObject = meta ? JSON.parse(meta) : {};
+
+    if (req.cookies['_ym_uid']) {
+        parsedMeta['_ym_uid'] = req.cookies['_ym_uid'];
+    }
+
+    const currentTime = format(new Date(), dateTemplateWithTime);
+
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.mail.ru',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'zakaz@pr-mebel.ru',
+            pass: 'nobiele000',
+        },
+    });
+
     try {
-        const transporter = nodemailer.createTransport({
-            host: 'smtp.mail.ru',
-            port: 465,
-            secure: true,
-            auth: {
-                user: 'zakaz@pr-mebel.ru',
-                pass: 'nobiele000',
+        await prisma.orders.create({
+            data: {
+                name,
+                tel,
+                place,
+                createdAt: new Date(),
+                email,
+                text: description,
+                meta: parsedMeta,
             },
         });
-
-        const currentTime = format(new Date(), dateTemplateWithTime);
 
         await transporter.sendMail(
             {
@@ -73,21 +93,12 @@ const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
                 <p><strong>Почта:</strong><br>${email || '-'}</p>
                 <p><strong>Описание:</strong><br>${description || '-'}</p>
                 <hr>
-                ${
-                    meta
-                        ? `
-                            <p>Дополнительная информация<br>
-                                ${Object.entries(JSON.parse(meta)).reduce(
-                                    (acc, val) => `${acc}<p><strong>${val[0]}:</strong> ${val[1]}</p>`,
-                                    ''
-                                )}
-                                ${
-                                    req.cookies['_ym_uid'] &&
-                                    `<p><strong>_ym_uid:</strong> ${req.cookies['_ym_uid']}</p>`
-                                }
-                            </p>`
-                        : ''
-                }
+                <p>Дополнительная информация<br>
+                    ${Object.entries(parsedMeta).reduce(
+                        (acc, val) => `${acc}<p><strong>${val[0]}:</strong> ${val[1]}</p>`,
+                        ''
+                    )}
+                </p>
             `,
                 attachments: files.map((file) => ({
                     filename: file.filename,
@@ -103,6 +114,7 @@ const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (error) {
         res.status(500).json(error);
     }
+    res.status(200);
 };
 
 export default withSentry(sendEmailV2);

@@ -65,7 +65,7 @@ const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     try {
-        await prisma.orders.create({
+        const response = await prisma.orders.create({
             data: {
                 name,
                 tel,
@@ -77,6 +77,12 @@ const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
             },
         });
 
+        console.log('success', response);
+    } catch (e) {
+        console.log(e);
+    }
+
+    try {
         await transporter.sendMail(
             {
                 from: {

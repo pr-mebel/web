@@ -40,6 +40,47 @@ type Body = {
     meta?: string;
 };
 
+type CreateMessageParams = {
+    emailTo: string;
+    email?: string;
+    name: string;
+    tel: string;
+    place: string;
+    description?: string;
+    meta: Record<string, unknown>;
+    files: Express.Multer.File[];
+};
+
+const createMessage = ({ emailTo, files, name, place, tel, description, email, meta }: CreateMessageParams) => {
+    const currentTime = format(new Date(), dateTemplateWithTime);
+
+    return {
+        from: {
+            address: emailTo,
+            name: `${place} | ${tel} | ${currentTime}`,
+        },
+        to: emailTo,
+        replyTo: email || emailTo,
+        subject: `${name} | ${tel} | ${currentTime}`,
+        html: `
+            <p><strong>Кнопка:</strong><br>${place}</p>
+            <p><strong>Имя:</strong><br>${name}</p>
+            <p><strong>Телефон:</strong><br>${tel}</p>
+            <p><strong>Почта:</strong><br>${email || '-'}</p>
+            <p><strong>Описание:</strong><br>${description || '-'}</p>
+            <hr>
+            <p>Дополнительная информация<br>
+                ${Object.entries(meta).reduce((acc, val) => `${acc}<p><strong>${val[0]}:</strong> ${val[1]}</p>`, '')}
+            </p>
+        `,
+        attachments: files.map((file) => ({
+            filename: file.filename,
+            content: file.buffer,
+            contentType: file.mimetype,
+        })),
+    };
+};
+
 const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
     await runMiddleware(req, res, uploadMiddleware);
 
@@ -52,15 +93,23 @@ const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
         parsedMeta['_ym_uid'] = req.cookies['_ym_uid'];
     }
 
-    const currentTime = format(new Date(), dateTemplateWithTime);
-
-    const transporter = nodemailer.createTransport({
+    const transporterMail = nodemailer.createTransport({
         host: 'smtp.mail.ru',
         port: 465,
         secure: true,
         auth: {
             user: 'zakaz@pr-mebel.ru',
             pass: 'nobiele000',
+        },
+    });
+
+    const transporterYandex = nodemailer.createTransport({
+        host: 'smtp.yandex.ru',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'nobieleadv@yandex.ru',
+            pass: 'Nobie111@',
         },
     });
 
@@ -79,50 +128,56 @@ const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
 
         console.log('success', response);
     } catch (e) {
-        console.log(e);
+        console.error(e);
     }
 
     try {
-        await transporter.sendMail(
-            {
-                from: {
-                    address: 'zakaz@pr-mebel.ru',
-                    name: `${place} | ${tel} | ${currentTime}`,
-                },
-                to: 'zakaz@pr-mebel.ru',
-                replyTo: email || 'zakaz@pr-mebel.ru',
-                subject: `${name} | ${tel} | ${currentTime}`,
-                html: `
-                    <p><strong>Кнопка:</strong><br>${place}</p>
-                    <p><strong>Имя:</strong><br>${name}</p>
-                    <p><strong>Телефон:</strong><br>${tel}</p>
-                    <p><strong>Почта:</strong><br>${email || '-'}</p>
-                    <p><strong>Описание:</strong><br>${description || '-'}</p>
-                    <hr>
-                    <p>Дополнительная информация<br>
-                        ${Object.entries(parsedMeta).reduce(
-                            (acc, val) => `${acc}<p><strong>${val[0]}:</strong> ${val[1]}</p>`,
-                            ''
-                        )}
-                    </p>
-                `,
-                attachments: files.map((file) => ({
-                    filename: file.filename,
-                    content: file.buffer,
-                    contentType: file.mimetype,
-                })),
-            },
-            (error, info) => {
-                console.log(error, info);
-                res.status(200).json({ error, info });
+        await transporterMail.sendMail(
+            createMessage({
+                emailTo: 'zakaz@pr-mebel.ru',
+                meta: parsedMeta,
+                files,
+                name,
+                place,
+                tel,
+                description,
+                email,
+            }),
+            (error) => {
+                if (error) {
+                    console.error(error);
+                }
             }
         );
     } catch (error) {
-        res.status(500).json({
-            error,
-            message: 'Something went wrong',
-        });
+        console.error(error);
+        res.status(500).json(error);
     }
+
+    try {
+        await transporterYandex.sendMail(
+            createMessage({
+                emailTo: 'nobieleadv@yandex.ru',
+                meta: parsedMeta,
+                files,
+                name,
+                place,
+                tel,
+                description,
+                email,
+            }),
+            (error) => {
+                if (error) {
+                    console.error(error);
+                }
+            }
+        );
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(error);
+    }
+
+    res.status(200);
 };
 
 export default withSentry(sendEmailV2);

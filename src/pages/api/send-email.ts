@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import { withSentry } from '@sentry/nextjs';
+import Sentry, { withSentry } from '@sentry/nextjs';
 import multer from 'multer';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
@@ -81,7 +81,16 @@ const createMessage = ({ emailTo, files, name, place, tel, description, email, m
     };
 };
 
-const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
+const handleException = (error: unknown, source: string, other: Record<string, unknown>) => {
+    Sentry.captureException(error, {
+        extra: {
+            source,
+            ...other,
+        },
+    });
+};
+
+const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
     await runMiddleware(req, res, uploadMiddleware);
 
     const { email, name, tel, description, meta, place } = req.body as Body;
@@ -127,8 +136,9 @@ const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
         });
 
         console.log('success', response);
-    } catch (e) {
-        console.error(e);
+    } catch (error) {
+        handleException(error, 'database', req.body);
+        console.error(error);
     }
 
     try {
@@ -150,6 +160,7 @@ const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
             }
         );
     } catch (error) {
+        handleException(error, 'mail.ru', req.body);
         console.error(error);
         res.status(500).json(error);
     }
@@ -173,6 +184,7 @@ const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
             }
         );
     } catch (error) {
+        handleException(error, 'yandex.ru', req.body);
         console.error(error);
         res.status(500).json(error);
     }
@@ -180,7 +192,7 @@ const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(200);
 };
 
-export default withSentry(sendEmailV2);
+export default withSentry(sendEmail);
 
 export const config = {
     api: {

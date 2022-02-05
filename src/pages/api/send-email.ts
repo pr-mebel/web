@@ -87,19 +87,19 @@ const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
                 replyTo: email || 'zakaz@pr-mebel.ru',
                 subject: `${name} | ${tel} | ${currentTime}`,
                 html: `
-                <p><strong>Кнопка:</strong><br>${place}</p>
-                <p><strong>Имя:</strong><br>${name}</p>
-                <p><strong>Телефон:</strong><br>${tel}</p>
-                <p><strong>Почта:</strong><br>${email || '-'}</p>
-                <p><strong>Описание:</strong><br>${description || '-'}</p>
-                <hr>
-                <p>Дополнительная информация<br>
-                    ${Object.entries(parsedMeta).reduce(
-                        (acc, val) => `${acc}<p><strong>${val[0]}:</strong> ${val[1]}</p>`,
-                        ''
-                    )}
-                </p>
-            `,
+                    <p><strong>Кнопка:</strong><br>${place}</p>
+                    <p><strong>Имя:</strong><br>${name}</p>
+                    <p><strong>Телефон:</strong><br>${tel}</p>
+                    <p><strong>Почта:</strong><br>${email || '-'}</p>
+                    <p><strong>Описание:</strong><br>${description || '-'}</p>
+                    <hr>
+                    <p>Дополнительная информация<br>
+                        ${Object.entries(parsedMeta).reduce(
+                            (acc, val) => `${acc}<p><strong>${val[0]}:</strong> ${val[1]}</p>`,
+                            ''
+                        )}
+                    </p>
+                `,
                 attachments: files.map((file) => ({
                     filename: file.filename,
                     content: file.buffer,
@@ -112,7 +112,10 @@ const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
             }
         );
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({
+            error,
+            message: 'Something went wrong',
+        });
     }
 };
 

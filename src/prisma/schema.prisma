@@ -1,0 +1,21 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("PLANETSCALE_PRISMA_DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model Orders {
+  id        Int      @id @default(autoincrement())
+  email     String?  @db.VarChar(255)
+  name      String   @db.VarChar(255)
+  tel       String   @db.VarChar(255)
+  place     String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  text      String?  @db.Text
+  meta      Json?
+}

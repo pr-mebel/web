@@ -114,7 +114,6 @@ const sendEmailV2 = async (req: NextApiRequest, res: NextApiResponse) => {
     } catch (error) {
         res.status(500).json(error);
     }
-    res.status(200);
 };
 
 export default withSentry(sendEmailV2);

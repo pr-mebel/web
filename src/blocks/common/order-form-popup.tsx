@@ -2,12 +2,12 @@ import { Dialog, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ClearIcon from '@material-ui/icons/Clear';
 import PublishIcon from '@material-ui/icons/Publish';
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useSendEmail } from '@/api';
 import { Input, SubmitButton } from '@/components';
-import { useAnalytics, useContactFormModal, useFileUpload } from '@/hooks';
+import { useAnalytics, useContactFormModal, useFormSubmitModal } from '@/hooks';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
 
 const useStyles = makeStyles((theme) => ({
@@ -54,6 +54,9 @@ const useStyles = makeStyles((theme) => ({
         gridTemplateColumns: '1fr',
         rowGap: '15px',
         maxWidth: '255px',
+    },
+    inputFile: {
+        display: 'none',
     },
     imgContainer: {
         width: '100%',
@@ -117,29 +120,69 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const OrderFormPopup: FC = () => {
-    const fileUpload = useFileUpload();
     const analytics = useAnalytics();
     const classes = useStyles();
     const contactFormModal = useContactFormModal();
+    const formSubmitModal = useFormSubmitModal();
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [fileList, setFileList] = useState<File[]>([]);
     const { register, handleSubmit } = useForm();
-    const { loading, onSendEmail } = useSendEmail({
-        place: 'Модальное окно',
-        files: fileUpload.data,
-        onFinish: () => {
-            contactFormModal.onClose();
-            analytics.onSendEmail('zakazat_modal');
-            analytics.onContactMeModalSubmitted();
-            fileUpload.onClear();
-        },
-    });
+    const { onSendEmail } = useSendEmail({ place: 'Модальное окно' });
 
     /**
      * Закрывает попап
      */
     const handleClosePopup = useCallback(() => {
-        fileUpload.onClear();
-        contactFormModal.onClose();
-    }, [fileUpload, contactFormModal]);
+        if (fileInputRef.current) {
+            contactFormModal.onClose();
+            fileInputRef.current.value = '';
+        }
+    }, [fileInputRef, contactFormModal]);
+
+    /**
+     * Имитирует клик по инпуту файлов
+     */
+    const handleFileInputClick = useCallback(() => {
+        fileInputRef.current?.click();
+    }, [fileInputRef]);
+
+    /**
+     * Сохраняет новые загруженные файлы в массив
+     */
+    const handleFileUploadChange = useCallback(() => {
+        if (fileInputRef.current?.files && fileInputRef.current.files) {
+            const files = fileInputRef.current.files;
+            setFileList((prev) => [...prev, ...files]);
+        }
+    }, [fileInputRef]);
+
+    /**
+     * Очищает загруженные файлы
+     */
+    const handleDeleteSelectedFiles = useCallback(() => {
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+            setFileList([]);
+        }
+    }, [fileInputRef]);
+
+    /**
+     * Отправляет форму
+     */
+    const onSubmit = useCallback(
+        (data) => {
+            contactFormModal.onClose();
+            onSendEmail({
+                ...data,
+                files: fileList,
+            });
+            analytics.onSendEmail('zakazat_modal');
+            analytics.onContactMeModalSubmitted();
+            handleDeleteSelectedFiles();
+            formSubmitModal.onOpen();
+        },
+        [fileList, contactFormModal, formSubmitModal, analytics, onSendEmail, handleDeleteSelectedFiles]
+    );
 
     return (
         <Dialog
@@ -169,7 +212,7 @@ export const OrderFormPopup: FC = () => {
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                    <form className={classes.form} onSubmit={handleSubmit(onSendEmail)}>
+                    <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                         <Input
                             ref={register}
                             name="name"
@@ -208,22 +251,31 @@ export const OrderFormPopup: FC = () => {
                             multiline
                             rows={5}
                         />
-                        {fileUpload.renderFileInput()}
-                        <div className={classes.fileInputContainer} onClick={fileUpload.onClick}>
+                        <input
+                            type="file"
+                            multiple
+                            ref={fileInputRef}
+                            className={classes.inputFile}
+                            onChange={handleFileUploadChange}
+                        />
+                        <div className={classes.fileInputContainer} onClick={handleFileInputClick}>
                             <PublishIcon className={classes.icon} />
                             <Typography className={classes.fileInputText} style={{ textTransform: 'uppercase' }}>
                                 Прикрепить эскизы
                             </Typography>
                         </div>
-                        {!!fileUpload.data?.length && (
+                        {!!fileList?.length && (
                             <div className={classes.fileListWrapper}>
                                 <Typography className={classes.fileInputText}>
-                                    {`${fileUpload.data.length}\xA0${getFileDeclination(fileUpload.data.length)}`}
-                                    <ClearIcon className={classes.deleteFilesIcon} onClick={fileUpload.onClear} />
+                                    {`${fileList.length}\xA0${getFileDeclination(fileList.length)}`}
+                                    <ClearIcon
+                                        className={classes.deleteFilesIcon}
+                                        onClick={handleDeleteSelectedFiles}
+                                    />
                                 </Typography>
                             </div>
                         )}
-                        <SubmitButton loading={loading}>Рассчитать стоимость</SubmitButton>
+                        <SubmitButton>Рассчитать стоимость</SubmitButton>
                     </form>
                 </Grid>
                 <Typography variant="body2" align="center" className={classes.copy}>

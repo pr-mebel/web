@@ -3,6 +3,8 @@ import { captureException, withSentry } from '@sentry/nextjs';
 import multer from 'multer';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
+import Mail from 'nodemailer/lib/mailer';
+import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
 import { dateTemplateWithTime } from '@/constants';
 import { format } from '@/utils';
@@ -89,7 +91,19 @@ const handleException = (error: unknown, source: string, other: Record<string, u
     });
 };
 
-const sendRequestMailRu = async (req: NextApiRequest, res: NextApiResponse) => {
+const sendEmail = (transport: nodemailer.Transporter<SMTPTransport.SentMessageInfo>, params: Mail.Options) => {
+    return new Promise((resolve, reject) => {
+        transport.sendMail(params, (error, info) => {
+            if (error) {
+                return reject(error);
+            }
+
+            return resolve(info);
+        });
+    });
+};
+
+const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
     await runMiddleware(req, res, uploadMiddleware);
 
     const { email, name, tel, description, meta, place } = req.body as Body;
@@ -111,40 +125,62 @@ const sendRequestMailRu = async (req: NextApiRequest, res: NextApiResponse) => {
         },
     });
 
+    const transporterYandex = nodemailer.createTransport({
+        host: 'smtp.yandex.ru',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'nobieleadv@yandex.ru',
+            pass: 'Nobie111@',
+        },
+    });
+
     try {
-        transporterMail.sendMail(
-            createMessage({
-                emailTo: 'zakaz@pr-mebel.ru',
-                meta: parsedMeta,
-                files,
-                name,
-                place,
-                tel,
-                description,
-                email,
-            }),
-            (error, info) => {
-                if (error) {
-                    console.error('sent to mail.ru with error', { ...error });
-                }
+        const [mailRuInfo, yandexInfo] = await Promise.all([
+            sendEmail(
+                transporterMail,
+                createMessage({
+                    emailTo: 'zakaz@pr-mebel.ru',
+                    meta: parsedMeta,
+                    files,
+                    name,
+                    place,
+                    tel,
+                    description,
+                    email,
+                })
+            ),
+            sendEmail(
+                transporterYandex,
+                createMessage({
+                    emailTo: 'nobieleadv@yandex.ru',
+                    meta: parsedMeta,
+                    files,
+                    name,
+                    place,
+                    tel,
+                    description,
+                    email,
+                })
+            ),
+        ]);
 
-                console.info('sent to mail.ru', {
-                    info: JSON.stringify(info),
-                });
+        const info = {
+            'zakaz@pr-mebel.ru': mailRuInfo,
+            'nobieleadv@yandex.ru': yandexInfo,
+        };
 
-                res.status(200).json(info);
-            }
-        );
+        console.info('sent to mail.ru', info);
+
+        res.status(200).json(info);
     } catch (error) {
         handleException(error, 'mail.ru', req.body);
-        console.error('unable to send to mail.ru', {
-            error: error as string,
-        });
+        console.error('unable to send to mail.ru', error);
         res.status(500).json(error);
     }
 };
 
-export default withSentry(sendRequestMailRu);
+export default withSentry(sendRequestEmail);
 
 export const config = {
     api: {

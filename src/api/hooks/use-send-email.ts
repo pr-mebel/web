@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { noop } from 'lodash';
 import { useRouter } from 'next/router';
+import { useSnackbar } from 'notistack';
 import { useCallback, useState } from 'react';
 
 import { useFormSubmitModal } from '@/hooks';
@@ -33,6 +34,7 @@ const prepareData = ({ name, tel, description, email, files, place, meta = {} }:
 export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmailParams) => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
+    const { enqueueSnackbar } = useSnackbar();
     const formSubmitModal = useFormSubmitModal();
 
     const handleSendEmail = useCallback(
@@ -52,29 +54,33 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
                 },
             });
 
-            await Promise.all([
-                axios.post(endpoints.logRequestToDB, {
-                    ...values,
-                    place,
-                    meta: {
-                        ...values.meta,
-                        URL: router.pathname,
-                        ...(utm ? JSON.parse(utm) : {}),
-                    },
-                }),
-                axios.post(endpoints.sendRequestMailRu, formData, {
-                    headers: { 'content-type': 'multipart/form-data' },
-                }),
-                axios.post(endpoints.sendRequestYandexRu, formData, {
-                    headers: { 'content-type': 'multipart/form-data' },
-                }),
-            ]);
+            try {
+                await Promise.all([
+                    axios.post(endpoints.logRequestToDB, {
+                        ...values,
+                        place,
+                        meta: {
+                            ...values.meta,
+                            URL: router.pathname,
+                            ...(utm ? JSON.parse(utm) : {}),
+                        },
+                    }),
+                    axios.post(endpoints.sendRequestEmail, formData, {
+                        headers: { 'content-type': 'multipart/form-data' },
+                    }),
+                ]);
+
+                formSubmitModal.onOpen();
+                onFinish();
+            } catch (error) {
+                enqueueSnackbar('Не удалось отправить заявку. Напишите нам на почту напрямую, либо попробуйте позже', {
+                    variant: 'error',
+                });
+            }
 
             setLoading(false);
-            formSubmitModal.onOpen();
-            onFinish();
         },
-        [router, place, files, formSubmitModal, onFinish]
+        [files, place, router.pathname, formSubmitModal, onFinish, enqueueSnackbar]
     );
 
     return {

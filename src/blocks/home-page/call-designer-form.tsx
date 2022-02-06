@@ -1,11 +1,11 @@
 import { Container, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import React, { FC, useCallback } from 'react';
+import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useSendEmail } from '@/api';
 import { ButtonContainer, Input, SubmitButton } from '@/components';
-import { useAnalytics, useFormSubmitModal } from '@/hooks';
+import { useAnalytics } from '@/hooks';
 import { formatPhoneInput } from '@/utils';
 
 const useStyles = makeStyles((theme) => ({
@@ -34,29 +34,19 @@ const useStyles = makeStyles((theme) => ({
 export const CallDesignerForm: FC = () => {
     const analytics = useAnalytics();
     const classes = useStyles();
-    const formSubmitModal = useFormSubmitModal();
     const { register, handleSubmit, reset } = useForm();
-    const { onSendEmail } = useSendEmail({ place: 'Главная/Вызвать дизайнера' });
-    /**
-     * Отправляет заполненную форму
-     */
-    const onSubmit = useCallback(
-        (data) => {
-            onSendEmail({
-                ...data,
-                files: [],
-            });
+    const { loading, onSendEmail } = useSendEmail({
+        place: 'Главная/Вызвать дизайнера',
+        onFinish: () => {
             analytics.onSendEmail('designer');
-            formSubmitModal.onOpen();
             reset();
         },
-        [reset, formSubmitModal, analytics, onSendEmail]
-    );
+    });
 
     return (
         <div className={classes.root}>
             <Container>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSendEmail)}>
                     <Grid container>
                         <Grid item xs={1} sm={3} />
                         <Grid item xs={10} sm={6} container spacing={1}>
@@ -91,7 +81,7 @@ export const CallDesignerForm: FC = () => {
                         </Grid>
                         <Grid item xs={12} className={classes.buttonContainer}>
                             <ButtonContainer>
-                                <SubmitButton>Вызвать дизайнера</SubmitButton>
+                                <SubmitButton loading={loading}>Вызвать дизайнера</SubmitButton>
                             </ButtonContainer>
                         </Grid>
                         <Grid item xs container justifyContent="center">

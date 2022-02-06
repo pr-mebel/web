@@ -1,11 +1,10 @@
 import { Prisma } from '@prisma/client';
-import Sentry, { withSentry } from '@sentry/nextjs';
+import { captureException, withSentry } from '@sentry/nextjs';
 import multer from 'multer';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
 import { dateTemplateWithTime } from '@/constants';
-import { prisma } from '@/lib/prisma';
 import { format } from '@/utils';
 
 const upload = multer({
@@ -82,7 +81,7 @@ const createMessage = ({ emailTo, files, name, place, tel, description, email, m
 };
 
 const handleException = (error: unknown, source: string, other: Record<string, unknown>) => {
-    Sentry.captureException(error, {
+    captureException(error, {
         extra: {
             source,
             ...other,
@@ -90,7 +89,7 @@ const handleException = (error: unknown, source: string, other: Record<string, u
     });
 };
 
-const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
+const sendRequestMailRu = async (req: NextApiRequest, res: NextApiResponse) => {
     await runMiddleware(req, res, uploadMiddleware);
 
     const { email, name, tel, description, meta, place } = req.body as Body;
@@ -112,37 +111,8 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
         },
     });
 
-    const transporterYandex = nodemailer.createTransport({
-        host: 'smtp.yandex.ru',
-        port: 465,
-        secure: true,
-        auth: {
-            user: 'nobieleadv@yandex.ru',
-            pass: 'Nobie111@',
-        },
-    });
-
     try {
-        const response = await prisma.orders.create({
-            data: {
-                name,
-                tel,
-                place,
-                createdAt: new Date(),
-                email,
-                text: description,
-                meta: parsedMeta,
-            },
-        });
-
-        console.log('success', response);
-    } catch (error) {
-        handleException(error, 'database', req.body);
-        console.error(error);
-    }
-
-    try {
-        await transporterMail.sendMail(
+        transporterMail.sendMail(
             createMessage({
                 emailTo: 'zakaz@pr-mebel.ru',
                 meta: parsedMeta,
@@ -153,46 +123,28 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
                 description,
                 email,
             }),
-            (error) => {
+            (error, info) => {
                 if (error) {
-                    console.error(error);
+                    console.error('sent to mail.ru with error', { ...error });
                 }
+
+                console.info('sent to mail.ru', {
+                    info: JSON.stringify(info),
+                });
+
+                res.status(200).json(info);
             }
         );
     } catch (error) {
         handleException(error, 'mail.ru', req.body);
-        console.error(error);
+        console.error('unable to send to mail.ru', {
+            error: error as string,
+        });
         res.status(500).json(error);
     }
-
-    try {
-        await transporterYandex.sendMail(
-            createMessage({
-                emailTo: 'nobieleadv@yandex.ru',
-                meta: parsedMeta,
-                files,
-                name,
-                place,
-                tel,
-                description,
-                email,
-            }),
-            (error) => {
-                if (error) {
-                    console.error(error);
-                }
-            }
-        );
-    } catch (error) {
-        handleException(error, 'yandex.ru', req.body);
-        console.error(error);
-        res.status(500).json(error);
-    }
-
-    res.status(200);
 };
 
-export default withSentry(sendEmail);
+export default withSentry(sendRequestMailRu);
 
 export const config = {
     api: {

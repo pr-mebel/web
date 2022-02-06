@@ -102,38 +102,38 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
         parsedMeta['_ym_uid'] = req.cookies['_ym_uid'];
     }
 
-    console.info('init mail.ru smtp with', process.env.EMAIL_MAIL_RU, process.env.PASSWORD_MAIL_RU);
+    // console.info('init mail.ru smtp with', process.env.EMAIL_MAIL_RU, process.env.PASSWORD_MAIL_RU);
     const transporterMail = nodemailer.createTransport({
         host: 'smtp.mail.ru',
         port: 465,
         secure: true,
-        logger: true,
-        debug: true,
+        // logger: true,
+        // debug: true,
         auth: {
-            user: process.env.EMAIL_MAIL_RU,
-            pass: process.env.PASSWORD_MAIL_RU,
+            user: 'zakaz@pr-mebel.ru',
+            pass: 'nobiele000',
         },
     });
 
-    await transporterMail.verify((...params) => console.info('verify mail.ru transporter', ...params));
+    // await transporterMail.verify((...params) => console.info('verify mail.ru transporter', ...params));
 
-    console.info('init yandex smtp with', process.env.EMAIL_YANDEX, process.env.PASSWORD_YANDEX);
+    // console.info('init yandex smtp with', process.env.EMAIL_YANDEX, process.env.PASSWORD_YANDEX);
     const transporterYandex = nodemailer.createTransport({
         host: 'smtp.yandex.ru',
         port: 465,
         secure: true,
-        logger: true,
-        debug: true,
+        // logger: true,
+        // debug: true,
         auth: {
-            user: process.env.EMAIL_YANDEX,
-            pass: process.env.PASSWORD_YANDEX,
+            user: 'nobieleadv@yandex.ru',
+            pass: 'Nobie111@',
         },
     });
 
-    await transporterYandex.verify((...params) => console.info('verify yandex transporter', ...params));
+    // await transporterYandex.verify((...params) => console.info('verify yandex transporter', ...params));
 
     try {
-        const response = await prisma.orders.create({
+        await prisma.orders.create({
             data: {
                 name,
                 tel,
@@ -145,14 +145,14 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
             },
         });
 
-        console.info('written to database successfully', response);
+        // console.info('written to database successfully', response);
     } catch (error) {
         handleException(error, 'database', req.body);
         console.error(error);
     }
 
     try {
-        const response = await transporterMail.sendMail(
+        await transporterMail.sendMail(
             createMessage({
                 emailTo: process.env.EMAIL_MAIL_RU,
                 meta: parsedMeta,
@@ -169,7 +169,7 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             }
         );
-        console.info('sent to', process.env.EMAIL_MAIL_RU, response);
+        // console.info('sent to', process.env.EMAIL_MAIL_RU);
     } catch (error) {
         handleException(error, process.env.EMAIL_MAIL_RU, req.body);
         console.error(error);
@@ -177,7 +177,7 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     try {
-        const response = await transporterYandex.sendMail(
+        await transporterYandex.sendMail(
             createMessage({
                 emailTo: process.env.EMAIL_YANDEX,
                 meta: parsedMeta,
@@ -194,7 +194,7 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             }
         );
-        console.info('sent to ', process.env.EMAIL_YANDEX, response);
+        // console.info('sent to ', process.env.EMAIL_YANDEX);
     } catch (error) {
         handleException(error, process.env.EMAIL_YANDEX, req.body);
         console.error(error);

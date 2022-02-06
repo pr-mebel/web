@@ -2,12 +2,12 @@ import { Container, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Image from 'next/image';
 import bgImg from 'public/images/home-page/questions-form/1.jpg';
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useSendEmail } from '@/api';
 import { BlockTitle, Input, SubmitButton } from '@/components';
-import { useAnalytics } from '@/hooks';
+import { useAnalytics, useFormSubmitModal } from '@/hooks';
 import { formatPhoneInput } from '@/utils';
 
 const useStyles = makeStyles((theme) => ({
@@ -94,14 +94,25 @@ const useStyles = makeStyles((theme) => ({
 export const QuestionsForm: FC = () => {
     const analytics = useAnalytics();
     const classes = useStyles();
+    const formSubmitModal = useFormSubmitModal();
     const { register, handleSubmit, reset } = useForm();
-    const { loading, onSendEmail } = useSendEmail({
-        place: 'Главная/Остались вопросы?',
-        onFinish: () => {
+    const { onSendEmail } = useSendEmail({ place: 'Главная/Остались вопросы?' });
+
+    /**
+     * Отправляет форму
+     */
+    const onSubmit = useCallback(
+        (data) => {
+            onSendEmail({
+                ...data,
+                files: [],
+            });
             analytics.onSendEmail('vopros');
+            formSubmitModal.onOpen();
             reset();
         },
-    });
+        [reset, formSubmitModal, analytics, onSendEmail]
+    );
 
     return (
         <div className={classes.root}>
@@ -121,7 +132,7 @@ export const QuestionsForm: FC = () => {
                 <Typography variant="h6" className={classes.subtitle}>
                     Заполните форму ниже. Наш менеджер свяжется с вами и ответит на вопросы
                 </Typography>
-                <form onSubmit={handleSubmit(onSendEmail)} className={classes.form}>
+                <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
                     <Input
                         ref={register}
                         name="name"
@@ -157,7 +168,7 @@ export const QuestionsForm: FC = () => {
                         darkMode
                     />
                     <div className={classes.buttonContainer}>
-                        <SubmitButton loading={loading}>Отправить</SubmitButton>
+                        <SubmitButton>Отправить</SubmitButton>
                     </div>
                 </form>
                 <Typography className={classes.text} align="center">

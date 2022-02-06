@@ -3,12 +3,12 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ClearIcon from '@material-ui/icons/Clear';
 import PublishIcon from '@material-ui/icons/Publish';
-import React, { FC } from 'react';
+import React, { FC, useCallback, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useSendEmail } from '@/api';
 import { ButtonContainer, Input, SubmitButton } from '@/components';
-import { useAnalytics, useFileUpload } from '@/hooks';
+import { useAnalytics, useFormSubmitModal } from '@/hooks';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
 
 const useStyles = makeStyles((theme) => ({
@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
     copyrightLink: {
         color: 'white',
     },
+    inputFile: {
+        display: 'none',
+    },
     buttonContainer: {
         marginTop: '36px',
         marginBottom: '24px',
@@ -78,26 +81,64 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const FeedbackForm: FC = () => {
-    const fileUpload = useFileUpload();
     const analytics = useAnalytics();
     const classes = useStyles();
     const theme = useTheme();
+    const formSubmitModal = useFormSubmitModal();
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
+    const fileInputRef = useRef<HTMLInputElement>(null);
     const { register, handleSubmit, reset } = useForm();
-    const { loading, onSendEmail } = useSendEmail({
-        place: 'Главная/Расчет стоимости',
-        files: fileUpload.data,
-        onFinish: () => {
+    const [fileList, setFileList] = useState<File[]>([]);
+    const { onSendEmail } = useSendEmail({ place: 'Главная/Расчет стоимости' });
+
+    /**
+     * Имитирует клик на инпут файла
+     */
+    const handleFileInputClick = useCallback(() => {
+        fileInputRef.current?.click();
+    }, [fileInputRef]);
+
+    /**
+     * Сохраняет выбранные файлы в массив
+     */
+    const handleFileUploadChange = useCallback(() => {
+        if (fileInputRef.current?.files && fileInputRef.current.files) {
+            const files = fileInputRef.current.files;
+            setFileList((prev) => [...prev, ...files]);
+        }
+    }, [fileInputRef]);
+
+    /**
+     * Очищает массив сохраненных файлов
+     */
+    const handleClearFiles = useCallback(() => {
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+            setFileList([]);
+        }
+    }, [fileInputRef]);
+
+    /**
+     * Отправляет форму
+     */
+    const onSubmit = useCallback(
+        (data) => {
+            onSendEmail({
+                ...data,
+                files: fileList,
+            });
             analytics.onSendEmail('proekt');
-            fileUpload.onClear();
+            formSubmitModal.onOpen();
+            handleClearFiles();
             reset();
         },
-    });
+        [reset, fileList, formSubmitModal, analytics, onSendEmail, handleClearFiles]
+    );
 
     return (
         <div className={classes.root}>
             <Container>
-                <form onSubmit={handleSubmit(onSendEmail)}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <Grid container justifyContent="center">
                         <Grid item xs={1} />
                         <Grid item xs={10} md={6} container direction="row" spacing={smDown ? 2 : 4}>
@@ -149,8 +190,14 @@ export const FeedbackForm: FC = () => {
                             className={classes.fileUploadContainer}
                         >
                             <Grid item xs={6} container justifyContent="center">
-                                {fileUpload.renderFileInput()}
-                                <div onClick={fileUpload.onClick} className={classes.publish}>
+                                <input
+                                    type="file"
+                                    multiple
+                                    ref={fileInputRef}
+                                    className={classes.inputFile}
+                                    onChange={handleFileUploadChange}
+                                />
+                                <div onClick={handleFileInputClick} className={classes.publish}>
                                     <PublishIcon className={classes.icon} />
                                     <Typography className={classes.textPublish}>
                                         Прикрепить
@@ -160,16 +207,11 @@ export const FeedbackForm: FC = () => {
                                 </div>
                             </Grid>
                             <Grid item xs={6}>
-                                {!!fileUpload.data?.length && (
+                                {!!fileList?.length && (
                                     <Grid item xs={12} container justifyContent="center">
                                         <Typography className={classes.fileInputText}>
-                                            {`${fileUpload.data.length}\xA0${getFileDeclination(
-                                                fileUpload.data.length
-                                            )}`}
-                                            <ClearIcon
-                                                className={classes.deleteFilesIcon}
-                                                onClick={fileUpload.onClear}
-                                            />
+                                            {`${fileList.length}\xA0${getFileDeclination(fileList.length)}`}
+                                            <ClearIcon className={classes.deleteFilesIcon} onClick={handleClearFiles} />
                                         </Typography>
                                     </Grid>
                                 )}
@@ -177,7 +219,7 @@ export const FeedbackForm: FC = () => {
                         </Grid>
                         <Grid item xs={12} className={classes.buttonContainer}>
                             <ButtonContainer>
-                                <SubmitButton loading={loading}>Рассчитать стоимость</SubmitButton>
+                                <SubmitButton>Рассчитать стоимость</SubmitButton>
                             </ButtonContainer>
                         </Grid>
                         <Grid item xs container justifyContent="center">

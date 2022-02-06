@@ -1,13 +1,9 @@
-import { CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { FC } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        height: '45px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        lineHeight: '43px',
         paddingTop: '0',
         paddingBottom: '0',
         background: theme.palette.primary.main,
@@ -23,20 +19,9 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
             color: theme.palette.primary.main,
             background: 'white',
-            '& .MuiCircularProgress-colorPrimary': {
-                color: theme.palette.primary.main,
-            },
         },
         '&:focus': {
             outline: 'none',
-            color: theme.palette.primary.main,
-            background: 'white',
-            '& .MuiCircularProgress-colorPrimary': {
-                color: theme.palette.primary.main,
-            },
-        },
-        '& .MuiCircularProgress-colorPrimary': {
-            color: 'white',
         },
     },
     [theme.breakpoints.down('xs')]: {
@@ -46,21 +31,17 @@ const useStyles = makeStyles((theme) => ({
     },
     '@media (max-width: 991px)': {
         root: {
-            height: '40px',
+            lineHeight: '38px',
         },
     },
 }));
 
-type SubmitButtonProps = {
-    loading?: boolean;
-};
-
-export const SubmitButton: FC<SubmitButtonProps> = ({ loading, children }) => {
+export const SubmitButton: FC = ({ children }) => {
     const classes = useStyles();
 
     return (
         <button type="submit" className={classes.root}>
-            {loading ? <CircularProgress size={20} /> : children}
+            {children}
         </button>
     );
 };

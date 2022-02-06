@@ -14,6 +14,7 @@
     },
     "dependencies": {
         "@apollo/client": "^3.3.7",
+        "@logtail/node": "0.1.10",
         "@material-ui/core": "^4.11.3",
         "@material-ui/icons": "^4.11.2",
         "@prisma/client": "3.9.1",
@@ -30,6 +31,7 @@
         "next-images": "^1.8.1",
         "node": "17.1.0",
         "nodemailer": "6.7.2",
+        "notistack": "1.0.9",
         "react": "17.0.2",
         "react-dom": "17.0.2",
         "react-hook-form": "^6.14.2",
@@ -38,9 +40,11 @@
         "react-swipeable": "6.2.0",
         "react-yandex-maps": "^4.6.0",
         "redux": "^4.0.5",
+        "sharp": "0.30.0",
         "uuid": "^8.3.2"
     },
     "devDependencies": {
+        "@logtail/types": "0.1.8",
         "@types/classnames": "^2.2.11",
         "@types/lodash": "^4.14.168",
         "@types/multer": "1.4.7",

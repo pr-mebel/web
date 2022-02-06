@@ -1,12 +1,17 @@
 import axios from 'axios';
+import { noop } from 'lodash';
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
+
+import { useFormSubmitModal } from '@/hooks';
 
 import { endpoints } from '../endpoints';
 import { SendEmailParams } from '../types';
 
 type UseSendEmailParams = {
     place: string;
+    files?: File[];
+    onFinish?: () => void;
 };
 
 const sendEmail = ({ name, tel, description, email, files, place, meta = {} }: SendEmailParams): Promise<void> => {
@@ -27,15 +32,20 @@ const sendEmail = ({ name, tel, description, email, files, place, meta = {} }: S
     });
 };
 
-export const useSendEmail = ({ place }: UseSendEmailParams) => {
+export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmailParams) => {
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
+    const formSubmitModal = useFormSubmitModal();
 
     const handleSendEmail = useCallback(
-        async (values: Omit<SendEmailParams, 'place'>) => {
+        async (values: Omit<SendEmailParams, 'place' | 'files'>) => {
             const utm = localStorage.getItem('utm');
 
-            sendEmail({
+            setLoading(true);
+
+            await sendEmail({
                 ...values,
+                files,
                 place,
                 meta: {
                     ...values.meta,
@@ -43,11 +53,16 @@ export const useSendEmail = ({ place }: UseSendEmailParams) => {
                     ...(utm ? JSON.parse(utm) : {}),
                 },
             });
+
+            setLoading(false);
+            formSubmitModal.onOpen();
+            onFinish();
         },
-        [router, place]
+        [router, place, files, formSubmitModal, onFinish]
     );
 
     return {
+        loading,
         onSendEmail: handleSendEmail,
     };
 };

@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 interface Window {
     yaCounter54949111: {
         reachGoal: (val: string) => void;

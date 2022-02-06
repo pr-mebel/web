@@ -5,6 +5,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
 import { dateTemplateWithTime } from '@/constants';
+import { logger } from '@/lib/logger';
 import { prisma } from '@/lib/prisma';
 import { format } from '@/utils';
 
@@ -123,7 +124,7 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     try {
-        const response = await prisma.orders.create({
+        await prisma.orders.create({
             data: {
                 name,
                 tel,
@@ -135,10 +136,12 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
             },
         });
 
-        console.log('success', response);
+        logger.info('written to database');
     } catch (error) {
         handleException(error, 'database', req.body);
-        console.error(error);
+        logger.error('unable to write to database', {
+            error: error as string,
+        });
     }
 
     try {
@@ -153,15 +156,21 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
                 description,
                 email,
             }),
-            (error) => {
+            (error, info) => {
                 if (error) {
-                    console.error(error);
+                    logger.error('sent to mail.ru with error', { ...error });
                 }
+
+                logger.info('sent to mail.ru', {
+                    info: JSON.stringify(info),
+                });
             }
         );
     } catch (error) {
         handleException(error, 'mail.ru', req.body);
-        console.error(error);
+        logger.error('unable to send to mail.ru', {
+            error: error as string,
+        });
         res.status(500).json(error);
     }
 
@@ -177,19 +186,26 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
                 description,
                 email,
             }),
-            (error) => {
+            (error, info) => {
                 if (error) {
-                    console.error(error);
+                    logger.error('sent to yandex.ru with error', { ...error });
                 }
+
+                logger.info('sent to yandex.ru', {
+                    info: JSON.stringify(info),
+                });
             }
         );
     } catch (error) {
         handleException(error, 'yandex.ru', req.body);
-        console.error(error);
+        logger.error('unable to send to yandex.ru', {
+            error: error as string,
+        });
         res.status(500).json(error);
     }
 
-    res.status(200);
+    logger.info('finished send-email');
+    res.status(200).json('success');
 };
 
 export default withSentry(sendEmail);

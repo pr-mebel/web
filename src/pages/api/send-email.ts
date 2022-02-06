@@ -115,6 +115,8 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
         },
     });
 
+    await transporterMail.verify((...params) => console.info('verify mail.ru transporter', ...params));
+
     console.info('init yandex smtp with', process.env.EMAIL_YANDEX, process.env.PASSWORD_YANDEX);
     const transporterYandex = nodemailer.createTransport({
         host: 'smtp.yandex.ru',
@@ -127,6 +129,8 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
             pass: process.env.PASSWORD_YANDEX,
         },
     });
+
+    await transporterYandex.verify((...params) => console.info('verify yandex transporter', ...params));
 
     try {
         const response = await prisma.orders.create({

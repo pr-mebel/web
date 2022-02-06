@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import Sentry, { withSentry } from '@sentry/nextjs';
+import { captureException, withSentry } from '@sentry/nextjs';
 import multer from 'multer';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
@@ -41,7 +41,7 @@ type Body = {
 };
 
 type CreateMessageParams = {
-    emailTo: string;
+    emailTo?: string;
     email?: string;
     name: string;
     tel: string;
@@ -51,7 +51,7 @@ type CreateMessageParams = {
     files: Express.Multer.File[];
 };
 
-const createMessage = ({ emailTo, files, name, place, tel, description, email, meta }: CreateMessageParams) => {
+const createMessage = ({ emailTo = '', files, name, place, tel, description, email, meta }: CreateMessageParams) => {
     const currentTime = format(new Date(), dateTemplateWithTime);
 
     return {
@@ -81,8 +81,8 @@ const createMessage = ({ emailTo, files, name, place, tel, description, email, m
     };
 };
 
-const handleException = (error: unknown, source: string, other: Record<string, unknown>) => {
-    Sentry.captureException(error, {
+const handleException = (error: unknown, source = '', other: Record<string, unknown>) => {
+    captureException(error, {
         extra: {
             source,
             ...other,
@@ -107,8 +107,8 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
         port: 465,
         secure: true,
         auth: {
-            user: 'zakaz@pr-mebel.ru',
-            pass: 'nobiele000',
+            user: process.env.EMAIL_MAIL_RU,
+            pass: process.env.PASSWORD_MAIL_RU,
         },
     });
 
@@ -117,13 +117,13 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
         port: 465,
         secure: true,
         auth: {
-            user: 'nobieleadv@yandex.ru',
-            pass: 'Nobie111@',
+            user: process.env.EMAIL_YANDEX,
+            pass: process.env.PASSWORD_YANDEX,
         },
     });
 
     try {
-        const response = await prisma.orders.create({
+        await prisma.orders.create({
             data: {
                 name,
                 tel,
@@ -135,7 +135,7 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
             },
         });
 
-        console.log('success', response);
+        console.info('written to database successfully');
     } catch (error) {
         handleException(error, 'database', req.body);
         console.error(error);
@@ -144,7 +144,7 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         await transporterMail.sendMail(
             createMessage({
-                emailTo: 'zakaz@pr-mebel.ru',
+                emailTo: process.env.EMAIL_MAIL_RU,
                 meta: parsedMeta,
                 files,
                 name,
@@ -159,8 +159,9 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             }
         );
+        console.info('sent to ', process.env.EMAIL_MAIL_RU);
     } catch (error) {
-        handleException(error, 'mail.ru', req.body);
+        handleException(error, process.env.EMAIL_MAIL_RU, req.body);
         console.error(error);
         res.status(500).json(error);
     }
@@ -168,7 +169,7 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         await transporterYandex.sendMail(
             createMessage({
-                emailTo: 'nobieleadv@yandex.ru',
+                emailTo: process.env.EMAIL_YANDEX,
                 meta: parsedMeta,
                 files,
                 name,
@@ -183,13 +184,14 @@ const sendEmail = async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             }
         );
+        console.info('sent to ', process.env.EMAIL_YANDEX);
     } catch (error) {
-        handleException(error, 'yandex.ru', req.body);
+        handleException(error, process.env.EMAIL_YANDEX, req.body);
         console.error(error);
         res.status(500).json(error);
     }
 
-    res.status(200);
+    res.status(200).json('success');
 };
 
 export default withSentry(sendEmail);

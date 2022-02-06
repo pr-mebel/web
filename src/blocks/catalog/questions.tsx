@@ -2,12 +2,12 @@ import { Container, Hidden, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ClearIcon from '@material-ui/icons/Clear';
 import PublishIcon from '@material-ui/icons/Publish';
-import React, { FC, useCallback, useRef, useState } from 'react';
+import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useSendEmail } from '@/api';
 import { BlockTitle, Input, SubmitButton } from '@/components';
-import { useAnalytics, useFormSubmitModal } from '@/hooks';
+import { useAnalytics, useFileUpload } from '@/hooks';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
 
 const useStyles = makeStyles({
@@ -56,9 +56,6 @@ const useStyles = makeStyles({
     copyrightLink: {
         color: 'white',
     },
-    inputFile: {
-        display: 'none',
-    },
     fileInputContainer: {
         display: 'flex',
         justifyContent: 'center',
@@ -94,57 +91,18 @@ const useStyles = makeStyles({
 
 export const Questions: FC = () => {
     const analytics = useAnalytics();
+    const fileUpload = useFileUpload();
     const classes = useStyles();
-    const formSubmitModal = useFormSubmitModal();
-    const fileInputRef = useRef<HTMLInputElement>(null);
-    const [fileList, setFileList] = useState<File[]>([]);
     const { register, handleSubmit, reset } = useForm();
-    const { onSendEmail } = useSendEmail({ place: 'Каталог/Остались вопросы?' });
-
-    /**
-     * Обработчик клика на инпут загрузки файла
-     */
-    const handleFileInputClick = useCallback(() => {
-        fileInputRef.current?.click();
-    }, [fileInputRef]);
-
-    /**
-     * Загружает выбранные файлы на сервер
-     */
-    const handleFileUploadChange = useCallback(() => {
-        if (fileInputRef.current?.files && fileInputRef.current.files) {
-            const files = fileInputRef.current.files;
-
-            setFileList((prev) => [...prev, ...files]);
-        }
-    }, [fileInputRef]);
-
-    /**
-     * Удаляет выбранные файлы
-     */
-    const handleDeleteSelectedFiles = useCallback(() => {
-        if (fileInputRef.current) {
-            fileInputRef.current.value = '';
-            setFileList([]);
-        }
-    }, []);
-
-    /**
-     * Отправляет форму после клика на кнопку
-     */
-    const onSubmit = useCallback(
-        (data) => {
-            onSendEmail({
-                ...data,
-                files: fileList,
-            });
+    const { loading, onSendEmail } = useSendEmail({
+        place: 'Каталог/Остались вопросы?',
+        files: fileUpload.data,
+        onFinish: () => {
             analytics.onSendEmail('vopros_katalog');
-            formSubmitModal.onOpen();
-            handleDeleteSelectedFiles();
+            fileUpload.onClear();
             reset();
         },
-        [fileList, reset, formSubmitModal, analytics, onSendEmail, handleDeleteSelectedFiles]
-    );
+    });
 
     return (
         <div className={classes.root}>
@@ -165,7 +123,7 @@ export const Questions: FC = () => {
                         вас предложение!
                     </Typography>
                 </Hidden>
-                <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+                <form onSubmit={handleSubmit(onSendEmail)} className={classes.form}>
                     <Input
                         ref={register}
                         name="name"
@@ -209,28 +167,22 @@ export const Questions: FC = () => {
                         className={classes.textarea}
                         darkMode
                     />
-                    <div className={classes.fileInputContainer} onClick={handleFileInputClick}>
-                        <input
-                            type="file"
-                            multiple
-                            ref={fileInputRef}
-                            className={classes.inputFile}
-                            onChange={handleFileUploadChange}
-                        />
+                    <div className={classes.fileInputContainer} onClick={fileUpload.onClick}>
+                        {fileUpload.renderFileInput()}
                         <PublishIcon className={classes.icon} />
                         <Typography className={classes.fileInputText} style={{ textTransform: 'uppercase' }}>
                             Прикрепить эскизы
                         </Typography>
                     </div>
-                    {!!fileList?.length && (
+                    {!!fileUpload.data?.length && (
                         <div className={classes.fileListWrapper}>
                             <Typography className={classes.fileInputText}>
-                                {`${fileList.length}\xA0${getFileDeclination(fileList.length)}`}
-                                <ClearIcon className={classes.deleteFilesIcon} onClick={handleDeleteSelectedFiles} />
+                                {`${fileUpload.data.length}\xA0${getFileDeclination(fileUpload.data.length)}`}
+                                <ClearIcon className={classes.deleteFilesIcon} onClick={fileUpload.onClear} />
                             </Typography>
                         </div>
                     )}
-                    <SubmitButton>Отправить</SubmitButton>
+                    <SubmitButton loading={loading}>Отправить</SubmitButton>
                 </form>
                 <Typography className={classes.text} align="center">
                     Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие на&nbsp;обработку

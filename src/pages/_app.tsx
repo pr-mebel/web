@@ -1,4 +1,5 @@
 import '../theme/globals.css';
+import 'intersection-observer';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import type { AppProps } from 'next/app';

@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://pr-mebel.ru/sitemap.xml

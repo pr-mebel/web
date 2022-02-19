@@ -1,33 +1,31 @@
-import { Grid, Typography } from '@material-ui/core';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Grid, Typography, useTheme } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import React, { FC } from 'react';
-
-const useStyles = makeStyles((theme) => ({
-    [theme.breakpoints.down('xs')]: {
-        text: {
-            fontSize: '14px',
-            lineHeight: '16px',
-        },
-    },
-}));
 
 type Props = {
     img: React.ReactNode;
 };
 
 export const DesignCard: FC<Props> = ({ img, children }) => {
-    const classes = useStyles();
     const theme = useTheme();
-    const isXsDown = useMediaQuery(theme.breakpoints.down('xs'));
+    const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
-        <Grid container alignItems="center" spacing={1} direction={isXsDown ? 'row' : 'column'}>
+        <Grid container alignItems="center" spacing={1} direction={isSmDown ? 'row' : 'column'}>
             <Grid item xs={2} sm={12}>
                 {img}
             </Grid>
             <Grid item xs={10} sm={12}>
-                <Typography className={classes.text} variant="body2" align={isXsDown ? 'left' : 'center'}>
+                <Typography
+                    sx={(theme) => ({
+                        [theme.breakpoints.down('sm')]: {
+                            fontSize: '14px',
+                            lineHeight: '16px',
+                        },
+                    })}
+                    variant="body2"
+                    align={isSmDown ? 'left' : 'center'}
+                >
                     {children}
                 </Typography>
             </Grid>

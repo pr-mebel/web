@@ -1,46 +1,13 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@mui/material';
 import React, { FC } from 'react';
 
 import { CardPopup, Filters, Gallery, Lead, Questions, TextBlock } from '@/blocks/catalog';
-import { DesignOffer, Map, ShopImg } from '@/blocks/common';
+import { Contacts, DesignOffer, ShopImg } from '@/blocks/common';
 import { useTrackUtm } from '@/hooks';
 import { useCards } from '@/hooks/catalog/use-cards';
 
-const useStyles = makeStyles((theme) => ({
-    filterSection: {
-        marginTop: '60px',
-    },
-    gallerySection: {
-        marginTop: '20px',
-        marginBottom: '60px',
-    },
-    designOfferSection: {
-        margin: '40px 0',
-    },
-    shopImgSection: {
-        marginTop: '40px',
-    },
-    mapSection: {
-        marginTop: '80px',
-    },
-    [theme.breakpoints.down('md')]: {
-        filterSection: {
-            marginTop: '40px',
-        },
-        mapSection: {
-            marginTop: '60px',
-        },
-    },
-    [theme.breakpoints.down('sm')]: {
-        mapSection: {
-            marginTop: '40px',
-        },
-    },
-}));
-
 const Catalog: FC = () => {
     useTrackUtm();
-    const classes = useStyles();
     const {
         filters,
         list,
@@ -58,10 +25,24 @@ const Catalog: FC = () => {
         <>
             <main>
                 <Lead sectionID={filters.section} />
-                <section className={classes.filterSection}>
+                <Box
+                    component="section"
+                    sx={(theme) => ({
+                        marginTop: '60px',
+                        [theme.breakpoints.down('lg')]: {
+                            marginTop: '40px',
+                        },
+                    })}
+                >
                     <Filters filter={filters} onChange={onChangeFilter} />
-                </section>
-                <section className={classes.gallerySection}>
+                </Box>
+                <Box
+                    component="section"
+                    sx={{
+                        marginTop: '20px',
+                        marginBottom: '60px',
+                    }}
+                >
                     <Gallery
                         items={list}
                         isLoading={isLoading}
@@ -69,22 +50,53 @@ const Catalog: FC = () => {
                         onCardClick={onCardClick}
                         onLoadMore={onShowMore}
                     />
-                </section>
-                <section className={classes.designOfferSection}>
+                </Box>
+                <Box
+                    component="section"
+                    sx={{
+                        marginTop: '40px',
+                    }}
+                >
                     <TextBlock />
-                </section>
-                <section className={classes.designOfferSection}>
+                </Box>
+                <Box
+                    component="section"
+                    sx={{
+                        marginTop: '40px',
+                    }}
+                >
                     <DesignOffer />
-                </section>
-                <section className={classes.questionsSection}>
+                </Box>
+                <Box
+                    component="section"
+                    sx={{
+                        marginTop: '40px',
+                    }}
+                >
                     <Questions />
-                </section>
-                <section className={classes.shopImgSection}>
+                </Box>
+                <Box
+                    component="section"
+                    sx={{
+                        marginTop: '40px',
+                    }}
+                >
                     <ShopImg />
-                </section>
-                <section className={classes.mapSection}>
-                    <Map />
-                </section>
+                </Box>
+                <Box
+                    component="section"
+                    sx={(theme) => ({
+                        marginTop: '80px',
+                        [theme.breakpoints.down('lg')]: {
+                            marginTop: '60px',
+                        },
+                        [theme.breakpoints.down('md')]: {
+                            marginTop: '40px',
+                        },
+                    })}
+                >
+                    <Contacts />
+                </Box>
             </main>
             {cardModal.isOpen && selectedItem && (
                 <CardPopup

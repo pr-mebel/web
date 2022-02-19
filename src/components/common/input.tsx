@@ -1,50 +1,22 @@
-import { Input as MUIInput } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
-import React, { ComponentPropsWithRef, FC, forwardRef } from 'react';
+import { Input as MUIInput, InputProps as MUIInputProps, styled } from '@mui/material';
 
-const useStyles = makeStyles({
-    input: {
-        paddingLeft: '30px',
-        paddingRight: '30px',
-        fontSize: '14px',
-        lineHeight: '16px',
-    },
-
-    inputDark: {
-        color: 'white',
-        '&:placeholder': {
-            color: 'white',
-        },
-    },
-
-    rootDark: {
-        '&:hover&:before,&:before': {
-            borderColor: 'white',
-        },
-    },
-});
-
-type InputProps = ComponentPropsWithRef<typeof MUIInput> & {
+type InputProps = MUIInputProps & {
     darkMode?: boolean;
 };
 
-// eslint-disable-next-line react/display-name
-export const Input: FC<InputProps> = forwardRef(({ darkMode, ...rest }, ref) => {
-    const classes = useStyles();
-
-    return (
-        <MUIInput
-            {...rest}
-            inputRef={ref}
-            classes={{
-                root: classNames({
-                    [classes.rootDark]: darkMode,
-                }),
-                input: classNames(classes.input, {
-                    [classes.inputDark]: darkMode,
-                }),
-            }}
-        />
-    );
-});
+export const Input = styled(MUIInput, {
+    shouldForwardProp: (prop) => prop !== 'darkMode',
+})<InputProps>(({ darkMode }) => ({
+    paddingLeft: '30px',
+    paddingRight: '30px',
+    ...(darkMode
+        ? {
+              '& .MuiInput-input': {
+                  color: 'white',
+              },
+              '&:hover&:before,&:before': {
+                  borderBottomColor: 'white',
+              },
+          }
+        : {}),
+}));

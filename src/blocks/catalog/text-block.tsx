@@ -1,21 +1,17 @@
-import { Container, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Container, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { FC } from 'react';
 
-const useStyles = makeStyles((theme) => ({
-    [theme.breakpoints.down('sm')]: {
-        text: {
-            display: 'none',
-        },
-    },
-}));
-
 export const TextBlock: FC = () => {
-    const classes = useStyles();
+    const theme = useTheme();
+    const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
+
+    if (isMdDown) {
+        return null;
+    }
 
     return (
         <Container>
-            <Typography variant="body1" className={classes.text}>
+            <Typography variant="body1">
                 Независимо от&nbsp;того, какой стиль исполнения гардеробной вы&nbsp;выберите, будь&nbsp;то элегантная
                 классика или идущий в&nbsp;ногу со&nbsp;временем модерн, мы&nbsp;гарантируем предоставить вам
                 безупречный сервис, максимально функциональный и&nbsp;эргономичный дизайн, премиальные материалы, более

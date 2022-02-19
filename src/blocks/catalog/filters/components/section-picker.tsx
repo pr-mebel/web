@@ -1,49 +1,9 @@
-import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import cn from 'classnames';
+import { Box, Typography } from '@mui/material';
+import clsx from 'clsx';
 import React, { FC, useCallback } from 'react';
 
 import { filters } from '@/constants';
 import { FilterField, FilterValue, SectionID } from '@/entities';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        justifyContent: 'center',
-    },
-    wrapper: {
-        borderRadius: '5px',
-        padding: '11px 48px 10px',
-        display: 'inline-flex',
-        alignItems: 'center',
-        background: theme.palette.grey[100],
-    },
-    option: {
-        cursor: 'pointer',
-        padding: '0 20px',
-        textTransform: 'uppercase',
-    },
-    selectedOption: {
-        cursor: 'default',
-        color: theme.palette.primary.main,
-    },
-    [theme.breakpoints.down('sm')]: {
-        wrapper: {
-            padding: '8px 15px 7px',
-            background: 'none',
-            display: 'flex',
-            flexDirection: 'column',
-        },
-        dash: {
-            display: 'none',
-        },
-        option: {
-            padding: '3px 10px',
-            fontSize: '14px',
-            fontWeight: '600',
-        },
-    },
-}));
 
 type Props = {
     options: typeof filters.sections;
@@ -52,11 +12,6 @@ type Props = {
 };
 
 export const SectionPicker: FC<Props> = ({ options, value, onChange }) => {
-    const classes = useStyles();
-
-    /**
-     * Обработчик выбора секции
-     */
     const handleClick = useCallback(
         (value: FilterValue) => () => {
             onChange({
@@ -68,22 +23,60 @@ export const SectionPicker: FC<Props> = ({ options, value, onChange }) => {
     );
 
     return (
-        <div className={classes.root}>
-            <div className={classes.wrapper}>
+        <Box
+            sx={{
+                display: 'flex',
+                justifyContent: 'center',
+            }}
+        >
+            <Box
+                sx={(theme) => ({
+                    borderRadius: '5px',
+                    padding: '11px 48px 10px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    background: theme.palette.grey[100],
+                    '& .option': {
+                        cursor: 'pointer',
+                        padding: '0 20px',
+                        textTransform: 'uppercase',
+                    },
+                    '& .selectedOption': {
+                        cursor: 'default',
+                        color: theme.palette.primary.main,
+                    },
+                    [theme.breakpoints.down('md')]: {
+                        padding: '8px 15px 7px',
+                        background: 'none',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        '& .option': {
+                            option: {
+                                padding: '3px 10px',
+                                fontSize: '14px',
+                                fontWeight: '600',
+                            },
+                        },
+                        '& .dash': {
+                            display: 'none',
+                        },
+                    },
+                })}
+            >
                 {options.map((section, i) => {
                     if (i !== options.length - 1) {
                         return (
                             <React.Fragment key={section.id}>
                                 <Typography
                                     variant="body1"
-                                    className={cn(classes.option, {
-                                        [classes.selectedOption]: value === section.id,
+                                    className={clsx('option', {
+                                        selectedOption: value === section.id,
                                     })}
                                     onClick={handleClick(section.id)}
                                 >
                                     {section.title}
                                 </Typography>
-                                <span className={classes.dash}>&mdash;</span>
+                                <span className="dash">&mdash;</span>
                             </React.Fragment>
                         );
                     }
@@ -92,8 +85,8 @@ export const SectionPicker: FC<Props> = ({ options, value, onChange }) => {
                         <Typography
                             key={section.id}
                             variant="body1"
-                            className={cn(classes.option, {
-                                [classes.selectedOption]: value === section.id,
+                            className={clsx('option', {
+                                selectedOption: value === section.id,
                             })}
                             onClick={handleClick(section.id)}
                         >
@@ -101,7 +94,7 @@ export const SectionPicker: FC<Props> = ({ options, value, onChange }) => {
                         </Typography>
                     );
                 })}
-            </div>
-        </div>
+            </Box>
+        </Box>
     );
 };

@@ -1,7 +1,7 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 import React, { FC } from 'react';
 
-import { DesignOffer, Map, ShopImg } from '@/blocks/common';
+import { Contacts, DesignOffer, ShopImg } from '@/blocks/common';
 import {
     About,
     Advantages,
@@ -9,157 +9,78 @@ import {
     CallDesignerForm,
     Carousel,
     Catalog,
-    Description,
     Faq,
     FeedbackForm,
     HowToOrder,
     OurProduction,
     QuestionsForm,
+    TextBlock,
     WardrobeLeft,
     WardrobeRight,
-} from '@/blocks/home-page';
-import { useTrackUtm } from '@/hooks';
+} from '@/blocks/home';
 
-const marginTop80 = {
-    marginTop: '-80px',
-    paddingTop: '160px',
-};
-
-const marginTop40 = {
-    marginTop: '-40px',
-    paddingTop: '80px',
-};
-
-const useStyles = makeStyles((theme) => ({
-    carousel: {},
-    description: {
-        marginTop: '65px',
-    },
-    catalog: marginTop80,
-    designOffer: marginTop80,
-    feedbackForm: marginTop80,
-    advantages: marginTop80,
-    wardrobeLeft: marginTop80,
-    wardrobeRight: marginTop80,
-    about: marginTop80,
-    callDesigner: marginTop80,
-    callDesignerForm: marginTop80,
-    ourProduction: marginTop80,
-    howToOrder: marginTop80,
-    faq: marginTop80,
-    questionsForm: marginTop80,
-    shopImg: marginTop40,
-    contacts: marginTop80,
-    [theme.breakpoints.down('xs')]: {
-        description: marginTop40,
-        catalog: marginTop40,
-        designOffer: marginTop40,
-        feedbackForm: marginTop40,
-        advantages: marginTop40,
-        wardrobeLeft: marginTop40,
-        wardrobeRight: marginTop40,
-        about: marginTop40,
-        callDesigner: marginTop40,
-        callDesignerForm: marginTop40,
-        ourProduction: marginTop40,
-        howToOrder: marginTop40,
-        faq: marginTop40,
-        questionsForm: marginTop40,
-        shopImg: marginTop40,
-        contacts: marginTop40,
+const Section = styled('section')(({ theme }) => ({
+    marginTop: '80px',
+    [theme.breakpoints.down('sm')]: {
+        marginTop: '40px',
     },
 }));
 
 const HomePage: FC = () => {
-    useTrackUtm();
-    const classes = useStyles();
-
     return (
         <main>
-            <section id="carousel" className={classes.carousel}>
+            <Section sx={{ marginTop: '0' }}>
                 <Carousel />
-            </section>
-
+            </Section>
             {/* Текст под каруселью */}
-            <section className={classes.description}>
-                <Description />
-            </section>
-
-            {/* Ссылки на каталог */}
-            <section id="catalog" className={classes.catalog}>
+            <Section>
+                <TextBlock />
+            </Section>
+            <Section>
                 <Catalog />
-            </section>
-
-            {/* Получите дизайн-проект и стомость вашего проекта сегодня */}
-            <section id="design-offer" className={classes.designOffer}>
+            </Section>
+            <Section>
                 <DesignOffer />
-            </section>
-
-            {/* Форма рассчёта стоимости с прикладыванием файла */}
-            <section className={classes.feedbackForm}>
+            </Section>
+            <Section>
                 <FeedbackForm />
-            </section>
-
-            {/* Преимущества нашей продукции */}
-            <section id="advantages" className={classes.advantages}>
+            </Section>
+            <Section>
                 <Advantages />
-            </section>
-
-            {/* Комфорт и удобство, продуманное до мелочей */}
-            <section id="comfort" className={classes.wardrobeLeft}>
+            </Section>
+            <Section>
                 <WardrobeLeft />
-            </section>
-
-            {/* Исключтельное качество нашей мебели */}
-            <section id="quality" className={classes.wardrobeRight}>
+            </Section>
+            <Section>
                 <WardrobeRight />
-            </section>
-
-            {/* О нас */}
-            <section id="about" className={classes.about}>
+            </Section>
+            <Section>
                 <About />
-            </section>
-
-            {/* Закажите выезд дизайнера-замерщика сегодня
-                    и получите проект мебели в течение 24 часов */}
-            <section id="call-designer" className={classes.callDesigner}>
+            </Section>
+            <Section>
                 <CallDesigner />
-            </section>
-
-            {/* Форма вызова дизайнера-замерщика */}
-            <section className={classes.callDesignerForm}>
+            </Section>
+            <Section>
                 <CallDesignerForm />
-            </section>
-
-            {/* Наше производство */}
-            <section id="production" className={classes.ourProduction}>
+            </Section>
+            <Section>
                 <OurProduction />
-            </section>
-
-            {/* Как заказать нашу мебель */}
-            <section id="how-to-order" className={classes.howToOrder}>
+            </Section>
+            <Section>
                 <HowToOrder />
-            </section>
-
-            {/* Часто задаваемые вопросы */}
-            <section id="faq" className={classes.faq}>
+            </Section>
+            <Section>
                 <Faq />
-            </section>
-
-            {/* Форма "Остались вопросы?" */}
-            <section id="questions" className={classes.questionsForm}>
+            </Section>
+            <Section>
                 <QuestionsForm />
-            </section>
-
-            {/* Изображение магазина */}
-            <section id="shop-img" className={classes.shopImg}>
+            </Section>
+            <Section>
                 <ShopImg />
-            </section>
-
-            {/* Магазин на карте */}
-            <section id="contacts" className={classes.contacts}>
-                <Map />
-            </section>
+            </Section>
+            <Section>
+                <Contacts />
+            </Section>
         </main>
     );
 };

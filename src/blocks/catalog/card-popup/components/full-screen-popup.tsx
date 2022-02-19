@@ -1,37 +1,8 @@
-import { Dialog } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { Clear as ClearIcon } from '@material-ui/icons';
+import ClearIcon from '@mui/icons-material/Clear';
+import { Dialog } from '@mui/material';
 import React, { FC, MouseEventHandler, useMemo } from 'react';
 
 import { Image as ImageType } from '@/entities';
-
-const useStyles = makeStyles(() => ({
-    paperRoot: {
-        position: 'relative',
-        background: 'rgba(0, 0, 0, 0)',
-    },
-    closeIcon: {
-        cursor: 'pointer',
-        width: '30px',
-        height: '30px',
-        top: '5px',
-        right: '5px',
-        position: 'absolute',
-        zIndex: 10,
-        background: 'rgba(255, 255, 255, 0.4)',
-    },
-    image: {
-        width: '100%',
-        height: '100%',
-    },
-    imageContainer: {
-        opacity: 0,
-        transition: 'all .3s ease-in',
-    },
-    imageContainerVisible: {
-        opacity: 1,
-    },
-}));
 
 type Props = {
     isOpen: boolean;
@@ -40,8 +11,6 @@ type Props = {
 };
 
 export const FullscreenCardPopup: FC<Props> = ({ image, isOpen, onClose }) => {
-    const classes = useStyles();
-
     const { width, height } = useMemo(() => {
         const padding = 32;
         const windowWidth = window.innerWidth - padding > 1920 ? 1920 : window.innerWidth - padding;
@@ -69,7 +38,9 @@ export const FullscreenCardPopup: FC<Props> = ({ image, isOpen, onClose }) => {
             onClose={onClose}
             maxWidth={false}
             PaperProps={{
-                style: {
+                sx: {
+                    position: 'relative',
+                    background: 'rgba(0, 0, 0, 0)',
                     backgroundRepeat: 'no-repeat',
                     backgroundImage: isOpen ? `url(${image.url})` : 'none',
                     backgroundSize: 'cover',
@@ -77,10 +48,21 @@ export const FullscreenCardPopup: FC<Props> = ({ image, isOpen, onClose }) => {
                     width,
                     height,
                 },
-                className: classes.paperRoot,
             }}
         >
-            <ClearIcon className={classes.closeIcon} onClick={onClose} />
+            <ClearIcon
+                sx={{
+                    cursor: 'pointer',
+                    width: '30px',
+                    height: '30px',
+                    top: '5px',
+                    right: '5px',
+                    position: 'absolute',
+                    zIndex: 10,
+                    background: 'rgba(255, 255, 255, 0.4)',
+                }}
+                onClick={onClose}
+            />
         </Dialog>
     );
 };

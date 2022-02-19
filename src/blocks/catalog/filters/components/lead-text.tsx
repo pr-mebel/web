@@ -1,6 +1,4 @@
-import { Typography } from '@material-ui/core';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { FC } from 'react';
 
 import { MDASH, NB_SP } from '@/constants';
@@ -83,26 +81,24 @@ export const texts: Record<
     },
 } as const;
 
-const useStyles = makeStyles((theme) => ({
-    [theme.breakpoints.down('sm')]: {
-        root: {
-            fontSize: '16px',
-            lineHeight: '22px',
-        },
-    },
-}));
-
 type Props = {
     selectedSection: SectionID;
 };
 
 export const LeadText: FC<Props> = ({ selectedSection }) => {
-    const classes = useStyles();
     const theme = useTheme();
     const mdUp = useMediaQuery(theme.breakpoints.up('md'));
 
     return (
-        <Typography variant="body1" className={classes.root}>
+        <Typography
+            variant="body1"
+            sx={(theme) => ({
+                [theme.breakpoints.down('md')]: {
+                    fontSize: '16px',
+                    lineHeight: '22px',
+                },
+            })}
+        >
             {texts[selectedSection][mdUp ? 'large' : 'small']}
         </Typography>
     );

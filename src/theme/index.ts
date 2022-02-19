@@ -1,6 +1,6 @@
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material/styles';
 
-export default createTheme({
+export const theme = createTheme({
     breakpoints: {
         values: {
             xs: 0,
@@ -16,95 +16,105 @@ export default createTheme({
             main: '#ff001f',
         },
     },
-    overrides: {
+    components: {
         MuiInputLabel: {
-            root: {
-                fontFamily: 'Gilroy, sans-serif',
+            styleOverrides: {
+                root: {
+                    fontFamily: 'Gilroy, sans-serif',
+                },
             },
         },
         MuiInputBase: {
-            input: {
-                fontFamily: 'Gilroy, sans-serif',
+            styleOverrides: {
+                root: {
+                    fontFamily: 'Gilroy, sans-serif',
+                },
             },
         },
         MuiTypography: {
-            h1: {
-                fontFamily: 'Gilroy, sans-serif',
-            },
-            h2: {
-                fontFamily: 'Gilroy, sans-serif',
-            },
-            h3: {
-                fontFamily: 'Gilroy, sans-serif',
-            },
-            h4: {
-                textTransform: 'uppercase',
-                fontSize: '30px',
-                lineHeight: '35px',
-                fontWeight: 300,
-                fontFamily: 'Gilroy, sans-serif',
-                '@media (max-width: 960px)': {
-                    fontSize: '26px',
+            styleOverrides: {
+                h1: {
+                    fontFamily: 'Gilroy, sans-serif',
                 },
-                '@media (max-width: 600px)': {
-                    fontSize: '22px',
-                    lineHeight: '25px',
+                h2: {
+                    fontFamily: 'Gilroy, sans-serif',
                 },
-            },
-            h5: {
-                textTransform: 'uppercase',
-                fontSize: '24px',
-                lineHeight: '28px',
-                fontWeight: 300,
-                fontFamily: 'Gilroy, sans-serif',
-                '@media (max-width: 600px)': {
+                h3: {
+                    fontFamily: 'Gilroy, sans-serif',
+                },
+                h4: {
+                    textTransform: 'uppercase',
+                    fontSize: '30px',
+                    lineHeight: '35px',
+                    fontWeight: 300,
+                    fontFamily: 'Gilroy, sans-serif',
+                    '@media (max-width: 960px)': {
+                        fontSize: '26px',
+                    },
+                    '@media (max-width: 600px)': {
+                        fontSize: '22px',
+                        lineHeight: '25px',
+                    },
+                },
+                h5: {
+                    textTransform: 'uppercase',
+                    fontSize: '24px',
+                    lineHeight: '28px',
+                    fontWeight: 300,
+                    fontFamily: 'Gilroy, sans-serif',
+                    '@media (max-width: 600px)': {
+                        fontSize: '16px',
+                        lineHeight: '20px',
+                    },
+                },
+                h6: {
+                    textTransform: 'uppercase',
+                    fontSize: '18px',
+                    lineHeight: '1.3',
+                    fontWeight: 300,
+                    fontFamily: 'Gilroy, sans-serif',
+                    '@media (max-width: 960px)': {
+                        fontSize: '16px',
+                    },
+                    '@media (max-width: 600px)': {
+                        fontSize: '14px',
+                        lineHeight: '16px',
+                    },
+                },
+                subtitle1: {
+                    fontFamily: 'Gilroy, sans-serif',
+                },
+                subtitle2: {
+                    fontFamily: 'Gilroy, sans-serif',
+                },
+                body1: {
+                    fontSize: '18px',
+                    lineHeight: '1.4',
+                    letterSpacing: 'normal',
+                    fontFamily: 'Gilroy, sans-serif',
+                },
+                body2: {
                     fontSize: '16px',
-                    lineHeight: '20px',
-                },
-            },
-            h6: {
-                textTransform: 'uppercase',
-                fontSize: '18px',
-                lineHeight: '1.3',
-                fontWeight: 300,
-                fontFamily: 'Gilroy, sans-serif',
-                '@media (max-width: 960px)': {
-                    fontSize: '16px',
-                },
-                '@media (max-width: 600px)': {
-                    fontSize: '14px',
-                    lineHeight: '16px',
-                },
-            },
-            subtitle1: {
-                fontFamily: 'Gilroy, sans-serif',
-            },
-            subtitle2: {
-                fontFamily: 'Gilroy, sans-serif',
-            },
-            body1: {
-                fontSize: '18px',
-                lineHeight: '1.4',
-                letterSpacing: 'normal',
-                fontFamily: 'Gilroy, sans-serif',
-            },
-            body2: {
-                fontSize: '16px',
-                lineHeight: '18px',
-                letterSpacing: 'normal',
-                fontFamily: 'Gilroy, sans-serif',
-                '@media (max-width: 960px)': {
-                    fontSize: '15px',
+                    lineHeight: '18px',
+                    letterSpacing: 'normal',
+                    fontFamily: 'Gilroy, sans-serif',
+                    '@media (max-width: 960px)': {
+                        fontSize: '15px',
+                    },
                 },
             },
         },
         MuiContainer: {
-            root: {
-                '@media (min-width: 600px)': {
-                    paddingLeft: '5%',
-                    paddingRight: '5%',
+            styleOverrides: {
+                root: {
+                    '@media (min-width: 600px)': {
+                        paddingLeft: '5%',
+                        paddingRight: '5%',
+                    },
                 },
             },
         },
     },
 });
+
+export * from './create-emotion-cache';

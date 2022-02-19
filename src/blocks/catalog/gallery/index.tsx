@@ -1,27 +1,10 @@
-import { Container, Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Box, CircularProgress, Container, Grid, Skeleton, Typography } from '@mui/material';
+import { range } from 'lodash';
 import React, { FC } from 'react';
 
-import { ButtonContainer, Loader, MainButton } from '@/components';
+import { Button, ButtonContainer } from '@/components';
 
 import { Card } from './components';
-
-const useStyles = makeStyles((theme) => ({
-    buttonContainer: {
-        marginTop: '60px',
-    },
-    notFound: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '200px',
-    },
-    [theme.breakpoints.down('xs')]: {
-        buttonContainer: {
-            marginTop: '30px',
-        },
-    },
-}));
 
 type GalleryProps = {
     items: {
@@ -38,7 +21,24 @@ type GalleryProps = {
 };
 
 export const Gallery: FC<GalleryProps> = ({ items, isLoading, hasMore, onCardClick, onLoadMore }) => {
-    const classes = useStyles();
+    if (!items.length && !isLoading) {
+        return (
+            <Container>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        minHeight: '200px',
+                    }}
+                >
+                    <Typography align="center">
+                        По заданному фильтру ничего не найдено. Пожалуйста, поменяйте запрос.
+                    </Typography>
+                </Box>
+            </Container>
+        );
+    }
 
     return (
         <Container>
@@ -53,21 +53,32 @@ export const Gallery: FC<GalleryProps> = ({ items, isLoading, hasMore, onCardCli
                         />
                     </Grid>
                 ))}
-                {isLoading && <Loader />}
+                {isLoading &&
+                    range(12).map((val) => (
+                        <Grid key={val} item xs={12} sm={6} md={4}>
+                            <Skeleton
+                                variant="rectangular"
+                                width="100%"
+                                sx={{
+                                    paddingTop: '66.66%',
+                                }}
+                            />
+                        </Grid>
+                    ))}
             </Grid>
-            {items.length === 0 && !isLoading && (
-                <div className={classes.notFound}>
-                    <Typography align="center">
-                        По заданному фильтру ничего не найдено. Пожалуйста, поменяйте запрос.
-                    </Typography>
-                </div>
-            )}
             {!!hasMore && (
-                <div className={classes.buttonContainer}>
-                    <ButtonContainer>
-                        <MainButton onClick={onLoadMore}>Показать еще</MainButton>
-                    </ButtonContainer>
-                </div>
+                <ButtonContainer
+                    sx={(theme) => ({
+                        marginTop: '60px',
+                        [theme.breakpoints.down('sm')]: {
+                            marginTop: '30px',
+                        },
+                    })}
+                >
+                    <Button block onClick={onLoadMore}>
+                        Показать еще
+                    </Button>
+                </ButtonContainer>
             )}
         </Container>
     );

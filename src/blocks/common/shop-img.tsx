@@ -1,22 +1,16 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@mui/material';
 import Image from 'next/image';
 import img from 'public/images/common/shop-img/1.png';
 import React, { FC } from 'react';
 
-const useStyles = makeStyles({
-    root: {
-        width: '100%',
-        paddingTop: '30%',
-        position: 'relative',
-    },
-});
-
-export const ShopImg: FC = () => {
-    const classes = useStyles();
-
-    return (
-        <div className={classes.root}>
-            <Image src={img} layout="fill" alt="Изображение салона" placeholder="blur" />
-        </div>
-    );
-};
+export const ShopImg: FC = () => (
+    <Box
+        sx={{
+            width: '100%',
+            paddingTop: '30%',
+            position: 'relative',
+        }}
+    >
+        <Image src={img} layout="fill" alt="Изображение салона" placeholder="blur" />
+    </Box>
+);

@@ -51,8 +51,8 @@ const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
         port: 465,
         secure: true,
         auth: {
-            user: 'zakaz@pr-mebel.ru',
-            pass: 'nobiele000',
+            user: process.env.EMAIL_MAIL_RU,
+            pass: process.env.PASSWORD_MAIL_RU,
         },
     });
 
@@ -61,8 +61,8 @@ const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
         port: 465,
         secure: true,
         auth: {
-            user: 'nobieleadv@yandex.ru',
-            pass: 'Nobie111@',
+            user: process.env.EMAIL_YANDEX,
+            pass: process.env.PASSWORD_YANDEX,
         },
     });
 
@@ -71,7 +71,7 @@ const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
             sendEmail(
                 transporterMail,
                 createMessage({
-                    emailTo: 'zakaz@pr-mebel.ru',
+                    emailTo: process.env.EMAIL_MAIL_RU!,
                     meta: metaResult,
                     files,
                     name,
@@ -84,7 +84,7 @@ const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
             sendEmail(
                 transporterYandex,
                 createMessage({
-                    emailTo: 'nobieleadv@yandex.ru',
+                    emailTo: process.env.EMAIL_YANDEX!,
                     meta: metaResult,
                     files,
                     name,
@@ -97,8 +97,8 @@ const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
         ]);
 
         const info = {
-            'zakaz@pr-mebel.ru': mailRuInfo,
-            'nobieleadv@yandex.ru': yandexInfo,
+            [process.env.EMAIL_MAIL_RU!]: mailRuInfo,
+            [process.env.EMAIL_YANDEX!]: yandexInfo,
         };
 
         console.info('sent to mail.ru', info);

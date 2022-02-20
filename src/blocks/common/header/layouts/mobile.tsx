@@ -124,6 +124,9 @@ export const MobileHeader: FC = () => {
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between',
+                            '& .link': {
+                                textTransform: 'uppercase',
+                            },
                         },
                     }}
                     onClick={handleCloseDrawer}
@@ -131,36 +134,54 @@ export const MobileHeader: FC = () => {
                 >
                     <Grid container>
                         <Grid item xs={12}>
-                            <Link href="/catalog">Каталог</Link>
+                            <Link href="/catalog" className="link">
+                                Каталог
+                            </Link>
                         </Grid>
                         <Hl />
                         <Grid item xs={12} container spacing={1} direction="column" style={{ paddingLeft: '10px' }}>
                             <Grid item xs>
-                                <Link href="/catalog?section=cupboard">Шкафы</Link>
+                                <Link href="/catalog?section=cupboard" className="link">
+                                    Шкафы
+                                </Link>
                             </Grid>
                             <Grid item xs>
-                                <Link href="/catalog?section=wardrobe">Гардеробные</Link>
+                                <Link href="/catalog?section=wardrobe" className="link">
+                                    Гардеробные
+                                </Link>
                             </Grid>
                             <Grid item xs>
-                                <Link href="/catalog?section=accessories">Аксессуары</Link>
+                                <Link href="/catalog?section=accessories" className="link">
+                                    Аксессуары
+                                </Link>
                             </Grid>
                             <Grid item xs>
-                                <Link href="/catalog?section=lightingSystems">Системы подсветки</Link>
+                                <Link href="/catalog?section=lightingSystems" className="link">
+                                    Системы подсветки
+                                </Link>
                             </Grid>
                         </Grid>
                         <Hl />
                         <Grid item xs={12} container spacing={1} direction="column">
                             <Grid item xs>
-                                <Link href="/#design-offer">Рассчитать стоимость</Link>
+                                <Link href="/#design-offer" className="link">
+                                    Рассчитать стоимость
+                                </Link>
                             </Grid>
                             <Grid item xs>
-                                <Link href="/#advantages">Преимущества</Link>
+                                <Link href="/#advantages" className="link">
+                                    Преимущества
+                                </Link>
                             </Grid>
                             <Grid item xs>
-                                <Link href="/#about">О нас</Link>
+                                <Link href="/#about" className="link">
+                                    О нас
+                                </Link>
                             </Grid>
                             <Grid item xs>
-                                <Link href="/#contacts">Контакты</Link>
+                                <Link href="/#contacts" className="link">
+                                    Контакты
+                                </Link>
                             </Grid>
                         </Grid>
                     </Grid>

@@ -11,6 +11,7 @@ export const ColumnTitle = (props: ComponentProps<typeof Link>) => (
                 xs: 'center',
                 md: 'inherit',
             },
+            textTransform: 'uppercase',
         }}
         {...props}
     >

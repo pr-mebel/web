@@ -101,7 +101,7 @@ export const Faq: FC = () => {
                                     }}
                                 >
                                     <Typography className="number">{item.id}</Typography>
-                                    <Typography>{item.title}</Typography>
+                                    <Typography variant="body2">{item.title}</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
                                     <Typography variant="body2">{item.text}</Typography>

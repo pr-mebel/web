@@ -1,11 +1,8 @@
-import { gql } from '@apollo/client';
 import { withSentry } from '@sentry/nextjs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { client } from '@/api/client';
-import { isProduction } from '@/utils';
-
-const FAQEntityID = '50kulGjR4KrEMHAomWqIgM';
+import { makeRequest } from '@/lib/faq';
 
 export type FetchFAQRespone = {
     faqList: {
@@ -21,18 +18,7 @@ export type FetchFAQRespone = {
 const faq = async (_: NextApiRequest, res: NextApiResponse) => {
     try {
         const resp = await client.query<FetchFAQRespone>({
-            query: gql`
-                {
-                    faqList(id: "${FAQEntityID}", preview: ${!isProduction()}) {
-                        itemsCollection {
-                            items {
-                                title
-                                text
-                            }
-                        }
-                    }
-                }
-            `,
+            query: makeRequest(),
         });
 
         return res.status(200).json(resp.data.faqList.itemsCollection.items);

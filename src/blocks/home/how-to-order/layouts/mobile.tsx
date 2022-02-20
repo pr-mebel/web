@@ -29,7 +29,6 @@ export const Mobile = () => {
         >
             {LIST.map((item) => (
                 <div key={item.id}>
-                    <Typography className="number">{item.id}</Typography>
                     <BlockTitle>
                         <Typography variant="h6">{item.title}</Typography>
                     </BlockTitle>

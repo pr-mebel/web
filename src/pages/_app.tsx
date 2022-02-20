@@ -53,8 +53,6 @@ const MyApp: FC<MyAppProps> = ({ Component, emotionCache = clientSideEmotionCach
                             />
                             <meta name="canonical" content="https://pr-mebel.com" />
                             <title>Частный мебельер - салон мебели премиум-класса</title>
-                            {/* PWA primary color */}
-                            <meta name="theme-color" content={theme.palette.primary.main} />
                             <meta content="af51c3e9352991d1" name="yandex-verification" />
                             <meta content="fe86c27432cb6049" name="yandex-verification" />
                             <meta content="5stp2baz27773j5xm7q9o0torwuokr" name="facebook-domain-verification" />

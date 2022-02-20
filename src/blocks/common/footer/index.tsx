@@ -178,11 +178,30 @@ export const Footer: FC = () => {
                             +7 (495) 278-02-85
                         </Link>
                         <Typography
-                            sx={{
+                            sx={(theme) => ({
                                 marginBottom: '30px',
-                            }}
+                                '& .text': {
+                                    display: 'inline-block',
+                                    [theme.breakpoints.down('sm')]: {
+                                        display: 'block',
+                                    },
+                                },
+                                '& .space': {
+                                    [theme.breakpoints.down('sm')]: {
+                                        display: 'none',
+                                    },
+                                },
+                            })}
                         >
-                            м. Сокол, ул. Балтийская, д.9. С 10:00 до 20:00
+                            <Typography component="span" className="text">
+                                м. Сокол, ул. Балтийская, д.9.
+                            </Typography>
+                            <Typography component="span" className="space">
+                                {' '}
+                            </Typography>
+                            <Typography component="span" className="text">
+                                С 10:00 до 20:00
+                            </Typography>
                         </Typography>
                         <Typography
                             sx={{

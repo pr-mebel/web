@@ -15,8 +15,8 @@ export const useAnalytics = () => {
                 window.yaCounter86537628?.reachGoal('forms');
 
                 window.ga?.('send', 'event', 'form', targetValue);
-                window.ga?.('send', 'evet', 'forms');
-                window.ga?.('send', 'evet', 'form', 'submit');
+                window.ga?.('send', 'event', 'forms');
+                window.ga?.('send', 'event', 'form', 'submit');
 
                 window.fbq?.('track', 'Lead');
             }

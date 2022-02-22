@@ -1,18 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState = {
     isOpen: false,
+    marker: null as string | null,
 };
 
 const contactFormModalSlice = createSlice({
     name: 'contactFormModal',
     initialState,
     reducers: {
-        openContactFormModal(state) {
+        openContactFormModal(state, { payload }: PayloadAction<string | undefined>) {
             state.isOpen = true;
+            state.marker = payload || null;
         },
         closeContactFormModal(state) {
             state.isOpen = false;
+            state.marker = null;
         },
     },
 });

@@ -116,7 +116,7 @@ export const Mobile = () => {
                     marginTop: '32px',
                 }}
             >
-                <Button block onClick={contactFormModal.onOpen}>
+                <Button block onClick={() => contactFormModal.onOpen('Kachestvo')}>
                     Рассчитать стоимость
                 </Button>
             </ButtonContainer>

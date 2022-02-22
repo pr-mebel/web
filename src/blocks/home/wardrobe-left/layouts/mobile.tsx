@@ -177,7 +177,7 @@ export const Mobile: FC = () => {
                     marginTop: '32px',
                 }}
             >
-                <Button block onClick={contactFormModal.onOpen}>
+                <Button block onClick={() => contactFormModal.onOpen('komfort')}>
                     Рассчитать стоимость
                 </Button>
             </ButtonContainer>

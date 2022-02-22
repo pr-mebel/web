@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
+import { State } from '@/redux';
 import { isProduction } from '@/utils';
 
 export const useAnalytics = () => {
     const [ready, setReady] = useState(false);
+    const marker = useSelector((state: State) => state.contactFormModal.marker);
 
     const handleTrackSendEmail = useCallback(
         (targetValue: string) => {
@@ -14,14 +17,19 @@ export const useAnalytics = () => {
                 window.yaCounter86537628?.reachGoal(targetValue);
                 window.yaCounter86537628?.reachGoal('forms');
 
+                if (marker) {
+                    window.ga?.('send', 'event', 'form', marker);
+                }
+
                 window.ga?.('send', 'event', 'form', targetValue);
+                window.ga?.('send', 'event', 'form', 'forms');
                 window.ga?.('send', 'event', 'forms');
                 window.ga?.('send', 'event', 'form', 'submit');
 
                 window.fbq?.('track', 'Lead');
             }
         },
-        [ready]
+        [ready, marker]
     );
 
     const handleContactsInView = useCallback(() => {

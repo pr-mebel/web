@@ -202,7 +202,7 @@ const CardPopupComponent: FC<Props> = ({
                             </Typography>
                         </div>
                         <div>
-                            <Button block onClick={contactFormModal.onOpen}>
+                            <Button block onClick={() => contactFormModal.onOpen('zakazat_katalog')}>
                                 Рассчитать стоимость
                             </Button>
                             <Grid

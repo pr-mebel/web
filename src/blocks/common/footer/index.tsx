@@ -138,22 +138,22 @@ export const Footer: FC = () => {
                     </Grid>
                     <Grid item xs={12} sm={6} md={3} container direction="column" alignItems="center">
                         <div>
-                            <ColumnTitle asButton onClick={contactFormModal.onOpen}>
+                            <ColumnTitle asButton onClick={() => contactFormModal.onOpen()}>
                                 Связаться с нами
                             </ColumnTitle>
                             <List>
                                 <li>
-                                    <Link asButton className="listItem" onClick={contactFormModal.onOpen}>
+                                    <Link asButton className="listItem" onClick={() => contactFormModal.onOpen()}>
                                         Заказать звонок
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link asButton className="listItem" onClick={contactFormModal.onOpen}>
+                                    <Link asButton className="listItem" onClick={() => contactFormModal.onOpen()}>
                                         Получить проект
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link asButton className="listItem" onClick={contactFormModal.onOpen}>
+                                    <Link asButton className="listItem" onClick={() => contactFormModal.onOpen()}>
                                         Вызвать дизайнера замерщика
                                     </Link>
                                 </li>

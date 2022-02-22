@@ -26,7 +26,7 @@ export const HowToOrder: FC = () => {
                     },
                 }}
             >
-                <Button block onClick={contactFormModal.onOpen}>
+                <Button block onClick={() => contactFormModal.onOpen('zakazat')}>
                     Оставить заявку
                 </Button>
             </ButtonContainer>

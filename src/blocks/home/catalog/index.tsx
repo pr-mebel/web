@@ -41,7 +41,7 @@ export const Catalog: FC = () => {
                 }}
             >
                 <ButtonContainer>
-                    <Button block onClick={contactFormModal.onOpen}>
+                    <Button block onClick={() => contactFormModal.onOpen()}>
                         Рассчитать стоимость
                     </Button>
                 </ButtonContainer>

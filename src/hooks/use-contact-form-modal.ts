@@ -8,9 +8,12 @@ export const useContactFormModal = () => {
     const dispatch = useDispatch();
     const isOpen = useSelector((state: State) => state.contactFormModal.isOpen);
 
-    const handleOpen = useCallback(() => {
-        dispatch(openContactFormModal());
-    }, [dispatch]);
+    const handleOpen = useCallback(
+        (marker?: string) => {
+            dispatch(openContactFormModal(marker));
+        },
+        [dispatch]
+    );
 
     const handleClose = useCallback(() => {
         dispatch(closeContactFormModal());

@@ -20,7 +20,7 @@ export const Advantages: FC = () => {
                     marginTop: isSmDown ? '20px' : '32px',
                 }}
             >
-                <Button block onClick={contactFormModal.onOpen}>
+                <Button block onClick={() => contactFormModal.onOpen('preim')}>
                     Рассчитать стоимость
                 </Button>
             </ButtonContainer>

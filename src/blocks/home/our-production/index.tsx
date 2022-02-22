@@ -90,7 +90,7 @@ export const OurProduction: FC = () => {
                 }}
             >
                 <ButtonContainer>
-                    <Button block onClick={contactFormModal.onOpen}>
+                    <Button block onClick={() => contactFormModal.onOpen()}>
                         Получить проект
                     </Button>
                 </ButtonContainer>

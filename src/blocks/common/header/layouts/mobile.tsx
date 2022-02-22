@@ -215,7 +215,7 @@ export const MobileHeader: FC = () => {
                             <SocialIconsList />
                         </Grid>
                         <Grid item xs>
-                            <Button block onClick={contactFormModal.onOpen}>
+                            <Button block onClick={() => contactFormModal.onOpen()}>
                                 Заказать звонок
                             </Button>
                         </Grid>

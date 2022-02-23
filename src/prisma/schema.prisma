@@ -17,5 +17,7 @@ model Orders {
   place     String   @db.VarChar(255)
   createdAt DateTime @default(now())
   text      String?  @db.Text
+  archived  Boolean  @default(false) @db.TinyInt()
+  tags      Json?
   meta      Json?
 }

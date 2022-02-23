@@ -18,9 +18,7 @@ export const OrderFormPopup: FC = () => {
         place: 'Модальное окно',
         files: fileUpload.data,
         onFinish: () => {
-            console.log('here1');
             contactFormModal.onClose();
-            console.log('here2');
             analytics.onSendEmail('zakazat_modal');
             analytics.onContactMeModalSubmitted();
             fileUpload.onClear();

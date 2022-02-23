@@ -36,49 +36,49 @@ const HomePage: FC = () => {
             <Section>
                 <TextBlock />
             </Section>
-            <Section>
+            <Section id="catalog">
                 <Catalog />
             </Section>
-            <Section>
+            <Section id="design-offer">
                 <DesignOffer />
             </Section>
             <Section>
                 <FeedbackForm />
             </Section>
-            <Section>
+            <Section id="advantages">
                 <Advantages />
             </Section>
-            <Section>
+            <Section id="comfort">
                 <WardrobeLeft />
             </Section>
-            <Section>
+            <Section id="quality">
                 <WardrobeRight />
             </Section>
-            <Section>
+            <Section id="about">
                 <About />
             </Section>
-            <Section>
+            <Section id="call-designer">
                 <CallDesigner />
             </Section>
             <Section>
                 <CallDesignerForm />
             </Section>
-            <Section>
+            <Section id="production">
                 <OurProduction />
             </Section>
-            <Section>
+            <Section id="how-to-order">
                 <HowToOrder />
             </Section>
-            <Section>
+            <Section id="faq">
                 <Faq />
             </Section>
-            <Section>
+            <Section id="questions">
                 <QuestionsForm />
             </Section>
             <Section>
                 <ShopImg />
             </Section>
-            <Section>
+            <Section id="contacts">
                 <Contacts />
             </Section>
         </main>

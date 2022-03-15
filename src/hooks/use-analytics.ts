@@ -27,6 +27,8 @@ export const useAnalytics = () => {
                 window.ga?.('send', 'event', 'form', 'submit');
 
                 window.fbq?.('track', 'Lead');
+
+                window._tmr.push({ type: 'reachGoal', id: 3241411, goal: 'lid' });
             }
         },
         [ready, marker]

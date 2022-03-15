@@ -8,4 +8,7 @@ interface Window {
     };
     ga: (...args: unknown) => void;
     fbq: (...args: unknown) => void;
+    _tmr: {
+        push: (...args: unknown) => void;
+    };
 }

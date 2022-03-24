@@ -2,7 +2,7 @@ import { Box, Container, Grid, Typography } from '@mui/material';
 import React, { FC } from 'react';
 
 import { Link } from '@/components';
-import { Facebook, Instagram, LogoFooter, Vkontakte } from '@/components/icons';
+import { LogoFooter, Vkontakte } from '@/components/icons';
 import { useAnalytics, useContactFormModal } from '@/hooks';
 
 import { ColumnTitle, List } from './components';
@@ -233,22 +233,9 @@ export const Footer: FC = () => {
                             },
                         })}
                     >
-                        <Grid item xs={4} container justifyContent="center">
+                        <Grid item xs={12} container justifyContent="center">
                             <Link href="https://vk.com/public185518769" external>
                                 <Vkontakte className="socialIcon" />
-                            </Link>
-                        </Grid>
-                        <Grid item xs={4} container justifyContent="center">
-                            <Link href="https://www.instagram.com/pr_mebel.ru/" external>
-                                <Instagram className="socialIcon" />
-                            </Link>
-                        </Grid>
-                        <Grid item xs={4} container justifyContent="center">
-                            <Link
-                                href="https://www.facebook.com/%D0%A7%D0%B0%D1%81%D1%82%D0%BD%D1%8B%D0%B9-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D1%8C%D0%B5%D1%80-108136607213942"
-                                external
-                            >
-                                <Facebook className="socialIcon" />
                             </Link>
                         </Grid>
                     </Grid>

@@ -3,7 +3,7 @@ import { Box, Dialog, Grid, Skeleton, Typography, useMediaQuery, useTheme } from
 import React, { FC, memo } from 'react';
 
 import { Button } from '@/components/common';
-import { Facebook, Instagram, Vkontakte } from '@/components/icons';
+import { Vkontakte } from '@/components/icons';
 import { Image as ImageType } from '@/entities';
 import { useContactFormModal, useModal } from '@/hooks';
 
@@ -213,19 +213,9 @@ const CardPopupComponent: FC<Props> = ({
                             >
                                 <Grid item xs={3} sm={4} />
                                 <Grid item xs={6} sm={4} container spacing={2}>
-                                    <Grid item xs={4} container justifyContent="center">
-                                        <a href="https://www.instagram.com/pr_mebel.ru/">
-                                            <Instagram />
-                                        </a>
-                                    </Grid>
-                                    <Grid item xs={4} container justifyContent="center">
+                                    <Grid item xs={12} container justifyContent="center">
                                         <a href="https://vk.com/public185518769">
                                             <Vkontakte />
-                                        </a>
-                                    </Grid>
-                                    <Grid item xs={4} container justifyContent="center">
-                                        <a href="https://www.facebook.com/%D0%A7%D0%B0%D1%81%D1%82%D0%BD%D1%8B%D0%B9-%D0%BC%D0%B5%D0%B1%D0%B5%D0%BB%D1%8C%D0%B5%D1%80-108136607213942">
-                                            <Facebook />
                                         </a>
                                     </Grid>
                                 </Grid>

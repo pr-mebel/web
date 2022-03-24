@@ -1,10 +1,10 @@
-import { withSentry } from '@sentry/nextjs';
+// import { withSentry } from '@sentry/nextjs';
 import multer from 'multer';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
 import { createMessage, createMeta, sendEmail } from '@/lib/send-email';
-import { logException } from '@/lib/sentry';
+// import { logException } from '@/lib/sentry';
 
 const upload = multer({
     storage: multer.memoryStorage(),
@@ -105,13 +105,14 @@ const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
 
         res.status(200).json(info);
     } catch (error) {
-        logException(error, 'mail.ru', req.body);
+        // logException(error, 'mail.ru', req.body);
         console.error('unable to send to mail.ru', error);
         res.status(500).json(error);
     }
 };
 
-export default withSentry(sendRequestEmail);
+export default sendRequestEmail;
+// export default withSentry(sendRequestEmail);
 
 export const config = {
     api: {

@@ -1,10 +1,10 @@
 import { Prisma } from '@prisma/client';
-import { withSentry } from '@sentry/nextjs';
+// import { withSentry } from '@sentry/nextjs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { prisma } from '@/lib/prisma';
 import { createMeta } from '@/lib/send-email';
-import { logException } from '@/lib/sentry';
+// import { logException } from '@/lib/sentry';
 
 type Body = {
     email?: string;
@@ -35,7 +35,7 @@ const logRequestToDB = async (req: NextApiRequest, res: NextApiResponse) => {
 
         console.info('written to database');
     } catch (error) {
-        logException(error, 'database', req.body);
+        // logException(error, 'database', req.body);
         console.error('unable to write to database', {
             error: error as string,
         });
@@ -45,4 +45,5 @@ const logRequestToDB = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(200).json('success');
 };
 
-export default withSentry(logRequestToDB);
+export default logRequestToDB;
+// export default withSentry(logRequestToDB);

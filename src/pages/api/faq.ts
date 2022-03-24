@@ -1,4 +1,4 @@
-import { withSentry } from '@sentry/nextjs';
+// import { withSentry } from '@sentry/nextjs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { client } from '@/api/client';
@@ -27,4 +27,5 @@ const faq = async (_: NextApiRequest, res: NextApiResponse) => {
     }
 };
 
-export default withSentry(faq);
+export default faq;
+// export default withSentry(faq);

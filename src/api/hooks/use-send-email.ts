@@ -55,18 +55,6 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
             });
 
             try {
-                await axios.post(endpoints.logRequestToDB, {
-                    ...values,
-                    place,
-                    meta: {
-                        ...values.meta,
-                        URL: router.pathname,
-                        ...(utm ? JSON.parse(utm) : {}),
-                    },
-                });
-            } catch {}
-
-            try {
                 await axios.post(endpoints.sendRequestEmail, formData, {
                     headers: { 'content-type': 'multipart/form-data' },
                 });
@@ -80,6 +68,18 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
             }
 
             setLoading(false);
+
+            try {
+                await axios.post(endpoints.logRequestToDB, {
+                    ...values,
+                    place,
+                    meta: {
+                        ...values.meta,
+                        URL: router.pathname,
+                        ...(utm ? JSON.parse(utm) : {}),
+                    },
+                });
+            } catch {}
         },
         [files, place, router.pathname, formSubmitModal, onFinish, enqueueSnackbar]
     );

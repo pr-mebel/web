@@ -55,20 +55,21 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
             });
 
             try {
-                await Promise.all([
-                    axios.post(endpoints.logRequestToDB, {
-                        ...values,
-                        place,
-                        meta: {
-                            ...values.meta,
-                            URL: router.pathname,
-                            ...(utm ? JSON.parse(utm) : {}),
-                        },
-                    }),
-                    axios.post(endpoints.sendRequestEmail, formData, {
-                        headers: { 'content-type': 'multipart/form-data' },
-                    }),
-                ]);
+                await axios.post(endpoints.logRequestToDB, {
+                    ...values,
+                    place,
+                    meta: {
+                        ...values.meta,
+                        URL: router.pathname,
+                        ...(utm ? JSON.parse(utm) : {}),
+                    },
+                });
+            } catch {}
+
+            try {
+                await axios.post(endpoints.sendRequestEmail, formData, {
+                    headers: { 'content-type': 'multipart/form-data' },
+                });
 
                 formSubmitModal.onOpen();
                 onFinish();

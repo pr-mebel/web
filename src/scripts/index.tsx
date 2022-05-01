@@ -62,7 +62,7 @@ export const ScriptsList = () => {
                 }}
             />
             <Script
-                id="bitrix-messenger"
+                id="vk-counter"
                 strategy="lazyOnload"
                 dangerouslySetInnerHTML={{
                     __html: VkCounter,

@@ -75,3 +75,7 @@ export const MailRuCounter = `
     if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
     })(document, window, "topmailru-code");
 `;
+
+export const VkCounter = `
+    !function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?169',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1378416-aoC9n"),VK.Retargeting.Hit()},document.head.appendChild(t)}();
+`;

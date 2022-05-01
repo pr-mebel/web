@@ -29,6 +29,8 @@ export const useAnalytics = () => {
                 window.fbq?.('track', 'Lead');
 
                 window._tmr.push({ type: 'reachGoal', id: 3241411, goal: 'lid' });
+
+                window.VK.Goal('conversion');
             }
         },
         [ready, marker]

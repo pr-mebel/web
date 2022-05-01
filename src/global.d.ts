@@ -11,4 +11,7 @@ interface Window {
     _tmr: {
         push: (...args: unknown) => void;
     };
+    VK: {
+        Goal: (arg: string) => void;
+    };
 }

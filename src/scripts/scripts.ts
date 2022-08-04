@@ -79,3 +79,20 @@ export const MailRuCounter = `
 export const VkCounter = `
     !function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?169',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1378416-aoC9n"),VK.Retargeting.Hit()},document.head.appendChild(t)}();
 `;
+
+export const RoistatCounter = `
+    (function(w, d, s, h, id) {
+    w.roistatProjectId = id; w.roistatHost = h;
+    var p = d.location.protocol == "https:" ? "https://" : "http://";
+    var u = /^.*roistat_visit=[^;]+(.*)?$/.test(d.cookie) ? "/dist/module.js" : "/api/site/1.0/"+id+"/init?referrer="+encodeURIComponent(d.location.href);
+    var js = d.createElement(s); js.charset="UTF-8"; js.async = 1; js.src = p+h+u; var js2 = d.getElementsByTagName(s)[0]; js2.parentNode.insertBefore(js, js2);
+`;
+
+export const RoistatIntegrationWithBitrixWidjets = `
+    (function(w, d, s, h) {
+    w.roistatLanguage = '';
+    var p = d.location.protocol == "https:" ? "https://" : "http://";
+    var u = "/static/marketplace/Bitrix24Widget/script.js";
+    var js = d.createElement(s); js.async = 1; js.src = p+h+u; var js2 = d.getElementsByTagName(s)[0]; js2.parentNode.insertBefore(js, js2);
+    })(window, document, 'script', 'cloud.roistat.com');
+`;

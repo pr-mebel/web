@@ -7,7 +7,7 @@ import {
     FacebookPixel,
     GoogleAnalytics,
     GoogleTagManger,
-    MailRuCounter,
+    MailRuCounter, RoistatCounter, RoistatIntegrationWithBitrixWidjets,
     VkCounter,
     YandexMetrika,
 } from './scripts';
@@ -66,6 +66,20 @@ export const ScriptsList = () => {
                 strategy="lazyOnload"
                 dangerouslySetInnerHTML={{
                     __html: VkCounter,
+                }}
+            />
+            <Script
+                id="roistat-counter"
+                strategy="lazyOnload"
+                dangerouslySetInnerHTML={{
+                    __html: RoistatCounter,
+                }}
+            />
+            <Script
+                id="roistat-integration-with-bitrix-widgets"
+                strategy="lazyOnload"
+                dangerouslySetInnerHTML={{
+                    __html: RoistatIntegrationWithBitrixWidjets,
                 }}
             />
         </>

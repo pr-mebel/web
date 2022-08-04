@@ -7,7 +7,9 @@ import {
     FacebookPixel,
     GoogleAnalytics,
     GoogleTagManger,
-    MailRuCounter, RoistatCounter, RoistatIntegrationWithBitrixWidjets,
+    MailRuCounter,
+    RoistatCounter,
+    RoistatIntegrationWithBitrixWidjets,
     VkCounter,
     YandexMetrika,
 } from './scripts';

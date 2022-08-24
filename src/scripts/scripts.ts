@@ -66,7 +66,7 @@ export const FacebookPixel = `
 
 export const MailRuCounter = `
     var _tmr = window._tmr || (window._tmr = []);
-    _tmr.push({id: "3241411", type: "pageView", start: (new Date()).getTime(), pid: "USER_ID"});
+    _tmr.push({id: "3259213", type: "pageView", start: (new Date()).getTime(), pid: "USER_ID"});
     (function (d, w, id) {
     if (d.getElementById(id)) return;
     var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;

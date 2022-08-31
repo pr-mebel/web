@@ -88,12 +88,13 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
                     },
                 });
             } catch {}
+
+            //Roistat Start Event Sending
+            const baseUrl = window.location.href.split("?")[0];
+            window.roistat?.event.send(formPlaceMappingToRoistatEventName[place], {'baseUrl': baseUrl});
+            //Roistat End Event Sending
         },
 
-    //Roistat Start Event Sending
-    const baseUrl = window.location.href.split("?")[0];
-    window.roistat?.event.send(formPlaceMappingToRoistatEventName[place], {'baseUrl': baseUrl});
-    //Roistat End Event Sending
 
     [files, place, router.pathname, formSubmitModal, onFinish, enqueueSnackbar]
 );

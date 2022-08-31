@@ -4,7 +4,9 @@ interface Window {
         reachGoal: (val: string) => void;
     };
     roistat: {
-        event: (...args: unknown) => void;
+        event: {
+            send:(...args: unknown) => void;
+        }
     };
     yaCounter86537628: {
         reachGoal: (val: string) => void;

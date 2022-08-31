@@ -21,27 +21,27 @@ const logRequest = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const metaResult = createMeta(meta, req.cookies, req.headers);
 
-    try {
-        await prisma.orders.create({
-            data: {
-                name,
-                tel,
-                place,
-                createdAt: new Date(),
-                email,
-                text: description,
-                meta: metaResult as Prisma.JsonObject,
-            },
-        });
-
-        console.info('written to database');
-    } catch (error) {
-        // logException(error, 'database', req.body);
-        console.error('unable to write to database', {
-            error: error as string,
-        });
-        res.status(500).json(error);
-    }
+    // try {
+    //     await prisma.orders.create({
+    //         data: {
+    //             name,
+    //             tel,
+    //             place,
+    //             createdAt: new Date(),
+    //             email,
+    //             text: description,
+    //             meta: metaResult as Prisma.JsonObject,
+    //         },
+    //     });
+    //
+    //     console.info('written to database');
+    // } catch (error) {
+    //     // logException(error, 'database', req.body);
+    //     console.error('unable to write to database', {
+    //         error: error as string,
+    //     });
+    //     res.status(500).json(error);
+    // }
 
     const roistatData = {
         roistat: req.cookies['roistat_visit'] ? req.cookies['roistat_visit'] : 'nocookie',

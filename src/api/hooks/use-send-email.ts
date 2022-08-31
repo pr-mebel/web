@@ -32,6 +32,14 @@ const prepareData = ({ name, tel, description, email, files, place, meta = {} }:
 };
 
 export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmailParams) => {
+    const formPlaceMappingToRoistatEventName: Record<string, string> = {
+        'Каталог/Остались вопросы?': 'send_form__catalog__questions',
+        'Модальное окно': 'send_form__modal',
+        'Главная/Вызвать дизайнера': 'send_form__glavnaya__call_designer',
+        'Главная/Остались вопросы?': 'send_form__glavnaya__questions',
+        'Главная/Расчет стоимости': 'send_form__glavnaya__calc_project',
+    };
+
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
@@ -81,8 +89,14 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
                 });
             } catch {}
         },
-        [files, place, router.pathname, formSubmitModal, onFinish, enqueueSnackbar]
-    );
+
+    //Roistat Start Event Sending
+    const baseUrl = window.location.href.split("?")[0];
+    window.roistat?.event.send(formPlaceMappingToRoistatEventName[place], {'baseUrl': baseUrl});
+    //Roistat End Event Sending
+
+    [files, place, router.pathname, formSubmitModal, onFinish, enqueueSnackbar]
+);
 
     return {
         loading,

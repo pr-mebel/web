@@ -3,6 +3,9 @@ interface Window {
     yaCounter54949111: {
         reachGoal: (val: string) => void;
     };
+    roistat: {
+        event: (...args: unknown) => void;
+    };
     yaCounter86537628: {
         reachGoal: (val: string) => void;
     };

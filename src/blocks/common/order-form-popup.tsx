@@ -15,7 +15,7 @@ export const OrderFormPopup: FC = () => {
     const contactFormModal = useContactFormModal();
     const { register, handleSubmit } = useForm();
     const { loading, onSendEmail } = useSendEmail({
-        place: 'Модальное окно',
+        place: 'modal',
         files: fileUpload.data,
         onFinish: () => {
             contactFormModal.onClose();

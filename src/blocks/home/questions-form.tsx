@@ -13,7 +13,7 @@ export const QuestionsForm: FC = () => {
     const analytics = useAnalytics();
     const { register, handleSubmit, reset } = useForm();
     const { loading, onSendEmail } = useSendEmail({
-        place: 'Главная/Остались вопросы?',
+        place: 'home/more-questions',
         onFinish: () => {
             analytics.onSendEmail('vopros');
             reset();

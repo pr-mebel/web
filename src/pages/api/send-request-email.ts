@@ -1,10 +1,8 @@
-// import { withSentry } from '@sentry/nextjs';
 import multer from 'multer';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
 import { createMessage, createMeta, sendEmail } from '@/lib/send-email';
-// import { logException } from '@/lib/sentry';
 
 const upload = multer({
     storage: multer.memoryStorage(),

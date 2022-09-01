@@ -16,7 +16,7 @@ export const FeedbackForm: FC = () => {
     const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
     const { register, handleSubmit, reset } = useForm();
     const { loading, onSendEmail } = useSendEmail({
-        place: 'Главная/Расчет стоимости',
+        place: 'home/calculate-price',
         files: fileUpload.data,
         onFinish: () => {
             analytics.onSendEmail('proekt');

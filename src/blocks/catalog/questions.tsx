@@ -16,7 +16,7 @@ export const Questions: FC = () => {
     const fileUpload = useFileUpload();
     const { register, handleSubmit, reset } = useForm();
     const { loading, onSendEmail } = useSendEmail({
-        place: 'Каталог/Остались вопросы?',
+        place: 'catalog/more-questions',
         files: fileUpload.data,
         onFinish: () => {
             analytics.onSendEmail('vopros_katalog');

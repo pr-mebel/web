@@ -11,7 +11,7 @@ export const CallDesignerForm: FC = () => {
     const analytics = useAnalytics();
     const { register, handleSubmit, reset } = useForm();
     const { loading, onSendEmail } = useSendEmail({
-        place: 'Главная/Вызвать дизайнера',
+        place: 'home/call-designer',
         onFinish: () => {
             analytics.onSendEmail('designer');
             reset();

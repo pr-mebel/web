@@ -58,7 +58,7 @@ export const ScriptsList = () => {
             />
             <Script
                 id="bitrix-messenger"
-                strategy="lazyOnload"
+                strategy="beforeInteractive"
                 dangerouslySetInnerHTML={{
                     __html: BitrixMessenger,
                 }}
@@ -72,14 +72,14 @@ export const ScriptsList = () => {
             />
             <Script
                 id="roistat-counter"
-                strategy="lazyOnload"
+                strategy="beforeInteractive"
                 dangerouslySetInnerHTML={{
                     __html: RoistatCounter,
                 }}
             />
             <Script
                 id="roistat-integration-with-bitrix-widgets"
-                strategy="lazyOnload"
+                strategy="beforeInteractive"
                 dangerouslySetInnerHTML={{
                     __html: RoistatIntegrationWithBitrixWidjets,
                 }}

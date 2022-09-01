@@ -63,6 +63,11 @@ export const useAnalytics = () => {
     const handleContactsMailClick = useCallback(() => {
         if (ready) {
             window.yaCounter54949111?.reachGoal('mail');
+
+            //Roistat Start Event Sending
+            const baseUrl = window.location.href.split("?")[0];
+            window.roistat?.event.send('contacts_mail_click', {'baseUrl': baseUrl});
+            //Roistat End Event Sending
         }
     }, [ready]);
 

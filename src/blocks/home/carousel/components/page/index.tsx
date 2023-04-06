@@ -197,7 +197,7 @@ export const Page: FC<Props> = ({ pageID, titles, subtitles, texts, to }) => (
                 ))}
             </div>
             <div className="buttonContainer">
-                <Link href={to} passHref>
+                <Link href={to} passHref legacyBehavior>
                     <button type="button" className="button">
                         <Typography className="buttonText">Подробнее</Typography>
                     </button>

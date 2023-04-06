@@ -58,7 +58,7 @@ export const Link: FC<ComponentProps<typeof Root>> = ({ href, external, asButton
     }
 
     return (
-        <NextLink passHref href={href || '/'}>
+        <NextLink passHref href={href || '/'} legacyBehavior>
             <Root {...rest}>{children}</Root>
         </NextLink>
     );

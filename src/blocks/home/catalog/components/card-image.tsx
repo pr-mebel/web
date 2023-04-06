@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import img1 from 'public/images/home-page/catalog/1.jpg';
 import img2 from 'public/images/home-page/catalog/2.jpg';
 import img3 from 'public/images/home-page/catalog/3.jpg';

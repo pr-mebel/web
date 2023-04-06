@@ -1,6 +1,6 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
 import clsx from 'clsx';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import img1 from 'public/images/home-page/wardrobe-left/wardrobe-1.jpg';
 import img2 from 'public/images/home-page/wardrobe-left/wardrobe-2.jpg';
 import img3 from 'public/images/home-page/wardrobe-left/wardrobe-3.jpg';

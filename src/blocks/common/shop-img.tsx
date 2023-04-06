@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import img from 'public/images/common/shop-img/1.png';
 import React, { FC } from 'react';
 

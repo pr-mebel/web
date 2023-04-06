@@ -1,5 +1,5 @@
 import { Box, Popover, Typography } from '@mui/material';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import React, { FC, MouseEvent, useState } from 'react';
 
 import { BlockTitle } from '@/components/common';

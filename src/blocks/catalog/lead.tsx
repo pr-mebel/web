@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import clsx from 'clsx';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import accessories from 'public/images/catalog/lead/accessories.jpg';
 import cupboard from 'public/images/catalog/lead/cupboard.jpg';
 import wardrobe from 'public/images/catalog/lead/wardrobe.jpg';

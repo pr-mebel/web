@@ -4,9 +4,9 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
 import RoomIcon from '@mui/icons-material/Room';
 import { Box, Container, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Map as YMap, Placemark, YMaps as YMapsProvider } from '@pbe/react-yandex-maps';
 import React, { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { Map as YMap, Placemark, YMaps as YMapsProvider } from 'react-yandex-maps';
 
 import { BlockTitle, Link } from '@/components/common';
 import { useAnalytics } from '@/hooks';

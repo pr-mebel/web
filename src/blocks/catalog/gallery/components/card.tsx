@@ -1,6 +1,6 @@
 import { Box, Skeleton, SvgIcon, Typography } from '@mui/material';
 import clsx from 'clsx';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import React, { FC, useCallback, useState } from 'react';
 
 type Props = {

@@ -1,5 +1,5 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import img from 'public/images/home-page/our-production/1.jpg';
 import React, { FC } from 'react';
 

@@ -1,3 +1,4 @@
+import { StaticImageData } from 'next/legacy/image';
 import topImgMob1 from 'public/images/home-page/carousel/top-img-mob1.jpg';
 import topImgMob2 from 'public/images/home-page/carousel/top-img-mob2.jpg';
 import topImgMob3 from 'public/images/home-page/carousel/top-img-mob3.jpg';

@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from '@mui/material';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import bgImg from 'public/images/home-page/questions-form/1.jpg';
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';

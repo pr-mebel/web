@@ -1,7 +1,7 @@
 import CheckIcon from '@mui/icons-material/Check';
 import { Box, Grid, Typography } from '@mui/material';
 import clsx from 'clsx';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import { BlockTitle } from '@/components';
 import { usePagination } from '@/hooks';

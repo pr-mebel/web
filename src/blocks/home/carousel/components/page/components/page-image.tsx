@@ -1,5 +1,5 @@
 import { useMediaQuery, useTheme } from '@mui/material';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import React, { FC } from 'react';
 
 import { imageMapping } from './image-mapping';

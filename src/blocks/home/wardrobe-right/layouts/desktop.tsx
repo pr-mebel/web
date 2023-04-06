@@ -1,5 +1,5 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import defaultImage from 'public/images/home-page/wardrobe-right/wardrobe-1.jpg';
 import React from 'react';
 

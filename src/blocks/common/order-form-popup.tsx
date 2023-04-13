@@ -6,19 +6,26 @@ import { useForm } from 'react-hook-form';
 
 import { useSendEmail } from '@/api';
 import { Button, Input } from '@/components';
-import { useAnalytics, useContactFormModal, useFileUpload } from '@/hooks';
+import { useAnalytics, useFileUpload } from '@/hooks';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
 
-export const OrderFormPopup: FC = () => {
+import { FormSubmitPopup } from './form-submit-popup';
+
+type OrderFormPopupProps = {
+    isOpen: boolean;
+    marker?: string;
+    onClose: () => void;
+};
+
+export const OrderFormPopup: FC<OrderFormPopupProps> = ({ isOpen, marker, onClose }) => {
     const fileUpload = useFileUpload();
-    const analytics = useAnalytics();
-    const contactFormModal = useContactFormModal();
+    const analytics = useAnalytics(marker);
     const { register, handleSubmit } = useForm();
-    const { loading, onSendEmail } = useSendEmail({
+    const { loading, onSendEmail, formSubmitModal } = useSendEmail({
         place: 'modal',
         files: fileUpload.data,
         onFinish: () => {
-            contactFormModal.onClose();
+            onClose();
             analytics.onSendEmail('zakazat_modal');
             analytics.onContactMeModalSubmitted();
             fileUpload.onClear();
@@ -30,233 +37,236 @@ export const OrderFormPopup: FC = () => {
      */
     const handleClosePopup = useCallback(() => {
         fileUpload.onClear();
-        contactFormModal.onClose();
-    }, [fileUpload, contactFormModal]);
+        onClose();
+    }, [fileUpload, onClose]);
 
     return (
-        <Dialog
-            open={contactFormModal.isOpen}
-            onClose={handleClosePopup}
-            scroll="body"
-            PaperProps={{
-                sx: (theme) => ({
-                    position: 'relative',
-                    maxWidth: '434px',
-                    [theme.breakpoints.down('sm')]: {
-                        maxWidth: 'unset !important',
-                        width: 'calc(100% - 16px)',
-                        margin: 'auto',
-                    },
-                }),
-            }}
-        >
-            <ClearIcon
-                sx={{
-                    cursor: 'pointer',
-                    width: '30px',
-                    height: '30px',
-                    top: '5px',
-                    right: '5px',
-                    position: 'absolute',
-                    zIndex: 10,
-                    background: 'rgba(255, 255, 255, 0.4)',
-                }}
-                onClick={handleClosePopup}
-            />
-            <Box
-                sx={{
-                    width: '100%',
-                    position: 'relative',
-                    paddingTop: '27.17%',
-                    '& .image': {
-                        position: 'absolute',
-                        height: '100%',
-                        width: '100%',
-                        top: '0',
-                        left: '0',
-                    },
+        <>
+            <Dialog
+                open={isOpen}
+                onClose={handleClosePopup}
+                scroll="body"
+                PaperProps={{
+                    sx: (theme) => ({
+                        position: 'relative',
+                        maxWidth: '434px',
+                        [theme.breakpoints.down('sm')]: {
+                            maxWidth: 'unset !important',
+                            width: 'calc(100% - 16px)',
+                            margin: 'auto',
+                        },
+                    }),
                 }}
             >
-                <img className="image" src="images/common/order-form-popup/1.jpg" alt="Картинка в модальном окне" />
-            </Box>
-            <Grid
-                container
-                justifyContent="center"
-                sx={{
-                    padding: '20px 35px 35px',
-                }}
-            >
-                <Typography
-                    variant="h5"
-                    gutterBottom
+                <ClearIcon
                     sx={{
-                        fontSize: '20px',
-                        fontWeight: 400,
+                        cursor: 'pointer',
+                        width: '30px',
+                        height: '30px',
+                        top: '5px',
+                        right: '5px',
+                        position: 'absolute',
+                        zIndex: 10,
+                        background: 'rgba(255, 255, 255, 0.4)',
+                    }}
+                    onClick={handleClosePopup}
+                />
+                <Box
+                    sx={{
+                        width: '100%',
+                        position: 'relative',
+                        paddingTop: '27.17%',
+                        '& .image': {
+                            position: 'absolute',
+                            height: '100%',
+                            width: '100%',
+                            top: '0',
+                            left: '0',
+                        },
                     }}
                 >
-                    Расчет стоимости проекта
-                </Typography>
+                    <img className="image" src="images/common/order-form-popup/1.jpg" alt="Картинка в модальном окне" />
+                </Box>
                 <Grid
-                    item
-                    xs={12}
-                    sx={(theme) => ({
-                        position: 'relative',
-                        '&::after': {
-                            position: 'absolute',
-                            content: '""',
-                            bottom: '-15px',
-                            left: '25%',
-                            width: '50%',
-                            height: '1px',
-                            background: theme.palette.primary.main,
-                        },
-                    })}
+                    container
+                    justifyContent="center"
+                    sx={{
+                        padding: '20px 35px 35px',
+                    }}
                 >
                     <Typography
-                        variant="body1"
-                        align="center"
+                        variant="h5"
+                        gutterBottom
                         sx={{
-                            fontSize: '14px',
-                            lineHeight: '16.8px',
+                            fontSize: '20px',
+                            fontWeight: 400,
                         }}
                     >
-                        Отправьте эскизы, план помещения или просто напишите свои пожелания к&nbsp;будущему проекту
-                        и&nbsp;мы&nbsp;подготовим для Вас индивидуальное предложение
+                        Расчет стоимости проекта
                     </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Box
-                        component="form"
-                        sx={{
-                            margin: '35px auto 0',
-                            display: 'grid',
-                            gridTemplateColumns: '1fr',
-                            rowGap: '15px',
-                            maxWidth: '255px',
-                        }}
-                        onSubmit={handleSubmit(onSendEmail)}
+                    <Grid
+                        item
+                        xs={12}
+                        sx={(theme) => ({
+                            position: 'relative',
+                            '&::after': {
+                                position: 'absolute',
+                                content: '""',
+                                bottom: '-15px',
+                                left: '25%',
+                                width: '50%',
+                                height: '1px',
+                                background: theme.palette.primary.main,
+                            },
+                        })}
                     >
-                        <Input
-                            inputRef={register}
-                            name="name"
-                            placeholder="Имя"
-                            type="text"
-                            fullWidth
-                            autoComplete="name"
-                            required
-                        />
-                        <Input
-                            inputRef={register}
-                            name="tel"
-                            placeholder="Телефон"
-                            type="tel"
-                            fullWidth
-                            autoComplete="tel"
-                            required
-                            onChange={(event) => {
-                                event.target.value = formatPhoneInput(event.target.value);
-                            }}
-                        />
-                        <Input
-                            inputRef={register}
-                            name="email"
-                            placeholder="E-mail"
-                            type="email"
-                            fullWidth
-                            autoComplete="email"
-                        />
-                        <Input
-                            inputRef={register}
-                            name="description"
-                            placeholder="Описание"
-                            type="text"
-                            fullWidth
-                            multiline
-                            rows={4}
-                        />
-                        {fileUpload.renderFileInput()}
-                        <Box
+                        <Typography
+                            variant="body1"
+                            align="center"
                             sx={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                cursor: 'pointer',
+                                fontSize: '14px',
+                                lineHeight: '16.8px',
                             }}
-                            onClick={fileUpload.onClick}
                         >
-                            <PublishIcon
-                                sx={{
-                                    marginRight: '5px',
+                            Отправьте эскизы, план помещения или просто напишите свои пожелания к&nbsp;будущему проекту
+                            и&nbsp;мы&nbsp;подготовим для Вас индивидуальное предложение
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Box
+                            component="form"
+                            sx={{
+                                margin: '35px auto 0',
+                                display: 'grid',
+                                gridTemplateColumns: '1fr',
+                                rowGap: '15px',
+                                maxWidth: '255px',
+                            }}
+                            onSubmit={handleSubmit(onSendEmail)}
+                        >
+                            <Input
+                                inputRef={register}
+                                name="name"
+                                placeholder="Имя"
+                                type="text"
+                                fullWidth
+                                autoComplete="name"
+                                required
+                            />
+                            <Input
+                                inputRef={register}
+                                name="tel"
+                                placeholder="Телефон"
+                                type="tel"
+                                fullWidth
+                                autoComplete="tel"
+                                required
+                                onChange={(event) => {
+                                    event.target.value = formatPhoneInput(event.target.value);
                                 }}
                             />
-                            <Typography
-                                sx={{
-                                    fontSize: '12px',
-                                    lineHeight: '1.4',
-                                    position: 'relative',
-                                    textTransform: 'uppercase',
-                                }}
-                            >
-                                Прикрепить эскизы
-                            </Typography>
-                        </Box>
-                        {!!fileUpload.data?.length && (
+                            <Input
+                                inputRef={register}
+                                name="email"
+                                placeholder="E-mail"
+                                type="email"
+                                fullWidth
+                                autoComplete="email"
+                            />
+                            <Input
+                                inputRef={register}
+                                name="description"
+                                placeholder="Описание"
+                                type="text"
+                                fullWidth
+                                multiline
+                                rows={4}
+                            />
+                            {fileUpload.renderFileInput()}
                             <Box
                                 sx={{
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center',
+                                    cursor: 'pointer',
                                 }}
+                                onClick={fileUpload.onClick}
                             >
+                                <PublishIcon
+                                    sx={{
+                                        marginRight: '5px',
+                                    }}
+                                />
                                 <Typography
                                     sx={{
                                         fontSize: '12px',
                                         lineHeight: '1.4',
                                         position: 'relative',
+                                        textTransform: 'uppercase',
                                     }}
                                 >
-                                    {`${fileUpload.data.length}\xA0${getFileDeclination(fileUpload.data.length)}`}
-                                    <ClearIcon
-                                        sx={{
-                                            cursor: 'pointer',
-                                            width: '16px',
-                                            height: '16px',
-                                            position: 'absolute',
-                                            right: '-20px',
-                                            bottom: '0px',
-                                        }}
-                                        onClick={fileUpload.onClear}
-                                    />
+                                    Прикрепить эскизы
                                 </Typography>
                             </Box>
-                        )}
-                        <Button type="submit" loading={loading}>
-                            Рассчитать стоимость
-                        </Button>
-                    </Box>
-                </Grid>
-                <Typography
-                    variant="body2"
-                    align="center"
-                    sx={{
-                        marginTop: '15px',
-                        fontSize: '14px',
-                        lineHeight: '1',
-                    }}
-                >
-                    Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие на&nbsp;обработку
-                    персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
-                    <Box
-                        component="a"
-                        href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
+                            {!!fileUpload.data?.length && (
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            fontSize: '12px',
+                                            lineHeight: '1.4',
+                                            position: 'relative',
+                                        }}
+                                    >
+                                        {`${fileUpload.data.length}\xA0${getFileDeclination(fileUpload.data.length)}`}
+                                        <ClearIcon
+                                            sx={{
+                                                cursor: 'pointer',
+                                                width: '16px',
+                                                height: '16px',
+                                                position: 'absolute',
+                                                right: '-20px',
+                                                bottom: '0px',
+                                            }}
+                                            onClick={fileUpload.onClear}
+                                        />
+                                    </Typography>
+                                </Box>
+                            )}
+                            <Button type="submit" loading={loading}>
+                                Рассчитать стоимость
+                            </Button>
+                        </Box>
+                    </Grid>
+                    <Typography
+                        variant="body2"
+                        align="center"
                         sx={{
-                            color: 'black',
+                            marginTop: '15px',
+                            fontSize: '14px',
+                            lineHeight: '1',
                         }}
                     >
-                        пользовательским соглашением
-                    </Box>
-                </Typography>
-            </Grid>
-        </Dialog>
+                        Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие на&nbsp;обработку
+                        персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
+                        <Box
+                            component="a"
+                            href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"
+                            sx={{
+                                color: 'black',
+                            }}
+                        >
+                            пользовательским соглашением
+                        </Box>
+                    </Typography>
+                </Grid>
+            </Dialog>
+            <FormSubmitPopup {...formSubmitModal} />
+        </>
     );
 };

@@ -2,10 +2,10 @@ import axios from 'axios';
 import { noop } from 'lodash';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { FormId, formIdToRoistatEventNameMapping } from '@/constants';
-import { useFormSubmitModal } from '@/hooks';
+import { useModal } from '@/hooks';
 
 import { endpoints } from '../endpoints';
 import { SendEmailParams } from '../types';
@@ -36,7 +36,7 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
-    const formSubmitModal = useFormSubmitModal();
+    const formSubmitModal = useModal();
 
     const handleSendEmail = useCallback(
         async (values: Omit<SendEmailParams, 'place' | 'files'>) => {
@@ -60,7 +60,7 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
                     headers: { 'content-type': 'multipart/form-data' },
                 });
 
-                formSubmitModal.onOpen();
+                formSubmitModal.handleOpen();
                 onFinish();
             } catch (error) {
                 enqueueSnackbar('Не удалось отправить заявку. Напишите нам на почту напрямую, либо попробуйте позже', {
@@ -91,8 +91,18 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
         [files, place, router.pathname, formSubmitModal, onFinish, enqueueSnackbar]
     );
 
+    useEffect(() => {
+        if (formSubmitModal.isOpen) {
+            setTimeout(() => formSubmitModal.handleClose(), 5000);
+        }
+    }, [formSubmitModal]);
+
     return {
         loading,
         onSendEmail: handleSendEmail,
+        formSubmitModal: {
+            isOpen: formSubmitModal.isOpen,
+            onClose: formSubmitModal.handleClose,
+        },
     };
 };

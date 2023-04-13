@@ -1,20 +1,15 @@
 import ClearIcon from '@mui/icons-material/Clear';
 import { Box, Dialog, Grid, Typography } from '@mui/material';
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 
-import { useFormSubmitModal } from '@/hooks';
+type FormSubmitPopupProps = {
+    isOpen: boolean;
+    onClose: () => void;
+};
 
-export const FormSubmitPopup: FC = () => {
-    const formSubmitModal = useFormSubmitModal();
-
-    useEffect(() => {
-        if (formSubmitModal.isOpen) {
-            setTimeout(() => formSubmitModal.onClose(), 5000);
-        }
-    }, [formSubmitModal]);
-
+export const FormSubmitPopup: FC<FormSubmitPopupProps> = ({ isOpen, onClose }) => {
     return (
-        <Dialog open={formSubmitModal.isOpen} onClose={formSubmitModal.onClose} fullWidth maxWidth="sm">
+        <Dialog open={isOpen} onClose={onClose} fullWidth maxWidth="sm">
             <Box
                 sx={{
                     padding: '40px',
@@ -34,7 +29,7 @@ export const FormSubmitPopup: FC = () => {
                         position: 'absolute',
                         zIndex: 10,
                     }}
-                    onClick={formSubmitModal.onClose}
+                    onClick={onClose}
                 />
                 <Typography
                     variant="body1"

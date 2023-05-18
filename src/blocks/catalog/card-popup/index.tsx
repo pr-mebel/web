@@ -233,6 +233,11 @@ const CardPopupComponent: FC<Props> = ({
             <OrderFormPopup
                 isOpen={contactFormModal.isOpen}
                 marker="zakazat_katalog"
+                meta={{
+                    Артикул: selectedItem.id,
+                    Коллекция: selectedItem.collection,
+                    Картинка: selectedItem.imageMedium.url,
+                }}
                 onClose={contactFormModal.handleClose}
             />
         </>

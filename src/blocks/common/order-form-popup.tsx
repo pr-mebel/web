@@ -14,10 +14,11 @@ import { FormSubmitPopup } from './form-submit-popup';
 type OrderFormPopupProps = {
     isOpen: boolean;
     marker?: string;
+    meta?: Record<string, unknown>;
     onClose: () => void;
 };
 
-export const OrderFormPopup: FC<OrderFormPopupProps> = ({ isOpen, marker, onClose }) => {
+export const OrderFormPopup: FC<OrderFormPopupProps> = ({ isOpen, marker, meta, onClose }) => {
     const fileUpload = useFileUpload();
     const analytics = useAnalytics(marker);
     const { register, handleSubmit } = useForm();
@@ -39,6 +40,16 @@ export const OrderFormPopup: FC<OrderFormPopupProps> = ({ isOpen, marker, onClos
         fileUpload.onClear();
         onClose();
     }, [fileUpload, onClose]);
+
+    const handleSubmitForm = useCallback(
+        (values) => {
+            onSendEmail({
+                ...values,
+                meta,
+            });
+        },
+        [onSendEmail, meta]
+    );
 
     return (
         <>
@@ -142,7 +153,7 @@ export const OrderFormPopup: FC<OrderFormPopupProps> = ({ isOpen, marker, onClos
                                 rowGap: '15px',
                                 maxWidth: '255px',
                             }}
-                            onSubmit={handleSubmit(onSendEmail)}
+                            onSubmit={handleSubmit(handleSubmitForm)}
                         >
                             <Input
                                 inputRef={register}

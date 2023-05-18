@@ -1,20 +1,22 @@
-import { filters } from '@/constants';
+import { z } from 'zod';
 
-export const sectionIDs = filters.sections.map((section) => section.id);
-export type SectionID = typeof filters.sections[number]['id'];
-export const styleIDs = filters.styles.map((style) => style.id);
-export type StyleID = typeof filters.styles[number]['id'];
-export const doorTypeIDs = filters.doorTypes.map((doorTypes) => doorTypes.id);
-export type DoorTypeID = typeof filters.doorTypes[number]['id'];
+export const sectionIDs = z.enum(['cupboard', 'wardrobe', 'accessories', 'lightingSystems']);
+export type SectionID = z.infer<typeof sectionIDs>;
+export const styleIDs = z.enum(['any', 'modern', 'classic', 'neoclassic', 'designer']);
+export type StyleID = z.infer<typeof styleIDs>;
+export const doorTypeIDs = z.enum(['any', 'coupe', 'swing', 'folding']);
+export type DoorTypeID = z.infer<typeof doorTypeIDs>;
 
-export const filterFields = ['section', 'style', 'doorType'] as const;
-export type FilterField = typeof filterFields[number];
+export const filterFields = z.enum(['section', 'style', 'doorType']);
+export type FilterField = z.infer<typeof filterFields>;
 
-export type Filter = {
-    section: SectionID;
-    style: StyleID;
-    doorType: DoorTypeID;
-};
+export const filterZod = z.object({
+    section: sectionIDs,
+    style: styleIDs,
+    doorType: doorTypeIDs,
+});
+
+export type Filter = z.infer<typeof filterZod>;
 
 export type FilterValue = SectionID | StyleID | DoorTypeID;
 

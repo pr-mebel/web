@@ -2,10 +2,11 @@ import { ArrowBack, ArrowForward, Clear as ClearIcon } from '@mui/icons-material
 import { Box, Dialog, Grid, Skeleton, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { FC, memo } from 'react';
 
+import { OrderFormPopup } from '@/blocks/common';
 import { Button } from '@/components/common';
 import { Vkontakte } from '@/components/icons';
 import { Image as ImageType } from '@/entities';
-import { useContactFormModal, useModal } from '@/hooks';
+import { useModal } from '@/hooks';
 
 import { FullscreenCardPopup } from './components';
 
@@ -36,7 +37,7 @@ const CardPopupComponent: FC<Props> = ({
     onClickForward,
 }) => {
     const fullscreenModal = useModal();
-    const contactFormModal = useContactFormModal();
+    const contactFormModal = useModal();
     const theme = useTheme();
     const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -202,7 +203,7 @@ const CardPopupComponent: FC<Props> = ({
                             </Typography>
                         </div>
                         <div>
-                            <Button block onClick={() => contactFormModal.onOpen('zakazat_katalog')}>
+                            <Button block onClick={() => contactFormModal.handleOpen()}>
                                 Рассчитать стоимость
                             </Button>
                             <Grid
@@ -228,6 +229,16 @@ const CardPopupComponent: FC<Props> = ({
                 isOpen={fullscreenModal.isOpen}
                 onClose={fullscreenModal.handleClose}
                 image={selectedItem.imageFull}
+            />
+            <OrderFormPopup
+                isOpen={contactFormModal.isOpen}
+                marker="zakazat_katalog"
+                meta={{
+                    Артикул: selectedItem.id,
+                    Коллекция: selectedItem.collection,
+                    Картинка: selectedItem.imageMedium.url,
+                }}
+                onClose={contactFormModal.handleClose}
             />
         </>
     );

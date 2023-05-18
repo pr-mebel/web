@@ -1,12 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 
-import { State } from '@/redux';
 import { isProduction } from '@/utils';
 
-export const useAnalytics = () => {
+export const useAnalytics = (marker?: string) => {
     const [ready, setReady] = useState(false);
-    const marker = useSelector((state: State) => state.contactFormModal.marker);
 
     const handleTrackSendEmail = useCallback(
         (targetValue: string) => {

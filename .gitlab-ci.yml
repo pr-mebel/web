@@ -1,8 +1,4 @@
-stages:
-  - mirror
-
 mirror:
-  stage: mirror
   image: alpine/git
   script:
     - git fetch origin main:staging

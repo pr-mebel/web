@@ -7,7 +7,7 @@ sync staging with main:
     - git config --global user.name "Maintainer PrMebel"
     - git fetch origin
     - git checkout staging
-    - git merge --commit --no-edit main
+    - git merge --commit --no-edit origin/main
     - git push origin staging
   only:
     - main

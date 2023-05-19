@@ -23,6 +23,7 @@ mirror:
   stage: mirror
   image: alpine/git
   script:
+    - apk add --no-cache openssh-client
     - git fetch origin main:staging
   only:
     - main

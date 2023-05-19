@@ -3,11 +3,25 @@ image: node:16
 # This folder is cached between builds
 # https://docs.gitlab.com/ee/ci/yaml/index.html#cache
 cache:
-    paths:
-        - node_modules/
+  paths:
+    - node_modules/
+
+stages:
+  - lint
+  - merge
 
 lint:
-    script:
-        - yarn
-        - yarn lint
-        - yarn typecheck
+  stage: lint
+  script:
+    - yarn
+    - yarn lint
+    - yarn typecheck
+
+merge_to_staging:
+  stage: merge
+  only:
+    - main
+  script:
+    - git checkout staging
+    - git merge main
+    - git push origin staging

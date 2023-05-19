@@ -5,7 +5,7 @@ mirror:
   script:
     - git fetch origin main:staging
     - git checkout staging
-    - git merge main
+    - git merge origin/main
     - git push origin staging
   only:
     - main

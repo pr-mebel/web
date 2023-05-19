@@ -13,7 +13,7 @@ sync staging with main:
         "https://${GITLAB_USER}:${GITLAB_TOKEN}@gitlab.com/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git"
     - git fetch origin
     - git checkout staging
-    - git merge --commit --no-edit -X theirs origin/main
-    - git push origin staging
+    - git rebase master
+    - git push --force origin staging
   only:
     - main

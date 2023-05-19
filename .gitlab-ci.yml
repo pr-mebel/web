@@ -8,7 +8,7 @@ cache:
 
 stages:
   - lint
-  - merge
+  - mirror
 
 lint:
   stage: lint
@@ -19,11 +19,10 @@ lint:
         yarn typecheck;
       fi
 
-merge_to_staging:
-  stage: merge
+mirror:
+  stage: mirror
+  image: alpine/git
+  script:
+    - git fetch origin main:staging
   only:
     - main
-  script:
-    - git checkout staging
-    - git merge main
-    - git push origin staging

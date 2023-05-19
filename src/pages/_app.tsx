@@ -11,6 +11,7 @@ import { SnackbarProvider } from 'notistack';
 import React, { FC, useEffect } from 'react';
 
 import { Footer, GoTopButton, Header } from '@/blocks/common';
+import { sessionStoragePageOpenTimestampKey } from '@/constants';
 import { ScriptsList } from '@/scripts';
 import { createEmotionCache, theme } from '@/theme';
 import { trpc } from '@/trpc';
@@ -32,6 +33,10 @@ const MyApp: FC<MyAppProps> = ({ Component, emotionCache = clientSideEmotionCach
         sessionStorage.setItem('prevPath', prevPath || '');
         sessionStorage.setItem('currentPath', router.pathname);
     }, [router.asPath, router.pathname]);
+
+    useEffect(() => {
+        sessionStorage.setItem(sessionStoragePageOpenTimestampKey, `${new Date().getTime()}`);
+    }, []);
 
     return (
         <React.StrictMode>

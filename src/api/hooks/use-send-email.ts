@@ -1,10 +1,12 @@
 import axios from 'axios';
+import { differenceInMilliseconds } from 'date-fns';
 import { noop } from 'lodash';
+import ms from 'ms';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 import { useCallback, useEffect, useState } from 'react';
 
-import { FormId, formIdToRoistatEventNameMapping } from '@/constants';
+import { FormId, formIdToRoistatEventNameMapping, sessionStoragePageOpenTimestampKey } from '@/constants';
 import { useModal } from '@/hooks';
 
 import { endpoints } from '../endpoints';
@@ -44,15 +46,26 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
 
             setLoading(true);
 
+            const meta = {
+                ...values.meta,
+                URL: router.pathname,
+                ...(utm ? JSON.parse(utm) : {}),
+            };
+
+            const timeSpent = sessionStorage.getItem(sessionStoragePageOpenTimestampKey);
+
+            if (timeSpent) {
+                sessionStorage.removeItem(sessionStoragePageOpenTimestampKey);
+                meta['Проведено время на сайте'] = ms(differenceInMilliseconds(new Date(), Number(timeSpent)), {
+                    long: true,
+                });
+            }
+
             const formData = prepareData({
                 ...values,
                 files,
                 place,
-                meta: {
-                    ...values.meta,
-                    URL: router.pathname,
-                    ...(utm ? JSON.parse(utm) : {}),
-                },
+                meta,
             });
 
             try {
@@ -74,11 +87,7 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
                 await axios.post(endpoints.logRequest, {
                     ...values,
                     place,
-                    meta: {
-                        ...values.meta,
-                        URL: router.pathname,
-                        ...(utm ? JSON.parse(utm) : {}),
-                    },
+                    meta,
                 });
             } catch {}
 

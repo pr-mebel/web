@@ -1,14 +1,19 @@
-mirror:
+sync staging with main:
   image:
     name: alpine/git:latest
     entrypoint: [""]
+  variables:
+    GIT_STRATEGY: fetch
   script:
-    - git config --global user.name "Gitlab workflow"
     - git config --global user.email "maintainer@pr-mebel.ru"
-    - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword $GITLAB_TOKEN" > ~/.netrc
-    - git fetch origin main:staging
+    - git config --global user.name "Maintainer PrMebel"
+    - echo "Setting up GitLab PAT"
+    - |
+      git remote set-url origin \
+        "https://${GITLAB_USER}:${GITLAB_TOKEN}@gitlab.com/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git"
+    - git fetch origin
     - git checkout staging
-    - git merge origin/main
+    - git merge --commit --no-edit -X theirs origin/main
     - git push origin staging
   only:
     - main

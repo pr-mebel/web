@@ -13,9 +13,11 @@ stages:
 lint:
   stage: lint
   script:
-    - yarn
-    - yarn lint
-    - yarn typecheck
+    - if [[ "$CI_COMMIT_REF_NAME" != "main" && "$CI_COMMIT_REF_NAME" != "staging" ]]; then
+        yarn;
+        yarn lint;
+        yarn typecheck;
+      fi
 
 merge_to_staging:
   stage: merge

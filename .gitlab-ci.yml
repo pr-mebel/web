@@ -3,6 +3,7 @@ mirror:
     name: alpine/git:latest
     entrypoint: [""]
   script:
+    - git fetch origin main:staging
     - git checkout staging
     - git merge main
     - git push origin staging

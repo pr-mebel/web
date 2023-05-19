@@ -3,10 +3,10 @@ mirror:
     name: alpine/git:latest
     entrypoint: [""]
   script:
-    - git fetch origin main:staging
     - git config --global user.name "Gitlab workflow"
     - git config --global user.email "maintainer@pr-mebel.ru"
     - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword $GITLAB_TOKEN" > ~/.netrc
+    - git fetch origin main:staging
     - git checkout staging
     - git merge origin/main
     - git push origin staging

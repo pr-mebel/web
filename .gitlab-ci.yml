@@ -1,5 +1,7 @@
 mirror:
-  image: alpine/git
+  image:
+    name: alpine/git:latest
+    entrypoint: [""]
   script:
     - git fetch origin main:staging
   only:

@@ -8,11 +8,19 @@ export const useAnalytics = (marker?: string) => {
     const handleTrackSendEmail = useCallback(
         (targetValue: string) => {
             if (ready) {
-                window.yaCounter54949111?.reachGoal(targetValue);
+                /**
+                 * 20.09.2023
+                 *
+                 * Поступил запрос не отправлять никакие метрики кроме 'forms'.
+                 * Так же было сказано добавить идентификатор 'conversion'.
+                 */
+                // window.yaCounter54949111?.reachGoal(targetValue);
                 window.yaCounter54949111?.reachGoal('forms');
+                window.yaCounter54949111?.reachGoal('conversion');
 
-                window.yaCounter86537628?.reachGoal(targetValue);
+                // window.yaCounter86537628?.reachGoal(targetValue);
                 window.yaCounter86537628?.reachGoal('forms');
+                window.yaCounter54949111?.reachGoal('conversion');
 
                 if (marker) {
                     window.ga?.('send', 'event', 'form', marker);

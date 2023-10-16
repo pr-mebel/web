@@ -101,6 +101,20 @@ export const useCards = () => {
     }, [currentListFiltered, state.page]);
 
     const handleChangeFilter = useCallback(({ name, value }: { name: FilterField; value: FilterValue }) => {
+        if (name === 'section') {
+            router.replace(
+                {
+                    pathname: router.pathname,
+                    query: {
+                        ...router.query,
+                        [name]: value,
+                    },
+                },
+                undefined,
+                { scroll: false }
+            );
+        }
+
         dispatch({
             type: 'use-cards/setFilter',
             payload: {

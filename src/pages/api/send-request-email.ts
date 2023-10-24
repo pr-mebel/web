@@ -54,63 +54,31 @@ const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
         },
     });
 
-    const transporterYandex = nodemailer.createTransport({
-        host: 'smtp.yandex.ru',
-        port: 465,
-        secure: true,
-        auth: {
-            user: process.env.EMAIL_YANDEX,
-            pass: process.env.PASSWORD_YANDEX,
-        },
-    });
-
     try {
-        const [mailRuInfo, yandexInfo] = await Promise.all([
-            sendEmail(
-                transporterMail,
-                createMessage({
-                    emailTo: process.env.EMAIL_MAIL_RU!,
-                    meta: metaResult,
-                    files,
-                    name,
-                    place,
-                    tel,
-                    description,
-                    email,
-                })
-            ),
-            sendEmail(
-                transporterYandex,
-                createMessage({
-                    emailTo: process.env.EMAIL_YANDEX!,
-                    meta: metaResult,
-                    files,
-                    name,
-                    place,
-                    tel,
-                    description,
-                    email,
-                })
-            ),
-        ]);
-
-        const info = {
-            [process.env.EMAIL_MAIL_RU!]: mailRuInfo,
-            [process.env.EMAIL_YANDEX!]: yandexInfo,
-        };
+        const info = sendEmail(
+            transporterMail,
+            createMessage({
+                emailTo: process.env.EMAIL_MAIL_RU!,
+                meta: metaResult,
+                files,
+                name,
+                place,
+                tel,
+                description,
+                email,
+            })
+        );
 
         console.info('sent to mail.ru', info);
 
         res.status(200).json(info);
     } catch (error) {
-        // logException(error, 'mail.ru', req.body);
         console.error('unable to send to mail.ru', error);
         res.status(500).json(error);
     }
 };
 
 export default sendRequestEmail;
-// export default withSentry(sendRequestEmail);
 
 export const config = {
     api: {

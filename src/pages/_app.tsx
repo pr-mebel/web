@@ -4,6 +4,7 @@ import 'intersection-observer';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/system';
+import { Analytics } from '@vercel/analytics/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -93,6 +94,7 @@ const MyApp: FC<MyAppProps> = ({ Component, emotionCache = clientSideEmotionCach
                     <SnackbarProvider maxSnack={1}>
                         <Header />
                         <Component {...pageProps} />
+                        <Analytics />
                         <Footer />
 
                         <GoTopButton />

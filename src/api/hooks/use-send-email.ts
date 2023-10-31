@@ -4,10 +4,14 @@ import { noop } from 'lodash';
 import ms from 'ms';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
-import { FormId, formIdToRoistatEventNameMapping, sessionStoragePageOpenTimestampKey } from '@/constants';
-import { useModal } from '@/hooks';
+import {
+    FormId,
+    formIdToRoistatEventNameMapping,
+    sessionStoragePageOpenTimestampKey,
+} from '@/constants';
+import { useFormSubmition } from '@/context/form-submition';
 
 import { endpoints } from '../endpoints';
 import { SendEmailParams } from '../types';
@@ -18,7 +22,15 @@ type UseSendEmailParams = {
     onFinish?: () => void;
 };
 
-const prepareData = ({ name, tel, description, email, files, place, meta = {} }: SendEmailParams) => {
+const prepareData = ({
+    name,
+    tel,
+    description,
+    email,
+    files,
+    place,
+    meta = {},
+}: SendEmailParams) => {
     const formData = new FormData();
 
     formData.append('name', name);
@@ -38,7 +50,7 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
-    const formSubmitModal = useModal();
+    const formSubmitionModal = useFormSubmition();
 
     const handleSendEmail = useCallback(
         async (values: Omit<SendEmailParams, 'place' | 'files'>) => {
@@ -56,9 +68,12 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
 
             if (timeSpent) {
                 sessionStorage.removeItem(sessionStoragePageOpenTimestampKey);
-                meta['Проведено время на сайте'] = ms(differenceInMilliseconds(new Date(), Number(timeSpent)), {
-                    long: true,
-                });
+                meta['Проведено время на сайте'] = ms(
+                    differenceInMilliseconds(new Date(), Number(timeSpent)),
+                    {
+                        long: true,
+                    }
+                );
             }
 
             const formData = prepareData({
@@ -73,12 +88,15 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
                     headers: { 'content-type': 'multipart/form-data' },
                 });
 
-                formSubmitModal.handleOpen();
+                formSubmitionModal.show();
                 onFinish();
             } catch (error) {
-                enqueueSnackbar('Не удалось отправить заявку. Напишите нам на почту напрямую, либо попробуйте позже', {
-                    variant: 'error',
-                });
+                enqueueSnackbar(
+                    'Не удалось отправить заявку. Напишите нам на почту напрямую, либо попробуйте позже',
+                    {
+                        variant: 'error',
+                    }
+                );
             }
 
             setLoading(false);
@@ -93,25 +111,17 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
 
             // Roistat Start Event Sending
             const baseUrl = window.location.href.split('?')[0];
-            window.roistat?.event.send(formIdToRoistatEventNameMapping[place], { baseUrl: baseUrl });
+            window.roistat?.event.send(formIdToRoistatEventNameMapping[place], {
+                baseUrl: baseUrl,
+            });
             // Roistat End Event Sending
         },
 
-        [files, place, router.pathname, formSubmitModal, onFinish, enqueueSnackbar]
+        [files, place, router.pathname, formSubmitionModal, onFinish, enqueueSnackbar]
     );
-
-    useEffect(() => {
-        if (formSubmitModal.isOpen) {
-            setTimeout(() => formSubmitModal.handleClose(), 5000);
-        }
-    }, [formSubmitModal]);
 
     return {
         loading,
         onSendEmail: handleSendEmail,
-        formSubmitModal: {
-            isOpen: formSubmitModal.isOpen,
-            onClose: formSubmitModal.handleClose,
-        },
     };
 };

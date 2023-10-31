@@ -55,7 +55,7 @@ const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     try {
-        const info = sendEmail(
+        const info = await sendEmail(
             transporterMail,
             createMessage({
                 emailTo: process.env.EMAIL_MAIL_RU!,

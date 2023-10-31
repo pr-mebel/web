@@ -1,4 +1,5 @@
 import createEmotionServer from '@emotion/server/create-instance';
+import { Analytics } from '@vercel/analytics/react';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
 
@@ -18,6 +19,7 @@ export default class MyDocument extends Document {
                 <body>
                     <Main />
                     <NextScript />
+                    <Analytics />
                 </body>
             </Html>
         );

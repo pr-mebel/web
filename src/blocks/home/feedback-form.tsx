@@ -6,12 +6,11 @@ import { useForm } from 'react-hook-form';
 
 import { useSendEmail } from '@/api';
 import { Button, ButtonContainer, Input } from '@/components';
-import { useAnalytics, useFileUpload } from '@/hooks';
+import { useFileUpload } from '@/hooks';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
 
 export const FeedbackForm: FC = () => {
     const fileUpload = useFileUpload();
-    const analytics = useAnalytics();
     const theme = useTheme();
     const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
     const { register, handleSubmit, reset } = useForm();
@@ -19,7 +18,6 @@ export const FeedbackForm: FC = () => {
         place: 'home/calculate-price',
         files: fileUpload.data,
         onFinish: () => {
-            analytics.onSendEmail('proekt');
             fileUpload.onClear();
             reset();
         },
@@ -36,7 +34,14 @@ export const FeedbackForm: FC = () => {
                 <form onSubmit={handleSubmit(onSendEmail)}>
                     <Grid container justifyContent="center">
                         <Grid item xs={1} />
-                        <Grid item xs={10} md={6} container direction="row" spacing={isMdDown ? 2 : 4}>
+                        <Grid
+                            item
+                            xs={10}
+                            md={6}
+                            container
+                            direction="row"
+                            spacing={isMdDown ? 2 : 4}
+                        >
                             <Grid item xs={12} md={6}>
                                 <Input
                                     inputRef={register}
@@ -75,9 +80,10 @@ export const FeedbackForm: FC = () => {
                                             lineHeight: '14px',
                                         }}
                                     >
-                                        Прикрепите, пожалуйста, эскизы вашей мебели или просто план помещения
-                                        с&nbsp;описанием ваших пожеланий и&nbsp;наш дизайнер в&nbsp;кратчайшие сроки
-                                        подготовит для вас свои предложения.
+                                        Прикрепите, пожалуйста, эскизы вашей мебели или просто план
+                                        помещения с&nbsp;описанием ваших пожеланий и&nbsp;наш
+                                        дизайнер в&nbsp;кратчайшие сроки подготовит для вас свои
+                                        предложения.
                                     </Typography>
                                 </Grid>
                             </Hidden>
@@ -187,8 +193,9 @@ export const FeedbackForm: FC = () => {
                                     }}
                                     align="center"
                                 >
-                                    Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие
-                                    на&nbsp;обработку персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
+                                    Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю
+                                    согласие на&nbsp;обработку персональных данных
+                                    и&nbsp;подтверждаю, что ознакомлен с&nbsp;
                                     <Box
                                         component="a"
                                         href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"

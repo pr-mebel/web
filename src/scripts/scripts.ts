@@ -98,3 +98,16 @@ export const RoistatIntegrationWithBitrixWidjets = `
     var js = d.createElement(s); js.async = 1; js.src = p+h+u; var js2 = d.getElementsByTagName(s)[0]; js2.parentNode.insertBefore(js, js2);
     })(window, document, 'script', 'cloud.roistat.com');
 `;
+
+export const Bitrix24WidgetYandexMetrikaGoal = `
+window.addEventListener('onBitrixLiveChat', function(event) {
+	var widget = event.detail.widget;
+
+	widget.subscribe({
+		type: BX.LiveChatWidget.SubscriptionType.sessionStart,
+		callback: function(data) {
+            window.yaCounter54949111?.reachGoal('bitrix-chat/open');
+		}
+	});
+});
+`;

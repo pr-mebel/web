@@ -6,20 +6,18 @@ import { useForm } from 'react-hook-form';
 
 import { useSendEmail } from '@/api';
 import { BlockTitle, Button, Input } from '@/components';
-import { useAnalytics, useFileUpload } from '@/hooks';
+import { useFileUpload } from '@/hooks';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
 
 export const Questions: FC = () => {
     const theme = useTheme();
     const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
-    const analytics = useAnalytics();
     const fileUpload = useFileUpload();
     const { register, handleSubmit, reset } = useForm();
     const { loading, onSendEmail } = useSendEmail({
         place: 'catalog/more-questions',
         files: fileUpload.data,
         onFinish: () => {
-            analytics.onSendEmail('vopros_katalog');
             fileUpload.onClear();
             reset();
         },
@@ -61,9 +59,9 @@ export const Questions: FC = () => {
                         }}
                         gutterBottom
                     >
-                        А&nbsp;если вы&nbsp;хотите получить расчет конкретной модели, прикрепите свои эскизы или план
-                        помещения с&nbsp;описанием пожеланий и&nbsp;наш дизайнер в&nbsp;кратчайшие сроки подготовит для
-                        вас предложение!
+                        А&nbsp;если вы&nbsp;хотите получить расчет конкретной модели, прикрепите
+                        свои эскизы или план помещения с&nbsp;описанием пожеланий и&nbsp;наш
+                        дизайнер в&nbsp;кратчайшие сроки подготовит для вас предложение!
                     </Typography>
                 )}
                 <Box
@@ -174,7 +172,9 @@ export const Questions: FC = () => {
                             }}
                         >
                             <Typography className="fileInputText">
-                                {`${fileUpload.data.length}\xA0${getFileDeclination(fileUpload.data.length)}`}
+                                {`${fileUpload.data.length}\xA0${getFileDeclination(
+                                    fileUpload.data.length
+                                )}`}
                                 <ClearIcon className="icon" onClick={fileUpload.onClear} />
                             </Typography>
                         </Box>
@@ -194,8 +194,8 @@ export const Questions: FC = () => {
                     }}
                     align="center"
                 >
-                    Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие на&nbsp;обработку
-                    персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
+                    Нажимая кнопку &laquo;Рассчитать стоимость&raquo;, я&nbsp;даю согласие
+                    на&nbsp;обработку персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
                     <Box
                         component="a"
                         href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"

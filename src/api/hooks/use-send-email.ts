@@ -8,12 +8,14 @@ import { useSnackbar } from 'notistack';
 import { useCallback, useState } from 'react';
 import { v4 } from 'uuid';
 
+import { useYaCounter54949111 } from '@/analytics';
 import {
     FormId,
     formIdToRoistatEventNameMapping,
     sessionStoragePageOpenTimestampKey,
 } from '@/constants';
 import { useFormSubmition } from '@/context/form-submition';
+import { isProduction } from '@/utils';
 
 import { endpoints } from '../endpoints';
 import { SendEmailParams } from '../types';
@@ -53,6 +55,25 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
     const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
     const formSubmitionModal = useFormSubmition();
+    const yaCounter54949111 = useYaCounter54949111();
+
+    const trackSubmit = useCallback(() => {
+        if (!isProduction()) return;
+        yaCounter54949111.track('inquiry-form/submit');
+
+        window.yaCounter86537628?.reachGoal('forms');
+        window.yaCounter86537628?.reachGoal('conversion');
+
+        window.ga?.('send', 'event', 'form', 'forms');
+        window.ga?.('send', 'event', 'forms');
+        window.ga?.('send', 'event', 'form', 'submit');
+
+        window.fbq?.('track', 'Lead');
+
+        window._tmr.push({ type: 'reachGoal', id: 3241411, goal: 'lid' });
+
+        window.VK.Goal('conversion');
+    }, [yaCounter54949111]);
 
     const handleSendEmail = useCallback(
         async (values: Omit<SendEmailParams, 'place' | 'files'>) => {
@@ -101,6 +122,7 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
 
                 formSubmitionModal.show();
                 onFinish();
+                trackSubmit();
             } catch (error) {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const errorMessage = (error as any)?.message;
@@ -136,7 +158,7 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
             // Roistat End Event Sending
         },
 
-        [files, place, router.pathname, formSubmitionModal, onFinish, enqueueSnackbar]
+        [router.pathname, files, place, formSubmitionModal, onFinish, trackSubmit, enqueueSnackbar]
     );
 
     return {

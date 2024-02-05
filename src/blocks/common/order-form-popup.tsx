@@ -6,27 +6,23 @@ import { useForm } from 'react-hook-form';
 
 import { useSendEmail } from '@/api';
 import { Button, Input } from '@/components';
-import { useAnalytics, useFileUpload } from '@/hooks';
+import { useFileUpload } from '@/hooks';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
 
 type OrderFormPopupProps = {
     isOpen: boolean;
-    marker?: string;
     meta?: Record<string, unknown>;
     onClose: () => void;
 };
 
-export const OrderFormPopup: FC<OrderFormPopupProps> = ({ isOpen, marker, meta, onClose }) => {
+export const OrderFormPopup: FC<OrderFormPopupProps> = ({ isOpen, meta, onClose }) => {
     const fileUpload = useFileUpload();
-    const analytics = useAnalytics(marker);
     const { register, handleSubmit } = useForm();
     const { loading, onSendEmail } = useSendEmail({
         place: 'modal',
         files: fileUpload.data,
         onFinish: () => {
             onClose();
-            analytics.onSendEmail('zakazat_modal');
-            analytics.onContactMeModalSubmitted();
             fileUpload.onClear();
         },
     });

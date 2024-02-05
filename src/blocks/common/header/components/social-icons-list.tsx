@@ -1,40 +1,45 @@
 import { Box } from '@mui/material';
-import { FC } from 'react';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { Link } from '@/components';
 import { Vkontakte } from '@/components/icons';
 
 import { List } from './list';
 
-export const SocialIconsList: FC = () => (
-    <List
-        sx={(theme) => ({
-            display: 'flex',
-            flexDirection: 'row',
-            width: '100px',
-            justifyContent: 'center',
-            margin: 'auto',
-            '& .socialIcon': {
-                '&:hover path': {
-                    fill: theme.palette.primary.main,
-                    transition: 'fill .1s',
-                },
-            },
-        })}
-    >
-        <Box
-            sx={{
+export const SocialIconsList = () => {
+    const analytics = useYaCounter54949111();
+
+    return (
+        <List
+            sx={(theme) => ({
                 display: 'flex',
-            }}
+                flexDirection: 'row',
+                width: '100px',
+                justifyContent: 'center',
+                margin: 'auto',
+                '& .socialIcon': {
+                    '&:hover path': {
+                        fill: theme.palette.primary.main,
+                        transition: 'fill .1s',
+                    },
+                },
+            })}
         >
-            <Link
+            <Box
                 sx={{
-                    display: 'inline-flex',
+                    display: 'flex',
                 }}
-                href="https://vk.com/public185518769"
+                onClick={() => analytics.track('social-networks/vk/visit')}
             >
-                <Vkontakte className="socialIcon" />
-            </Link>
-        </Box>
-    </List>
-);
+                <Link
+                    sx={{
+                        display: 'inline-flex',
+                    }}
+                    href="https://vk.com/public185518769"
+                >
+                    <Vkontakte className="socialIcon" />
+                </Link>
+            </Box>
+        </List>
+    );
+};

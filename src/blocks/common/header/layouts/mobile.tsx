@@ -2,9 +2,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Box, Container, Drawer, Grid, styled, Typography } from '@mui/material';
 import React, { FC, useCallback, useState } from 'react';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { Button, Link } from '@/components';
 import { LogoHeader } from '@/components/icons';
-import { useAnalytics, useModal } from '@/hooks';
+import { useModal } from '@/hooks';
 
 import { OrderFormPopup } from '../../order-form-popup';
 import { SocialIconsList } from '../components';
@@ -18,7 +19,7 @@ const Hl = styled('div')(({ theme }) => ({
 }));
 
 export const MobileHeader: FC = () => {
-    const analytics = useAnalytics();
+    const analytics = useYaCounter54949111();
     const contactFormModal = useModal();
 
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -98,13 +99,17 @@ export const MobileHeader: FC = () => {
                                 className="text"
                                 href="tel:+74952780285"
                                 external
-                                onClick={analytics.onHeaderPhoneClick}
+                                onClick={() => analytics.track('phone-number/click')}
                             >
                                 +7 (495) 278-02-85
                             </Link>
                             <Box className="address">
                                 <Typography className="text" align="center">
-                                    <Link className="text" href="https://yandex.ru/maps/-/CCQtFQdaLA" external>
+                                    <Link
+                                        className="text"
+                                        href="https://yandex.ru/maps/-/CCQtFQdaLA"
+                                        external
+                                    >
                                         м. сокол
                                     </Link>{' '}
                                     10:00 - 20:00
@@ -146,7 +151,14 @@ export const MobileHeader: FC = () => {
                                 </Link>
                             </Grid>
                             <Hl />
-                            <Grid item xs={12} container spacing={1} direction="column" style={{ paddingLeft: '10px' }}>
+                            <Grid
+                                item
+                                xs={12}
+                                container
+                                spacing={1}
+                                direction="column"
+                                style={{ paddingLeft: '10px' }}
+                            >
                                 <Grid item xs>
                                     <Link href="/catalog?section=cupboard" className="link">
                                         Шкафы
@@ -205,7 +217,11 @@ export const MobileHeader: FC = () => {
                                 }}
                             >
                                 <Typography className="text" align="center">
-                                    <Link href="tel:+74952780285" external onClick={analytics.onHeaderPhoneClick}>
+                                    <Link
+                                        href="tel:+74952780285"
+                                        external
+                                        onClick={() => analytics.track('phone-number/click')}
+                                    >
                                         +7 (495) 278-02-85
                                     </Link>
                                 </Typography>
@@ -230,7 +246,10 @@ export const MobileHeader: FC = () => {
                     </Drawer>
                 </Container>
             </Box>
-            <OrderFormPopup isOpen={contactFormModal.isOpen} onClose={contactFormModal.handleClose} />
+            <OrderFormPopup
+                isOpen={contactFormModal.isOpen}
+                onClose={contactFormModal.handleClose}
+            />
         </>
     );
 };

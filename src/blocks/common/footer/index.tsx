@@ -1,15 +1,16 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
 import React, { FC } from 'react';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { Link } from '@/components';
 import { LogoFooter, Vkontakte } from '@/components/icons';
-import { useAnalytics, useModal } from '@/hooks';
+import { useModal } from '@/hooks';
 
 import { OrderFormPopup } from '../order-form-popup';
 import { ColumnTitle, List } from './components';
 
 export const Footer: FC = () => {
-    const analytics = useAnalytics();
+    const analytics = useYaCounter54949111();
     const contactFormModal = useModal();
 
     return (
@@ -62,34 +63,62 @@ export const Footer: FC = () => {
                         </Grid>
                     </Grid>
                     <Grid container spacing={4}>
-                        <Grid item xs={12} sm={6} md={3} container direction="column" alignItems="center">
+                        <Grid
+                            item
+                            xs={12}
+                            sm={6}
+                            md={3}
+                            container
+                            direction="column"
+                            alignItems="center"
+                        >
                             <div>
                                 <ColumnTitle href="/catalog">Каталог</ColumnTitle>
                                 <List>
                                     <li>
-                                        <Link href="/catalog?section=cupboard&style=classic" className="listItem">
+                                        <Link
+                                            href="/catalog?section=cupboard&style=classic"
+                                            className="listItem"
+                                        >
                                             Шкафы классические
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/catalog?section=cupboard&style=modern" className="listItem">
+                                        <Link
+                                            href="/catalog?section=cupboard&style=modern"
+                                            className="listItem"
+                                        >
                                             Шкафы современные
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/catalog?section=wardrobe&style=classic" className="listItem">
+                                        <Link
+                                            href="/catalog?section=wardrobe&style=classic"
+                                            className="listItem"
+                                        >
                                             Гардеробные классические
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="/catalog?section=wardrobe&style=modern" className="listItem">
+                                        <Link
+                                            href="/catalog?section=wardrobe&style=modern"
+                                            className="listItem"
+                                        >
                                             Гардеробные современные
                                         </Link>
                                     </li>
                                 </List>
                             </div>
                         </Grid>
-                        <Grid item xs={12} sm={6} md={3} container direction="column" alignItems="center">
+                        <Grid
+                            item
+                            xs={12}
+                            sm={6}
+                            md={3}
+                            container
+                            direction="column"
+                            alignItems="center"
+                        >
                             <div>
                                 <ColumnTitle href="/#advantages">Преимущества</ColumnTitle>
                                 <List>
@@ -111,7 +140,15 @@ export const Footer: FC = () => {
                                 </List>
                             </div>
                         </Grid>
-                        <Grid item xs={12} sm={6} md={3} container direction="column" alignItems="center">
+                        <Grid
+                            item
+                            xs={12}
+                            sm={6}
+                            md={3}
+                            container
+                            direction="column"
+                            alignItems="center"
+                        >
                             <div>
                                 <ColumnTitle href="/#about">О нас</ColumnTitle>
                                 <List>
@@ -138,7 +175,15 @@ export const Footer: FC = () => {
                                 </List>
                             </div>
                         </Grid>
-                        <Grid item xs={12} sm={6} md={3} container direction="column" alignItems="center">
+                        <Grid
+                            item
+                            xs={12}
+                            sm={6}
+                            md={3}
+                            container
+                            direction="column"
+                            alignItems="center"
+                        >
                             <div>
                                 <ColumnTitle asButton onClick={() => contactFormModal.handleOpen()}>
                                     Связаться с нами
@@ -188,7 +233,11 @@ export const Footer: FC = () => {
                         }}
                     >
                         <Grid item xs={12} sx={{ textAlign: 'center' }}>
-                            <Link href="tel:+7(495)2780285" external onClick={analytics.onFooterPhoneClick}>
+                            <Link
+                                href="tel:+7(495)2780285"
+                                external
+                                onClick={() => analytics.track('phone-number/click')}
+                            >
                                 +7 (495) 278-02-85
                             </Link>
                             <Typography
@@ -247,7 +296,13 @@ export const Footer: FC = () => {
                                 },
                             })}
                         >
-                            <Grid item xs={12} container justifyContent="center">
+                            <Grid
+                                item
+                                xs={12}
+                                container
+                                justifyContent="center"
+                                onClick={() => analytics.track('social-networks/vk/visit')}
+                            >
                                 <Link href="https://vk.com/public185518769" external>
                                     <Vkontakte className="socialIcon" />
                                 </Link>
@@ -316,14 +371,17 @@ export const Footer: FC = () => {
                                 >
                                     |
                                 </Box>
-                                2020 Все права защищены законом. Копирование и цитирование только с письменного
-                                разрешения автора.
+                                2020 Все права защищены законом. Копирование и цитирование только с
+                                письменного разрешения автора.
                             </Typography>
                         </Grid>
                     </Grid>
                 </Container>
             </Box>
-            <OrderFormPopup isOpen={contactFormModal.isOpen} onClose={contactFormModal.handleClose} />
+            <OrderFormPopup
+                isOpen={contactFormModal.isOpen}
+                onClose={contactFormModal.handleClose}
+            />
         </>
     );
 };

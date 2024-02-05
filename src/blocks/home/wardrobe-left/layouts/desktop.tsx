@@ -31,7 +31,9 @@ export const Desktop: FC = () => {
         <>
             <Container>
                 <BlockTitle>
-                    <Typography variant="h4">Комфорт и удобство, продуманное до&nbsp;мелочей</Typography>
+                    <Typography variant="h4">
+                        Комфорт и удобство, продуманное до&nbsp;мелочей
+                    </Typography>
                 </BlockTitle>
                 <Grid
                     container
@@ -110,9 +112,9 @@ export const Desktop: FC = () => {
                     </Grid>
                     <Grid item xs={6}>
                         <Typography>
-                            Мы&nbsp;разработали специальные решения для оптимизации хранения ваших вещей, которые
-                            позволяют сделать ежедневно пользование мебелью не&nbsp;только удобным и&nbsp;комфортным,
-                            но&nbsp;еще и&nbsp;приятным
+                            Мы&nbsp;разработали специальные решения для оптимизации хранения ваших
+                            вещей, которые позволяют сделать ежедневно пользование мебелью
+                            не&nbsp;только удобным и&nbsp;комфортным, но&nbsp;еще и&nbsp;приятным
                         </Typography>
                         <Box
                             component="ul"
@@ -161,7 +163,10 @@ export const Desktop: FC = () => {
                     </Button>
                 </ButtonContainer>
             </Container>
-            <OrderFormPopup isOpen={contactFormModal.isOpen} marker="komfort" onClose={contactFormModal.handleClose} />
+            <OrderFormPopup
+                isOpen={contactFormModal.isOpen}
+                onClose={contactFormModal.handleClose}
+            />
         </>
     );
 };

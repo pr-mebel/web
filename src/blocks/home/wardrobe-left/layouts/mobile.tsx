@@ -36,7 +36,9 @@ export const Mobile: FC = () => {
         <>
             <Container>
                 <BlockTitle>
-                    <Typography variant="h4">Комфорт и удобство, продуманное до&nbsp;мелочей</Typography>
+                    <Typography variant="h4">
+                        Комфорт и удобство, продуманное до&nbsp;мелочей
+                    </Typography>
                 </BlockTitle>
                 <Grid container justifyContent="center">
                     <Grid item xs>
@@ -141,7 +143,11 @@ export const Mobile: FC = () => {
                         ))}
                     </Grid>
                     <Grid item xs={12}>
-                        <Pagination numberOfPages={ADDITIONAL.length + 1} activeIndex={current} onChange={onSet} />
+                        <Pagination
+                            numberOfPages={ADDITIONAL.length + 1}
+                            activeIndex={current}
+                            onChange={onSet}
+                        />
                     </Grid>
                     {current !== 0 ? (
                         <Grid
@@ -167,9 +173,10 @@ export const Mobile: FC = () => {
                             }}
                         >
                             <Typography variant="body2">
-                                Мы&nbsp;разработали специальные решения для оптимизации хранения ваших вещей, которые
-                                позволяют сделать ежедневно пользование мебелью не&nbsp;только удобным
-                                и&nbsp;комфортным, но&nbsp;еще и&nbsp;приятным
+                                Мы&nbsp;разработали специальные решения для оптимизации хранения
+                                ваших вещей, которые позволяют сделать ежедневно пользование мебелью
+                                не&nbsp;только удобным и&nbsp;комфортным, но&nbsp;еще
+                                и&nbsp;приятным
                             </Typography>
                         </Grid>
                     )}
@@ -184,7 +191,10 @@ export const Mobile: FC = () => {
                     </Button>
                 </ButtonContainer>
             </Container>
-            <OrderFormPopup isOpen={contactFormModal.isOpen} marker="komfort" onClose={contactFormModal.handleClose} />
+            <OrderFormPopup
+                isOpen={contactFormModal.isOpen}
+                onClose={contactFormModal.handleClose}
+            />
         </>
     );
 };

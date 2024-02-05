@@ -1,14 +1,14 @@
 import { Box, Container, Grid, Typography, useScrollTrigger } from '@mui/material';
 import React, { FC, useCallback, useState } from 'react';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { Link } from '@/components';
 import { LogoHeader } from '@/components/icons';
-import { useAnalytics } from '@/hooks';
 
 import { Dropdown, List, SocialIconsList } from '../components';
 
 export const DesktopHeader: FC = () => {
-    const analytics = useAnalytics();
+    const analytics = useYaCounter54949111();
 
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -94,7 +94,10 @@ export const DesktopHeader: FC = () => {
                                 },
                             }}
                         >
-                            <li onMouseEnter={handleOpenDropdown} onMouseLeave={handleCloseDropdown}>
+                            <li
+                                onMouseEnter={handleOpenDropdown}
+                                onMouseLeave={handleCloseDropdown}
+                            >
                                 <Typography
                                     sx={(theme) => ({
                                         display: 'inline-block',
@@ -138,12 +141,18 @@ export const DesktopHeader: FC = () => {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link href="/catalog?section=accessories" className="text">
+                                            <Link
+                                                href="/catalog?section=accessories"
+                                                className="text"
+                                            >
                                                 Аксессуары
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link href="/catalog?section=lightingSystems" className="text">
+                                            <Link
+                                                href="/catalog?section=lightingSystems"
+                                                className="text"
+                                            >
                                                 Системы подсветки
                                             </Link>
                                         </li>
@@ -190,7 +199,7 @@ export const DesktopHeader: FC = () => {
                                     href="tel:+74952780285"
                                     external
                                     className="text"
-                                    onClick={analytics.onHeaderPhoneClick}
+                                    onClick={() => analytics.track('phone-number/click')}
                                 >
                                     +7 (495) 278-02-85
                                 </Link>
@@ -198,7 +207,11 @@ export const DesktopHeader: FC = () => {
                             {!smallHeader && (
                                 <>
                                     <li>
-                                        <Link href="https://yandex.ru/maps/-/CCQtFQdaLA" external className="text">
+                                        <Link
+                                            href="https://yandex.ru/maps/-/CCQtFQdaLA"
+                                            external
+                                            className="text"
+                                        >
                                             м. сокол
                                         </Link>
                                     </li>

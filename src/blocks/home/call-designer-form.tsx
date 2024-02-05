@@ -4,16 +4,13 @@ import { useForm } from 'react-hook-form';
 
 import { useSendEmail } from '@/api';
 import { Button, ButtonContainer, Input } from '@/components';
-import { useAnalytics } from '@/hooks';
 import { formatPhoneInput } from '@/utils';
 
 export const CallDesignerForm: FC = () => {
-    const analytics = useAnalytics();
     const { register, handleSubmit, reset } = useForm();
     const { loading, onSendEmail } = useSendEmail({
         place: 'home/call-designer',
         onFinish: () => {
-            analytics.onSendEmail('designer');
             reset();
         },
     });
@@ -87,8 +84,9 @@ export const CallDesignerForm: FC = () => {
                                     }}
                                     align="center"
                                 >
-                                    Нажимая кнопку &laquo;Вызвать дизайнера&raquo;, я&nbsp;даю согласие
-                                    на&nbsp;обработку персональных данных и&nbsp;подтверждаю, что ознакомлен с&nbsp;
+                                    Нажимая кнопку &laquo;Вызвать дизайнера&raquo;, я&nbsp;даю
+                                    согласие на&nbsp;обработку персональных данных
+                                    и&nbsp;подтверждаю, что ознакомлен с&nbsp;
                                     <Box
                                         component="a"
                                         href="https://docs.google.com/document/d/1KSM18JIPpeT6weSQaG3dgpTEC9MO3wvxYWsrF2A6CZE/edit"

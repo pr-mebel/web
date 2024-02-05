@@ -27,7 +27,10 @@ export const Advantages: FC = () => {
                     </Button>
                 </ButtonContainer>
             </Container>
-            <OrderFormPopup isOpen={contactFormModal.isOpen} marker="preim" onClose={contactFormModal.handleClose} />
+            <OrderFormPopup
+                isOpen={contactFormModal.isOpen}
+                onClose={contactFormModal.handleClose}
+            />
         </>
     );
 };

@@ -8,8 +8,8 @@ import { Map as YMap, Placemark, YMaps as YMapsProvider } from '@pbe/react-yande
 import React, { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { BlockTitle, Link } from '@/components/common';
-import { useAnalytics } from '@/hooks';
 
 // TODO: Заменить на SVG
 const apple = 'images/common/map/apple.png';
@@ -18,7 +18,7 @@ const yandex = 'images/common/map/yandex.png';
 const mail = 'images/common/map/mail-icon.svg';
 
 export const Contacts: FC = () => {
-    const analytics = useAnalytics();
+    const analytics = useYaCounter54949111();
     const theme = useTheme();
     const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
     const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
@@ -28,7 +28,7 @@ export const Contacts: FC = () => {
 
     useEffect(() => {
         if (inView) {
-            analytics.onContactsInView();
+            analytics.track('contacts-section/view');
         }
     }, [inView, analytics]);
 
@@ -45,8 +45,8 @@ export const Contacts: FC = () => {
             >
                 <Grid item xs={12} sm={5} className="contact__connect">
                     <Typography variant="body2">
-                        Мы&nbsp;с&nbsp;удовольствием покажем весь ассортимент нашей мебели и&nbsp;поможем вам сделать
-                        правильный выбор.
+                        Мы&nbsp;с&nbsp;удовольствием покажем весь ассортимент нашей мебели
+                        и&nbsp;поможем вам сделать правильный выбор.
                     </Typography>
                     <Typography
                         variant="h6"
@@ -83,7 +83,10 @@ export const Contacts: FC = () => {
                         </li>
                         <li className="listItem">
                             <PhoneIcon className="icon" />
-                            <Typography variant="body2" onClick={analytics.onContactsPhoneClick}>
+                            <Typography
+                                variant="body2"
+                                onClick={() => analytics.track('phone-number/click')}
+                            >
                                 <Link href="tel:+7(495)2780285" external>
                                     +7 (495) 278-02-85
                                 </Link>
@@ -91,7 +94,10 @@ export const Contacts: FC = () => {
                         </li>
                         <li className="listItem">
                             <MailIcon className="icon" />
-                            <Typography variant="body2" onClick={analytics.onContactsMailClick}>
+                            <Typography
+                                variant="body2"
+                                onClick={() => analytics.track('email/click')}
+                            >
                                 E-mail:
                                 {'\xA0'}
                                 <Link
@@ -160,7 +166,11 @@ export const Contacts: FC = () => {
                     >
                         <li className="listItem">
                             <img src={yandex} alt="Яндекс" className="icon" />
-                            <Typography variant="body2" className="mapsText">
+                            <Typography
+                                variant="body2"
+                                className="mapsText"
+                                onClick={() => analytics.track('maps/yandex/visit')}
+                            >
                                 <Link
                                     href={
                                         isDesktop
@@ -176,7 +186,11 @@ export const Contacts: FC = () => {
                         </li>
                         <li className="listItem">
                             <img src={google} alt="Google" className="icon" />
-                            <Typography variant="body2" className="mapsText">
+                            <Typography
+                                variant="body2"
+                                className="mapsText"
+                                onClick={() => analytics.track('maps/google/visit')}
+                            >
                                 <Link
                                     href={
                                         isDesktop
@@ -192,8 +206,16 @@ export const Contacts: FC = () => {
                         </li>
                         <li className="listItem">
                             <img src={apple} alt="Apple" className="icon" />
-                            <Typography variant="body2" className="mapsText">
-                                <Link href="http://maps.apple.com/?daddr=55.809176,37.512955" external underline>
+                            <Typography
+                                variant="body2"
+                                className="mapsText"
+                                onClick={() => analytics.track('maps/apple/visit')}
+                            >
+                                <Link
+                                    href="http://maps.apple.com/?daddr=55.809176,37.512955"
+                                    external
+                                    underline
+                                >
                                     Открыть Apple Maps
                                 </Link>
                             </Typography>
@@ -217,7 +239,7 @@ export const Contacts: FC = () => {
                                     textDecoration: 'none',
                                 },
                             })}
-                            onClick={analytics.onContactsMailClick}
+                            onClick={() => analytics.track('email/click')}
                         >
                             <Link href="mailto:zakaz@pr-mebel.ru" external underline>
                                 Написать письмо

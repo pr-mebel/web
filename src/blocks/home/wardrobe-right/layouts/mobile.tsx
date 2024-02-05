@@ -80,7 +80,11 @@ export const Mobile = () => {
                         ))}
                     </Grid>
                     <Grid item xs={12}>
-                        <Pagination numberOfPages={ADDITIONAL.length + 1} activeIndex={current} onChange={onSet} />
+                        <Pagination
+                            numberOfPages={ADDITIONAL.length + 1}
+                            activeIndex={current}
+                            onChange={onSet}
+                        />
                     </Grid>
                     {current !== 0 ? (
                         <Grid
@@ -106,9 +110,10 @@ export const Mobile = () => {
                             }}
                         >
                             <Typography variant="body2">
-                                Каждое наше изделие это сложный инженерный продукт, включающий в&nbsp;себя передовые
-                                мировые стандарты производства мебели. Все это сделано для того, чтобы наша мебель
-                                безупречно служила вам долгие годы
+                                Каждое наше изделие это сложный инженерный продукт, включающий
+                                в&nbsp;себя передовые мировые стандарты производства мебели. Все это
+                                сделано для того, чтобы наша мебель безупречно служила вам долгие
+                                годы
                             </Typography>
                         </Grid>
                     )}
@@ -125,7 +130,6 @@ export const Mobile = () => {
             </Container>
             <OrderFormPopup
                 isOpen={contactFormModal.isOpen}
-                marker="Kachestvo"
                 onClose={contactFormModal.handleClose}
             />
         </>

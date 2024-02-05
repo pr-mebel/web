@@ -33,7 +33,10 @@ export const HowToOrder: FC = () => {
                     </Button>
                 </ButtonContainer>
             </Container>
-            <OrderFormPopup isOpen={contactFormModal.isOpen} marker="zakazat" onClose={contactFormModal.handleClose} />
+            <OrderFormPopup
+                isOpen={contactFormModal.isOpen}
+                onClose={contactFormModal.handleClose}
+            />
         </>
     );
 };

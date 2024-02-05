@@ -32,9 +32,9 @@ export const Desktop = () => {
                         }}
                     >
                         <Typography variant="body1">
-                            Каждое наше изделие это сложный инженерный продукт, включающий в&nbsp;себя передовые мировые
-                            стандарты производства мебели. Все это сделано для того, чтобы наша мебель безупречно
-                            служила вам долгие годы
+                            Каждое наше изделие это сложный инженерный продукт, включающий
+                            в&nbsp;себя передовые мировые стандарты производства мебели. Все это
+                            сделано для того, чтобы наша мебель безупречно служила вам долгие годы
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
@@ -97,7 +97,6 @@ export const Desktop = () => {
             </Container>
             <OrderFormPopup
                 isOpen={contactFormModal.isOpen}
-                marker="Kachestvo"
                 onClose={contactFormModal.handleClose}
             />
         </>

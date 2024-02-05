@@ -100,15 +100,13 @@ export const RoistatIntegrationWithBitrixWidjets = `
 `;
 
 export const Bitrix24WidgetYandexMetrikaGoal = `
-window.addEventListener('onBitrixLiveChat', function(event)
-{
+window.addEventListener('onBitrixLiveChat', function(event) {
 	var widget = event.detail.widget;
 
-	// Обработка событий	
 	widget.subscribe({
 		type: BX.LiveChatWidget.SubscriptionType.sessionStart,
 		callback: function(data) {
-            window.yaCounter54949111?.reachGoal('chat/message');
+            window.yaCounter54949111?.reachGoal('bitrix-chat/open');
 		}
 	});
 });

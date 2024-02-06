@@ -3,6 +3,7 @@ import Script from 'next/script';
 import { isProduction } from '@/utils';
 
 import {
+    Bitrix24WidgetYandexMetrikaGoal,
     BitrixMessenger,
     FacebookPixel,
     GoogleAnalytics,
@@ -22,7 +23,10 @@ export const ScriptsList = () => {
     return (
         <>
             <Script src="https://af.click.ru/af.js?id=10173" strategy="beforeInteractive" />
-            <Script src="https://www.google-analytics.com/analytics.js" strategy="beforeInteractive" />
+            <Script
+                src="https://www.google-analytics.com/analytics.js"
+                strategy="beforeInteractive"
+            />
             <Script src="https://vk.com/js/api/openapi.js?144" strategy="beforeInteractive" />
             <Script
                 id="google-tag-manager"
@@ -48,7 +52,11 @@ export const ScriptsList = () => {
                     __html: FacebookPixel,
                 }}
             />
-            <Script src="//cdn.callibri.ru/callibri.js" type="text/javascript" strategy="afterInteractive" />
+            <Script
+                src="//cdn.callibri.ru/callibri.js"
+                type="text/javascript"
+                strategy="afterInteractive"
+            />
             <Script
                 id="mail.ru-raiting"
                 strategy="afterInteractive"
@@ -61,6 +69,13 @@ export const ScriptsList = () => {
                 strategy="afterInteractive"
                 dangerouslySetInnerHTML={{
                     __html: BitrixMessenger,
+                }}
+            />
+            <Script
+                id="bitrix-messenger-analytics"
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: Bitrix24WidgetYandexMetrikaGoal,
                 }}
             />
             <Script

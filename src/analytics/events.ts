@@ -3,7 +3,8 @@ export const yaCounter54949111Goals = [
     'maps/yandex/visit',
     'maps/google/visit',
     'maps/apple/visit',
-    'bitrix-chat/open',
+    'bitrix-chat/open', // used in the scripts folder
+    'bitrix-chat/start-conversation', // used in the scripts folder
     'catalog-page/wardrobe/visit',
     'catalog-page/cupboard/visit',
     'catalog-page/accessories/visit',

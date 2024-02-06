@@ -106,6 +106,13 @@ window.addEventListener('onBitrixLiveChat', function(event) {
 	widget.subscribe({
 		type: BX.LiveChatWidget.SubscriptionType.sessionStart,
 		callback: function(data) {
+            window.yaCounter54949111?.reachGoal('bitrix-chat/start-conversation');
+		}
+	});
+
+    widget.subscribe({
+		type: BX.LiveChatWidget.SubscriptionType.widgetOpen,
+		callback: function(data) {
             window.yaCounter54949111?.reachGoal('bitrix-chat/open');
 		}
 	});

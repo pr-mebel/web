@@ -1,19 +1,27 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { useSendEmail } from '@/api';
 import { Button, ButtonContainer, Input } from '@/components';
 import { formatPhoneInput } from '@/utils';
 
 export const CallDesignerForm: FC = () => {
-    const { register, handleSubmit, reset } = useForm();
+    const analytics = useYaCounter54949111();
+    const { register, handleSubmit, reset, formState } = useForm();
     const { loading, onSendEmail } = useSendEmail({
         place: 'home/call-designer',
         onFinish: () => {
             reset();
         },
     });
+
+    useEffect(() => {
+        if (formState.isDirty) {
+            analytics.track('inquiry/not-modal/first-touch');
+        }
+    }, [analytics, formState.isDirty]);
 
     return (
         <Box

@@ -15,5 +15,6 @@ export const yaCounter54949111Goals = [
     'phone-number/click',
     'email/click',
     'social-networks/vk/visit',
+    'inquiry/not-modal/first-touch',
 ] as const;
 export type YaCounter54949111Goal = typeof yaCounter54949111Goals[number];

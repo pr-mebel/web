@@ -1,21 +1,29 @@
 import { Box, Container, Typography } from '@mui/material';
 import Image from 'next/legacy/image';
 import bgImg from 'public/images/home-page/questions-form/1.jpg';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { useSendEmail } from '@/api';
 import { BlockTitle, Button, Input } from '@/components';
 import { formatPhoneInput } from '@/utils';
 
 export const QuestionsForm: FC = () => {
-    const { register, handleSubmit, reset } = useForm();
+    const analytics = useYaCounter54949111();
+    const { register, handleSubmit, reset, formState } = useForm();
     const { loading, onSendEmail } = useSendEmail({
         place: 'home/more-questions',
         onFinish: () => {
             reset();
         },
     });
+
+    useEffect(() => {
+        if (formState.isDirty) {
+            analytics.track('inquiry/not-modal/first-touch');
+        }
+    }, [analytics, formState.isDirty]);
 
     return (
         <Box

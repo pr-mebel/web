@@ -1,9 +1,10 @@
 import ClearIcon from '@mui/icons-material/Clear';
 import PublishIcon from '@mui/icons-material/Publish';
 import { Box, Container, Typography, useMediaQuery, useTheme } from '@mui/material';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { useSendEmail } from '@/api';
 import { BlockTitle, Button, Input } from '@/components';
 import { useFileUpload } from '@/hooks';
@@ -13,7 +14,8 @@ export const Questions: FC = () => {
     const theme = useTheme();
     const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
     const fileUpload = useFileUpload();
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, formState } = useForm();
+    const analytics = useYaCounter54949111();
     const { loading, onSendEmail } = useSendEmail({
         place: 'catalog/more-questions',
         files: fileUpload.data,
@@ -22,6 +24,12 @@ export const Questions: FC = () => {
             reset();
         },
     });
+
+    useEffect(() => {
+        if (formState.isDirty) {
+            analytics.track('inquiry/not-modal/first-touch');
+        }
+    }, [analytics, formState.isDirty]);
 
     return (
         <Box

@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Container, Grid, Skeleton, Typography } from '@mui/material';
+import { Box, Container, Grid, Skeleton, Typography } from '@mui/material';
 import { range } from 'lodash';
 import React, { FC } from 'react';
 
@@ -20,7 +20,13 @@ type GalleryProps = {
     onLoadMore: () => void;
 };
 
-export const Gallery: FC<GalleryProps> = ({ items, isLoading, hasMore, onCardClick, onLoadMore }) => {
+export const Gallery: FC<GalleryProps> = ({
+    items,
+    isLoading,
+    hasMore,
+    onCardClick,
+    onLoadMore,
+}) => {
     if (!items.length && !isLoading) {
         return (
             <Container>

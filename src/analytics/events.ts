@@ -9,6 +9,8 @@ export const yaCounter54949111Goals = [
     'catalog-page/cupboard/visit',
     'catalog-page/accessories/visit',
     'catalog-page/lighting/visit',
+    'catalog-page/show-more-button/click',
+    'inquiry-form-modal/open',
     'contacts-section/view',
     'phone-number/click',
     'email/click',

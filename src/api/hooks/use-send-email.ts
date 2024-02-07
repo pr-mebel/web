@@ -14,7 +14,7 @@ import {
     formIdToRoistatEventNameMapping,
     sessionStoragePageOpenTimestampKey,
 } from '@/constants';
-import { useFormSubmition } from '@/context/form-submition';
+import { useInquiryForm } from '@/context/inquiry-form';
 import { isProduction } from '@/utils';
 
 import { endpoints } from '../endpoints';
@@ -54,7 +54,7 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
-    const formSubmitionModal = useFormSubmition();
+    const { successModal } = useInquiryForm();
     const yaCounter54949111 = useYaCounter54949111();
 
     const trackSubmit = useCallback(() => {
@@ -120,7 +120,7 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
                     requestId,
                 });
 
-                formSubmitionModal.show();
+                successModal.handleOpen();
                 onFinish();
                 trackSubmit();
             } catch (error) {
@@ -151,14 +151,13 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
             } catch {}
 
             // Roistat Start Event Sending
-            const baseUrl = window.location.href.split('?')[0];
             window.roistat?.event.send(formIdToRoistatEventNameMapping[place], {
-                baseUrl: baseUrl,
+                baseUrl: window.location.href.split('?')[0],
             });
             // Roistat End Event Sending
         },
 
-        [router.pathname, files, place, formSubmitionModal, onFinish, trackSubmit, enqueueSnackbar]
+        [router.pathname, files, place, successModal, onFinish, trackSubmit, enqueueSnackbar]
     );
 
     return {

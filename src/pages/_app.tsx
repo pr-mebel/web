@@ -13,7 +13,7 @@ import React, { FC, useEffect } from 'react';
 
 import { Footer, GoTopButton, Header } from '@/blocks/common';
 import { sessionStoragePageOpenTimestampKey } from '@/constants';
-import { FormSubmitionProvider } from '@/context/form-submition';
+import { InquiryFormProvider } from '@/context/inquiry-form';
 import { ScriptsList } from '@/scripts';
 import { createEmotionCache, theme } from '@/theme';
 import { trpc } from '@/trpc';
@@ -104,16 +104,16 @@ const MyApp: FC<MyAppProps> = ({ Component, emotionCache = clientSideEmotionCach
                     </Head>
                     <CssBaseline />
 
-                    <FormSubmitionProvider>
-                        <SnackbarProvider maxSnack={1}>
+                    <SnackbarProvider maxSnack={1}>
+                        <InquiryFormProvider>
                             <Header />
                             <Component {...pageProps} />
                             <Analytics />
                             <Footer />
 
                             <GoTopButton />
-                        </SnackbarProvider>
-                    </FormSubmitionProvider>
+                        </InquiryFormProvider>
+                    </SnackbarProvider>
                 </ThemeProvider>
             </CacheProvider>
         </React.StrictMode>

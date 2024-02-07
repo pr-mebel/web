@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import React, { FC } from 'react';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { CardPopup, Filters, Gallery, Lead, Questions, TextBlock } from '@/blocks/catalog';
 import { Contacts, DesignOffer, ShopImg } from '@/blocks/common';
 import { useTrackUtm } from '@/hooks';
@@ -8,6 +9,7 @@ import { useCards } from '@/hooks/catalog/use-cards';
 
 const Catalog: FC = () => {
     useTrackUtm();
+    const analytics = useYaCounter54949111();
     const {
         filters,
         list,
@@ -48,7 +50,10 @@ const Catalog: FC = () => {
                         isLoading={isLoading}
                         hasMore={hasMore}
                         onCardClick={onCardClick}
-                        onLoadMore={onShowMore}
+                        onLoadMore={() => {
+                            analytics.track('catalog-page/show-more-button/click');
+                            onShowMore();
+                        }}
                     />
                 </Box>
                 <Box

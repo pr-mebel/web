@@ -2,9 +2,9 @@ import { ArrowBack, ArrowForward, Clear as ClearIcon } from '@mui/icons-material
 import { Box, Dialog, Grid, Skeleton, Typography, useMediaQuery, useTheme } from '@mui/material';
 import React, { FC, memo } from 'react';
 
-import { OrderFormPopup } from '@/blocks/common';
 import { Button } from '@/components/common';
 import { Vkontakte } from '@/components/icons';
+import { useInquiryForm } from '@/context/inquiry-form';
 import { Image as ImageType } from '@/entities';
 import { useModal } from '@/hooks';
 
@@ -37,7 +37,7 @@ const CardPopupComponent: FC<Props> = ({
     onClickForward,
 }) => {
     const fullscreenModal = useModal();
-    const contactFormModal = useModal();
+    const { inquiryModal } = useInquiryForm();
     const theme = useTheme();
     const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -203,7 +203,16 @@ const CardPopupComponent: FC<Props> = ({
                             </Typography>
                         </div>
                         <div>
-                            <Button block onClick={() => contactFormModal.handleOpen()}>
+                            <Button
+                                block
+                                onClick={() =>
+                                    inquiryModal.handleOpen({
+                                        Артикул: selectedItem.id,
+                                        Коллекция: selectedItem.collection,
+                                        Картинка: selectedItem.imageMedium.url,
+                                    })
+                                }
+                            >
                                 Рассчитать стоимость
                             </Button>
                             <Grid
@@ -229,15 +238,6 @@ const CardPopupComponent: FC<Props> = ({
                 isOpen={fullscreenModal.isOpen}
                 onClose={fullscreenModal.handleClose}
                 image={selectedItem.imageFull}
-            />
-            <OrderFormPopup
-                isOpen={contactFormModal.isOpen}
-                meta={{
-                    Артикул: selectedItem.id,
-                    Коллекция: selectedItem.collection,
-                    Картинка: selectedItem.imageMedium.url,
-                }}
-                onClose={contactFormModal.handleClose}
             />
         </>
     );

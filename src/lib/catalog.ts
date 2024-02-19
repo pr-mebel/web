@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 import { SectionID } from '@/entities';
 import { isProduction } from '@/utils';
 
-export const makeRequest = (section: SectionID) => {
+export const makeRequest = (section: SectionID, skip = 0) => {
     let filters = '';
 
     switch (section) {
@@ -33,7 +33,7 @@ export const makeRequest = (section: SectionID) => {
         {
             result: ${section}SectionCollection(limit: 1, preview: ${!isProduction()}) {
                 items {
-                    cardsCollection {
+                    cardsCollection(skip: ${skip}) {
                         total
                         items {
                             ... on ${section[0].toUpperCase() + section.slice(1)} {

@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { client } from '@/api/client';
-import { SectionCollection, SectionID } from '@/entities';
+import { Item, SectionCollection, SectionID } from '@/entities';
 import { makeRequest } from '@/lib/catalog';
 
 const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -10,9 +10,24 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
     };
 
     try {
-        const data = await client.query<{ result: SectionCollection }>({ query: makeRequest(section) });
+        const items = [] as Item[];
+        let total = 0;
 
-        return res.status(200).json(data.data.result.items[0].cardsCollection.items);
+        let count = 0;
+
+        do {
+            const data = await client.query<{ result: SectionCollection }>({
+                query: makeRequest(section, items.length),
+            });
+
+            total = data.data.result.items[0].cardsCollection.total;
+            items.push(...data.data.result.items[0].cardsCollection.items);
+
+            console.log(items.length, total);
+            count++;
+        } while (items.length !== total && count < 3);
+
+        return res.status(200).json(items);
     } catch (error) {
         return res.status(500).json(error);
     }

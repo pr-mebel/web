@@ -13,8 +13,6 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
         const items = [] as Item[];
         let total = 0;
 
-        let count = 0;
-
         do {
             const data = await client.query<{ result: SectionCollection }>({
                 query: makeRequest(section, items.length),
@@ -22,10 +20,7 @@ const catalog = async (req: NextApiRequest, res: NextApiResponse) => {
 
             total = data.data.result.items[0].cardsCollection.total;
             items.push(...data.data.result.items[0].cardsCollection.items);
-
-            console.log(items.length, total);
-            count++;
-        } while (items.length !== total && count < 3);
+        } while (items.length !== total);
 
         return res.status(200).json(items);
     } catch (error) {

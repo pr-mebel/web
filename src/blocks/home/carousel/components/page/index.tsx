@@ -2,6 +2,8 @@ import { styled, Typography } from '@mui/material';
 import Link from 'next/link';
 import React, { FC } from 'react';
 
+import { useYaCounter54949111 } from '@/analytics';
+
 import { PageImage } from './components';
 
 const Root = styled('div')(({ theme }) => ({
@@ -170,39 +172,48 @@ type Props = {
     to: string;
 };
 
-export const Page: FC<Props> = ({ pageID, titles, subtitles, texts, to }) => (
-    <Root>
-        <div className="imageContainer">
-            <PageImage pageID={pageID} />
-        </div>
+export const Page: FC<Props> = ({ pageID, titles, subtitles, texts, to }) => {
+    const analytics = useYaCounter54949111();
 
-        <div className="pageContent">
-            {titles.map((titleWrapper) => (
-                <Typography key={titleWrapper.id} className="text title">
-                    {titleWrapper.data}
-                </Typography>
-            ))}
-            <div>
-                {subtitles?.map((subtitleWrapper) => (
-                    <Typography key={subtitleWrapper.id} className="text subtitle">
-                        {subtitleWrapper.data}
+    return (
+        <Root>
+            <div className="imageContainer">
+                <PageImage pageID={pageID} />
+            </div>
+
+            <div className="pageContent">
+                {titles.map((titleWrapper) => (
+                    <Typography key={titleWrapper.id} className="text title">
+                        {titleWrapper.data}
                     </Typography>
                 ))}
+                <div>
+                    {subtitles?.map((subtitleWrapper) => (
+                        <Typography key={subtitleWrapper.id} className="text subtitle">
+                            {subtitleWrapper.data}
+                        </Typography>
+                    ))}
+                </div>
+                <div>
+                    {texts.map((textWrapper) => (
+                        <Typography key={textWrapper.id} className="text bottomText">
+                            {textWrapper.data}
+                        </Typography>
+                    ))}
+                </div>
+                <div className="buttonContainer">
+                    <Link
+                        href={to}
+                        passHref
+                        legacyBehavior
+                        onClick={() => analytics.track('lead-section/anything/click')}
+                    >
+                        <button type="button" className="button">
+                            <Typography className="buttonText">Подробнее</Typography>
+                        </button>
+                    </Link>
+                </div>
             </div>
-            <div>
-                {texts.map((textWrapper) => (
-                    <Typography key={textWrapper.id} className="text bottomText">
-                        {textWrapper.data}
-                    </Typography>
-                ))}
-            </div>
-            <div className="buttonContainer">
-                <Link href={to} passHref legacyBehavior>
-                    <button type="button" className="button">
-                        <Typography className="buttonText">Подробнее</Typography>
-                    </button>
-                </Link>
-            </div>
-        </div>
-    </Root>
-);
+        </Root>
+    );
+};

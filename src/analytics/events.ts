@@ -16,5 +16,14 @@ export const yaCounter54949111Goals = [
     'email/click',
     'social-networks/vk/visit',
     'inquiry/not-modal/first-touch',
+    'menu/cost/click',
+    'menu/advantages/click',
+    'menu/about-us/click',
+    'menu/contacts/click',
+    'lead-section/anything/click',
+    'materials-section/anything/click',
+    'comfort-section/anything/click',
+    'quality-section/anything/click',
+    'faq-section/anything/click',
 ] as const;
 export type YaCounter54949111Goal = typeof yaCounter54949111Goals[number];

@@ -6,6 +6,7 @@ import img2 from 'public/images/home-page/wardrobe-left/wardrobe-2.jpg';
 import img3 from 'public/images/home-page/wardrobe-left/wardrobe-3.jpg';
 import React, { FC, useCallback, useState } from 'react';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { BlockTitle, Button, ButtonContainer, Pagination } from '@/components/common';
 import { useInquiryForm } from '@/context/inquiry-form';
 import { usePagination } from '@/hooks';
@@ -17,8 +18,12 @@ export const Mobile: FC = () => {
     const { inquiryModal } = useInquiryForm();
     const [activeTabIndex, setActiveTabIndex] = useState(0);
 
+    const analytics = useYaCounter54949111();
     const { current, onReset, onSet, swipableHandlers } = usePagination({
         total: ADDITIONAL.length,
+        onBeforeSet: () => analytics.track('comfort-section/anything/click'),
+        onBeforeNext: () => analytics.track('comfort-section/anything/click'),
+        onBeforePrev: () => analytics.track('comfort-section/anything/click'),
     });
 
     /**
@@ -26,10 +31,11 @@ export const Mobile: FC = () => {
      */
     const handleClick = useCallback(
         (index) => () => {
+            analytics.track('comfort-section/anything/click');
             onReset();
             setActiveTabIndex(index);
         },
-        [onReset]
+        [onReset, analytics]
     );
 
     return (

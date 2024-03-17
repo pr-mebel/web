@@ -10,6 +10,7 @@ type UsePaginationParams = {
     resetIntervalOnChange?: boolean;
     onBeforeNext?: (...arg0: unknown[]) => unknown;
     onBeforePrev?: (...arg0: unknown[]) => unknown;
+    onBeforeSet?: (...arg0: unknown[]) => unknown;
 };
 
 export const usePagination = ({
@@ -19,6 +20,7 @@ export const usePagination = ({
     resetIntervalOnChange,
     onBeforeNext,
     onBeforePrev,
+    onBeforeSet,
 }: UsePaginationParams) => {
     const [activePage, setActivePage] = useState(0);
     const [triggered, setTriggered] = useState(false);
@@ -27,9 +29,13 @@ export const usePagination = ({
         setActivePage(0);
     }, []);
 
-    const handleSet = useCallback((page: number) => {
-        setActivePage(page);
-    }, []);
+    const handleSet = useCallback(
+        (page: number) => {
+            setActivePage(page);
+            onBeforeSet?.();
+        },
+        [onBeforeSet]
+    );
 
     const handleNextPage = useCallback(() => {
         setTriggered(true);
@@ -58,7 +64,11 @@ export const usePagination = ({
     /**
      * Крутит карусель
      */
-    const { pause, unpause, reset } = useInterval(handleNextPage, changePageIntervalTime ?? null, resetIntervalTime);
+    const { pause, unpause, reset } = useInterval(
+        handleNextPage,
+        changePageIntervalTime ?? null,
+        resetIntervalTime
+    );
 
     const handlers = useSwipeable({
         onSwipedLeft: () => handleNextPage(),

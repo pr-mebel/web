@@ -3,6 +3,7 @@ import Image from 'next/legacy/image';
 import defaultImage from 'public/images/home-page/wardrobe-right/wardrobe-1.jpg';
 import React from 'react';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { BlockTitle, Button, ButtonContainer } from '@/components/common';
 import { useInquiryForm } from '@/context/inquiry-form';
 
@@ -11,6 +12,7 @@ import { ADDITIONAL } from '../texts';
 
 export const Desktop = () => {
     const { inquiryModal } = useInquiryForm();
+    const analytics = useYaCounter54949111();
 
     return (
         <Container>
@@ -77,6 +79,9 @@ export const Desktop = () => {
                                     title={point.data.title}
                                     text={point.data.text}
                                     direction={point.data.direction}
+                                    onBeforeOpen={() =>
+                                        analytics.track('quality-section/anything/click')
+                                    }
                                 />
                             </Box>
                         ))}

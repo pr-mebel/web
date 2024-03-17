@@ -3,6 +3,7 @@ import { Box, SvgIcon, Typography } from '@mui/material';
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { BlockTitle } from '@/components';
 import { usePagination } from '@/hooks';
 
@@ -10,8 +11,11 @@ import { Options } from '../components';
 import { TABS } from '../texts';
 
 export const Mobile = () => {
+    const analytics = useYaCounter54949111();
     const { current, onNext, onPrev, swipableHandlers } = usePagination({
         total: TABS.length - 1,
+        onBeforeNext: () => analytics.track('comfort-section/anything/click'),
+        onBeforePrev: () => analytics.track('comfort-section/anything/click'),
     });
 
     return (
@@ -22,7 +26,9 @@ export const Mobile = () => {
             {...swipableHandlers}
         >
             <BlockTitle>
-                <Typography variant="h5">Мы используем только премиальные материалы для нашей мебели</Typography>
+                <Typography variant="h5">
+                    Мы используем только премиальные материалы для нашей мебели
+                </Typography>
             </BlockTitle>
             <Box
                 sx={{

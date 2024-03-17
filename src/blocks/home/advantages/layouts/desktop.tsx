@@ -3,6 +3,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { BlockTitle } from '@/components';
 import { usePagination } from '@/hooks';
 
@@ -10,8 +11,10 @@ import { Options, Tabs } from '../components';
 import { TABS } from '../texts';
 
 export const Desktop = () => {
+    const analytics = useYaCounter54949111();
     const { current, onSet } = usePagination({
         total: TABS.length - 1,
+        onBeforeSet: () => analytics.track('comfort-section/anything/click'),
     });
 
     return (
@@ -27,10 +30,12 @@ export const Desktop = () => {
             >
                 <Grid item xs={12} md={10}>
                     <Typography variant="body2">
-                        Мы&nbsp;постоянно улучшаем качество, эргономические и&nbsp;эстетические параметры нашей мебели.
-                        Начиная с&nbsp;подбора материалов и&nbsp;комплектующих мы&nbsp;создаем эксклюзивный проект
-                        будущего изделия, который не&nbsp;просто идеально впишется в&nbsp;ваш интерьер, а&nbsp;будет
-                        комфортен, удобен и&nbsp;функционален в&nbsp;использовании, и&nbsp;прослужит Вам долгие годы.
+                        Мы&nbsp;постоянно улучшаем качество, эргономические и&nbsp;эстетические
+                        параметры нашей мебели. Начиная с&nbsp;подбора материалов
+                        и&nbsp;комплектующих мы&nbsp;создаем эксклюзивный проект будущего изделия,
+                        который не&nbsp;просто идеально впишется в&nbsp;ваш интерьер, а&nbsp;будет
+                        комфортен, удобен и&nbsp;функционален в&nbsp;использовании, и&nbsp;прослужит
+                        Вам долгие годы.
                     </Typography>
                 </Grid>
             </Grid>

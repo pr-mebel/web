@@ -2,6 +2,7 @@ import { Box, Popover, Typography } from '@mui/material';
 import Image from 'next/legacy/image';
 import React, { FC, MouseEvent, useState } from 'react';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { BlockTitle } from '@/components/common';
 import { useModal } from '@/hooks';
 
@@ -10,12 +11,14 @@ type Props = {
     text: string;
     img: string;
     direction: string;
+    onBeforeOpen?: () => void;
 };
 
-export const WardrobeSnippet: FC<Props> = ({ title, text, img, direction }) => {
+export const WardrobeSnippet: FC<Props> = ({ title, text, img, direction, onBeforeOpen }) => {
     const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
     const popup = useModal({
         onOpen: (event: MouseEvent<HTMLDivElement>) => {
+            onBeforeOpen?.();
             setAnchorEl(event.currentTarget);
         },
         onClose: () => {

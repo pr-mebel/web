@@ -1,6 +1,7 @@
 import { Container, styled } from '@mui/material';
-import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { usePagination } from '@/hooks';
 
 import { Page, Pagination } from './components';
@@ -77,25 +78,19 @@ const Root = styled('div')(({ theme }) => ({
 
 export const Carousel: FC = () => {
     const rootRef = useRef<HTMLDivElement>(null);
+    const analytics = useYaCounter54949111();
 
     const { current, interval, onNext, onPrev, onSet, swipableHandlers } = usePagination({
         total: PAGES.length - 1,
         changePageIntervalTime: 7000,
         resetIntervalTime: 3000,
         resetIntervalOnChange: true,
+        onBeforeNext: () => analytics.track('lead-section/anything/click'),
+        onBeforePrev: () => analytics.track('lead-section/anything/click'),
+        onBeforeSet: () => analytics.track('lead-section/anything/click'),
     });
 
     const [windowWidth, setWindowWidth] = useState(0);
-
-    /**
-     * Переключает слайд
-     */
-    const handleChangeSlide = useCallback(
-        (value) => {
-            onSet(value);
-        },
-        [onSet]
-    );
 
     /**
      * Следит за изменением ширины окна
@@ -175,7 +170,11 @@ export const Carousel: FC = () => {
                             fill="#fff"
                         />
                     </svg>
-                    <Pagination currentPage={current} numberOfPages={PAGES.length} onChangeSlide={handleChangeSlide} />
+                    <Pagination
+                        currentPage={current}
+                        numberOfPages={PAGES.length}
+                        onChangeSlide={onSet}
+                    />
                     <svg className="nextMobile navMobile nav" viewBox="0 0 14 24" onClick={onNext}>
                         <path
                             d="M2.143 23.448a.807.807 0 0 1-.585.242.827.827 0 0 1-.584-1.41L11.253 12 .973 1.72A.827.827 0 0 1 2.144.553l10.863 10.864a.827.827 0 0 1 0 1.168L2.143 23.449z"

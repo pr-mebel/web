@@ -160,22 +160,38 @@ export const DesktopHeader: FC = () => {
                                 )}
                             </li>
                             <li>
-                                <Link href="/#design-offer" className="text">
+                                <Link
+                                    href="/#design-offer"
+                                    className="text"
+                                    onClick={() => analytics.track('menu/cost/click')}
+                                >
                                     Рассчитать стоимость
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/#advantages" className="text">
+                                <Link
+                                    href="/#advantages"
+                                    className="text"
+                                    onClick={() => analytics.track('menu/advantages/click')}
+                                >
                                     Преимущества
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/#about" className="text">
+                                <Link
+                                    href="/#about"
+                                    className="text"
+                                    onClick={() => analytics.track('menu/about-us/click')}
+                                >
                                     О нас
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/#contacts" className="text">
+                                <Link
+                                    href="/#contacts"
+                                    className="text"
+                                    onClick={() => analytics.track('menu/contacts/click')}
+                                >
                                     Контакты
                                 </Link>
                             </li>

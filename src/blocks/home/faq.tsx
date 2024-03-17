@@ -1,14 +1,23 @@
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Accordion, AccordionDetails, AccordionSummary, Container, Grid, Typography } from '@mui/material';
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Container,
+    Grid,
+    Typography,
+} from '@mui/material';
 import { useRequest } from 'ahooks';
 import React, { FC, useCallback, useState } from 'react';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { fetchFAQ } from '@/api';
 import { BlockTitle, Button, ButtonContainer } from '@/components';
 
 export const Faq: FC = () => {
     const [isShowMoreClicked, setIsShowMoreClicked] = useState(false);
     const [expandedItemID, setExpandedItemID] = useState<number | null>(null);
+    const analytics = useYaCounter54949111();
 
     const request = useRequest(async () => {
         const resp = await fetchFAQ();
@@ -23,8 +32,9 @@ export const Faq: FC = () => {
      * Обработчик клика на кнопку показать еще
      */
     const handleShowMore = useCallback(() => {
+        analytics.track('faq-section/anything/click');
         setIsShowMoreClicked(true);
-    }, []);
+    }, [analytics]);
 
     /**
      * Обработчик клика на конкретный вопрос.
@@ -32,13 +42,14 @@ export const Faq: FC = () => {
      */
     const handleChange = useCallback(
         (i: number) => (_: unknown, expanded: boolean) => {
+            analytics.track('faq-section/anything/click');
             if (expanded) {
                 setExpandedItemID(i);
             } else {
                 setExpandedItemID(null);
             }
         },
-        []
+        [analytics]
     );
 
     if (request.loading || !request.data) {

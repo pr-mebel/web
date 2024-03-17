@@ -4,6 +4,7 @@ import Image from 'next/legacy/image';
 import defaultImage from 'public/images/home-page/wardrobe-right/wardrobe-1.jpg';
 import React from 'react';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { BlockTitle, Button, ButtonContainer, Pagination } from '@/components/common';
 import { useInquiryForm } from '@/context/inquiry-form';
 import { usePagination } from '@/hooks';
@@ -13,8 +14,12 @@ import { ADDITIONAL } from '../texts';
 
 export const Mobile = () => {
     const { inquiryModal } = useInquiryForm();
+    const analytics = useYaCounter54949111();
     const { current, onSet, swipableHandlers } = usePagination({
         total: ADDITIONAL.length,
+        onBeforeSet: () => analytics.track('quality-section/anything/click'),
+        onBeforeNext: () => analytics.track('quality-section/anything/click'),
+        onBeforePrev: () => analytics.track('quality-section/anything/click'),
     });
 
     return (

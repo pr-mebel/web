@@ -181,22 +181,38 @@ export const MobileHeader: FC = () => {
                         <Hl />
                         <Grid item xs={12} container spacing={1} direction="column">
                             <Grid item xs>
-                                <Link href="/#design-offer" className="link">
+                                <Link
+                                    href="/#design-offer"
+                                    className="link"
+                                    onClick={() => analytics.track('menu/cost/click')}
+                                >
                                     Рассчитать стоимость
                                 </Link>
                             </Grid>
                             <Grid item xs>
-                                <Link href="/#advantages" className="link">
+                                <Link
+                                    href="/#advantages"
+                                    className="link"
+                                    onClick={() => analytics.track('menu/advantages/click')}
+                                >
                                     Преимущества
                                 </Link>
                             </Grid>
                             <Grid item xs>
-                                <Link href="/#about" className="link">
+                                <Link
+                                    href="/#about"
+                                    className="link"
+                                    onClick={() => analytics.track('menu/about-us/click')}
+                                >
                                     О нас
                                 </Link>
                             </Grid>
                             <Grid item xs>
-                                <Link href="/#contacts" className="link">
+                                <Link
+                                    href="/#contacts"
+                                    className="link"
+                                    onClick={() => analytics.track('menu/contacts/click')}
+                                >
                                     Контакты
                                 </Link>
                             </Grid>

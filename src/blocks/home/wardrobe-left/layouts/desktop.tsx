@@ -6,6 +6,7 @@ import img2 from 'public/images/home-page/wardrobe-left/wardrobe-2.jpg';
 import img3 from 'public/images/home-page/wardrobe-left/wardrobe-3.jpg';
 import React, { FC, useCallback, useState } from 'react';
 
+import { useYaCounter54949111 } from '@/analytics';
 import { BlockTitle, Button, ButtonContainer } from '@/components/common';
 import { useInquiryForm } from '@/context/inquiry-form';
 
@@ -14,6 +15,7 @@ import { ADDITIONAL, TABS } from '../texts';
 
 export const Desktop: FC = () => {
     const { inquiryModal } = useInquiryForm();
+    const analytics = useYaCounter54949111();
     const [activeTabIndex, setActiveTabIndex] = useState(0);
 
     /**
@@ -21,9 +23,10 @@ export const Desktop: FC = () => {
      */
     const handleClick = useCallback(
         (index) => () => {
+            analytics.track('comfort-section/anything/click');
             setActiveTabIndex(index);
         },
-        []
+        [analytics]
     );
 
     return (
@@ -103,6 +106,9 @@ export const Desktop: FC = () => {
                                     title={point.data.title}
                                     text={point.data.text}
                                     direction={point.data.direction}
+                                    onBeforeOpen={() =>
+                                        analytics.track('comfort-section/anything/click')
+                                    }
                                 />
                             </Box>
                         ))}

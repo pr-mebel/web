@@ -2,7 +2,6 @@ import { Box, Popover, Typography } from '@mui/material';
 import Image from 'next/legacy/image';
 import React, { FC, MouseEvent, useState } from 'react';
 
-import { useYaCounter54949111 } from '@/analytics';
 import { BlockTitle } from '@/components/common';
 import { useModal } from '@/hooks';
 

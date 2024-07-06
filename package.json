@@ -1,6 +1,7 @@
 {
     "name": "pr-mebel-next",
     "private": true,
+    "packageManager": "pnpm@9.3.0",
     "scripts": {
         "dev": "next dev",
         "build": "next build",
@@ -8,10 +9,10 @@
         "start": "next start",
         "postinstall": "husky install",
         "lint": "next lint",
+        "lint:staged": "lint-staged",
         "format": "prettier --write .",
         "typecheck": "tsc --noEmit -p ./tsconfig.json",
-        "typecheck:watch": "npm run typecheck -- --watch",
-        "prepare": "lint-staged"
+        "typecheck:watch": "npm run typecheck -- --watch"
     },
     "dependencies": {
         "@apollo/client": "^3.3.7",
@@ -21,14 +22,9 @@
         "@mui/icons-material": "5.4.1",
         "@mui/material": "5.4.1",
         "@mui/styles": "5.4.1",
+        "@mui/system": "5.16.0",
         "@pbe/react-yandex-maps": "1.2.3",
-        "@tanstack/react-query": "4.28.0",
-        "@trpc/client": "10.18.0",
-        "@trpc/next": "10.18.0",
-        "@trpc/react-query": "10.18.0",
-        "@trpc/server": "10.19.0",
-        "@vercel/analytics": "1.1.1",
-        "ahooks": "3.1.9",
+        "ahooks": "3.8.0",
         "axios": "0.24.0",
         "clsx": "1.1.1",
         "date-fns": "2.28.0",
@@ -54,7 +50,6 @@
         "zod": "3.21.4"
     },
     "devDependencies": {
-        "@types/classnames": "^2.2.11",
         "@types/lodash": "^4.14.168",
         "@types/ms": "0.7.31",
         "@types/multer": "1.4.7",
@@ -80,10 +75,9 @@
         "eslint-plugin-simple-import-sort": "7.0.0",
         "express": "4.17.2",
         "globby": "13.1.1",
-        "husky": "7.0.4",
-        "lint-staged": "12.0.3",
-        "prettier": "2.4.1",
-        "typescript": "5.0.4",
-        "webpack-cli": "^4.4.0"
+        "husky": "9.0.11",
+        "lint-staged": "15.2.7",
+        "prettier": "3.3.2",
+        "typescript": "5.5.3"
     }
 }

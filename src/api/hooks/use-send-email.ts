@@ -1,4 +1,3 @@
-import { track } from '@vercel/analytics';
 import axios from 'axios';
 import { differenceInMilliseconds } from 'date-fns';
 import { noop } from 'lodash';
@@ -6,7 +5,6 @@ import ms from 'ms';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 import { useCallback, useState } from 'react';
-import { v4 } from 'uuid';
 
 import { useYaCounter54949111 } from '@/analytics';
 import {
@@ -107,31 +105,14 @@ export const useSendEmail = ({ place, files = [], onFinish = noop }: UseSendEmai
             });
 
             try {
-                const requestId = v4();
-
-                track('form-submitted', { formData: JSON.stringify(formData), requestId });
-
                 await axios.post(endpoints.sendRequestEmail, formData, {
                     headers: { 'content-type': 'multipart/form-data' },
-                });
-
-                track('form-submitted-successfully', {
-                    formData: JSON.stringify(formData),
-                    requestId,
                 });
 
                 successModal.handleOpen();
                 onFinish();
                 trackSubmit();
             } catch (error) {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const errorMessage = (error as any)?.message;
-
-                track('form-submitted-failed', {
-                    formData: JSON.stringify(formData),
-                    error: errorMessage || 'Unknown error',
-                });
-
                 enqueueSnackbar(
                     'Не удалось отправить заявку. Напишите нам на почту напрямую, либо попробуйте позже',
                     {

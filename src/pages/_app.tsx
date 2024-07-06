@@ -4,7 +4,6 @@ import 'intersection-observer';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/system';
-import { Analytics } from '@vercel/analytics/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -16,7 +15,6 @@ import { sessionStoragePageOpenTimestampKey } from '@/constants';
 import { InquiryFormProvider } from '@/context/inquiry-form';
 import { ScriptsList } from '@/scripts';
 import { createEmotionCache, theme } from '@/theme';
-import { trpc } from '@/trpc';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -108,7 +106,6 @@ const MyApp: FC<MyAppProps> = ({ Component, emotionCache = clientSideEmotionCach
                         <InquiryFormProvider>
                             <Header />
                             <Component {...pageProps} />
-                            <Analytics />
                             <Footer />
 
                             <GoTopButton />
@@ -120,4 +117,4 @@ const MyApp: FC<MyAppProps> = ({ Component, emotionCache = clientSideEmotionCach
     );
 };
 
-export default trpc.withTRPC(MyApp);
+export default MyApp;

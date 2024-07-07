@@ -1,5 +1,3 @@
-// const { withSentryConfig } = require('@sentry/nextjs');
-
 const moduleExports = {
   swcMinify: true,
   env: {
@@ -18,9 +16,3 @@ const moduleExports = {
 };
 
 module.exports = moduleExports;
-
-// const sentryWebpackPluginOptions = {
-//     silent: true,
-// };
-
-// module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);

@@ -40,6 +40,7 @@ export const OrderFormPopup: FC<OrderFormPopupProps> = ({
   }, [fileUpload, onClose]);
 
   const handleSubmitForm = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (values: any) => {
       onSendEmail({
         ...values,

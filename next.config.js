@@ -4,7 +4,13 @@ const moduleExports = {
     VERCEL_ENV: process.env.VERCEL_ENV,
   },
   images: {
-    domains: ['images.ctfassets.net'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net',
+        port: '',
+      },
+    ],
   },
   redirects: async () => [
     {

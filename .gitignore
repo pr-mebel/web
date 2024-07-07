@@ -44,6 +44,5 @@ yarn-error.log*
 .sentryclirc
 
 # sitemap
-public/sitemap.xml
 .vercel
 .env*.local

@@ -22,7 +22,7 @@ export const Desktop: FC = () => {
    * Переключает вкладки по клику
    */
   const handleClick = useCallback(
-    (index) => () => {
+    (index: number) => () => {
       analytics.track('comfort-section/anything/click');
       setActiveTabIndex(index);
     },

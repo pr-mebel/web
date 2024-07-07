@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { differenceInMilliseconds } from 'date-fns';
-import { noop } from 'lodash';
 import ms from 'ms';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
@@ -51,7 +50,7 @@ const prepareData = ({
 export const useSendEmail = ({
   place,
   files = [],
-  onFinish = noop,
+  onFinish,
 }: UseSendEmailParams) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -116,7 +115,7 @@ export const useSendEmail = ({
         });
 
         successModal.handleOpen();
-        onFinish();
+        onFinish?.();
         trackSubmit();
       } catch (error) {
         enqueueSnackbar(

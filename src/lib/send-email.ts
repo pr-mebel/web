@@ -1,4 +1,3 @@
-import { isObject } from 'lodash';
 import { NextApiRequest } from 'next';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
@@ -48,7 +47,7 @@ export const createMessage = ({
             <hr>
             <p>Дополнительная информация<br>
                 ${Object.entries(meta).reduce((acc, val) => {
-                  if (isObject(val[1])) {
+                  if (typeof val[1] === 'object') {
                     return `${acc}<p><strong>${val[0]}:</strong> ${JSON.stringify(val[1])}</p>`;
                   }
 

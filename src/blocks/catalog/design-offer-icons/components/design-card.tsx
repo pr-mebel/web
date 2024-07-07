@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 
 type Props = {
   img: React.ReactNode;
+  children: React.ReactNode;
 };
 
 export const DesignCard: FC<Props> = ({ img, children }) => {

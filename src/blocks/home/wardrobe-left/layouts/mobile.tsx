@@ -35,7 +35,7 @@ export const Mobile: FC = () => {
    * Переключает вкладки по клику
    */
   const handleClick = useCallback(
-    (index) => () => {
+    (index: number) => () => {
       analytics.track('comfort-section/anything/click');
       onReset();
       setActiveTabIndex(index);

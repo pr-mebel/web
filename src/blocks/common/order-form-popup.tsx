@@ -40,7 +40,7 @@ export const OrderFormPopup: FC<OrderFormPopupProps> = ({
   }, [fileUpload, onClose]);
 
   const handleSubmitForm = useCallback(
-    (values) => {
+    (values: any) => {
       onSendEmail({
         ...values,
         meta,

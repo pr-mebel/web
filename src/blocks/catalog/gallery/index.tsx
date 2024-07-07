@@ -1,5 +1,4 @@
 import { Box, Container, Grid, Skeleton, Typography } from '@mui/material';
-import { range } from 'lodash';
 import React, { FC } from 'react';
 
 import { Button, ButtonContainer } from '@/components';
@@ -61,8 +60,8 @@ export const Gallery: FC<GalleryProps> = ({
           </Grid>
         ))}
         {isLoading &&
-          range(12).map((val) => (
-            <Grid key={val} item xs={12} sm={6} md={4}>
+          Array.from({ length: 12 }).map((_, i) => (
+            <Grid key={i} item xs={12} sm={6} md={4}>
               <Skeleton
                 variant="rectangular"
                 width="100%"

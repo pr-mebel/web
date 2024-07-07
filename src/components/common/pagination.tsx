@@ -1,5 +1,4 @@
 import { Box, styled, SvgIcon as MUISvgIcon } from '@mui/material';
-import { range } from 'lodash';
 import React, { FC, useCallback } from 'react';
 
 const SvgIcon = styled(MUISvgIcon)(({ theme }) => ({
@@ -46,7 +45,7 @@ export const Pagination: FC<Props> = ({
    * Обработчик клика на номер страницы
    */
   const handleClickByIndex = useCallback(
-    (i) => () => {
+    (i: number) => () => {
       if (activeIndex !== i) {
         onChange(i);
       }
@@ -84,7 +83,7 @@ export const Pagination: FC<Props> = ({
           margin: 'auto',
         }}
       >
-        {range(numberOfPages).map((index) => (
+        {Array.from({ length: numberOfPages }).map((_, index) => (
           <Box
             sx={(theme) => ({
               width: '10px',

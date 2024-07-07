@@ -56,9 +56,6 @@ importers:
       intersection-observer:
         specifier: 0.12.0
         version: 0.12.0
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
       ms:
         specifier: 2.1.3
         version: 2.1.3
@@ -96,9 +93,6 @@ importers:
         specifier: 3.23.8
         version: 3.23.8
     devDependencies:
-      '@types/lodash':
-        specifier: ^4.17.6
-        version: 4.17.6
       '@types/ms':
         specifier: 0.7.34
         version: 0.7.34
@@ -611,9 +605,6 @@ packages:
 
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
-
-  '@types/lodash@4.17.6':
-    resolution: {integrity: sha512-OpXEVoCKSS3lQqjx9GGGOapBeuW5eUboYHRlHP9urXPX25IKZ6AnP5ZRxtVf63iieUbsHxLn8NQ5Nlftc6yzAA==}
 
   '@types/mime@1.3.5':
     resolution: {integrity: sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==}
@@ -3112,8 +3103,6 @@ snapshots:
   '@types/json-schema@7.0.15': {}
 
   '@types/json5@0.0.29': {}
-
-  '@types/lodash@4.17.6': {}
 
   '@types/mime@1.3.5': {}
 

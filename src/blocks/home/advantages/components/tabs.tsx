@@ -14,7 +14,7 @@ type Props = {
 
 export const Tabs: FC<Props> = ({ activeTab, tabs, onChange }) => {
   const handeChangeTab = useCallback(
-    (tab) => () => {
+    (tab: number) => () => {
       if (tab !== activeTab) {
         onChange(tab);
       }

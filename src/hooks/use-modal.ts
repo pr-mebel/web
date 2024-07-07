@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { noop } from 'lodash';
 import { useCallback, useState } from 'react';
 
 type UseModalProps<TO extends any[], TC extends any[], TT extends any[]> = {
@@ -22,15 +21,15 @@ export type UseModal<
 
 export const useModal = <TO extends any[], TC extends any[], TT extends any[]>({
   initialOpen = false,
-  onOpen = noop,
-  onClose = noop,
-  onToggle = noop,
+  onOpen,
+  onClose,
+  onToggle,
 }: UseModalProps<TO, TC, TT> = {}): UseModal<TO, TC, TT> => {
   const [isOpen, setIsOpen] = useState(initialOpen);
 
   const handleOpen = useCallback(
     (...args: TO) => {
-      onOpen(...args);
+      onOpen?.(...args);
       setIsOpen(true);
     },
     [onOpen],
@@ -38,7 +37,7 @@ export const useModal = <TO extends any[], TC extends any[], TT extends any[]>({
 
   const handleClose = useCallback(
     (...args: TC) => {
-      onClose(...args);
+      onClose?.(...args);
       setIsOpen(false);
     },
     [onClose],
@@ -46,7 +45,7 @@ export const useModal = <TO extends any[], TC extends any[], TT extends any[]>({
 
   const handleToggle = useCallback(
     (...args: TT) => {
-      onToggle(...args);
+      onToggle?.(...args);
       setIsOpen(!isOpen);
     },
     [isOpen, onToggle],

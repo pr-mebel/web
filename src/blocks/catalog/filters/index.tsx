@@ -1,5 +1,4 @@
 import { Container, Typography } from '@mui/material';
-import { find } from 'lodash';
 import React, { FC, useEffect } from 'react';
 
 import { useYaCounter54949111 } from '@/analytics';
@@ -96,7 +95,7 @@ export const Filters: FC<Props> = ({ filter, onChange }) => {
       <section className="secondTitle">
         <BlockTitle>
           <Typography variant="h4">
-            {find(filterOptions.sections, { id: filter.section })?.title}
+            {filterOptions.sections.find((s) => s.id === filter.section)?.title}
           </Typography>
         </BlockTitle>
       </section>

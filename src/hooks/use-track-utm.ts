@@ -1,4 +1,3 @@
-import { isEmpty } from 'lodash';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -11,7 +10,7 @@ export const useTrackUtm = () => {
     if (
       router.isReady && // Параметры запроса прогрузились
       !prevPath && // Пришли с другого домена
-      !isEmpty(router.query) // Объект запроса не пустой
+      Object.keys(router.query).length > 0 // Есть UTM-метки
     ) {
       localStorage.setItem('utm', JSON.stringify(router.query));
     }

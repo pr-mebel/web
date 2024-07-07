@@ -73,7 +73,6 @@ export const usePagination = ({
   const handlers = useSwipeable({
     onSwipedLeft: () => handleNextPage(),
     onSwipedRight: () => handlePrevPage(),
-    preventDefaultTouchmoveEvent: true,
   });
 
   useEffect(() => {

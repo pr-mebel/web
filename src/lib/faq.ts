@@ -5,7 +5,7 @@ import { isProduction } from '@/utils';
 const FAQEntityID = '50kulGjR4KrEMHAomWqIgM';
 
 export const makeRequest = () => {
-    return gql`
+  return gql`
     {
         faqList(id: "${FAQEntityID}", preview: ${!isProduction()}) {
             itemsCollection {

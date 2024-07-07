@@ -21,92 +21,92 @@ import topImg6 from 'public/images/home-page/carousel/top-img6.jpg';
 type ScreenType = 'mobile' | 'tablet' | 'desktop';
 
 type Config = Record<
-    ScreenType,
-    {
-        img: StaticImageData;
-        quality?: number;
-    }
+  ScreenType,
+  {
+    img: StaticImageData;
+    quality?: number;
+  }
 > & {
-    alt: string;
+  alt: string;
 };
 
 export const imageMapping: Config[] = [
-    {
-        mobile: {
-            img: topImgMob1,
-            quality: 90,
-        },
-        tablet: {
-            img: topImgTab1,
-        },
-        desktop: {
-            img: topImg1,
-        },
-        alt: 'Частный мебельер',
+  {
+    mobile: {
+      img: topImgMob1,
+      quality: 90,
     },
-    {
-        mobile: {
-            img: topImgMob2,
-            quality: 90,
-        },
-        tablet: {
-            img: topImgTab2,
-        },
-        desktop: {
-            img: topImg2,
-        },
-        alt: 'Элегантная классика',
+    tablet: {
+      img: topImgTab1,
     },
-    {
-        mobile: {
-            img: topImgMob3,
-            quality: 90,
-        },
-        tablet: {
-            img: topImgTab3,
-        },
-        desktop: {
-            img: topImg3,
-        },
-        alt: 'Гардеробные',
+    desktop: {
+      img: topImg1,
     },
-    {
-        mobile: {
-            img: topImgMob4,
-            quality: 90,
-        },
-        tablet: {
-            img: topImgTab4,
-        },
-        desktop: {
-            img: topImg4,
-        },
-        alt: 'Дизайнерская мебель',
+    alt: 'Частный мебельер',
+  },
+  {
+    mobile: {
+      img: topImgMob2,
+      quality: 90,
     },
-    {
-        mobile: {
-            img: topImgMob5,
-            quality: 90,
-        },
-        tablet: {
-            img: topImgTab5,
-        },
-        desktop: {
-            img: topImg5,
-        },
-        alt: 'Комфорт, продуманный до мелочей',
+    tablet: {
+      img: topImgTab2,
     },
-    {
-        mobile: {
-            img: topImgMob6,
-            quality: 90,
-        },
-        tablet: {
-            img: topImgTab6,
-        },
-        desktop: {
-            img: topImg6,
-        },
-        alt: 'Истинное качество',
+    desktop: {
+      img: topImg2,
     },
+    alt: 'Элегантная классика',
+  },
+  {
+    mobile: {
+      img: topImgMob3,
+      quality: 90,
+    },
+    tablet: {
+      img: topImgTab3,
+    },
+    desktop: {
+      img: topImg3,
+    },
+    alt: 'Гардеробные',
+  },
+  {
+    mobile: {
+      img: topImgMob4,
+      quality: 90,
+    },
+    tablet: {
+      img: topImgTab4,
+    },
+    desktop: {
+      img: topImg4,
+    },
+    alt: 'Дизайнерская мебель',
+  },
+  {
+    mobile: {
+      img: topImgMob5,
+      quality: 90,
+    },
+    tablet: {
+      img: topImgTab5,
+    },
+    desktop: {
+      img: topImg5,
+    },
+    alt: 'Комфорт, продуманный до мелочей',
+  },
+  {
+    mobile: {
+      img: topImgMob6,
+      quality: 90,
+    },
+    tablet: {
+      img: topImgTab6,
+    },
+    desktop: {
+      img: topImg6,
+    },
+    alt: 'Истинное качество',
+  },
 ];

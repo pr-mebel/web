@@ -5,12 +5,12 @@ import { Desktop } from './layouts/desktop';
 import { Mobile } from './layouts/mobile';
 
 export const CallDesigner: FC = () => {
-    const theme = useTheme();
-    const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
+  const theme = useTheme();
+  const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
 
-    if (isSmDown) {
-        return <Mobile />;
-    }
+  if (isSmDown) {
+    return <Mobile />;
+  }
 
-    return <Desktop />;
+  return <Desktop />;
 };

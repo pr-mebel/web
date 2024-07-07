@@ -57,49 +57,49 @@ const text2small = `
 `;
 
 export const texts: Record<
-    SectionID,
-    {
-        large: string;
-        small: string;
-    }
+  SectionID,
+  {
+    large: string;
+    small: string;
+  }
 > = {
-    cupboard: {
-        large: text0large,
-        small: text0small,
-    },
-    wardrobe: {
-        large: text1large,
-        small: text1small,
-    },
-    accessories: {
-        large: text2large,
-        small: text2small,
-    },
-    lightingSystems: {
-        large: text2large,
-        small: text2small,
-    },
+  cupboard: {
+    large: text0large,
+    small: text0small,
+  },
+  wardrobe: {
+    large: text1large,
+    small: text1small,
+  },
+  accessories: {
+    large: text2large,
+    small: text2small,
+  },
+  lightingSystems: {
+    large: text2large,
+    small: text2small,
+  },
 } as const;
 
 type Props = {
-    selectedSection: SectionID;
+  selectedSection: SectionID;
 };
 
 export const LeadText: FC<Props> = ({ selectedSection }) => {
-    const theme = useTheme();
-    const mdUp = useMediaQuery(theme.breakpoints.up('md'));
+  const theme = useTheme();
+  const mdUp = useMediaQuery(theme.breakpoints.up('md'));
 
-    return (
-        <Typography
-            variant="body1"
-            sx={(theme) => ({
-                [theme.breakpoints.down('md')]: {
-                    fontSize: '16px',
-                    lineHeight: '22px',
-                },
-            })}
-        >
-            {texts[selectedSection][mdUp ? 'large' : 'small']}
-        </Typography>
-    );
+  return (
+    <Typography
+      variant="body1"
+      sx={(theme) => ({
+        [theme.breakpoints.down('md')]: {
+          fontSize: '16px',
+          lineHeight: '22px',
+        },
+      })}
+    >
+      {texts[selectedSection][mdUp ? 'large' : 'small']}
+    </Typography>
+  );
 };

@@ -5,12 +5,12 @@ import { DesktopHeader } from './layouts/desktop';
 import { MobileHeader } from './layouts/mobile';
 
 export const Header: FC = () => {
-    const theme = useTheme();
-    const isLgDown = useMediaQuery(theme.breakpoints.down('lg'));
+  const theme = useTheme();
+  const isLgDown = useMediaQuery(theme.breakpoints.down('lg'));
 
-    if (isLgDown) {
-        return <MobileHeader />;
-    }
+  if (isLgDown) {
+    return <MobileHeader />;
+  }
 
-    return <DesktopHeader />;
+  return <DesktopHeader />;
 };

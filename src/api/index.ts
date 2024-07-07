@@ -11,8 +11,8 @@ import { endpoints } from './endpoints';
  * @returns Объект с новыми карточками
  */
 export const fetchCatalogByFilter = (section: SectionID) =>
-    axios.post<Item[]>(endpoints.getCaltalogByFilter, {
-        section,
-    });
+  axios.post<Item[]>(endpoints.getCaltalogByFilter, {
+    section,
+  });
 
 export * from './hooks';

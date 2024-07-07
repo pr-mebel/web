@@ -1,13 +1,13 @@
 export type SendEmailParams = {
-    email?: string;
-    name: string;
-    tel: string;
-    description?: string;
-    place: string;
-    meta?: Record<string, unknown>;
-    files?: File[];
+  email?: string;
+  name: string;
+  tel: string;
+  description?: string;
+  place: string;
+  meta?: Record<string, unknown>;
+  files?: File[];
 };
 
 export type UploadFilesParams = {
-    files: FileList;
+  files: FileList;
 };

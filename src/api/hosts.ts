@@ -1,3 +1,3 @@
 export const hosts = {
-    vercel: '/api',
+  vercel: '/api',
 };

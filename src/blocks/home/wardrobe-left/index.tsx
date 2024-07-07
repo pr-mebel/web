@@ -5,12 +5,12 @@ import { Desktop } from './layouts/desktop';
 import { Mobile } from './layouts/mobile';
 
 export const WardrobeLeft: FC = () => {
-    const theme = useTheme();
-    const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
+  const theme = useTheme();
+  const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
 
-    if (isMdDown) {
-        return <Mobile />;
-    }
+  if (isMdDown) {
+    return <Mobile />;
+  }
 
-    return <Desktop />;
+  return <Desktop />;
 };

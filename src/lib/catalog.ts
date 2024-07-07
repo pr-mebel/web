@@ -4,11 +4,11 @@ import { SectionID } from '@/entities';
 import { isProduction } from '@/utils';
 
 export const makeRequest = (section: SectionID, skip = 0) => {
-    let filters = '';
+  let filters = '';
 
-    switch (section) {
-        case 'cupboard': {
-            filters = `
+  switch (section) {
+    case 'cupboard': {
+      filters = `
                 modern
                 classic
                 neoclassic
@@ -17,19 +17,19 @@ export const makeRequest = (section: SectionID, skip = 0) => {
                 swing
                 folding
             `;
-            break;
-        }
-        case 'wardrobe': {
-            filters = `
+      break;
+    }
+    case 'wardrobe': {
+      filters = `
                 modern
                 classic
                 neoclassic
             `;
-            break;
-        }
+      break;
     }
+  }
 
-    return gql`
+  return gql`
         {
             result: ${section}SectionCollection(limit: 1, preview: ${!isProduction()}) {
                 items {

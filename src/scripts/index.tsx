@@ -67,7 +67,7 @@ export const ScriptsList = () => {
         id="mail.ru-raiting-3541616"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
-          __html: MailRuCounter(3541616),
+          __html: MailRuCounter,
         }}
       />
       <Script

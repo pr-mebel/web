@@ -64,17 +64,10 @@ export const ScriptsList = () => {
         strategy="afterInteractive"
       />
       <Script
-        id="mail.ru-raiting-3259213"
+        id="mail.ru-raiting-3541616"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
-          __html: MailRuCounter(3259213),
-        }}
-      />
-      <Script
-        id="mail.ru-raiting-3532048"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: MailRuCounter(3532048),
+          __html: MailRuCounter(3541616),
         }}
       />
       <Script

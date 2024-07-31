@@ -70,10 +70,6 @@ export const useSendEmail = ({
     window.ga?.('send', 'event', 'form', 'submit');
 
     window.fbq?.('track', 'Lead');
-
-    window._tmr.push({ type: 'reachGoal', id: 3241411, goal: 'lid' });
-
-    window.VK.Goal('conversion');
   }, [yaCounter54949111]);
 
   const handleSendEmail = useCallback(

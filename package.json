@@ -55,6 +55,8 @@
     "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "5.10.1",
     "@typescript-eslint/parser": "5.10.1",
+    "@upstash/ratelimit": "2.0.1",
+    "@vercel/kv": "2.0.0",
     "eslint": "8.8.0",
     "eslint-config-alloy": "4.4.0",
     "eslint-config-google": "^0.14.0",

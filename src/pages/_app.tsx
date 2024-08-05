@@ -20,6 +20,18 @@ import { createEmotionCache, theme } from '@/theme';
 
 const clientSideEmotionCache = createEmotionCache();
 
+import { env } from '@/env';
+
+if (typeof window !== 'undefined') {
+  posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
+    person_profiles: 'always',
+    loaded: (posthog) => {
+      if (env.NEXT_PUBLIC_NODE_ENV === 'development') posthog.debug();
+    },
+  });
+}
+
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }

@@ -79,6 +79,7 @@ export const useSendEmail = ({
 
   const handleSendEmail = useCallback(
     async (values: Omit<SendEmailParams, 'place' | 'files'>) => {
+      posthog.capture('client.send_email.start');
       const utm = localStorage.getItem('utm');
 
       setLoading(true);
@@ -111,6 +112,7 @@ export const useSendEmail = ({
       });
 
       try {
+        posthog.capture('client.send_email.attempt', { data: FormData });
         await axios.post(endpoints.sendRequestEmail, formData, {
           headers: { 'content-type': 'multipart/form-data' },
         });
@@ -118,8 +120,9 @@ export const useSendEmail = ({
         successModal.handleOpen();
         onFinish?.();
         trackSubmit();
+        posthog.capture('client.send_email.success', { data: FormData });
       } catch (error) {
-        posthog.capture('useSendEmail.sendRequestEmail.catch', {
+        posthog.capture('client.send_email.failure', {
           property: FormData,
         });
         enqueueSnackbar(

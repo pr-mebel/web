@@ -1,4 +1,5 @@
 import { styled } from '@mui/material/styles';
+import posthog from 'posthog-js';
 import React, { FC } from 'react';
 
 import { Contacts, DesignOffer, ShopImg } from '@/blocks/common';
@@ -27,6 +28,8 @@ const Section = styled('section')(({ theme }) => ({
 }));
 
 const HomePage: FC = () => {
+  posthog.capture('page_viewed', { page: 'home' });
+
   return (
     <main>
       <Section sx={{ marginTop: '0' }}>

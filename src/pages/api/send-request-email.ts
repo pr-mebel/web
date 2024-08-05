@@ -1,9 +1,10 @@
 import multer from 'multer';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
+import posthog from 'posthog-js';
 
-import { createMessage, createMeta, sendEmail } from '@/lib/send-email';
 import { env } from '@/env';
+import { createMessage, createMeta, sendEmail } from '@/lib/send-email';
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -38,6 +39,7 @@ type Body = {
 };
 
 const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
+  posthog.capture('api.send_request_email.start');
   await runMiddleware(req, res, uploadMiddleware);
 
   const { email, name, tel, description, meta = '', place } = req.body as Body;
@@ -56,24 +58,25 @@ const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   try {
-    const info = await sendEmail(
-      transporterMail,
-      createMessage({
-        emailTo: env.EMAIL_MAIL_RU,
-        meta: metaResult,
-        files,
-        name,
-        place,
-        tel,
-        description,
-        email,
-      }),
-    );
+    const message = createMessage({
+      emailTo: env.EMAIL_MAIL_RU,
+      meta: metaResult,
+      files,
+      name,
+      place,
+      tel,
+      description,
+      email,
+    });
+    const info = await sendEmail(transporterMail, message);
 
     console.info('sent to mail.ru', info);
 
+    posthog.capture('api.send_request_email.success', { data: message, info });
+
     res.status(200).json(info);
   } catch (error) {
+    posthog.capture('api.send_request_email.failure', { error });
     console.error('unable to send to mail.ru', error);
     res.status(500).json(error);
   }

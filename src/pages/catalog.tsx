@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import posthog from 'posthog-js';
 import React, { FC } from 'react';
 
 import { useYaCounter54949111 } from '@/analytics';
@@ -15,6 +16,7 @@ import { useTrackUtm } from '@/hooks';
 import { useCards } from '@/hooks/catalog/use-cards';
 
 const Catalog: FC = () => {
+  posthog.capture('page_viewed', { page: 'home' });
   useTrackUtm();
   const analytics = useYaCounter54949111();
   const {

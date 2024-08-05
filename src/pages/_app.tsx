@@ -8,6 +8,8 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { SnackbarProvider } from 'notistack';
+import posthog from 'posthog-js';
+import { PostHogProvider } from 'posthog-js/react';
 import React, { FC, useEffect } from 'react';
 
 import { Footer, GoTopButton, Header } from '@/blocks/common';
@@ -17,6 +19,18 @@ import { ScriptsList } from '@/scripts';
 import { createEmotionCache, theme } from '@/theme';
 
 const clientSideEmotionCache = createEmotionCache();
+
+import { env } from '@/env';
+
+if (typeof window !== 'undefined') {
+  posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
+    person_profiles: 'always',
+    loaded: (posthog) => {
+      if (env.NEXT_PUBLIC_NODE_ENV === 'development') posthog.debug();
+    },
+  });
+}
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -109,15 +123,17 @@ const MyApp: FC<MyAppProps> = ({
           </Head>
           <CssBaseline />
 
-          <SnackbarProvider maxSnack={1}>
-            <InquiryFormProvider>
-              <Header />
-              <Component {...pageProps} />
-              <Footer />
+          <PostHogProvider client={posthog}>
+            <SnackbarProvider maxSnack={1}>
+              <InquiryFormProvider>
+                <Header />
+                <Component {...pageProps} />
+                <Footer />
 
-              <GoTopButton />
-            </InquiryFormProvider>
-          </SnackbarProvider>
+                <GoTopButton />
+              </InquiryFormProvider>
+            </SnackbarProvider>
+          </PostHogProvider>
         </ThemeProvider>
       </CacheProvider>
     </React.StrictMode>

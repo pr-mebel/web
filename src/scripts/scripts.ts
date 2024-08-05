@@ -36,13 +36,6 @@ export const YandexMetrika = `
         webvisor:true,
         trackHash:true
     });
-
-    ym(86537628, "init", {
-        clickmap: true,
-        trackLinks: true,
-        accurateTrackBounce: true,
-        trackHash: true
-    });
 `;
 
 export const BitrixMessenger = `

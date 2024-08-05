@@ -1,6 +1,8 @@
 import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { env } from '@/env';
+
 type Body = {
   email?: string;
   name: string;
@@ -16,7 +18,7 @@ const logRequest = async (req: NextApiRequest, res: NextApiResponse) => {
     roistat: req.cookies['roistat_visit']
       ? req.cookies['roistat_visit']
       : 'nocookie',
-    key: process.env.ROISTAT_KEY,
+    key: env.ROISTAT_KEY,
     title: `Заявка с формы "${place}"`,
     comment: description ? description : null,
     name: name,

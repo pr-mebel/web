@@ -1,8 +1,8 @@
-const moduleExports = {
+await import('./src/env.js');
+
+/** @type {import("next").NextConfig} */
+const config = {
   swcMinify: true,
-  env: {
-    VERCEL_ENV: process.env.VERCEL_ENV,
-  },
   images: {
     remotePatterns: [
       {
@@ -21,4 +21,4 @@ const moduleExports = {
   ],
 };
 
-module.exports = moduleExports;
+export default config;

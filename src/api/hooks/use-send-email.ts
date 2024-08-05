@@ -3,6 +3,7 @@ import { differenceInMilliseconds } from 'date-fns';
 import ms from 'ms';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
+import posthog from 'posthog-js';
 import { useCallback, useState } from 'react';
 
 import { useYaCounter54949111 } from '@/analytics';
@@ -78,6 +79,7 @@ export const useSendEmail = ({
 
   const handleSendEmail = useCallback(
     async (values: Omit<SendEmailParams, 'place' | 'files'>) => {
+      posthog.capture('client.send_email.start');
       const utm = localStorage.getItem('utm');
 
       setLoading(true);
@@ -110,6 +112,7 @@ export const useSendEmail = ({
       });
 
       try {
+        posthog.capture('client.send_email.attempt', { data: FormData });
         await axios.post(endpoints.sendRequestEmail, formData, {
           headers: { 'content-type': 'multipart/form-data' },
         });
@@ -117,7 +120,11 @@ export const useSendEmail = ({
         successModal.handleOpen();
         onFinish?.();
         trackSubmit();
+        posthog.capture('client.send_email.success', { data: FormData });
       } catch (error) {
+        posthog.capture('client.send_email.failure', {
+          property: FormData,
+        });
         enqueueSnackbar(
           'Не удалось отправить заявку. Напишите нам на почту напрямую, либо попробуйте позже',
           {

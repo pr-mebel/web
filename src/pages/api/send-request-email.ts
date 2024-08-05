@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
 import { createMessage, createMeta, sendEmail } from '@/lib/send-email';
+import { env } from '@/env';
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -49,8 +50,8 @@ const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
     port: 465,
     secure: true,
     auth: {
-      user: process.env.EMAIL_MAIL_RU,
-      pass: process.env.PASSWORD_MAIL_RU,
+      user: env.EMAIL_MAIL_RU,
+      pass: env.PASSWORD_MAIL_RU,
     },
   });
 
@@ -58,7 +59,7 @@ const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
     const info = await sendEmail(
       transporterMail,
       createMessage({
-        emailTo: process.env.EMAIL_MAIL_RU!,
+        emailTo: env.EMAIL_MAIL_RU,
         meta: metaResult,
         files,
         name,

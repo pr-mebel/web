@@ -3,6 +3,7 @@ import { differenceInMilliseconds } from 'date-fns';
 import ms from 'ms';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
+import posthog from 'posthog-js';
 import { useCallback, useState } from 'react';
 
 import { useYaCounter54949111 } from '@/analytics';
@@ -118,6 +119,9 @@ export const useSendEmail = ({
         onFinish?.();
         trackSubmit();
       } catch (error) {
+        posthog.capture('useSendEmail.sendRequestEmail.catch', {
+          property: FormData,
+        });
         enqueueSnackbar(
           'Не удалось отправить заявку. Напишите нам на почту напрямую, либо попробуйте позже',
           {

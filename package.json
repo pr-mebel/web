@@ -1,6 +1,7 @@
 {
   "name": "pr-mebel-next",
   "private": true,
+  "type": "module",
   "packageManager": "pnpm@9.3.0",
   "scripts": {
     "dev": "next dev",
@@ -24,6 +25,7 @@
     "@mui/styles": "5.4.1",
     "@mui/system": "5.16.0",
     "@pbe/react-yandex-maps": "1.2.5",
+    "@t3-oss/env-nextjs": "0.11.0",
     "ahooks": "3.8.0",
     "axios": "1.7.2",
     "clsx": "2.1.1",
@@ -36,6 +38,7 @@
     "next": "14.2.4",
     "nodemailer": "6.9.14",
     "notistack": "2.0.3",
+    "posthog-js": "1.154.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-hook-form": "^6.14.2",

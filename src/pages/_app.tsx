@@ -8,6 +8,8 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { SnackbarProvider } from 'notistack';
+import posthog from 'posthog-js';
+import { PostHogProvider } from 'posthog-js/react';
 import React, { FC, useEffect } from 'react';
 
 import { Footer, GoTopButton, Header } from '@/blocks/common';
@@ -109,15 +111,17 @@ const MyApp: FC<MyAppProps> = ({
           </Head>
           <CssBaseline />
 
-          <SnackbarProvider maxSnack={1}>
-            <InquiryFormProvider>
-              <Header />
-              <Component {...pageProps} />
-              <Footer />
+          <PostHogProvider client={posthog}>
+            <SnackbarProvider maxSnack={1}>
+              <InquiryFormProvider>
+                <Header />
+                <Component {...pageProps} />
+                <Footer />
 
-              <GoTopButton />
-            </InquiryFormProvider>
-          </SnackbarProvider>
+                <GoTopButton />
+              </InquiryFormProvider>
+            </SnackbarProvider>
+          </PostHogProvider>
         </ThemeProvider>
       </CacheProvider>
     </React.StrictMode>

@@ -5,6 +5,7 @@ import React, { FC, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useSendEmail } from '@/api';
+import { SendEmailParams } from '@/api/types';
 import { Button, Input } from '@/components';
 import { useFileUpload } from '@/hooks';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
@@ -21,13 +22,15 @@ export const OrderFormPopup: FC<OrderFormPopupProps> = ({
   onClose,
 }) => {
   const fileUpload = useFileUpload();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } =
+    useForm<Omit<SendEmailParams, 'place' | 'files'>>();
   const { loading, onSendEmail } = useSendEmail({
     place: 'modal',
     files: fileUpload.data,
     onFinish: () => {
       onClose();
       fileUpload.onClear();
+      reset();
     },
   });
 
@@ -159,8 +162,7 @@ export const OrderFormPopup: FC<OrderFormPopupProps> = ({
             onSubmit={handleSubmit(handleSubmitForm)}
           >
             <Input
-              inputRef={register}
-              name="name"
+              {...register('name')}
               placeholder="Имя"
               type="text"
               fullWidth
@@ -168,8 +170,7 @@ export const OrderFormPopup: FC<OrderFormPopupProps> = ({
               required
             />
             <Input
-              inputRef={register}
-              name="tel"
+              {...register('tel')}
               placeholder="Телефон"
               type="tel"
               fullWidth
@@ -180,7 +181,7 @@ export const OrderFormPopup: FC<OrderFormPopupProps> = ({
               }}
             />
             <Input
-              inputRef={register}
+              {...register('email')}
               name="email"
               placeholder="E-mail"
               type="email"
@@ -188,7 +189,7 @@ export const OrderFormPopup: FC<OrderFormPopupProps> = ({
               autoComplete="email"
             />
             <Input
-              inputRef={register}
+              {...register('description')}
               name="description"
               placeholder="Описание"
               type="text"

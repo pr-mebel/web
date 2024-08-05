@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form';
 
 import { useYaCounter54949111 } from '@/analytics';
 import { useSendEmail } from '@/api';
+import { SendEmailParams } from '@/api/types';
 import { BlockTitle, Button, Input } from '@/components';
 import { useFileUpload } from '@/hooks';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
@@ -20,7 +21,8 @@ export const Questions: FC = () => {
   const theme = useTheme();
   const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
   const fileUpload = useFileUpload();
-  const { register, handleSubmit, reset, formState } = useForm();
+  const { register, handleSubmit, reset, formState } =
+    useForm<Omit<SendEmailParams, 'place' | 'files'>>();
   const analytics = useYaCounter54949111();
   const { loading, onSendEmail } = useSendEmail({
     place: 'catalog/more-questions',
@@ -94,8 +96,7 @@ export const Questions: FC = () => {
           }}
         >
           <Input
-            inputRef={register}
-            name="name"
+            {...register('name')}
             placeholder="Имя"
             type="text"
             fullWidth
@@ -104,8 +105,7 @@ export const Questions: FC = () => {
             darkMode
           />
           <Input
-            inputRef={register}
-            name="tel"
+            {...register('tel')}
             placeholder="Телефон"
             type="tel"
             fullWidth
@@ -117,8 +117,7 @@ export const Questions: FC = () => {
             }}
           />
           <Input
-            inputRef={register}
-            name="email"
+            {...register('email')}
             placeholder="E-mail"
             type="email"
             fullWidth
@@ -126,9 +125,7 @@ export const Questions: FC = () => {
             darkMode
           />
           <Input
-            inputRef={register}
-            name="description"
-            type="text"
+            {...register('description')}
             fullWidth
             multiline
             rows={5}

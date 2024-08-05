@@ -4,12 +4,14 @@ import { useForm } from 'react-hook-form';
 
 import { useYaCounter54949111 } from '@/analytics';
 import { useSendEmail } from '@/api';
+import { SendEmailParams } from '@/api/types';
 import { Button, ButtonContainer, Input } from '@/components';
 import { formatPhoneInput } from '@/utils';
 
 export const CallDesignerForm: FC = () => {
   const analytics = useYaCounter54949111();
-  const { register, handleSubmit, reset, formState } = useForm();
+  const { register, handleSubmit, reset, formState } =
+    useForm<Omit<SendEmailParams, 'place' | 'files'>>();
   const { loading, onSendEmail } = useSendEmail({
     place: 'home/call-designer',
     onFinish: () => {
@@ -40,7 +42,7 @@ export const CallDesignerForm: FC = () => {
             <Grid item xs={10} sm={6} container spacing={1}>
               <Grid item xs={12} md={5}>
                 <Input
-                  inputRef={register}
+                  {...register('name')}
                   name="name"
                   placeholder="Имя"
                   type="name"
@@ -53,7 +55,7 @@ export const CallDesignerForm: FC = () => {
               <Grid item md={2} />
               <Grid item xs={12} md={5}>
                 <Input
-                  inputRef={register}
+                  {...register('tel')}
                   name="tel"
                   placeholder="Телефон"
                   type="tel"

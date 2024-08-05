@@ -6,12 +6,14 @@ import { useForm } from 'react-hook-form';
 
 import { useYaCounter54949111 } from '@/analytics';
 import { useSendEmail } from '@/api';
+import { SendEmailParams } from '@/api/types';
 import { BlockTitle, Button, Input } from '@/components';
 import { formatPhoneInput } from '@/utils';
 
 export const QuestionsForm: FC = () => {
   const analytics = useYaCounter54949111();
-  const { register, handleSubmit, reset, formState } = useForm();
+  const { register, handleSubmit, reset, formState } =
+    useForm<Omit<SendEmailParams, 'place' | 'files'>>();
   const { loading, onSendEmail } = useSendEmail({
     place: 'home/more-questions',
     onFinish: () => {
@@ -113,7 +115,7 @@ export const QuestionsForm: FC = () => {
           }}
         >
           <Input
-            inputRef={register}
+            {...register('name')}
             name="name"
             placeholder="Имя"
             type="text"
@@ -123,7 +125,7 @@ export const QuestionsForm: FC = () => {
             darkMode
           />
           <Input
-            inputRef={register}
+            {...register('tel')}
             name="tel"
             placeholder="Телефон"
             type="tel"
@@ -136,7 +138,7 @@ export const QuestionsForm: FC = () => {
             }}
           />
           <Input
-            inputRef={register}
+            {...register('email')}
             name="description"
             type="text"
             fullWidth

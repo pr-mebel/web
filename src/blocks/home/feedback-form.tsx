@@ -14,6 +14,7 @@ import { useForm } from 'react-hook-form';
 
 import { useYaCounter54949111 } from '@/analytics';
 import { useSendEmail } from '@/api';
+import { SendEmailParams } from '@/api/types';
 import { Button, ButtonContainer, Input } from '@/components';
 import { useFileUpload } from '@/hooks';
 import { formatPhoneInput, getFileDeclination } from '@/utils';
@@ -23,7 +24,8 @@ export const FeedbackForm: FC = () => {
   const theme = useTheme();
   const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
   const analytics = useYaCounter54949111();
-  const { register, handleSubmit, reset, formState } = useForm();
+  const { register, handleSubmit, reset, formState } =
+    useForm<Omit<SendEmailParams, 'place' | 'files'>>();
   const { loading, onSendEmail } = useSendEmail({
     place: 'home/calculate-price',
     files: fileUpload.data,
@@ -60,8 +62,7 @@ export const FeedbackForm: FC = () => {
             >
               <Grid item xs={12} md={6}>
                 <Input
-                  inputRef={register}
-                  name="name"
+                  {...register('name')}
                   placeholder="Имя"
                   type="text"
                   fullWidth
@@ -72,8 +73,7 @@ export const FeedbackForm: FC = () => {
               </Grid>
               <Grid item xs={12} md={6}>
                 <Input
-                  inputRef={register}
-                  name="tel"
+                  {...register('tel')}
                   placeholder="Телефон"
                   type="tel"
                   fullWidth

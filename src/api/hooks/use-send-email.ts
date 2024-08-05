@@ -112,7 +112,9 @@ export const useSendEmail = ({
       });
 
       try {
-        posthog.capture('client.send_email.attempt', { data: FormData });
+        posthog.capture('client.send_email.attempt', {
+          data: FormData.toString(),
+        });
         await axios.post(endpoints.sendRequestEmail, formData, {
           headers: { 'content-type': 'multipart/form-data' },
         });
@@ -120,10 +122,12 @@ export const useSendEmail = ({
         successModal.handleOpen();
         onFinish?.();
         trackSubmit();
-        posthog.capture('client.send_email.success', { data: FormData });
+        posthog.capture('client.send_email.success', {
+          data: FormData.toString(),
+        });
       } catch (error) {
         posthog.capture('client.send_email.failure', {
-          property: FormData,
+          property: FormData.toString(),
         });
         enqueueSnackbar(
           'Не удалось отправить заявку. Напишите нам на почту напрямую, либо попробуйте позже',

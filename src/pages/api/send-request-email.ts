@@ -72,11 +72,16 @@ const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
 
     console.info('sent to mail.ru', info);
 
-    posthog.capture('api.send_request_email.success', { data: message, info });
+    posthog.capture('api.send_request_email.success', {
+      data: JSON.stringify(message),
+      info: JSON.stringify(info),
+    });
 
     res.status(200).json(info);
   } catch (error) {
-    posthog.capture('api.send_request_email.failure', { error });
+    posthog.capture('api.send_request_email.failure', {
+      error: JSON.stringify(error),
+    });
     console.error('unable to send to mail.ru', error);
     res.status(500).json(error);
   }

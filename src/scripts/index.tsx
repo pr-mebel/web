@@ -12,6 +12,7 @@ import {
   RoistatCounter,
   RoistatIntegrationWithBitrixWidjets,
   VkCounter,
+  VkCounterOld,
   YandexMetrika,
 } from './scripts';
 
@@ -89,6 +90,13 @@ export const ScriptsList = () => {
         strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: VkCounter,
+        }}
+      />
+      <Script
+        id="vk-counter-old"
+        strategy="lazyOnload"
+        dangerouslySetInnerHTML={{
+          __html: VkCounterOld,
         }}
       />
       <Script

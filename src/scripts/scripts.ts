@@ -74,6 +74,10 @@ export const VkCounter = `
     !function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?169',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1378416-aoC9n"),VK.Retargeting.Hit()},document.head.appendChild(t)}();
 `;
 
+export const VkCounterOld = `
+  !function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?173',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1901298-8rWy9"),VK.Retargeting.Hit()},document.head.appendChild(t)}();
+`;
+
 export const RoistatCounter = `
     (function(w, d, s, h, id) {
     w.roistatProjectId = id; w.roistatHost = h;

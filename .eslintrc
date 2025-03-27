@@ -1,7 +1,6 @@
 {
   "plugins": ["simple-import-sort"],
   "extends": [
-    "next",
     "alloy",
     "alloy/react",
     "plugin:@typescript-eslint/recommended",

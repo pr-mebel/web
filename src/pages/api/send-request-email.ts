@@ -57,6 +57,16 @@ const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
+  const transporterMasterhost = nodemailer.createTransport({
+    host: 'smtp.masterhost.ru',
+    port: 465,
+    secure: true,
+    auth: {
+      user: 'zakaz@pr-mebel.ru',
+      pass: 'bst92THg9juqGUtgYF5P',
+    },
+  });
+
   try {
     const message = createMessage({
       emailTo: env.EMAIL_MAIL_RU,
@@ -69,6 +79,7 @@ const sendRequestEmail = async (req: NextApiRequest, res: NextApiResponse) => {
       email,
     });
     const info = await sendEmail(transporterMail, message);
+    const infoMasterhost = await sendEmail(transporterMasterhost, message);
 
     console.info('sent to mail.ru', info);
 

@@ -1,5 +1,5 @@
-# .github/workflows/deploy.yml
-name: Deploy Next.js to VPS
+# .github/workflows/deploy-via-pull.yml
+name: Deploy Next.js to VPS via Git Pull
 
 on:
   push:
@@ -7,90 +7,31 @@ on:
       - main # Trigger deployment on push to main branch
 
 jobs:
-  build:
-    name: Build Next.js App
-    runs-on: ubuntu-latest # Use GitHub-hosted runner
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22' # Specify your Node.js LTS version
-          cache: 'npm' # Cache npm dependencies
-
-      - name: Install Dependencies
-        run: npm ci # Use clean install
-
-      - name: Build Application
-        run: npm run build
-        env:
-          NEXT_PUBLIC_POSTHOG_HOST: ${{ secrets.NEXT_PUBLIC_POSTHOG_HOST }}
-          NEXT_PUBLIC_POSTHOG_KEY: ${{ secrets.NEXT_PUBLIC_POSTHOG_KEY }}
-          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
-          CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
-          CONTENTFUL_URI: ${{ secrets.CONTENTFUL_URI }}
-          EMAIL_MAIL_RU: ${{ secrets.EMAIL_MAIL_RU }}
-          PASSWORD_MAIL_RU: ${{ secrets.PASSWORD_MAIL_RU }}
-          ROISTAT_KEY: ${{ secrets.ROISTAT_KEY }}
-
-      - name: Prepare Artifact
-        run: |
-          # Create a directory to hold deployment files
-          mkdir deployment
-          # Copy necessary files into the deployment directory
-          cp -R .next ./deployment/
-          cp -R public ./deployment/
-          cp package.json ./deployment/
-          cp package-lock.json ./deployment/
-          cp next.config.js ./deployment/
-          # Copy ecosystem file if you use one
-          # cp ecosystem.config.js ./deployment/
-
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: nextjs-build-artifact # Use a clear name
-          path: ./deployment/ # Upload the prepared directory
-
   deploy:
     name: Deploy to VPS
-    needs: build # Run after build job is successful
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Only need a runner to execute the SSH command
 
     steps:
-      - name: Download Build Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: nextjs-build-artifact # Match the upload name
-          # Download directly into the current workspace directory
-
-      # --- STEP TO COPY FILES TO VPS ---
-      - name: Copy files to VPS via SCP
-        uses: appleboy/scp-action@v0.1.7 # Use the SCP action
-        with:
-          host: ${{ secrets.VPS_SSH_HOST }}
-          username: ${{ secrets.VPS_SSH_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          port: ${{ secrets.VPS_SSH_PORT || 22 }}
-          source: './*' # Copy all contents of the downloaded artifact directory
-          target: ${{ secrets.DEPLOY_PATH }} # The target directory on the VPS
-          strip_components: 1 # Removes the top-level 'deployment' directory during copy
-
-      # --- STEP TO EXECUTE COMMANDS ON VPS ---
-      - name: Execute deployment commands on VPS via SSH
+      - name: Deploy to VPS via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_SSH_HOST }}
           username: ${{ secrets.VPS_SSH_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          key: ${{ secrets.VPS_SSH_KEY }} # Key for the Action to connect to VPS
           port: ${{ secrets.VPS_SSH_PORT || 22 }}
           script: |
-            # Navigate to deployment directory (already contains files from SCP)
+            # Navigate to deployment directory
             echo "Navigating to ${{ secrets.DEPLOY_PATH }}"
             cd ${{ secrets.DEPLOY_PATH }}
+
+            # Ensure we are on the correct branch (optional but good practice)
+            echo "Checking out main branch..."
+            git checkout main
+            git reset --hard origin/main # Discard local changes, match remote
+
+            # Pull latest changes using the deploy key configured on the VPS
+            echo "Pulling latest changes from GitHub..."
+            git pull origin main
 
             # Create .env file from secrets
             echo "Creating .env.production.local file..."
@@ -106,9 +47,15 @@ jobs:
             chmod 600 .env.production.local
             echo ".env file created."
 
-            # Install only production dependencies
-            echo "Installing production dependencies..."
-            npm ci --only=production
+            # Install ALL dependencies (including devDependencies)
+            echo "Installing dependencies..."
+            # Use NVM environment if needed (adjust path if necessary)
+            # source /home/web/.nvm/nvm.sh # Source NVM if not loaded by default SSH session
+            npm ci # Installs based on package-lock.json
+
+            # Build the application ON THE SERVER
+            echo "Building application..."
+            npm run build
 
             # Reload/Start application using PM2
             echo "Restarting/Starting application '${{ secrets.APP_NAME }}' with PM2..."

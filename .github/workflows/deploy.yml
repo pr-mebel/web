@@ -73,11 +73,10 @@ jobs:
         with:
           host: ${{ secrets.VPS_SSH_HOST }}
           username: ${{ secrets.VPS_SSH_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }} # <<< SSH Key for ACTION to connect to VPS
+          key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_SSH_PORT || 22 }}
-          source: './*' # Copy all contents of the downloaded artifact directory
+          source: './deployment/*' # <<< CHANGE: Copy CONTENTS of deployment dir
           target: ${{ secrets.DEPLOY_PATH }}
-          strip_components: 1 # Removes the top-level 'deployment' directory during copy
 
       # --- STEP TO EXECUTE COMMANDS ON VPS ---
       - name: Execute deployment commands on VPS via SSH

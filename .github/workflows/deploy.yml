@@ -65,6 +65,9 @@ jobs:
         with:
           name: nextjs-build-artifact
 
+      - name: List workspace contents after download
+        run: ls -laR
+
       - name: Copy files to VPS via SCP
         uses: appleboy/scp-action@v0.1.7
         with:

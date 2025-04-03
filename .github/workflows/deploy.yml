@@ -31,7 +31,12 @@ jobs:
         env:
           NEXT_PUBLIC_POSTHOG_HOST: ${{ secrets.NEXT_PUBLIC_POSTHOG_HOST }}
           NEXT_PUBLIC_POSTHOG_KEY: ${{ secrets.NEXT_PUBLIC_POSTHOG_KEY }}
-          # Add other NEXT_PUBLIC_ variables needed during build
+          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+          CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+          CONTENTFUL_URI: ${{ secrets.CONTENTFUL_URI }}
+          EMAIL_MAIL_RU: ${{ secrets.EMAIL_MAIL_RU }}
+          PASSWORD_MAIL_RU: ${{ secrets.PASSWORD_MAIL_RU }}
+          ROISTAT_KEY: ${{ secrets.ROISTAT_KEY }}
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4

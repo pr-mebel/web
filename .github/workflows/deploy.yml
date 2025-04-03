@@ -26,8 +26,6 @@ jobs:
 
       - name: Build Application
         run: npm run build
-        # Add environment variables needed ONLY at build time (NEXT_PUBLIC_*)
-        # These can be set directly or read from secrets if sensitive
         env:
           NEXT_PUBLIC_POSTHOG_HOST: ${{ secrets.NEXT_PUBLIC_POSTHOG_HOST }}
           NEXT_PUBLIC_POSTHOG_KEY: ${{ secrets.NEXT_PUBLIC_POSTHOG_KEY }}
@@ -38,18 +36,24 @@ jobs:
           PASSWORD_MAIL_RU: ${{ secrets.PASSWORD_MAIL_RU }}
           ROISTAT_KEY: ${{ secrets.ROISTAT_KEY }}
 
-      - name: Upload Build Artifacts
+      - name: Prepare Artifact
+        run: |
+          # Create a directory to hold deployment files
+          mkdir deployment
+          # Copy necessary files into the deployment directory
+          cp -R .next ./deployment/
+          cp -R public ./deployment/
+          cp package.json ./deployment/
+          cp package-lock.json ./deployment/
+          cp next.config.js ./deployment/
+          # Copy ecosystem file if you use one
+          # cp ecosystem.config.js ./deployment/
+
+      - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: nextjs-build
-          path: |
-            .next
-            public
-            package.json
-            package-lock.json
-            next.config.js
-            # Exclude node_modules if installing on server
-            # !node_modules
+          name: nextjs-build-artifact # Use a clear name
+          path: ./deployment/ # Upload the prepared directory
 
   deploy:
     name: Deploy to VPS
@@ -57,43 +61,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download Build Artifacts
+      - name: Download Build Artifact
         uses: actions/download-artifact@v4
         with:
-          name: nextjs-build
-          path: ./deploy-files # Download to a temporary directory
+          name: nextjs-build-artifact # Match the upload name
+          # Download directly into the current workspace directory
 
-      - name: Deploy to VPS via SSH
+      # --- STEP TO COPY FILES TO VPS ---
+      - name: Copy files to VPS via SCP
+        uses: appleboy/scp-action@v0.1.7 # Use the SCP action
+        with:
+          host: ${{ secrets.VPS_SSH_HOST }}
+          username: ${{ secrets.VPS_SSH_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_SSH_PORT || 22 }}
+          source: './*' # Copy all contents of the downloaded artifact directory
+          target: ${{ secrets.DEPLOY_PATH }} # The target directory on the VPS
+          strip_components: 1 # Removes the top-level 'deployment' directory during copy
+
+      # --- STEP TO EXECUTE COMMANDS ON VPS ---
+      - name: Execute deployment commands on VPS via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_SSH_HOST }}
           username: ${{ secrets.VPS_SSH_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          port: ${{ secrets.VPS_SSH_PORT || 22 }} # Use default 22 if secret not set
+          port: ${{ secrets.VPS_SSH_PORT || 22 }}
           script: |
-            # Navigate to deployment directory
+            # Navigate to deployment directory (already contains files from SCP)
             echo "Navigating to ${{ secrets.DEPLOY_PATH }}"
             cd ${{ secrets.DEPLOY_PATH }}
-
-            # Create backup of previous version (optional but recommended)
-            echo "Creating backup..."
-            timestamp=$(date +%Y%m%d%H%M%S)
-            if [ -d ".next" ]; then
-              tar czf backup-$timestamp.tar.gz .next public package.json package-lock.json next.config.js .env.production.local || echo "Backup failed, continuing..."
-            fi
-
-            # Remove old files before copying new ones (use with caution!)
-            # Consider using rsync for more efficient transfers instead of removing everything
-            # echo "Removing old application files..."
-            # rm -rf .next public package.json package-lock.json next.config.js
-
-            # Copy new files from downloaded artifact directory
-            echo "Copying new application files..."
-            cp -R ~/deploy-files/.next .
-            cp -R ~/deploy-files/public .
-            cp ~/deploy-files/package.json .
-            cp ~/deploy-files/package-lock.json .
-            cp ~/deploy-files/next.config.js .
 
             # Create .env file from secrets
             echo "Creating .env.production.local file..."
@@ -113,12 +110,12 @@ jobs:
             echo "Installing production dependencies..."
             npm ci --only=production
 
-            # Reload application using PM2
-            echo "Reloading application '${{ secrets.APP_NAME }}' with PM2..."
-            sudo ${{ secrets.PM2_PATH }} reload ${{ secrets.APP_NAME }} || sudo ${{ secrets.PM2_PATH }} restart ${{ secrets.APP_NAME }}
-
-            # Optional: Clean up old backups (e.g., keep last 5)
-            echo "Cleaning up old backups..."
-            ls -tp backup-*.tar.gz | grep -v '/$' | tail -n +6 | xargs -I {} rm -- {} || echo "No old backups to remove."
+            # Reload/Start application using PM2
+            echo "Restarting/Starting application '${{ secrets.APP_NAME }}' with PM2..."
+            # Use startOrRestart if using an ecosystem file (recommended)
+            # sudo ${{ secrets.PM2_PATH }} startOrRestart ecosystem.config.js
+            # OR use restart || start if not using an ecosystem file
+            sudo ${{ secrets.PM2_PATH }} restart ${{ secrets.APP_NAME }} || sudo ${{ secrets.PM2_PATH }} start npm --name "${{ secrets.APP_NAME }}" -- start
+            sudo ${{ secrets.PM2_PATH }} save # Save process list
 
             echo "Deployment finished successfully!"

@@ -70,10 +70,7 @@ jobs:
             # Add other NEXT_PUBLIC_ exports if needed by build process
             npm run build || { echo "npm run build failed"; exit 1; } # Exit if build fails
 
-            # Reload/Start application using PM2
-            echo "Restarting/Starting application '${{ secrets.APP_NAME }}' with PM2..."
-            # Use startOrRestart if using an ecosystem file (recommended)
-            sudo ${{ secrets.PM2_PATH }} startOrRestart ecosystem.config.js || { echo "PM2 startOrRestart failed"; exit 1; }
-            sudo ${{ secrets.PM2_PATH }} save || { echo "PM2 save failed"; exit 1; }
+            echo "Executing PM2 deployment wrapper script..."
+            sudo /usr/local/bin/deploy_pm2_ecosystem.sh || { echo "PM2 wrapper script failed"; exit 1; }
 
             echo "Deployment finished successfully!"
